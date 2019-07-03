@@ -8,6 +8,7 @@ use strict;
 use Scalar::Util qw(looks_like_number);
 use POSIX qw(ceil);
 use Storable;
+use Math::Round;
 
 my $GameData = retrieve("cache_GameData");
 my $ModData = retrieve("cache_ModData");
@@ -167,7 +168,17 @@ END_PRINT
 					print "$starter<br />";
 				}
 				print "</td>";
-				print "<td>$p->{'time'}</td>";
+				my $time = $p->{'time'};
+				if ($time > 1440) { 
+					$time = "$time min (~" . nearest(.1, $time/1440) . " days)";
+				} elsif ($time == 1440) {
+					$time = "$time min (~1 day)";
+				} elsif ($time > 60) {
+					$time = sprintf("%d min (%d:%02d hrs)", $time, $time/60, $time%60);
+				} else {
+					$time = "$time min";
+				}
+				print "<td>$time</td>";
 				print "<td>$p->{'price'}</td>";
 				print "</tr>";
 			}
