@@ -119,12 +119,14 @@ sub ParseModData {
 			if (-e $manifest) {
 				LogMessage("    Manifest found. Parsing", 1);
 				my $file_contents = read_file("$BaseDir/$m/manifest.json", {binmode => ':encoding(UTF-8)'});
-				LogMessage("    Dumping object returned by read_file", 3);
+				LogMessage("    Dumping file contents", 3);
 				LogMessage(Dumper($file_contents), 3);
 				# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
 				$file_contents =~ s/^\x{feff}//;
 				my $json = from_rjson($file_contents);
-				LogMessage("    Dumping object returned by from_rjson", 3);
+				# Saving directory to locate mod folder later
+				$json->{'__PATH'} = "$BaseDir/$m";
+				LogMessage("    Dumping json object", 3);
 				LogMessage(Dumper($json), 3);
 				my $id = $json->{'UniqueID'};
 				my $name = $json->{'Name'};
@@ -149,12 +151,14 @@ sub ParseModData {
 							LogMessage("    Found another json: $f.", 1);
 							my $this_file = "$BaseDir/$m/$f";
 							my $file_contents = read_file("$BaseDir/$m/$f", {binmode => ':encoding(UTF-8)'});
-							LogMessage("      Dumping object returned by read_file", 3);
+							LogMessage("      Dumping file contents", 3);
 							LogMessage(Dumper($file_contents), 3);
 							# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
 							$file_contents =~ s/^\x{feff}//;
 							my $json = from_rjson($file_contents);
-							LogMessage("      Dumping object returned by from_rjson", 3);
+							# Saving directory to locate images later
+							$json->{'__PATH'} = "$BaseDir/$m";
+							LogMessage("      Dumping json object", 3);
 							LogMessage(Dumper($json), 3);
 							# Machines are just a giant array because I don't know what unique key would make sense
 							if (not exists $DataRef->{'Machines'}) {
@@ -184,12 +188,14 @@ sub ParseModData {
 									if (-e "$BaseDir/$m/$t/$i/$types{$t}") {
 										LogMessage("      Found and parsed item $i.", 1);
 										my $file_contents = read_file("$BaseDir/$m/$t/$i/$types{$t}", {binmode => ':encoding(UTF-8)'});
-										LogMessage("        Dumping object returned by read_file", 3);
+										LogMessage("        Dumping file contents", 3);
 										LogMessage(Dumper($file_contents), 3);
 										# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
 										$file_contents =~ s/^\x{feff}//;
 										my $json = from_rjson($file_contents);
-										LogMessage("        Dumping object returned by from_rjson", 3);
+										# Saving directory to locate images later
+										$json->{'__PATH'} = "$BaseDir/$m/$t/$i";
+										LogMessage("        Dumping json object", 3);
 										LogMessage(Dumper($json), 3);
 										if (not exists $DataRef->{$t}) {
 											$DataRef->{$t} = {};

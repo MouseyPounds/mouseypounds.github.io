@@ -35,7 +35,7 @@ sub GetItem {
 	my $output = "";
 	if (looks_like_number($input)) {
 		if ($input < 0) {
-			$output = "Any " . GetCategory($input);
+			$output = '<span class="group">Any ' . GetCategory($input) . '</span>';
 		}
 		elsif (exists $GameData->{'ObjectInformation'}{$input}) {
 			my $name = $GameData->{'ObjectInformation'}{$input}{'split'}[0];
@@ -123,19 +123,40 @@ sub MachineSummary {
 
 </head>
 <body>
+<div class="panel"><h1>MouseyPounds' PPJA Documentation: Machine Summary</h1>
+</div>
 END_PRINT
 
 # Table of Contents here, unless we auto-generate like in checkup app
 
+	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
+	my %Panel = ();
 	foreach my $j (@{$ModData->{'Machines'}}) {
 		# These are the individual json files from each machine mod
 		foreach my $m (@{$j->{'machines'}}) {
-			print <<"END_PRINT";
+			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
+			my $key = $m->{'name'};
+			my $tries = 0;
+			my $max_tries = 10;
+			while (exists $Panel{$key} and $tries < $max_tries) {
+				$key = $m->{'name'} . "_$tries";
+				$tries++;
+			}
+			if (exists $Panel{$key}) {
+				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
+			}
+			my $texture = "$j->{'__PATH'}/$m->{'texture'}";
+			my $output = <<"END_PRINT";
 <div class="panel">
+<div class="container">
+<img class="container__image" src="img/Test_x2.png" alt="Machine Sprite" />
+<div class="container__text">
 <h2>$m->{'name'}</h2>
 <span class="mach_desc">$m->{'description'}</span><br />
+</div>
+</div>
 Recipe: $m->{'crafting'} (TODO, will be parsed nicely later)<br />
-Sprites: TODO, need to save directory in data structure first and decide on how to arrange the images<br />
+Sprites: $texture, TI($m->{'tileindex'}) RI($m->{'readyindex'}) F($m->{'frames'})<br />
 <table class="output">
 <thead>
 <tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th></tr>
@@ -144,13 +165,39 @@ END_PRINT
 			if (exists $m->{'starter'}) {
 				$starter = GetItem($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
 			}
+			# Pre-scan production to handle "includes" by duplicating the production object for each additional item.
+			my @add = ();
 			foreach my $p (@{$m->{'production'}}) {
+				# We will assume that the materials array only contains one thing and that there are no other nested
+				#  objects which we care about. Thus, a shallow copy of the production object is acceptable.
+				if (exists $p->{'include'}) {
+					foreach my $p_inc (@{$p->{'include'}}) {
+						my %temp = %$p;
+						$temp{'materials'} = [];
+						$temp{'materials'}[0] = { 'index' => $p_inc };
+						push @add, \%temp;
+					}
+				}
+			}
+			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
+			my @rows = ();
+			foreach my $p (@{$m->{'production'}}, @add) {
 				my $name = GetItem($p->{'item'}, $p->{'index'});
 				my $starter_included = 0;
-				print "<tr><td>$name</td>";
-				print "<td>";
+				my %entry = { 'key1' => '', 'key2' => '', 'out' => '' };
+				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
+				# that a simple regex can do the job rather than needing a more robust general approach.
+				$entry{'key1'} = $name;
+				$entry{'key1'} =~ s/\<[^>]*>//g;
+				$entry{'out'} = "<tr><td>$name</td>";
+				$entry{'out'} .= "<td>";
+				my $i_count = 0;
 				foreach my $i (@{$p->{'materials'}}) {
 					$name = GetItem($i->{'name'}, $i->{'index'});
+					if ($i_count > 0) {
+						$name = "+ $name";
+					}
+					$i_count++;
 					my $stack_size = 1;
 					if (exists $i->{'stack'} and $i->{'stack'} > 1) {
 						$stack_size = $i->{'stack'};
@@ -162,12 +209,19 @@ END_PRINT
 					if ($stack_size > 1) {
 						$name .= " ($stack_size)";
 					}
-					print "$name<br />";
+					$entry{'out'} .= "$name<br />";
+					if ($entry{'key2'} eq '') {
+						$entry{'key2'} = $name;
+						$entry{'key2'} =~ s/\<[^>]*>//g;
+					}
 				}
 				if (not $starter_included and $starter ne "NO_STARTER") {
-					print "$starter<br />";
+					$entry{'out'} .= "+ $starter<br />";
 				}
-				print "</td>";
+				if (exists $p->{'exclude'}) {
+					$entry{'out'} .= '<span class="group">Except ' . join(', ', (map {GetItem($_)} @{$p->{'exclude'}})) . "</span><br />";
+				}
+				$entry{'out'} .= "</td>";
 				my $time = $p->{'time'};
 				if ($time > 1440) { 
 					$time = "$time min (~" . nearest(.1, $time/1440) . " days)";
@@ -184,17 +238,26 @@ END_PRINT
 				} else {
 					$time = "$time min";
 				}
-				print "<td>$time</td>";
-				print "<td>$p->{'price'}</td>";
-				print "</tr>";
+				$entry{'out'} .= "<td>$time</td>";
+				$entry{'out'} .= "<td>$p->{'price'}</td>";
+				$entry{'out'} .= "</tr>";
+				push @rows, \%entry;
+			}
+			foreach my $e (sort {$a->{'key1'} cmp $b->{'key1'} or $a->{'key2'} cmp $b->{'key2'}} @rows) {
+				$output .= $e->{'out'};
 			}
 
-			print <<"END_PRINT";
+			$output .= <<"END_PRINT";
 </table>
 </div>
 END_PRINT
+			$Panel{$key} = $output;
 		} # end of machine loop
 	} # end of "json" loop
+
+foreach my $p (sort keys %Panel) {
+	print $Panel{$p};
+}
 
 print <<"END_PRINT";
 </body>

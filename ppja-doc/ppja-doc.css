@@ -32,6 +32,10 @@ h2 {
 	margin-bottom: 1em;
 	font-weight: bold;
 }
+.note,.group {
+	font-style: italic;
+}
+
 table.output, table.calendar {
 	border: 2px solid black;
 	background-color: white;
@@ -51,7 +55,18 @@ td {
 table.output th, table.output td {
 	padding: 3px 8px;
 }
-
+.container {
+	margin-bottom: 1em;
+}
+.container__image {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 32px;
+	margin-right: 0.5em;
+  }
+.container__text {
+    display: inline-block;
+  }
 
 #TOC {
 	position: fixed;

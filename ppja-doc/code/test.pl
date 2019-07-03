@@ -6,6 +6,16 @@ use strict;
 use Imager;
 
 my $img = Imager->new;
+my $filename = 'C:/Program Files/Steam/steamapps\common/Stardew Valley/Content (unpacked)/Tilesheets/Craftables.png';
+
+$img->read(file=>$filename) or die $img->errstr;
+my $img2 = $img->crop(left=>0, top=>96, width=>16, height=>32);
+$img2->write(file=>"../img/TEST_x1.png");
+$img2 = $img2->scale(scalefactor=>2.0, qtype=>'preview');
+$img2->write(file=>"../img/TEST_x2.png");
+
+__END__
+my $img = Imager->new;
 my $filename = "mystical.png";
 
 print "reading\n";
