@@ -173,8 +173,14 @@ END_PRINT
 					$time = "$time min (~" . nearest(.1, $time/1440) . " days)";
 				} elsif ($time == 1440) {
 					$time = "$time min (~1 day)";
-				} elsif ($time > 60) {
-					$time = sprintf("%d min (%d:%02d hrs)", $time, $time/60, $time%60);
+				} elsif ($time >= 60) {
+					my $rem = $time%60;
+					my $hr = "hr" . ($time > 119 ? "s" : "");
+					if ($rem > 0) {
+						$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
+					} else {
+						$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
+					}
 				} else {
 					$time = "$time min";
 				}
