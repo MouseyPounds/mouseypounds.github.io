@@ -149,7 +149,7 @@ END_PRINT
 			my $output = <<"END_PRINT";
 <div class="panel">
 <div class="container">
-<img class="container__image" src="img/Test_x2.png" alt="Machine Sprite" />
+<img class="container__image" src="img/TEST_x2.png" alt="Machine Sprite" />
 <div class="container__text">
 <h2>$m->{'name'}</h2>
 <span class="mach_desc">$m->{'description'}</span><br />
