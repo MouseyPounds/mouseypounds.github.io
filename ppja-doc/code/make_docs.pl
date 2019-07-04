@@ -371,6 +371,9 @@ foreach my $p (sort keys %Panel) {
 }
 
 	print <<"END_PRINT";
+<div class="panel" id="footer">
+This'll be like credits and links and stuff some day.
+</div>
 </body>
 </html>
 END_PRINT
