@@ -251,13 +251,18 @@ sub ParseModData {
 								foreach my $i (@items) {
 									next if ($i eq '.' or $i eq '..');
 									if (-e "$BaseDir/$m/$t/$i/$types{$t}") {
-										LogMessage("      Found and parsed item $i.", 1);
+										LogMessage("      Found and parsed item folder $i.", 1);
 										my $file_contents = read_file("$BaseDir/$m/$t/$i/$types{$t}", {binmode => ':encoding(UTF-8)'});
 										LogMessage("        Dumping file contents", 3);
 										LogMessage(Dumper($file_contents), 3);
 										# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
 										$file_contents =~ s/^\x{feff}//;
 										my $json = from_rjson($file_contents);
+										my $key = $i;
+										if ($json->{'Name'} ne $key) {
+											LogMessage("WARNING: Item in folder {$i} is actually named {$json->{'Name'}}. Will use that for key instead", 1);
+											$key = $json->{'Name'};
+										}
 										# Saving directory and storing images
 										$json->{'__PATH'} = "$BaseDir/$m/$t/$i";
 										# Image logic is hardcoded. I'm sorry.
@@ -290,10 +295,10 @@ sub ParseModData {
 										if (not exists $DataRef->{$t}) {
 											$DataRef->{$t} = {};
 										}
-										if (exists $DataRef->{$t}{$i}) {
-											LogMessage("      WARNING: Item $i already exists in $t. Skipping this one.", 1);
+										if (exists $DataRef->{$t}{$key}) {
+											LogMessage("      WARNING: Item $key already exists in $t. Skipping this one.", 1);
 										} else {
-											$DataRef->{$t}{$i} = $json;
+											$DataRef->{$t}{$key} = $json;
 										}
 									} else {
 										LogMessage("      Found folder for item $i but no $types{$t} file.", 1);

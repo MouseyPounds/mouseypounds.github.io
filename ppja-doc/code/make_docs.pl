@@ -23,6 +23,25 @@ WriteCSS();
 
 exit;
 
+# Wikify: Conversion of a javascript function from Stardew Checkup that adds a wiki link for an item.
+#   item name
+#   page name (optional) - used when the item is just an anchor on another page rather than having its own page
+#
+sub Wikify {
+	my $item = shift;
+	my $page = shift;
+	my $trimmed = $item;
+	$trimmed =~ s/ (White)//;
+	$trimmed =~ s/ (Brown)//;
+	$trimmed =~ s/ /_/g;
+	
+	if (defined $page) {
+		return qq(<a href="http://stardewvalleywiki.com/$page#$trimmed">$item</a>);
+	} else {
+		return qq(<a href="http://stardewvalleywiki.com/$trimmed">$item</a>);
+	}
+}
+
 # GetItem receives 1 or 2 inputs and will use the first one that is defined.
 # It then tries to resolve an ID into a name if it looks like a vanilla item
 sub GetItem {
@@ -38,15 +57,64 @@ sub GetItem {
 	my $output = "";
 	if (looks_like_number($input)) {
 		if ($input < 0) {
-			$output = '<span class="group">Any ' . GetCategory($input) . '</span>';
+			# TODO: This needs better handling, either here or before it gets here
+			if ($input == -999) {
+				$output = qq(<span class="group">Same as Input</span>);
+			} else {
+				$output = '<span class="group">Any ' . GetCategory($input) . '</span>';
+			}
 		}
 		elsif (exists $GameData->{'ObjectInformation'}{$input}) {
 			my $name = $GameData->{'ObjectInformation'}{$input}{'split'}[0];
-			$output = qq(<a href="http://stardewvalleywiki.com/$name">$name</a>);
+			$output = Wikify($name);
 		}
 	} else {
-		# Custom, probably JA. Might do fancy stuff later
-		$output = $input;
+		# Custom, probably JA, but maybe not. JA takes priority
+		if (exists $ModData->{'Objects'}{$input}) {
+			# This is a JA item, but we have nothing to add yet.
+			$output = $input;
+		} else {
+			foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
+				if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
+					$output =  Wikify($input);
+				}
+			}
+		}
+	}
+	return $output;
+}
+
+# GetValue is a companion to GetItem and uses similar arguments & logic
+# Normally returns an integer, but if given a category will instead return "varies".
+# Also returns -1 if no valid input
+sub GetValue {
+	my $input = shift;
+	if (not defined $input or $input eq "") {
+		# first one didn't work, now try second
+		$input = shift;
+	}
+	if (not defined $input or $input eq "") {
+		# second didn't work either, give up
+		return -1;
+	}
+	my $output = "";
+	if (looks_like_number($input)) {
+		if ($input < 0) {
+			$output = "varies";
+		}
+		elsif (exists $GameData->{'ObjectInformation'}{$input}) {
+			$output = $GameData->{'ObjectInformation'}{$input}{'split'}[1];
+		}
+	} else {
+		if (exists $ModData->{'Objects'}{$input}) {
+			$output = $ModData->{'Objects'}{$input}{'Price'};
+		} else {
+			foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
+				if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
+					$output = $GameData->{'ObjectInformation'}{$k}{'split'}[1]
+				}
+			}
+		}
 	}
 	return $output;
 }
@@ -263,7 +331,16 @@ END_PRINT
 					$time = "$time min";
 				}
 				$entry{'out'} .= "<td>$time</td>";
-				$entry{'out'} .= "<td>$p->{'price'}</td>";
+				my $value = $p->{'price'};
+				if (not defined $value or $value eq "") {
+					$value = GetValue($p->{'item'}, $p->{'index'});
+				} elsif ($value =~ /original/) {
+					my $temp = GetValue($p->{'item'}, $p->{'index'});
+					if (looks_like_number($temp) and $temp > 0) {
+						$value =~ s/original/$temp/g;
+					}
+				}
+				$entry{'out'} .= "<td>$value</td>";
 				$entry{'out'} .= "</tr>";
 				push @rows, \%entry;
 			}
