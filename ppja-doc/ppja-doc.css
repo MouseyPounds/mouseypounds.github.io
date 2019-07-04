@@ -108,3 +108,127 @@ table.output th, table.output td {
 #TOC li a:hover {
 	background-color: #ffe0b0;
 }
+img.craftables {
+	vertical-align: -2px;
+	width: 16px;
+	height: 32px;
+	background-image:url("./img/ss_craftables.png")
+}
+img.craftables_x2 {
+	vertical-align: -5px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/ss_craftables_x2.png")
+}
+img.crops {
+	vertical-align: -2px;
+	/* Full sprite is 128px */
+	width: 16px;
+	height: 32px;
+	background-image:url("./img/ss_crops.png")
+}
+img.crops_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/ss_crops_x2.png")
+}
+img.hats {
+	vertical-align: -2px;
+	width: 20px;
+	height: 20px;
+	background-image:url("./img/ss_hats.png")
+}
+img.hats_x2 {
+	vertical-align: -2px;
+	width: 40px;
+	height: 40px;
+	background-image:url("./img/ss_hats_x2.png")
+}
+img.objects {
+	vertical-align: -2px;
+	width: 16px;
+	height: 16px;
+	background-image:url("./img/ss_objects.png")
+}
+img.objects_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 32px;
+	background-image:url("./img/ss_objects_x2.png")
+}
+img.trees {
+	vertical-align: -2px;
+	width: 48px;
+	height: 80px;
+	background-image:url("./img/ss_trees.png")
+}
+img.trees_x2 {
+	vertical-align: -2px;
+	width: 96px;
+	height: 160px;
+	background-image:url("./img/ss_trees_x2.png")
+}
+	img#Machine_Smoker {
+		background-position: -640px 0px;
+	}
+	img#Machine_Juicer {
+		background-position: -544px 0px;
+	}
+	img#Machine_Foreign_Cask {
+		background-position: -96px 0px;
+	}
+	img#Machine_Hardwood_Keg {
+		background-position: -32px 0px;
+	}
+	img#Machine_Yogurt_Jar {
+		background-position: -384px 0px;
+	}
+	img#Machine_Vinegar_Cask {
+		background-position: -512px 0px;
+	}
+	img#Machine_Glass_Jar {
+		background-position: -64px 0px;
+	}
+	img#Machine_Dehydrator {
+		background-position: -160px 0px;
+	}
+	img#Machine_Ice_Cream_Machine {
+		background-position: -448px 0px;
+	}
+	img#Machine_Alembic {
+		background-position: -480px 0px;
+	}
+	img#Machine_Butter_Churn {
+		background-position: -128px 0px;
+	}
+	img#Machine_Wax_Barrel {
+		background-position: -416px 0px;
+	}
+	img#Machine_Mayonnaise_Machine {
+		background-position: -608px 0px;
+	}
+	img#Machine_Extruder {
+		background-position: -256px 0px;
+	}
+	img#Machine_Still {
+		background-position: 0px 0px;
+	}
+	img#Machine_Grinder {
+		background-position: -288px 0px;
+	}
+	img#Machine_Drying_Rack {
+		background-position: -192px 0px;
+	}
+	img#Machine_Spinning_Wheel {
+		background-position: -352px 0px;
+	}
+	img#Machine_Soap_Press {
+		background-position: -576px 0px;
+	}
+	img#Machine_Infuser {
+		background-position: -320px 0px;
+	}
+	img#Machine_Enhanced_Oil_Maker {
+		background-position: -224px 0px;
+	}

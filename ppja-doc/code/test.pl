@@ -5,16 +5,25 @@
 use strict;
 use Imager;
 
-my $img = Imager->new;
-my $filename = 'C:/Program Files/Steam/steamapps\common/Stardew Valley/Content (unpacked)/Tilesheets/Craftables.png';
+my $img = Imager->new(xsize=>2048,ysize=>2048,channels=>4);
+$img->write(file=>"../img/2048_BLANK.png");
 
-$img->read(file=>$filename) or die $img->errstr;
+my $filename = 'C:/Program Files/Steam/steamapps\common/Stardew Valley/Content (unpacked)/Tilesheets/Craftables.png';
+my $img2 = Imager->new;
+$img2->read(file=>$filename) or die $img2->errstr;
+
+$img->paste(src=>$img2,
+		left => 0, top => 0,
+		src_minx => 0, src_miny => 96,
+		width=>16, height=>32);
+$img->write(file=>"../img/2048_NOTBLANK.png");
+
+__END__
+
 my $img2 = $img->crop(left=>0, top=>96, width=>16, height=>32);
 $img2->write(file=>"../img/TEST_x1.png");
 $img2 = $img2->scale(scalefactor=>2.0, qtype=>'preview');
 $img2->write(file=>"../img/TEST_x2.png");
-
-__END__
 my $img = Imager->new;
 my $filename = "mystical.png";
 

@@ -16,7 +16,10 @@ my $ModInfo = retrieve("cache_ModInfo");
 
 my $DocBase = "..";
 
+my $SpriteInfo = {};
+
 MachineSummary();
+WriteCSS();
 
 exit;
 
@@ -145,18 +148,22 @@ END_PRINT
 			if (exists $Panel{$key}) {
 				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
 			}
-			my $texture = "$j->{'__PATH'}/$m->{'texture'}";
+			my $id = "Machine_$m->{'name'}";
+			$id =~ s/ /_/g;
+			if (exists $SpriteInfo->{$id}) {
+				warn "Sprite ID {$id} will not be unique";
+			}
+			$SpriteInfo->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
 			my $output = <<"END_PRINT";
 <div class="panel">
 <div class="container">
-<img class="container__image" src="img/TEST_x2.png" alt="Machine Sprite" />
+<img class="container__image craftables_x2" id="$id" src="img/blank.png" alt="Machine Sprite" />
 <div class="container__text">
 <h2>$m->{'name'}</h2>
 <span class="mach_desc">$m->{'description'}</span><br />
 </div>
 </div>
 Recipe: $m->{'crafting'} (TODO, will be parsed nicely later)<br />
-Sprites: $texture, TI($m->{'tileindex'}) RI($m->{'readyindex'}) F($m->{'frames'})<br />
 <table class="output">
 <thead>
 <tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th></tr>
@@ -265,6 +272,198 @@ print <<"END_PRINT";
 END_PRINT
 
 	close $FH or die "Error closing file";
+}
+
+sub WriteCSS {
+	my $FH;
+	open $FH, ">$DocBase/ppja-doc.css" or die "Can't open ppja-doc.css for writing: $!";
+	select $FH;
+
+	print <<'END_PRINT';
+/* ppja-doc.css
+ * https://mouseypounds.github.io/ppja-doc/
+ */
+
+html {
+	min-height: 100%;
+	background-attachment: fixed;
+	background-color: #80a0f0; /* fallback color if gradients are not supported */
+	background-image: -webkit-linear-gradient(top, #80a0f0, #c0ffff, #40c040); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+	background-image:    -moz-linear-gradient(top, #80a0f0, #c0ffff, #40c040); /* For Firefox (3.6 to 15) */
+	background-image:      -o-linear-gradient(top, #80a0f0, #c0ffff, #40c040); /* For old Opera (11.1 to 12.0) */ 
+	background-image:         linear-gradient(to bottom, #80a0f0, #c0ffff, #40c040); /* Standard syntax; must be last */
+}
+body {
+	margin: 15px;
+	color: #603000;
+}
+a:link, a:visited { color: #804000; }
+a:hover { color: #d08000; }
+a:active { color: #ffa000; }
+.panel {
+	background-color: #ffe0b0;
+	padding: .5em 2em .5em 1em;
+	margin: 5px;
+	border: 5px solid #804000;
+	border-radius: 15px;
+}
+h2 {
+	margin: 10px 0 4px;
+}
+.mach_desc {
+	margin-bottom: 1em;
+	font-weight: bold;
+}
+.note,.group {
+	font-style: italic;
+}
+
+table.output, table.calendar {
+	border: 2px solid black;
+	background-color: white;
+	border-collapse: collapse;
+}
+th, td {
+	border: 1px solid black;
+	text-align: center;
+}
+th {
+	color: white;
+	background-color: #333;
+}
+td {
+	color: black;
+}
+table.output th, table.output td {
+	padding: 3px 8px;
+}
+.container {
+	margin-bottom: 1em;
+}
+.container__image {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 32px;
+	margin-right: 0.5em;
+  }
+.container__text {
+    display: inline-block;
+  }
+
+#TOC {
+	position: fixed;
+	right: 0;
+	top: 0;
+	padding: 0;
+	max-height: 90%;
+	max-width: 200px;
+	overflow: auto;
+	background-color: #eecc99;
+	box-shadow: -2px 2px 25px #603000;
+}
+#TOC, #TOC-details {
+	display:none;
+}
+#TOC:hover #TOC-details {
+	display:block;
+}
+#TOC > h1, #TOC li a {
+	padding: 5px 10px;
+	display: block;
+}
+#TOC > h1 {
+	margin: 0;
+	font-size: 18px;
+	line-height: 24px;
+	background-color: #804000;
+	color: #eecc99;
+}
+#TOC ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#TOC li a {
+	color: #60300;
+	text-decoration: none;
+}
+#TOC li a:hover {
+	background-color: #ffe0b0;
+}
+img.craftables {
+	vertical-align: -2px;
+	width: 16px;
+	height: 32px;
+	background-image:url("./img/ss_craftables.png")
+}
+img.craftables_x2 {
+	vertical-align: -5px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/ss_craftables_x2.png")
+}
+img.crops {
+	vertical-align: -2px;
+	/* Full sprite is 128px */
+	width: 16px;
+	height: 32px;
+	background-image:url("./img/ss_crops.png")
+}
+img.crops_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/ss_crops_x2.png")
+}
+img.hats {
+	vertical-align: -2px;
+	width: 20px;
+	height: 20px;
+	background-image:url("./img/ss_hats.png")
+}
+img.hats_x2 {
+	vertical-align: -2px;
+	width: 40px;
+	height: 40px;
+	background-image:url("./img/ss_hats_x2.png")
+}
+img.objects {
+	vertical-align: -2px;
+	width: 16px;
+	height: 16px;
+	background-image:url("./img/ss_objects.png")
+}
+img.objects_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 32px;
+	background-image:url("./img/ss_objects_x2.png")
+}
+img.trees {
+	vertical-align: -2px;
+	width: 48px;
+	height: 80px;
+	background-image:url("./img/ss_trees.png")
+}
+img.trees_x2 {
+	vertical-align: -2px;
+	width: 96px;
+	height: 160px;
+	background-image:url("./img/ss_trees_x2.png")
+}
+END_PRINT
+
+	foreach my $id (keys %$SpriteInfo) {
+		my $x = $SpriteInfo->{$id}{'x'};
+		my $y = $SpriteInfo->{$id}{'y'};
+		print <<"END_PRINT";
+	img#$id {
+		background-position: ${x}px ${y}px;
+	}
+END_PRINT
+	}
+	
+	close $FH;
 }
 
 __END__ 
