@@ -76,10 +76,13 @@ sub GetItem {
 		} else {
 			foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
 				if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
-					$output =  Wikify($input);
+					$output = Wikify($input);
 				}
 			}
 		}
+	}
+	if ($output eq '') {
+		$output = qq(<span class="note">Unknown Item: $input</span>);
 	}
 	return $output;
 }
