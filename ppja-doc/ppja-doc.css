@@ -36,7 +36,7 @@ h2 {
 	font-style: italic;
 }
 
-table.output, table.calendar {
+table.output, table.calendar, table.recipe {
 	border: 2px solid black;
 	background-color: white;
 	border-collapse: collapse;
@@ -49,11 +49,18 @@ th {
 	color: white;
 	background-color: #333;
 }
+table.recipe th {
+	color: black;
+	background-color: #aaa;
+}
 td {
 	color: black;
 }
-table.output th, table.output td {
+table.output th, table.output td, table.recipe th, table.recipe td {
 	padding: 3px 8px;
+}
+table.recipe {
+	margin-bottom: .5em;
 }
 .container {
 	margin-bottom: 1em;
@@ -79,10 +86,10 @@ table.output th, table.output td {
 	background-color: #eecc99;
 	box-shadow: -2px 2px 25px #603000;
 }
-#TOC, #TOC-details {
+#TOC-details {
 	display:none;
 }
-#TOC:hover #TOC-details {
+#TOC, #TOC:hover #TOC-details {
 	display:block;
 }
 #TOC > h1, #TOC li a {
@@ -169,50 +176,17 @@ img.trees_x2 {
 	height: 160px;
 	background-image:url("./img/ss_trees_x2.png")
 }
-	img#Machine_Smoker {
-		background-position: -640px 0px;
-	}
-	img#Machine_Juicer {
-		background-position: -544px 0px;
-	}
 	img#Machine_Foreign_Cask {
 		background-position: -96px 0px;
-	}
-	img#Machine_Hardwood_Keg {
-		background-position: -32px 0px;
-	}
-	img#Machine_Yogurt_Jar {
-		background-position: -384px 0px;
-	}
-	img#Machine_Vinegar_Cask {
-		background-position: -512px 0px;
-	}
-	img#Machine_Glass_Jar {
-		background-position: -64px 0px;
 	}
 	img#Machine_Dehydrator {
 		background-position: -160px 0px;
 	}
-	img#Machine_Ice_Cream_Machine {
-		background-position: -448px 0px;
-	}
-	img#Machine_Alembic {
-		background-position: -480px 0px;
-	}
-	img#Machine_Butter_Churn {
-		background-position: -128px 0px;
-	}
-	img#Machine_Wax_Barrel {
-		background-position: -416px 0px;
+	img#Machine_Still {
+		background-position: 0px 0px;
 	}
 	img#Machine_Mayonnaise_Machine {
 		background-position: -608px 0px;
-	}
-	img#Machine_Extruder {
-		background-position: -256px 0px;
-	}
-	img#Machine_Still {
-		background-position: 0px 0px;
 	}
 	img#Machine_Grinder {
 		background-position: -288px 0px;
@@ -220,15 +194,48 @@ img.trees_x2 {
 	img#Machine_Drying_Rack {
 		background-position: -192px 0px;
 	}
-	img#Machine_Spinning_Wheel {
-		background-position: -352px 0px;
+	img#Machine_Yogurt_Jar {
+		background-position: -384px 0px;
 	}
-	img#Machine_Soap_Press {
-		background-position: -576px 0px;
+	img#Machine_Enhanced_Oil_Maker {
+		background-position: -224px 0px;
+	}
+	img#Machine_Hardwood_Keg {
+		background-position: -32px 0px;
+	}
+	img#Machine_Alembic {
+		background-position: -480px 0px;
+	}
+	img#Machine_Ice_Cream_Machine {
+		background-position: -448px 0px;
+	}
+	img#Machine_Juicer {
+		background-position: -544px 0px;
+	}
+	img#Machine_Glass_Jar {
+		background-position: -64px 0px;
+	}
+	img#Machine_Vinegar_Cask {
+		background-position: -512px 0px;
+	}
+	img#Machine_Extruder {
+		background-position: -256px 0px;
 	}
 	img#Machine_Infuser {
 		background-position: -320px 0px;
 	}
-	img#Machine_Enhanced_Oil_Maker {
-		background-position: -224px 0px;
+	img#Machine_Wax_Barrel {
+		background-position: -416px 0px;
+	}
+	img#Machine_Spinning_Wheel {
+		background-position: -352px 0px;
+	}
+	img#Machine_Butter_Churn {
+		background-position: -128px 0px;
+	}
+	img#Machine_Soap_Press {
+		background-position: -576px 0px;
+	}
+	img#Machine_Smoker {
+		background-position: -640px 0px;
 	}

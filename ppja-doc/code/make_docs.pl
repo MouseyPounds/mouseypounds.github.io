@@ -128,9 +128,13 @@ sub MachineSummary {
 <body>
 <div class="panel"><h1>MouseyPounds' PPJA Documentation: Machine Summary</h1>
 </div>
+<div id="TOC">
+<h1>Navigation</h1>
+<div id="TOC-details">
+<ul>
 END_PRINT
 
-# Table of Contents here, unless we auto-generate like in checkup app
+	my %TOC = ();
 
 	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
 	my %Panel = ();
@@ -150,12 +154,14 @@ END_PRINT
 			}
 			my $id = "Machine_$m->{'name'}";
 			$id =~ s/ /_/g;
+			my $anchor = "TOC_$id";
+			$TOC{$m->{'name'}} = $anchor;
 			if (exists $SpriteInfo->{$id}) {
 				warn "Sprite ID {$id} will not be unique";
 			}
 			$SpriteInfo->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
 			my $output = <<"END_PRINT";
-<div class="panel">
+<div class="panel" id="$anchor">
 <div class="container">
 <img class="container__image craftables_x2" id="$id" src="img/blank.png" alt="Machine Sprite" />
 <div class="container__text">
@@ -163,7 +169,18 @@ END_PRINT
 <span class="mach_desc">$m->{'description'}</span><br />
 </div>
 </div>
-Recipe: $m->{'crafting'} (TODO, will be parsed nicely later)<br />
+<table class="recipe">
+<tbody><tr><th>Crafting Recipe</th><td>
+END_PRINT
+
+			my @recipe = split(' ', $m->{'crafting'});
+			for (my $i = 0; $i < scalar(@recipe); $i += 2) {
+				my $num = $recipe[$i+1];
+				$output .= GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
+			}
+			
+			$output .= <<"END_PRINT";
+</td></tbody></table>
 <table class="output">
 <thead>
 <tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th></tr>
@@ -263,10 +280,20 @@ END_PRINT
 	} # end of "json" loop
 
 foreach my $p (sort keys %Panel) {
+	print qq(<li><a href="#$TOC{$p}">$p</a></li>);
+}
+
+	print <<"END_PRINT";
+</ul>
+</div>
+</div>
+END_PRINT
+
+foreach my $p (sort keys %Panel) {
 	print $Panel{$p};
 }
 
-print <<"END_PRINT";
+	print <<"END_PRINT";
 </body>
 </html>
 END_PRINT
@@ -318,7 +345,7 @@ h2 {
 	font-style: italic;
 }
 
-table.output, table.calendar {
+table.output, table.calendar, table.recipe {
 	border: 2px solid black;
 	background-color: white;
 	border-collapse: collapse;
@@ -331,11 +358,18 @@ th {
 	color: white;
 	background-color: #333;
 }
+table.recipe th {
+	color: black;
+	background-color: #aaa;
+}
 td {
 	color: black;
 }
-table.output th, table.output td {
+table.output th, table.output td, table.recipe th, table.recipe td {
 	padding: 3px 8px;
+}
+table.recipe {
+	margin-bottom: .5em;
 }
 .container {
 	margin-bottom: 1em;
@@ -361,10 +395,10 @@ table.output th, table.output td {
 	background-color: #eecc99;
 	box-shadow: -2px 2px 25px #603000;
 }
-#TOC, #TOC-details {
+#TOC-details {
 	display:none;
 }
-#TOC:hover #TOC-details {
+#TOC, #TOC:hover #TOC-details {
 	display:block;
 }
 #TOC > h1, #TOC li a {
