@@ -7,6 +7,7 @@
 use strict;
 use JSON::Relaxed qw(from_rjson);
 use File::Slurp qw(read_file);
+use File::Copy;
 use Data::Dumper;
 use Storable;
 use Imager;
@@ -96,7 +97,15 @@ store $GameData, "cache_GameData";
 store $ModData, "cache_ModData";
 store $ModInfo, "cache_ModInfo";
 
-LogMessage("Cropping and writing spritesheets", 1);
+LogMessage("Copying game spritesheets", 1);
+copy("$GameDir/../Maps/springobjects.png", "../img/game_objects.png") or LogMessage("WARNING: Error copying game object sprites: $!", 1);
+copy("$GameDir/../Tilesheets/Craftables.png", "../img/game_craftables.png") or LogMessage("WARNING: Error copying game craftable sprites: $!", 1);
+copy("$GameDir/../Tilesheets/crops.png", "../img/game_crops.png") or LogMessage("WARNING: Error copying game crop sprites: $!", 1);
+copy("$GameDir/../Tilesheets/fruitTrees.png", "../img/game_trees.png") or LogMessage("WARNING: Error copying game tree sprites: $!", 1);
+copy("$GameDir/../Tilesheets/weapons.png", "../img/game_weapons.png") or LogMessage("WARNING: Error copying game weapon sprites: $!", 1);
+copy("$GameDir/../Characters/Farmer/hats.png", "../img/game_hats.png") or LogMessage("WARNING: Error copying game hat sprites: $!", 1);
+
+LogMessage("Cropping and writing mod spritesheets", 1);
 foreach my $k (keys %$SS) {
 	LogMessage("Trying to crop $k which has values I($SS->{$k}{'index'}), W($SS->{$k}{'width'}), H($SS->{$k}{'height'})", 1);
 	my $index = $SS->{$k}{'index'};

@@ -341,9 +341,9 @@ END_PRINT
 		$regrowth = (($regrowth > 0) ? $regrowth : "--");
 		my $need_scythe = ($GameData->{'Crops'}{$sid}{'split'}[5] ? "Yes" : "--");
 		my @multi_data = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[6]));
-		my $num_harvest = pop @multi_data;
+		my $num_harvest = $multi_data[0];
 		if ($num_harvest eq 'true') {
-			my ($min, $max, $inc_per_level, $extra_chance) = @multi_data;
+			my ($ignored, $min, $max, $inc_per_level, $extra_chance) = @multi_data;
 			$num_harvest = $min + $extra_chance;
 		} else {
 			$num_harvest = 1;
@@ -360,7 +360,7 @@ END_PRINT
 				$scost = 150;
 			}
 		} elsif ($crop eq 'Coffee Bean') {
-			$seed_vendor = Wikify("Traveling Merchant");
+			$seed_vendor = Wikify("Traveling Cart");
 			$scost = 2500;
 		} elsif ($crop eq 'Ancient Fruit') {
 			$seed_vendor = qq(<span class="note">None</span>);
@@ -848,6 +848,10 @@ sub WriteCSS {
 	my $FH;
 	open $FH, ">$DocBase/ppja-doc-img.css" or die "Can't open ppja-doc-img.css for writing: $!";
 	select $FH;
+	
+	# Info for the machine sprites are already in %SpriteInfo, but other mod sprites need to be added now too
+	
+	
 
 	print <<"END_PRINT";
 /* ppja-doc-img.css
