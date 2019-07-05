@@ -34,7 +34,13 @@ sub Wikify {
 	my $trimmed = $item;
 	$trimmed =~ s/ (White)//;
 	$trimmed =~ s/ (Brown)//;
+	$trimmed =~ s/L. /Large /;
 	$trimmed =~ s/ /_/g;
+
+	# Hardcoded Category redirects
+	if ($trimmed =~ /^fruit$/i or $trimmed =~ /^vegetable$/i or $trimmed =~ /^flower$/i) {
+		$trimmed .= 's';
+	}
 	
 	if (defined $page) {
 		return qq(<a href="http://stardewvalleywiki.com/$page#$trimmed">$item</a>);
@@ -72,7 +78,7 @@ sub GetItem {
 			if ($input == -999) {
 				$output = qq(<span class="group">Same as Input</span>);
 			} else {
-				$output = '<span class="group">Any ' . GetCategory($input) . '</span>';
+				$output = '<span class="group">Any ' . Wikify(GetCategory($input)) . '</span>';
 			}
 		}
 		elsif (exists $GameData->{'ObjectInformation'}{$input}) {
@@ -224,13 +230,14 @@ sub GetHeader {
 
 </head>
 <body>
-<div class="panel"><h1>MouseyPounds' PPJA Documentation: $subtitle</h1>
+<div class="panel" id="header"><h1>MouseyPounds' PPJA Documentation: $subtitle</h1>
 $longdesc
 </div>
 <div id="TOC">
 <h1>Navigation</h1>
 <div id="TOC-details">
 <ul>
+<li><a href="#header">(Top)</a></li>
 END_PRINT
 
 	return $output;
@@ -273,6 +280,8 @@ sub CropSummary {
 	print GetHeader("Crop Summary", qq(PPJA Artisan Valley Crop Summary),
 		qq(<p>A summary of crop growth information from the base game as well as <a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley</a>.</p>));
 
+		
+	print "</ul></div></div>";
 	print GetFooter();
 	return;
 	my %TOC = ();
@@ -448,8 +457,18 @@ sub MachineSummary {
 	my $FH;
 	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
 	select $FH;
-	print GetHeader("Machine Summary", qq(PPJA Artisan Valley Machine Summary),
-		qq(<p>A summary of machines from <a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley</a>.</p>));
+
+	my $longdesc = <<"END_PRINT";
+<p>A summary of machines from <a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley</a> version $ModInfo->{'ppja.avcfr'}{'Version'}. 
+Value and profit calculations all assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>.
+Inputs related to an entire category (e.g. <span class="note">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
+the wiki which only shows base game items. 
+There are two types of profit listed. <span class="note">Profit (Item)</span> is purely based on the difference between the value of ingredients and product
+while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
+production takes. The latter is rounded to two decimal places.
+</p>
+END_PRINT
+	print GetHeader("Machine Summary", qq(PPJA Artisan Valley Machine Summary), $longdesc);
 
 	my %TOC = ();
 
@@ -500,7 +519,7 @@ END_PRINT
 </td></tbody></table>
 <table class="sortable output">
 <thead>
-<tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th><th>Profit</th></tr>
+<tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th><th>Profit<br />(Item)</th><th>Profit<br />(Hr)</th></tr>
 </thead>
 <tbody>
 END_PRINT
@@ -616,6 +635,11 @@ END_PRINT
 					$profit = qq(<span class="note">Varies</span>);
 				} else {
 					$profit = $value - $cost;
+				}
+				$entry{'out'} .= "<td>$profit</td>";
+				# reuse profit variable for per-minute version.
+				if (looks_like_number($profit)) {
+					$profit = nearest(.01,60*$profit/$p->{'time'});
 				}
 				$entry{'out'} .= "<td>$profit</td>";
 				$entry{'out'} .= "</tr>";

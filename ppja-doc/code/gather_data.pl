@@ -17,7 +17,7 @@ use List::Util qw(min max);
 #   0: No logging (aside from warn/die)
 #   1: Simple trace messages only
 #   2: Trace messages and full data dumps
-#   3: Trace messages, data dumps, and file content dumps
+#   3: Normal trace messages, data dumps, file content dumps, and extra spammy trace messages
 my $LogLevel = 2;
 
 # Important directories. These would probably be better off as optional command-line arguments with reasonable
@@ -347,7 +347,7 @@ sub StoreNextImage {
 	$src_x = 0 if (not defined $src_x);
 	$src_y = 0 if (not defined $src_y);
 	
-	LogMessage("StoreNextImage called with parameters {$src_file} {$type} {$src_x} {$src_y}", 1);
+	LogMessage("StoreNextImage called with parameters {$src_file} {$type} {$src_x} {$src_y}", 3);
 
 	if (not defined $src_file or not defined $type or not exists $SS->{$type}) {
 		LogMessage("WARNING Missing required parameter for StoreNextImage {$src_file}, {$type}");
