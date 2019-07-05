@@ -25,6 +25,13 @@ a:active { color: #ffa000; }
 	border: 5px solid #804000;
 	border-radius: 15px;
 }
+#header {
+	padding-right: 5em;
+}
+#footer {
+	text-align: center;
+	padding-right: 1em;
+}
 h2 {
 	margin: 10px 0 4px;
 }
@@ -35,7 +42,18 @@ h2 {
 .note,.group {
 	font-style: italic;
 }
-
+/* Sortable Table indicators from https://www.kryogenix.org/code/browser/sorttable/#symbolsbeforesorting */
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+}
+table.sortable th {
+	cursor: pointer;
+	
+}
+table.sortable th:hover {
+	background-color: #666;
+	
+}
 table.output, table.calendar, table.recipe {
 	border: 2px solid black;
 	background-color: white;

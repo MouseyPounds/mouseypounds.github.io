@@ -6,7 +6,7 @@
 
 use strict;
 use Scalar::Util qw(looks_like_number);
-use POSIX qw(ceil);
+use POSIX qw(ceil floor);
 use Storable;
 use Math::Round;
 
@@ -18,6 +18,7 @@ my $DocBase = "..";
 
 my $SpriteInfo = {};
 
+CropSummary();
 MachineSummary();
 WriteCSS();
 
@@ -25,7 +26,7 @@ exit;
 
 # Wikify: Conversion of a javascript function from Stardew Checkup that adds a wiki link for an item.
 #   item name
-#   page name (optional) - used when the item is just an anchor on another page rather than having its own page
+#   page name [optional] - used when the item is just an anchor on another page rather than having its own page
 #
 sub Wikify {
 	my $item = shift;
@@ -40,6 +41,16 @@ sub Wikify {
 	} else {
 		return qq(<a href="http://stardewvalleywiki.com/$trimmed">$item</a>);
 	}
+}
+
+# StripHTML: Overly simplistic method of removing HTML tags from a string.
+# This is a terrible implementation for general use and some sort of package like HTML::Strip should be used
+#  for those cases, however since we are only using it to strip simple wiki links or spans that we ourselves
+#  created, we can get away with this non-robust method.
+sub StripHTML {
+	my $input = shift;
+	$input =~ s/\<[^>]*>//g;
+	return $input;
 }
 
 # GetItem receives 1 or 2 inputs and will use the first one that is defined.
@@ -176,11 +187,18 @@ sub GetCategory {
 # GetHeader - creates and returns HTML code for top of pages
 #
 #   subtitle - string to put in top header and title
-#   desc - [optional] any additonal info to include in top panel
+#   shortdesc - [optional] short description for social media embeds
+#   longdesc - [optional] any additonal info to include in top panel
 sub GetHeader {
 	my $subtitle = shift;
-	my $desc = shift;
-	$desc = "" if (not defined $desc);
+	my $shortdesc = shift;
+	if (not defined $shortdesc or $shortdesc eq '') {
+		$shortdesc = "Personal reference for the PPJA family of Stardew Valley mods.";
+	}
+	my $longdesc = shift;
+	if (not defined $longdesc) {
+		$longdesc = "";
+	}
 	
 	my $output = <<"END_PRINT";
 <!DOCTYPE html>
@@ -190,7 +208,7 @@ sub GetHeader {
 
 <meta charset="UTF-8" />
 <meta property="og:title" content="PPJA $subtitle" />
-<meta property="og:description" content="Personal reference for the PPJA family of Stardew Valley mods." />
+<meta property="og:description" content="$shortdesc" />
 <!-- meta property="og:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
 <!-- meta property="twitter:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
 <meta name="theme-color" content="#ffe0b0">
@@ -201,10 +219,13 @@ sub GetHeader {
 <link rel="stylesheet" type="text/css" href="./ppja-doc-img.css" />
 <!-- link rel="icon" type="image/png" href="./favicon_c.png" / -->
 
+<!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
+<script type="text/javascript" src="./sorttable.js"></script>
+
 </head>
 <body>
 <div class="panel"><h1>MouseyPounds' PPJA Documentation: $subtitle</h1>
-$desc
+$longdesc
 </div>
 <div id="TOC">
 <h1>Navigation</h1>
@@ -218,8 +239,25 @@ END_PRINT
 # GetFooter - creates and returns HTML code for bottom of pages
 sub GetFooter {
 	my $output = <<"END_PRINT";
-<div class="panel" id="footer">
-This'll be like credits and links and stuff some day.
+<div id="footer" class="panel">
+PPJA Docs:
+<a href="./crops.html">Crop Summary</a> || 
+<a href="./machines.html">Machine Summary</a>
+<br />
+Stardew Apps by MouseyPounds: <a href="https://mouseypounds.github.io/stardew-checkup/">Stardew Checkup</a> ||
+<a href="https://mouseypounds.github.io/stardew-predictor/">Stardew Predictor</a> || 
+<a href="https://mouseypounds.github.io/stardew-fair-helper/">Stardew Fair Helper</a>
+<br />
+Other Stardew Valley resources: <a href="http://stardewvalley.net/">Website</a> || 
+<a href="http://store.steampowered.com/app/413150/Stardew_Valley/">Steam Page</a> ||
+<a href="https://www.gog.com/game/stardew_valley">GOG Page</a> ||
+<a href="http://www.stardewvalleywiki.com/">Wiki</a> || 
+<a href="http://community.playstarbound.com/index.php?forums/stardew-valley.72/">Forums</a> ||
+<a href="https://www.reddit.com/r/StardewValley">Subreddit</a> ||
+<a href="https://discordapp.com/invite/StardewValley">Discord</a>
+<br />
+Stardew Valley was developed by <a href="http://twitter.com/concernedape">ConcernedApe</a> and published by 
+<a href="http://blog.chucklefish.org/about/">Chucklefish Games</a>.
 </div>
 </body>
 </html>
@@ -228,12 +266,15 @@ END_PRINT
 	return $output;
 }
 
-sub MachineSummary {
+sub CropSummary {
 	my $FH;
-	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
+	open $FH, ">$DocBase/crops.html" or die "Can't open crops.html for writing: $!";
 	select $FH;
-	print GetHeader("Machine Summary");
+	print GetHeader("Crop Summary", qq(PPJA Artisan Valley Crop Summary),
+		qq(<p>A summary of crop growth information from the base game as well as <a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley</a>.</p>));
 
+	print GetFooter();
+	return;
 	my %TOC = ();
 
 	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
@@ -309,10 +350,7 @@ END_PRINT
 				my $name = GetItem($p->{'item'}, $p->{'index'});
 				my $starter_included = 0;
 				my %entry = { 'key1' => '', 'key2' => '', 'out' => '' };
-				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
-				# that a simple regex can do the job rather than needing a more robust general approach.
-				$entry{'key1'} = $name;
-				$entry{'key1'} =~ s/\<[^>]*>//g;
+				$entry{'key1'} = StripHTML($name);
 				$entry{'out'} = "<tr><td>$name</td>";
 				$entry{'out'} .= "<td>";
 				my $i_count = 0;
@@ -335,8 +373,7 @@ END_PRINT
 					}
 					$entry{'out'} .= "$name<br />";
 					if ($entry{'key2'} eq '') {
-						$entry{'key2'} = $name;
-						$entry{'key2'} =~ s/\<[^>]*>//g;
+						$entry{'key2'} = StripHTML($name);
 					}
 				}
 				if (not $starter_included and $starter ne "NO_STARTER") {
@@ -388,9 +425,9 @@ END_PRINT
 		} # end of machine loop
 	} # end of "json" loop
 
-foreach my $p (sort keys %Panel) {
-	print qq(<li><a href="#$TOC{$p}">$p</a></li>);
-}
+	foreach my $p (sort keys %Panel) {
+		print qq(<li><a href="#$TOC{$p}">$p</a></li>);
+	}
 
 	print <<"END_PRINT";
 </ul>
@@ -398,9 +435,218 @@ foreach my $p (sort keys %Panel) {
 </div>
 END_PRINT
 
-foreach my $p (sort keys %Panel) {
-	print $Panel{$p};
+	foreach my $p (sort keys %Panel) {
+		print $Panel{$p};
+	}
+
+	print GetFooter();
+
+	close $FH or die "Error closing file";
 }
+
+sub MachineSummary {
+	my $FH;
+	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
+	select $FH;
+	print GetHeader("Machine Summary", qq(PPJA Artisan Valley Machine Summary),
+		qq(<p>A summary of machines from <a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley</a>.</p>));
+
+	my %TOC = ();
+
+	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
+	my %Panel = ();
+	foreach my $j (@{$ModData->{'Machines'}}) {
+		# These are the individual json files from each machine mod
+		foreach my $m (@{$j->{'machines'}}) {
+			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
+			my $key = $m->{'name'};
+			my $tries = 0;
+			my $max_tries = 10;
+			while (exists $Panel{$key} and $tries < $max_tries) {
+				$key = $m->{'name'} . "_$tries";
+				$tries++;
+			}
+			if (exists $Panel{$key}) {
+				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
+			}
+			my $id = "Machine_$m->{'name'}";
+			$id =~ s/ /_/g;
+			my $anchor = "TOC_$id";
+			$TOC{$m->{'name'}} = $anchor;
+			if (exists $SpriteInfo->{$id}) {
+				warn "Sprite ID {$id} will not be unique";
+			}
+			$SpriteInfo->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
+			my $output = <<"END_PRINT";
+<div class="panel" id="$anchor">
+<div class="container">
+<img class="container__image craftables_x2" id="$id" src="img/blank.png" alt="Machine Sprite" />
+<div class="container__text">
+<h2>$m->{'name'}</h2>
+<span class="mach_desc">$m->{'description'}</span><br />
+</div>
+</div>
+<table class="recipe">
+<tbody><tr><th>Crafting Recipe</th><td>
+END_PRINT
+
+			my @recipe = split(' ', $m->{'crafting'});
+			for (my $i = 0; $i < scalar(@recipe); $i += 2) {
+				my $num = $recipe[$i+1];
+				$output .= GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
+			}
+			
+			$output .= <<"END_PRINT";
+</td></tbody></table>
+<table class="sortable output">
+<thead>
+<tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th><th>Profit</th></tr>
+</thead>
+<tbody>
+END_PRINT
+			my $starter = "NO_STARTER";
+			if (exists $m->{'starter'}) {
+				$starter = GetItem($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
+			}
+			# Pre-scan production to handle "includes" by duplicating the production object for each additional item.
+			my @add = ();
+			foreach my $p (@{$m->{'production'}}) {
+				# We will assume that the materials array only contains one thing and that there are no other nested
+				#  objects which we care about. Thus, a shallow copy of the production object is acceptable.
+				if (exists $p->{'include'}) {
+					foreach my $p_inc (@{$p->{'include'}}) {
+						my %temp = %$p;
+						$temp{'materials'} = [];
+						$temp{'materials'}[0] = { 'index' => $p_inc };
+						push @add, \%temp;
+					}
+				}
+			}
+			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
+			my @rows = ();
+			foreach my $p (@{$m->{'production'}}, @add) {
+				my $name = GetItem($p->{'item'}, $p->{'index'});
+				my $starter_included = 0;
+				my %entry = { 'key1' => '', 'key2' => '', 'out' => '' };
+				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
+				# that a simple regex can do the job rather than needing a more robust general approach.
+				$entry{'key1'} = StripHTML($name);
+				$entry{'out'} = "<tr><td>$name</td>";
+				$entry{'out'} .= "<td>";
+				my $i_count = 0;
+				my $cost = 0;
+				foreach my $i (@{$p->{'materials'}}) {
+					$name = GetItem($i->{'name'}, $i->{'index'});
+					if ($i_count > 0) {
+						$name = "+ $name";
+					}
+					$i_count++;
+					my $stack_size = 1;
+					if (exists $i->{'stack'} and $i->{'stack'} > 1) {
+						$stack_size = $i->{'stack'};
+					}
+					if (not $starter_included and $starter eq $name) {
+						$stack_size++;
+						$starter_included = 1;
+					}
+					if ($stack_size > 1) {
+						$name .= " ($stack_size)";
+					}
+					$entry{'out'} .= "$name<br />";
+					if ($entry{'key2'} eq '') {
+						$entry{'key2'} = StripHTML($name);
+					}
+					$cost += $stack_size * GetValue($i->{'name'}, $i->{'index'});
+				}
+				if (not $starter_included and $starter ne "NO_STARTER") {
+					$entry{'out'} .= "+ $starter<br />";
+					$cost += GetValue($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
+				}
+				if (exists $p->{'exclude'}) {
+					$entry{'out'} .= '<span class="group">Except ' . join(', ', (map {GetItem($_)} @{$p->{'exclude'}})) . "</span><br />";
+				}
+				$entry{'out'} .= "</td>";
+				my $time = $p->{'time'};
+				if ($time > 1440) { 
+					$time = "$time min (~" . nearest(.1, $time/1440) . " days)";
+				} elsif ($time == 1440) {
+					$time = "$time min (~1 day)";
+				} elsif ($time >= 60) {
+					my $rem = $time%60;
+					my $hr = "hr" . ($time > 119 ? "s" : "");
+					if ($rem > 0) {
+						$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
+					} else {
+						$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
+					}
+				} else {
+					$time = "$time min";
+				}
+				$entry{'out'} .= "<td>$time</td>";
+				my $value = $p->{'price'};
+				if (not defined $value or $value eq "") {
+					$value = GetValue($p->{'item'}, $p->{'index'});
+				} elsif ($value =~ /original/) {
+					my $temp = GetValue($p->{'item'}, $p->{'index'});
+					if (looks_like_number($temp) and $temp > 0) {
+						$value =~ s/original/$temp/g;
+					}
+				}
+				if ($value =~ /input/) {
+					# We are trying to determine the main ingredient in order to better determine value & profit
+					# Since that ingredient was used for the second sort key, we try to look it up.
+					my $ingr_value = GetValue($entry{'key2'});
+					if (looks_like_number($ingr_value) and $ingr_value >= 0) {
+						$value =~ s/input/$ingr_value/g;
+					}
+				}
+				# Now let's do something a wee bit dangerous and try to evaluate the value equation.
+				# We aren't doing any sanity-checking on this, and there is the theoretical possibility somebody stuck
+				# some malicious perl code in their machine's output equation. But since this script is only being run
+				# on specific Stardew Valley mods from people we trust, we will take that risk.
+				my $eq_eval = eval $value;
+				#print STDOUT "Tried to eval {$value} and got {$eq_eval}\n";
+				if ($eq_eval ne '' and looks_like_number($eq_eval)) {
+					$value = floor($eq_eval);
+				}
+				$entry{'out'} .= "<td>$value</td>";
+				my $profit = "";
+				if ($value =~ /original/ or $value =~ /input/) {
+					# This still looks like an equation
+					$profit = qq(<span class="note">Varies</span>);
+				} else {
+					$profit = $value - $cost;
+				}
+				$entry{'out'} .= "<td>$profit</td>";
+				$entry{'out'} .= "</tr>";
+				push @rows, \%entry;
+			}
+			foreach my $e (sort {$a->{'key1'} cmp $b->{'key1'} or $a->{'key2'} cmp $b->{'key2'}} @rows) {
+				$output .= $e->{'out'};
+			}
+
+			$output .= <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
+			$Panel{$key} = $output;
+		} # end of machine loop
+	} # end of "json" loop
+
+	foreach my $p (sort keys %Panel) {
+		print qq(<li><a href="#$TOC{$p}">$p</a></li>);
+	}
+
+	print <<"END_PRINT";
+</ul>
+</div>
+</div>
+END_PRINT
+
+	foreach my $p (sort keys %Panel) {
+		print $Panel{$p};
+	}
 
 	print GetFooter();
 
