@@ -120,7 +120,14 @@ sub GetValue {
 	my $output = "";
 	if (looks_like_number($input)) {
 		if ($input < 0) {
-			$output = "varies";
+			# For an "Any Milk" or "Any Egg" entry we will use the price of cheapest option
+			if ($input == -6) {
+				$output = GetValue("Milk");
+			} elsif ($input == -5) {
+				$output = GetValue("Egg");
+			} else {
+				$output = "varies";
+			}
 		}
 		elsif (exists $GameData->{'ObjectInformation'}{$input}) {
 			$output = $GameData->{'ObjectInformation'}{$input}{'split'}[1];
@@ -277,9 +284,11 @@ sub CropSummary {
 	my $FH;
 	open $FH, ">$DocBase/crops.html" or die "Can't open crops.html for writing: $!";
 	select $FH;
-	print GetHeader("Crop Summary", qq(PPJA Artisan Valley Crop Summary),
-		qq(<p>A summary of crop growth information from the base game as well as <a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley</a>.</p>));
-
+	my $longdesc = <<"END_PRINT";
+<p>A summary of crop growth information from the base game as well as .
+</p>
+END_PRINT
+	print GetHeader("Crop Summary", qq(PPJA Artisan Valley Crop Summary), $longdesc);
 		
 	print "</ul></div></div>";
 	print GetFooter();
@@ -459,13 +468,26 @@ sub MachineSummary {
 	select $FH;
 
 	my $longdesc = <<"END_PRINT";
-<p>A summary of machines from <a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley</a> version $ModInfo->{'ppja.avcfr'}{'Version'}. 
-Value and profit calculations all assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>.
-Inputs related to an entire category (e.g. <span class="note">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
-the wiki which only shows base game items. 
-There are two types of profit listed. <span class="note">Profit (Item)</span> is purely based on the difference between the value of ingredients and product
-while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
-production takes. The latter is rounded to two decimal places.
+<p>A summary of machines from the following mods:</p>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.avcfr'}{'Name'}</a> version $ModInfo->{'ppja.avcfr'}{'Version'}
+including enabling recipes from:
+  <ul>
+  <li><a href="https://www.nexusmods.com/stardewvalley/mods/1897">$ModInfo->{'Aquilegia.SweetTooth'}{'Name'}</a> version $ModInfo->{'Aquilegia.SweetTooth'}{'Version'} (with <span class="note">Lavender</span> corrected to <span class="note">Herbal Lavender</span>).</li>
+  <!-- <li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li> -->
+  </ul>
+</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertofloristcfr'}{'Name'}</a> version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</li>
+</ul>
+<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
+the wiki which only shows base game items. All value and profit calculations assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>. Additonally, if a recipe calls for <span class="group">Any Milk</span>, the
+value of the small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> is used, and if a recipe calls for <span class="group">Any Egg</span>,
+the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is used.
+</p>
+
+<p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
+and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
+machine takes. The latter is rounded to two decimal places.
 </p>
 END_PRINT
 	print GetHeader("Machine Summary", qq(PPJA Artisan Valley Machine Summary), $longdesc);
@@ -475,7 +497,14 @@ END_PRINT
 	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
 	my %Panel = ();
 	foreach my $j (@{$ModData->{'Machines'}}) {
-		# These are the individual json files from each machine mod
+		# These are the individual json files from each machine mod. Since mod names here don't necessarily reflect either the
+		#  manifest name or UniqueID, we hardcode the appropriate keys for ModInfo.
+		my $extra_info = "";
+		if ($j->{name} eq 'Artisan Valley Machine Machines') {
+			$extra_info = qq(<p><span class="note">From $ModInfo->{'ppja.avcfr'}{'Name'} version $ModInfo->{'ppja.avcfr'}{'Version'}</span></p>);
+		} elsif ($j->{name} eq 'Farmer to Florist Machines Redux') {
+			$extra_info = qq(<p><span class="note">From $ModInfo->{'kildarien.farmertofloristcfr'}{'Name'} version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</span></p>);
+		} 
 		foreach my $m (@{$j->{'machines'}}) {
 			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
 			my $key = $m->{'name'};
@@ -504,6 +533,7 @@ END_PRINT
 <h2>$m->{'name'}</h2>
 <span class="mach_desc">$m->{'description'}</span><br />
 </div>
+$extra_info
 </div>
 <table class="recipe">
 <tbody><tr><th>Crafting Recipe</th><td>
