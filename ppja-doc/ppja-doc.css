@@ -43,9 +43,11 @@ h2 {
 	font-style: italic;
 }
 /* Sortable Table indicators from https://www.kryogenix.org/code/browser/sorttable/#symbolsbeforesorting */
+/*
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
     content: " \25B4\25BE" 
 }
+*/
 table.sortable th {
 	cursor: pointer;
 	
@@ -132,4 +134,14 @@ table.recipe {
 }
 #TOC li a:hover {
 	background-color: #ffe0b0;
+}
+/* Form stuff. */
+fieldset {
+	border: 1px solid #603000;
+	margin: 0.5em 0.25em 0.5em 0.75em;
+	padding: 0.5em 0.25em 0.5em 0.75em;
+	width: 30em;
+}
+.col_10, .col_20, .col_25, .col_35 {
+	display:none;
 }

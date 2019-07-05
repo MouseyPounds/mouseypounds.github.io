@@ -7,8 +7,10 @@
 use strict;
 use Scalar::Util qw(looks_like_number);
 use POSIX qw(ceil floor);
+use List::Util qw(min max);
 use Storable;
 use Math::Round;
+use Data::Dumper;
 
 my $GameData = retrieve("cache_GameData");
 my $ModData = retrieve("cache_ModData");
@@ -202,6 +204,7 @@ sub GetCategory {
 #   subtitle - string to put in top header and title
 #   shortdesc - [optional] short description for social media embeds
 #   longdesc - [optional] any additonal info to include in top panel
+#   script - [optional] javascript to enable
 sub GetHeader {
 	my $subtitle = shift;
 	my $shortdesc = shift;
@@ -212,12 +215,18 @@ sub GetHeader {
 	if (not defined $longdesc) {
 		$longdesc = "";
 	}
+	my $script = shift;
+	if (not defined $script or $script eq '') {
+		$script = "";
+	} else {
+		$script = qq(<script type="text/javascript" src="./$script"></script>);
+	}
 	
 	my $output = <<"END_PRINT";
 <!DOCTYPE html>
 <html>
 <head>
-<title>MouseyPounds' PPJA Documentation: $subtitle</title>
+<title>Mousey's PPJA Documentation: $subtitle</title>
 
 <meta charset="UTF-8" />
 <meta property="og:title" content="PPJA $subtitle" />
@@ -234,10 +243,11 @@ sub GetHeader {
 
 <!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
 <script type="text/javascript" src="./sorttable.js"></script>
+$script
 
 </head>
 <body>
-<div class="panel" id="header"><h1>MouseyPounds' PPJA Documentation: $subtitle</h1>
+<div class="panel" id="header"><h1>Mousey's PPJA Documentation: $subtitle</h1>
 $longdesc
 </div>
 <div id="TOC">
@@ -285,181 +295,308 @@ sub CropSummary {
 	open $FH, ">$DocBase/crops.html" or die "Can't open crops.html for writing: $!";
 	select $FH;
 	my $longdesc = <<"END_PRINT";
-<p>A summary of crop growth information from the base game as well as .
-</p>
+<p>A summary of growth information including base game crops as well as crops from the following mods:</p>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1610">$ModInfo->{'ParadigmNomad.FantasyCrops'}{'Name'}</a> version $ModInfo->{'ParadigmNomad.FantasyCrops'}{'Version'}</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertoflorist'}{'Name'}</a> version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1721">$ModInfo->{'paradigmnomad.freshmeat'}{'Name'}</a> version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1598">$ModInfo->{'ppja.fruitsandveggies'}{'Name'}</a> version $ModInfo->{'ppja.fruitsandveggies'}{'Version'}</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/2028">$ModInfo->{'mizu.flowers'}{'Name'}</a> version $ModInfo->{'mizu.flowers'}{'Version'}</li>
+</ul>
+<p>Growth speed option to apply to all crop tables:</p>
+<fieldset id="growth_speed_options" class="radio_set">
+<label><input type="radio" name="speed" value="0" checked="checked"> No speed modifiers</label><br />
+<label><input type="radio" name="speed" value="10"> 10% (Only one of <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession or <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
+<label><input type="radio" name="speed" value="20"> 20% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
+<label><input type="radio" name="speed" value="25"> 25% (Only <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label><br />
+<label><input type="radio" name="speed" value="35"> 35% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label>
+</fieldset>
+<input type="hidden" id="last_speed" value="0" />
 END_PRINT
-	print GetHeader("Crop Summary", qq(PPJA Artisan Valley Crop Summary), $longdesc);
+	print GetHeader("Crop Growth Summary", qq(PPJA Crop Growth Summary), $longdesc, "crops-form.js");
+
+	# We will organize this by Season so we start with an array that will hold a hash of the table rows keyed by crop name.
+	my @Panel = ( 
+		{ 'key' => 'Spring', 'row' => {}, },
+		{ 'key' => 'Summer', 'row' => {}, },
+		{ 'key' => 'Fall', 'row' => {}, },
+		{ 'key' => 'Winter', 'row' => {}, },
+		);
+
+	# Vanilla crop data
+	foreach my $sid (keys %{$GameData->{'Crops'}}) {
+		# The keys for the Crops hash are the object ID numbers for the Seeds (hence the var $sid)
+		# We will need to extract some info from ObjectInformation as well but don't sanity-check very often since we trust game data
+		my $sname = GetItem($sid);
+		my $scost = 2*$GameData->{'ObjectInformation'}{$sid}{'split'}[1];
+		my @phases = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[0]));
+		my $season_str = $GameData->{'Crops'}{$sid}{'split'}[1];
+		#my @seasons = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[1]));
+		my $sprite_index = $GameData->{'Crops'}{$sid}{'split'}[2];
+		my $cid = $GameData->{'Crops'}{$sid}{'split'}[3];
+		my $cname = GetItem($cid);
+		my $cprice = $GameData->{'ObjectInformation'}{$cid}{'split'}[1];
+		my $regrowth = $GameData->{'Crops'}{$sid}{'split'}[4];
+		$regrowth = (($regrowth > 0) ? $regrowth : "--");
+		my $need_scythe = ($GameData->{'Crops'}{$sid}{'split'}[5] ? "Yes" : "--");
+		my @multi_data = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[6]));
+		my $num_harvest = pop @multi_data;
+		if ($num_harvest eq 'true') {
+			my ($min, $max, $inc_per_level, $extra_chance) = @multi_data;
+			$num_harvest = $min + $extra_chance;
+		} else {
+			$num_harvest = 1;
+		}
+		my $is_trellis = (($GameData->{'Crops'}{$sid}{'split'}[7] eq 'true') ? "Yes" : "--");
+		my @color_data = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[8]));
+		# This is all hard-coded since it is handled in the exe
+		# To make it easier to read we check the name rather than id, so we have to strip it
+		my $crop = StripHTML($cname);
+		my $seed_vendor = Wikify("Pierre");
+		if ($crop eq 'Rhubarb' or $crop eq 'Starfruit' or $crop eq 'Beet' or $crop eq 'Cactus Fruit') {
+			$seed_vendor = Wikify("Sandy");
+			if ($crop eq 'Cactus Fruit') {
+				$scost = 150;
+			}
+		} elsif ($crop eq 'Coffee Bean') {
+			$seed_vendor = Wikify("Traveling Merchant");
+			$scost = 2500;
+		} elsif ($crop eq 'Ancient Fruit') {
+			$seed_vendor = qq(<span class="note">None</span>);
+		}
+		if ($crop eq 'Garlic' or $crop eq 'Red Cabbage' or $crop eq 'Artichoke') {
+			$seed_vendor .= "<br />(Year 2+)";
+		}
 		
-	print "</ul></div></div>";
-	print GetFooter();
-	return;
-	my %TOC = ();
-
-	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
-	my %Panel = ();
-	foreach my $j (@{$ModData->{'Machines'}}) {
-		# These are the individual json files from each machine mod
-		foreach my $m (@{$j->{'machines'}}) {
-			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
-			my $key = $m->{'name'};
-			my $tries = 0;
-			my $max_tries = 10;
-			while (exists $Panel{$key} and $tries < $max_tries) {
-				$key = $m->{'name'} . "_$tries";
-				$tries++;
-			}
-			if (exists $Panel{$key}) {
-				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
-			}
-			my $id = "Machine_$m->{'name'}";
-			$id =~ s/ /_/g;
-			my $anchor = "TOC_$id";
-			$TOC{$m->{'name'}} = $anchor;
-			if (exists $SpriteInfo->{$id}) {
-				warn "Sprite ID {$id} will not be unique";
-			}
-			$SpriteInfo->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
-			my $output = <<"END_PRINT";
-<div class="panel" id="$anchor">
-<div class="container">
-<img class="container__image craftables_x2" id="$id" src="img/blank.png" alt="Machine Sprite" />
-<div class="container__text">
-<h2>$m->{'name'}</h2>
-<span class="mach_desc">$m->{'description'}</span><br />
-</div>
-</div>
-<table class="recipe">
-<tbody><tr><th>Crafting Recipe</th><td>
+		my $output = <<"END_PRINT";
+<tr><td>$cname</td>
+<td>$sname</td>
+<td>$seed_vendor</td>
+<td>$scost</td>
+<td>$need_scythe</td>
+<td>$is_trellis</td>
+<td>$num_harvest</td>
 END_PRINT
-
-			my @recipe = split(' ', $m->{'crafting'});
-			for (my $i = 0; $i < scalar(@recipe); $i += 2) {
-				my $num = $recipe[$i+1];
-				$output .= GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
-			}
-			
-			$output .= <<"END_PRINT";
-</td></tbody></table>
-<table class="output">
-<thead>
-<tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th></tr>
-END_PRINT
-			my $starter = "NO_STARTER";
-			if (exists $m->{'starter'}) {
-				$starter = GetItem($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
-			}
-			# Pre-scan production to handle "includes" by duplicating the production object for each additional item.
-			my @add = ();
-			foreach my $p (@{$m->{'production'}}) {
-				# We will assume that the materials array only contains one thing and that there are no other nested
-				#  objects which we care about. Thus, a shallow copy of the production object is acceptable.
-				if (exists $p->{'include'}) {
-					foreach my $p_inc (@{$p->{'include'}}) {
-						my %temp = %$p;
-						$temp{'materials'} = [];
-						$temp{'materials'}[0] = { 'index' => $p_inc };
-						push @add, \%temp;
-					}
-				}
-			}
-			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
-			my @rows = ();
-			foreach my $p (@{$m->{'production'}}, @add) {
-				my $name = GetItem($p->{'item'}, $p->{'index'});
-				my $starter_included = 0;
-				my %entry = { 'key1' => '', 'key2' => '', 'out' => '' };
-				$entry{'key1'} = StripHTML($name);
-				$entry{'out'} = "<tr><td>$name</td>";
-				$entry{'out'} .= "<td>";
-				my $i_count = 0;
-				foreach my $i (@{$p->{'materials'}}) {
-					$name = GetItem($i->{'name'}, $i->{'index'});
-					if ($i_count > 0) {
-						$name = "+ $name";
-					}
-					$i_count++;
-					my $stack_size = 1;
-					if (exists $i->{'stack'} and $i->{'stack'} > 1) {
-						$stack_size = $i->{'stack'};
-					}
-					if (not $starter_included and $starter eq $name) {
-						$stack_size++;
-						$starter_included = 1;
-					}
-					if ($stack_size > 1) {
-						$name .= " ($stack_size)";
-					}
-					$entry{'out'} .= "$name<br />";
-					if ($entry{'key2'} eq '') {
-						$entry{'key2'} = StripHTML($name);
-					}
-				}
-				if (not $starter_included and $starter ne "NO_STARTER") {
-					$entry{'out'} .= "+ $starter<br />";
-				}
-				if (exists $p->{'exclude'}) {
-					$entry{'out'} .= '<span class="group">Except ' . join(', ', (map {GetItem($_)} @{$p->{'exclude'}})) . "</span><br />";
-				}
-				$entry{'out'} .= "</td>";
-				my $time = $p->{'time'};
-				if ($time > 1440) { 
-					$time = "$time min (~" . nearest(.1, $time/1440) . " days)";
-				} elsif ($time == 1440) {
-					$time = "$time min (~1 day)";
-				} elsif ($time >= 60) {
-					my $rem = $time%60;
-					my $hr = "hr" . ($time > 119 ? "s" : "");
-					if ($rem > 0) {
-						$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
-					} else {
-						$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
-					}
+		foreach my $opt (qw(0 10 20 25 35)) {
+			my $growth = CalcGrowth($opt/100, \@phases);
+			my $max_harvests = floor(27/$growth);
+			if (looks_like_number($regrowth) and $regrowth > -1) {
+				if ($growth > 27) {
+					$max_harvests = 0;
 				} else {
-					$time = "$time min";
+					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
 				}
-				$entry{'out'} .= "<td>$time</td>";
-				my $value = $p->{'price'};
-				if (not defined $value or $value eq "") {
-					$value = GetValue($p->{'item'}, $p->{'index'});
-				} elsif ($value =~ /original/) {
-					my $temp = GetValue($p->{'item'}, $p->{'index'});
-					if (looks_like_number($temp) and $temp > 0) {
-						$value =~ s/original/$temp/g;
-					}
-				}
-				$entry{'out'} .= "<td>$value</td>";
-				$entry{'out'} .= "</tr>";
-				push @rows, \%entry;
 			}
-			foreach my $e (sort {$a->{'key1'} cmp $b->{'key1'} or $a->{'key2'} cmp $b->{'key2'}} @rows) {
-				$output .= $e->{'out'};
-			}
-
 			$output .= <<"END_PRINT";
-</table>
-</div>
+<td class="col_$opt">$growth</td>
+<td class="col_$opt">$regrowth</td>
+<td class="col_$opt">$max_harvests</td>
 END_PRINT
-			$Panel{$key} = $output;
-		} # end of machine loop
-	} # end of "json" loop
-
-	foreach my $p (sort keys %Panel) {
-		print qq(<li><a href="#$TOC{$p}">$p</a></li>);
+		}
+		$output .= "</tr>";
+		foreach my $p (@Panel) {
+			my $check = lc $p->{'key'};
+			if ($season_str =~ /$check/) {
+				$p->{'row'}{StripHTML($cname)} = $output;
+			}
+		}
 	}
 
+	# Mod crop data; uses similar variable names to the vanilla logic
+	foreach my $key (keys %{$ModData->{'Crops'}}) {
+		# The keys for the Mod Crops hash should be the names of the crops but don't have to be
+		my $sname = $ModData->{'Crops'}{$key}{'SeedName'};
+		my $scost = $ModData->{'Crops'}{$key}{'SeedPurchasePrice'};
+		my @phases = @{$ModData->{'Crops'}{$key}{'Phases'}};
+		my $season_str = join(" ", @{$ModData->{'Crops'}{$key}{'Seasons'}});
+		#my @seasons = $ModData->{'Crops'}{$key}{'Seasons'};
+		#Sprites are the __SS keys
+		my $cname = GetItem($ModData->{'Crops'}{$key}{'Product'});
+		my $cprice = GetValue($ModData->{'Crops'}{$key}{'Product'});
+		my $regrowth = $ModData->{'Crops'}{$key}{'RegrowthPhase'};
+		$regrowth = (($regrowth > 0) ? $regrowth : "--");
+		my $need_scythe = ($ModData->{'Crops'}{$key}{'HarvestWithScythe'} ? "Yes" : "--");
+		my $is_trellis = ($ModData->{'Crops'}{$key}{'TrellisCrop'} ? "Yes" : "--");
+		#my @colors = @{$ModData->{'Crops'}{$key}{'Colors'}};
+		my $num_harvest = $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'} + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
+		my $seed_vendor = Wikify("Pierre");
+		if (exists $ModData->{'Crops'}{$key}{'SeedPurchaseFrom'}) {
+			$seed_vendor = Wikify($ModData->{'Crops'}{$key}{'SeedPurchaseFrom'});
+		}
+		if (exists $ModData->{'Crops'}{$key}{'SeedPurchaseRequirements'} and defined $ModData->{'Crops'}{$key}{'SeedPurchaseRequirements'}) {
+			my @req = TranslatePreconditions(@{$ModData->{'Crops'}{$key}{'SeedPurchaseRequirements'}});
+			# Note that the order here is not guaranteed. If we start getting crops with multiple different requirements we might have to deal with that
+			$seed_vendor .= '<br />' . join('<br />', @req);
+		}
+		
+		my $output = <<"END_PRINT";
+<tr><td>$cname</td>
+<td>$sname</td>
+<td>$seed_vendor</td>
+<td>$scost</td>
+<td>$need_scythe</td>
+<td>$is_trellis</td>
+<td>$num_harvest</td>
+END_PRINT
+		foreach my $opt (qw(0 10 20 25 35)) {
+			my $growth = CalcGrowth($opt/100, \@phases);
+			my $max_harvests = floor(27/$growth);
+			if (looks_like_number($regrowth) and $regrowth > -1) {
+				if ($growth > 27) {
+					$max_harvests = 0;
+				} else {
+					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
+				}
+			}
+			$output .= <<"END_PRINT";
+<td class="col_$opt">$growth</td>
+<td class="col_$opt">$regrowth</td>
+<td class="col_$opt">$max_harvests</td>
+END_PRINT
+		}
+		$output .= "</tr>";
+		foreach my $p (@Panel) {
+			my $check = lc $p->{'key'};
+			if ($season_str =~ /$check/) {
+				$p->{'row'}{StripHTML($cname)} = $output;
+			}
+		}
+	}
+
+	# Print the rest of the TOC
+	foreach my $p (@Panel) {
+		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'key'} Crops</a></li>);
+	}
 	print <<"END_PRINT";
 </ul>
 </div>
 </div>
 END_PRINT
+	
+	# Print the Panels
+	foreach my $p (@Panel) {
+		print <<"END_PRINT";
+<div class="panel" id="TOC_$p->{'key'}">
+<h2>$p->{'key'} Crops</h2>
 
-	foreach my $p (sort keys %Panel) {
-		print $Panel{$p};
+<table class="sortable output">
+<thead>
+<tr>
+<th>Crop Name</th>
+<th>Seed Name</th>
+<th>Seed Vendor<br />(&amp; Requirements)</th>
+<th>Seed<br />Price</th>
+<th>Needs<br />Scythe?</th>
+<th>Has<br />Trellis?</th>
+<th>Average<br />Yield</th>
+<th class="col_0">Initial<br />Growth</th>
+<th class="col_0">Regrowth</th>
+<th class="col_0">Maximum<br />Harvests</th>
+<th class="col_10">Initial<br />Growth</th>
+<th class="col_10">Regrowth</th>
+<th class="col_10">Maximum<br />Harvests</th>
+<th class="col_20">Initial<br />Growth</th>
+<th class="col_20">Regrowth</th>
+<th class="col_20">Maximum<br />Harvests</th>
+<th class="col_25">Initial<br />Growth</th>
+<th class="col_25">Regrowth</th>
+<th class="col_25">Maximum<br />Harvests</th>
+<th class="col_35">Initial<br />Growth</th>
+<th class="col_35">Regrowth</th>
+<th class="col_35">Maximum<br />Harvests</th>
+</tr>
+</thead>
+<tbody>
+END_PRINT
+		foreach my $k (sort keys %{$p->{'row'}}) {
+			print $p->{'row'}{$k};
+		}
+		print <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
 	}
-
+	
 	print GetFooter();
 
 	close $FH or die "Error closing file";
+}
+
+# CalcGrowth - Calculates the number of days it will take for a crop to grow from seed
+#
+#   factor - the pct reduction factor (e.g. .10 for basic speed-gro or agriculturist)
+#   phases_ref - a reference to the array of phase data
+sub CalcGrowth() {
+	my $factor = shift;
+	my $phases_ref = shift;
+	my @phases = @$phases_ref;
+	my $days = 0;
+	my $num_phases = scalar @phases;
+	for (my $i = 0; $i < $num_phases; $i++) {
+		$days += $phases[$i];
+	}
+	my $reduction = ceil($factor * $days);
+	# The following mimics the game's imprecision errors due to excessive type casting
+	# For more on the growth mechanics and this error, see https://stardewvalleywiki.com/Talk:Speed-Gro
+	if (($days % 10 == 0 and $factor == 0.10) or ($days % 5 == 0 and $factor == 0.20)) {
+		$reduction++;
+	}
+	my $tries = 0;
+	while ($reduction > 0 and $tries < 3) {
+		for (my $i = 0; $i <= $num_phases; $i++) {
+			if ($i == 0) {
+				if ($phases[$i] > 1) {
+					$phases[$i]--;
+					$reduction--;
+					$days--;
+				}
+			} elsif ($i < $num_phases) {
+				if ($phases[$i] > 0) {
+					$phases[$i]--;
+					$reduction--;
+					$days--;
+				}
+			} else {
+				# lost reduction day in final phase
+				$reduction--;
+			}
+			last if ($reduction <= 0);
+		}
+		$tries++;
+	}
+	return $days;
+}
+
+# TranslatePreconditions - Receives an array of event preconditions and tries to make them human-readable
+#  Currently only supports `z`, `y`, and `f` since those are what we have needed to deal with so far.
+sub TranslatePreconditions {
+	my %seasons = ( 'Spring' => 1, 'Summer' => 2, 'Fall' => 3, 'Winter' => 4 );
+	my $changed_seasons = 0;
+	my @results = ();
+	
+	foreach my $arg (@_) {
+		if ($arg =~ /^y (\d+)/) {
+			push @results, "(Year $1+)";
+		} elsif ($arg =~ /^f (\w+) (\d+)/) {
+			my $num_hearts = $2/250;
+			push @results, "($num_hearts+ Hearts with " . Wikify($1) . ")";
+		} elsif ($arg =~ /^z /) {
+			my @removal = split(/, ?/, $arg);
+			foreach my $r (@removal) {
+				$r =~ s/^z //;
+				my $s = ucfirst $r;
+				delete $seasons{$s} if (exists $seasons{$s});
+				$changed_seasons = 1;
+			}
+		}
+	}
+	if ($changed_seasons) {
+		my $r = '(' . join(', ', (sort {$seasons{$a} <=> $seasons{$b}} (keys %seasons))) . ')';
+		push @results, $r;
+	}
+	return @results;
 }
 
 sub MachineSummary {
@@ -805,45 +942,6 @@ my %options = (
 my %game_data = ( 'crops' => {}, 'obj' => {} , 'cook' => {} );
 my %ppja_data = ( 'crops' => {}, 'obj' => {} , 'cook' => {} );
 
-sub calc_reduction($+@) {
-	my $factor = shift;
-	my $phases_ref = shift;
-	my @phases = @$phases_ref;
-	my $days = 0;
-	my $num_phases = scalar @phases;
-	for (my $i = 0; $i < $num_phases; $i++) {
-		$days += $phases[$i];
-	}
-	my $reduction = ceil($factor * $days);
-	# mimic imprecision errors due to excessive type casting
-	if (($days % 10 == 0 and $factor == 0.10) or ($days % 5 == 0 and $factor == 0.20)) {
-		$reduction++;
-	}
-	my $tries = 0;
-	while ($reduction > 0 and $tries < 3) {
-		for (my $i = 0; $i <= $num_phases; $i++) {
-			if ($i == 0) {
-				if ($phases[$i] > 1) {
-					$phases[$i]--;
-					$reduction--;
-					$days--;
-				}
-			} elsif ($i < $num_phases) {
-				if ($phases[$i] > 0) {
-					$phases[$i]--;
-					$reduction--;
-					$days--;
-				}
-			} else {
-				# lost reduction day in final phase
-				$reduction--;
-			}
-			last if ($reduction <= 0);
-		}
-		$tries++;
-	}
-	return $days;
-}
 
 sub read_all_ja($+%) {
 	my $base_dir = shift;
@@ -970,33 +1068,6 @@ $game_data{'obj'}{347}[1] = 1000;
 
 
 print "Vanilla crop total growth times\n";
-foreach my $k (sort {$game_data{'obj'}{$a}[0] cmp $game_data{'obj'}{$b}[0]} keys %{$game_data{'crops'}}) {
-	my $base = 0;
-	my $out = "";
-	foreach my $op (sort {$options{$a} <=> $options{$b}} keys %options) {
-		my $all_phases = $game_data{'crops'}{$k}[0];
-		my @phases = (split(' ', $all_phases));
-		$base = calc_reduction($options{$op}, \@phases);
-		my $cost = 2*$game_data{'obj'}{$k}[1];
-		my $sell = $game_data{'obj'}{$game_data{'crops'}{$k}[3]}[1];
-		my @bonus = (split(' ', $game_data{'crops'}{$k}[6]));
-		my $harvest = 1;
-		if ($bonus[0] eq 'true') {
-			$harvest = $bonus[1]+$bonus[4];
-		}
-		my $income = $sell*$harvest;
-		my $profit = sprintf("%d   g(raw)",$income - $cost);
-		my $regrowth = "  ";
-		if ($game_data{'crops'}{$k}[4] > -1) {
-			$regrowth = sprintf("+%d",$game_data{'crops'}{$k}[4]);
-			$profit = sprintf("%.1f g/day ",$income/($game_data{'crops'}{$k}[4]));
-		}
-		my $trellis = ($game_data{'crops'}{$k}[7] eq "true")? "t": " ";
-		$out .= sprintf(" | %s (%d%%): %2d%2s%s %13s",$op,100*$options{$op},$base,$regrowth,$trellis,$profit);
-	}
-	my $name = $game_data{'obj'}{$k}[0];
-	printf("%23s (%3d)$out\n", $name, $k);
-}
 
 read_all_ja("PPJA", %ppja_data);
 
