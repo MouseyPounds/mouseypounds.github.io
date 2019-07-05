@@ -173,18 +173,23 @@ sub GetCategory {
 	return $output;
 }
 
-sub MachineSummary {
-	my $FH;
-	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
-	select $FH;
-	print <<"END_PRINT";
+# GetHeader - creates and returns HTML code for top of pages
+#
+#   subtitle - string to put in top header and title
+#   desc - [optional] any additonal info to include in top panel
+sub GetHeader {
+	my $subtitle = shift;
+	my $desc = shift;
+	$desc = "" if (not defined $desc);
+	
+	my $output = <<"END_PRINT";
 <!DOCTYPE html>
 <html>
 <head>
-<title>MouseyPounds' PPJA Documentation: Machine Summary</title>
+<title>MouseyPounds' PPJA Documentation: $subtitle</title>
 
 <meta charset="UTF-8" />
-<meta property="og:title" content="PPJA Machine Summary" />
+<meta property="og:title" content="PPJA $subtitle" />
 <meta property="og:description" content="Personal reference for the PPJA family of Stardew Valley mods." />
 <!-- meta property="og:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
 <!-- meta property="twitter:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
@@ -193,17 +198,41 @@ sub MachineSummary {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link rel="stylesheet" type="text/css" href="./ppja-doc.css" />
+<link rel="stylesheet" type="text/css" href="./ppja-doc-img.css" />
 <!-- link rel="icon" type="image/png" href="./favicon_c.png" / -->
 
 </head>
 <body>
-<div class="panel"><h1>MouseyPounds' PPJA Documentation: Machine Summary</h1>
+<div class="panel"><h1>MouseyPounds' PPJA Documentation: $subtitle</h1>
+$desc
 </div>
 <div id="TOC">
 <h1>Navigation</h1>
 <div id="TOC-details">
 <ul>
 END_PRINT
+
+	return $output;
+}
+
+# GetFooter - creates and returns HTML code for bottom of pages
+sub GetFooter {
+	my $output = <<"END_PRINT";
+<div class="panel" id="footer">
+This'll be like credits and links and stuff some day.
+</div>
+</body>
+</html>
+END_PRINT
+
+	return $output;
+}
+
+sub MachineSummary {
+	my $FH;
+	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
+	select $FH;
+	print GetHeader("Machine Summary");
 
 	my %TOC = ();
 
@@ -373,140 +402,20 @@ foreach my $p (sort keys %Panel) {
 	print $Panel{$p};
 }
 
-	print <<"END_PRINT";
-<div class="panel" id="footer">
-This'll be like credits and links and stuff some day.
-</div>
-</body>
-</html>
-END_PRINT
+	print GetFooter();
 
 	close $FH or die "Error closing file";
 }
 
 sub WriteCSS {
 	my $FH;
-	open $FH, ">$DocBase/ppja-doc.css" or die "Can't open ppja-doc.css for writing: $!";
+	open $FH, ">$DocBase/ppja-doc-img.css" or die "Can't open ppja-doc-img.css for writing: $!";
 	select $FH;
 
-	print <<'END_PRINT';
-/* ppja-doc.css
+	print <<"END_PRINT";
+/* ppja-doc-img.css
  * https://mouseypounds.github.io/ppja-doc/
  */
-
-html {
-	min-height: 100%;
-	background-attachment: fixed;
-	background-color: #80a0f0; /* fallback color if gradients are not supported */
-	background-image: -webkit-linear-gradient(top, #80a0f0, #c0ffff, #40c040); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
-	background-image:    -moz-linear-gradient(top, #80a0f0, #c0ffff, #40c040); /* For Firefox (3.6 to 15) */
-	background-image:      -o-linear-gradient(top, #80a0f0, #c0ffff, #40c040); /* For old Opera (11.1 to 12.0) */ 
-	background-image:         linear-gradient(to bottom, #80a0f0, #c0ffff, #40c040); /* Standard syntax; must be last */
-}
-body {
-	margin: 15px;
-	color: #603000;
-}
-a:link, a:visited { color: #804000; }
-a:hover { color: #d08000; }
-a:active { color: #ffa000; }
-.panel {
-	background-color: #ffe0b0;
-	padding: .5em 2em .5em 1em;
-	margin: 5px;
-	border: 5px solid #804000;
-	border-radius: 15px;
-}
-h2 {
-	margin: 10px 0 4px;
-}
-.mach_desc {
-	margin-bottom: 1em;
-	font-weight: bold;
-}
-.note,.group {
-	font-style: italic;
-}
-
-table.output, table.calendar, table.recipe {
-	border: 2px solid black;
-	background-color: white;
-	border-collapse: collapse;
-}
-th, td {
-	border: 1px solid black;
-	text-align: center;
-}
-th {
-	color: white;
-	background-color: #333;
-}
-table.recipe th {
-	color: black;
-	background-color: #aaa;
-}
-td {
-	color: black;
-}
-table.output th, table.output td, table.recipe th, table.recipe td {
-	padding: 3px 8px;
-}
-table.recipe {
-	margin-bottom: .5em;
-}
-.container {
-	margin-bottom: 1em;
-}
-.container__image {
-    display: inline-block;
-    vertical-align: bottom;
-    width: 32px;
-	margin-right: 0.5em;
-  }
-.container__text {
-    display: inline-block;
-  }
-
-#TOC {
-	position: fixed;
-	right: 0;
-	top: 0;
-	padding: 0;
-	max-height: 90%;
-	max-width: 200px;
-	overflow: auto;
-	background-color: #eecc99;
-	box-shadow: -2px 2px 25px #603000;
-}
-#TOC-details {
-	display:none;
-}
-#TOC, #TOC:hover #TOC-details {
-	display:block;
-}
-#TOC > h1, #TOC li a {
-	padding: 5px 10px;
-	display: block;
-}
-#TOC > h1 {
-	margin: 0;
-	font-size: 18px;
-	line-height: 24px;
-	background-color: #804000;
-	color: #eecc99;
-}
-#TOC ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-#TOC li a {
-	color: #60300;
-	text-decoration: none;
-}
-#TOC li a:hover {
-	background-color: #ffe0b0;
-}
 img.craftables {
 	vertical-align: -2px;
 	width: 16px;
@@ -574,9 +483,9 @@ END_PRINT
 		my $x = $SpriteInfo->{$id}{'x'};
 		my $y = $SpriteInfo->{$id}{'y'};
 		print <<"END_PRINT";
-	img#$id {
-		background-position: ${x}px ${y}px;
-	}
+img#$id {
+	background-position: ${x}px ${y}px;
+}
 END_PRINT
 	}
 	

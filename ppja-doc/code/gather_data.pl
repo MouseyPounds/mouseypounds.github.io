@@ -11,6 +11,7 @@ use Data::Dumper;
 use Storable;
 use Imager;
 use POSIX qw(floor);
+use List::Util qw(min max);
 
 # Logging
 #   0: No logging (aside from warn/die)
@@ -39,8 +40,10 @@ my $ModInfo = {};
 my $ModData = { 'Crops' => {}, 'Objects' => {}, 'BigCraftables' => {}, 'FruitTrees' => {}, 'Hats' => {}, 'Weapons' => {},
 	'Machines' => [], 'Cooking' => {}, 'Crafting' => {}, };
 
-# Spritesheets to consolidate mod images into single files
-my $SS_WIDTH = 2048;
+# Spritesheets to consolidate mod images into single files;
+# Currently choosing 1296 for width to fit 3 trees and 2048 for length just because it is half of the game limit.
+# At the end of the script we will crop out unused areas since if anything gets added the script will have to be rerun anyway.
+my $SS_WIDTH = 1296;
 my $SS_HEIGHT = 2048;
 my $SS = {
 		'crops' => { 
@@ -93,14 +96,25 @@ store $GameData, "cache_GameData";
 store $ModData, "cache_ModData";
 store $ModInfo, "cache_ModInfo";
 
-LogMessage("Writing spritesheets", 1);
+LogMessage("Cropping and writing spritesheets", 1);
 foreach my $k (keys %$SS) {
+	LogMessage("Trying to crop $k which has values I($SS->{$k}{'index'}), W($SS->{$k}{'width'}), H($SS->{$k}{'height'})", 1);
+	my $index = $SS->{$k}{'index'};
+	# This is done so that we still generate a small image for unused spritesheets
+	$index = 0 if ($index < 0);
+	my $sprites_per_row = floor($SS_WIDTH / $SS->{$k}{'width'});
+	my $max_width = $SS->{$k}{'width'} * min($sprites_per_row, ($index + 1));
+	my $max_height = $SS->{$k}{'height'} * (1 + floor($index / $sprites_per_row));
+	my $cropped_img = $SS->{$k}{'img'}->crop(left=>0, top=>0, width=>$max_width, height=>$max_height) or
+		die "Couldn't crop image: " . $SS->{$k}{'img'}->errstr;
+	LogMessage(" Spritesheet for $k is now " . $cropped_img->getwidth() . " x " . $cropped_img->getheight(), 1);
+
 	my $filename = "../img/ss_${k}.png";
-	$SS->{$k}{'img'}->write(file=>$filename) or 
-		die "Error writing normal spritesheet to $filename" . $SS->{$k}{'img'}->errstr;
+	$cropped_img->write(file=>$filename) or 
+		die "Error writing normal spritesheet to $filename" . $cropped_img->errstr;
 	$filename = "../img/ss_${k}_x2.png";
-	$SS->{$k}{'img'}->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>$filename) or 
-		die "Error writing scaled spritesheet to $filename" . $SS->{$k}{'img'}->errstr;
+	$cropped_img->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>$filename) or 
+		die "Error writing scaled spritesheet to $filename" . $cropped_img->errstr;
 }
 
 LogMessage("Script ended", 1);
