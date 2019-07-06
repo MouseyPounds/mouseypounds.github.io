@@ -56,9 +56,14 @@ table.sortable th:hover {
 	background-color: #666;
 	
 }
-table.output, table.calendar, table.recipe {
+table.output, table.calendar {
 	border: 2px solid black;
-	background-color: white;
+	background-color: #ddd;
+	border-collapse: collapse;
+}
+table.recipe {
+	border: 2px solid #201000;
+	background-color: #ddd;
 	border-collapse: collapse;
 }
 th, td {
@@ -70,8 +75,8 @@ th {
 	background-color: #333;
 }
 table.recipe th {
-	color: black;
-	background-color: #aaa;
+	color: white;
+	background-color: #402000;
 }
 td {
 	color: black;

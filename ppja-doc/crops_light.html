@@ -1,0 +1,4457 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mousey's PPJA Documentation: Crop Growth Summary</title>
+
+<meta charset="UTF-8" />
+<meta property="og:title" content="PPJA Crop Growth Summary" />
+<meta property="og:description" content="PPJA Crop Growth Summary" />
+<!-- meta property="og:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
+<!-- meta property="twitter:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
+<meta name="theme-color" content="#ffe0b0">
+<meta name="author" content="MouseyPounds" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" type="text/css" href="./ppja-doc.css" />
+<link rel="stylesheet" type="text/css" href="./ppja-doc-img.css" />
+<!-- link rel="icon" type="image/png" href="./favicon_c.png" / -->
+
+<!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
+<script type="text/javascript" src="./sorttable.js"></script>
+<script type="text/javascript" src="./crops-form.js"></script>
+
+</head>
+<body>
+<div class="panel" id="header"><h1>Mousey's PPJA Documentation: Crop Growth Summary</h1>
+<p>A summary of growth information including base game crops as well as crops from the following mods:</p>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">Cannabis Kit for JsonAssets</a> version 1.6.0</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1610">Fantasy Crops</a> version 1.3.2</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">Farmer to Florist</a> version 1.3.2</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1721">Fresh Meat</a> version 1.3.2</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1598">Fruits and Veggies for JsonAssets</a> version 1.8.2</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/2028">Mizu's Flowers for JsonAssets</a> version 1.5.1</li>
+</ul>
+<p>Growth speed option to apply to all crop tables:</p>
+<fieldset id="growth_speed_options" class="radio_set">
+<label><input type="radio" name="speed" value="0" checked="checked"> No speed modifiers</label><br />
+<label><input type="radio" name="speed" value="10"> 10% (Only one of <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession or <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
+<label><input type="radio" name="speed" value="20"> 20% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
+<label><input type="radio" name="speed" value="25"> 25% (Only <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label><br />
+<label><input type="radio" name="speed" value="35"> 35% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label>
+</fieldset>
+<input type="hidden" id="last_speed" value="0" />
+
+</div>
+<div id="TOC">
+<h1>Navigation</h1>
+<div id="TOC-details">
+<ul>
+<li><a href="#header">(Top)</a></li>
+<li><a href="#TOC_Spring">Spring Crops</a></li><li><a href="#TOC_Summer">Summer Crops</a></li><li><a href="#TOC_Fall">Fall Crops</a></li><li><a href="#TOC_Winter">Winter Crops</a></li></ul>
+</div>
+</div>
+<div class="panel" id="TOC_Spring">
+<h2>Spring Crops</h2>
+
+<table class="sortable output">
+<thead>
+<tr>
+<th>Crop Name</th>
+<th>Seed Name</th>
+<th>Seed Vendor<br />(&amp; Requirements)</th>
+<th>Seed<br />Price</th>
+<th>Needs<br />Scythe?</th>
+<th>Has<br />Trellis?</th>
+<th>Average<br />Yield</th>
+<th class="col_0">Initial<br />Growth</th>
+<th class="col_0">Regrowth</th>
+<th class="col_0">Maximum<br />Harvests</th>
+<th class="col_10">Initial<br />Growth</th>
+<th class="col_10">Regrowth</th>
+<th class="col_10">Maximum<br />Harvests</th>
+<th class="col_20">Initial<br />Growth</th>
+<th class="col_20">Regrowth</th>
+<th class="col_20">Maximum<br />Harvests</th>
+<th class="col_25">Initial<br />Growth</th>
+<th class="col_25">Regrowth</th>
+<th class="col_25">Maximum<br />Harvests</th>
+<th class="col_35">Initial<br />Growth</th>
+<th class="col_35">Regrowth</th>
+<th class="col_35">Maximum<br />Harvests</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><a href="http://stardewvalleywiki.com/Ancient_Fruit">Ancient Fruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Ancient_Seeds">Ancient Seeds</a></td>
+<td><span class="note">None</span></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">28</td>
+<td class="col_0">7</td>
+<td class="col_0">0</td>
+<td class="col_10">25</td>
+<td class="col_10">7</td>
+<td class="col_10">1</td>
+<td class="col_20">23</td>
+<td class="col_20">7</td>
+<td class="col_20">1</td>
+<td class="col_25">22</td>
+<td class="col_25">7</td>
+<td class="col_25">1</td>
+<td class="col_35">19</td>
+<td class="col_35">7</td>
+<td class="col_35">2</td>
+</tr><tr><td>Basil</td>
+<td>Basil Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">5</td>
+<td class="col_0">--</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">--</td>
+<td class="col_10">6</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Beef</td>
+<td>Beefvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Blue_Jazz">Blue Jazz</a></td>
+<td><a href="http://stardewvalleywiki.com/Jazz_Seeds">Jazz Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Cabbage</td>
+<td>Cabbage Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Cactus_Fruit">Cactus Fruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Cactus_Seeds">Cactus Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">10</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">9</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">7</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Camellia</td>
+<td>Camellia Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>2.02</td>
+<td class="col_0">13</td>
+<td class="col_0">3</td>
+<td class="col_0">5</td>
+<td class="col_10">11</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">10</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">9</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Cannabis</td>
+<td>Cannabis Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Carnation</td>
+<td>Carnation Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>45</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Cauliflower">Cauliflower</a></td>
+<td><a href="http://stardewvalleywiki.com/Cauliflower_Seeds">Cauliflower Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">10</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">9</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">8</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Chamomile</td>
+<td>Chamomile Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">5</td>
+<td class="col_0">--</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">--</td>
+<td class="col_10">6</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Chicken</td>
+<td>Chickenvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Coal">Coal</a></td>
+<td>Coal Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Clint">Clint</a><br />(Spring)</td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>2.2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
+<td><a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
+<td><a href="http://stardewvalleywiki.com/Traveling_Cart">Traveling Cart</a></td>
+<td>2500</td>
+<td>--</td>
+<td>--</td>
+<td>4.02</td>
+<td class="col_0">10</td>
+<td class="col_0">2</td>
+<td class="col_0">9</td>
+<td class="col_10">8</td>
+<td class="col_10">2</td>
+<td class="col_10">10</td>
+<td class="col_20">7</td>
+<td class="col_20">2</td>
+<td class="col_20">11</td>
+<td class="col_25">7</td>
+<td class="col_25">2</td>
+<td class="col_25">11</td>
+<td class="col_35">6</td>
+<td class="col_35">2</td>
+<td class="col_35">11</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Copper_Ore">Copper Ore</a></td>
+<td>Copper Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>3</td>
+<td class="col_0">10</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">7</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td>Delphinium</td>
+<td>Delphinium Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">9</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Garlic">Garlic</a></td>
+<td><a href="http://stardewvalleywiki.com/Garlic_Seeds">Garlic Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Green_Bean">Green Bean</a></td>
+<td><a href="http://stardewvalleywiki.com/Bean_Starter">Bean Starter</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>Yes</td>
+<td>1</td>
+<td class="col_0">10</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">8</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">7</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">7</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">6</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Hemp</td>
+<td>Hemp Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">10</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">8</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">7</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">7</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">6</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Herbal Peony</td>
+<td>Herbal Peony Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">13</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">11</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">10</td>
+<td class="col_20">--</td>
+<td class="col_20">2</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">9</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Honeysuckle</td>
+<td>Honeysuckle Starter</td>
+<td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a><br />(Spring)</td>
+<td>100</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">8</td>
+<td class="col_0">3</td>
+<td class="col_0">7</td>
+<td class="col_10">7</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">6</td>
+<td class="col_20">3</td>
+<td class="col_20">8</td>
+<td class="col_25">6</td>
+<td class="col_25">3</td>
+<td class="col_25">8</td>
+<td class="col_35">5</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Hyacinth</td>
+<td>Hyacinth Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">5</td>
+<td class="col_0">--</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">--</td>
+<td class="col_10">6</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Kale">Kale</a></td>
+<td><a href="http://stardewvalleywiki.com/Kale_Seeds">Kale Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>70</td>
+<td>Yes</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Lilac</td>
+<td>Lilac Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">11</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">9</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">8</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">8</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">7</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Muskmelon</td>
+<td>Muskmelon Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Mutton</td>
+<td>Muttonvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Onion</td>
+<td>Onion Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Parsley</td>
+<td>Parsley Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>25</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Parsnip">Parsnip</a></td>
+<td><a href="http://stardewvalleywiki.com/Parsnip_Seeds">Parsnip Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>Passion Fruit</td>
+<td>Passion Fruit Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>130</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.1</td>
+<td class="col_0">12</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">10</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">9</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">9</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td>Pineapple</td>
+<td>Pineapple Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Pink Cat</td>
+<td>Pink Cat Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Potato">Potato</a></td>
+<td><a href="http://stardewvalleywiki.com/Potato_Seeds">Potato Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1.2</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Rabbit</td>
+<td>Rabbitvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Rhubarb">Rhubarb</a></td>
+<td><a href="http://stardewvalleywiki.com/Rhubarb_Seeds">Rhubarb Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">13</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">11</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">10</td>
+<td class="col_20">--</td>
+<td class="col_20">2</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">8</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Rose</td>
+<td>Rose Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>200</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">12</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">10</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">9</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">9</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td>Shaded Violet</td>
+<td>Shaded Violet Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Spinach</td>
+<td>Spinach Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>15</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">3</td>
+<td class="col_0">--</td>
+<td class="col_0">9</td>
+<td class="col_10">2</td>
+<td class="col_10">--</td>
+<td class="col_10">13</td>
+<td class="col_20">2</td>
+<td class="col_20">--</td>
+<td class="col_20">13</td>
+<td class="col_25">2</td>
+<td class="col_25">--</td>
+<td class="col_25">13</td>
+<td class="col_35">1</td>
+<td class="col_35">--</td>
+<td class="col_35">27</td>
+</tr><tr><td>Spring Rose</td>
+<td>Spring Rose Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>200</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">12</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">10</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">9</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">9</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Strawberry">Strawberry</a></td>
+<td><a href="http://stardewvalleywiki.com/Strawberry_Seeds">Strawberry Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>0</td>
+<td>--</td>
+<td>--</td>
+<td>1.02</td>
+<td class="col_0">8</td>
+<td class="col_0">4</td>
+<td class="col_0">5</td>
+<td class="col_10">7</td>
+<td class="col_10">4</td>
+<td class="col_10">6</td>
+<td class="col_20">6</td>
+<td class="col_20">4</td>
+<td class="col_20">6</td>
+<td class="col_25">6</td>
+<td class="col_25">4</td>
+<td class="col_25">6</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+<td class="col_35">6</td>
+</tr><tr><td>Sugar Beet</td>
+<td>Sugar Beet Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Sweet Canary Melon</td>
+<td>Sweet Canary Melon Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>70</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">11</td>
+<td class="col_0">4</td>
+<td class="col_0">5</td>
+<td class="col_10">9</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_20">8</td>
+<td class="col_20">4</td>
+<td class="col_20">5</td>
+<td class="col_25">8</td>
+<td class="col_25">4</td>
+<td class="col_25">5</td>
+<td class="col_35">7</td>
+<td class="col_35">4</td>
+<td class="col_35">6</td>
+</tr><tr><td>Tea Leaf</td>
+<td>Tea Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">14</td>
+<td class="col_0">5</td>
+<td class="col_0">3</td>
+<td class="col_10">12</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">11</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">10</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">10</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td>Tobacco</td>
+<td>Tobacco Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Tulip">Tulip</a></td>
+<td><a href="http://stardewvalleywiki.com/Tulip_Bulb">Tulip Bulb</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Unpolished Rice</td>
+<td>Rice Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
+<td>50</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>3.2</td>
+<td class="col_0">5</td>
+<td class="col_0">2</td>
+<td class="col_0">12</td>
+<td class="col_10">4</td>
+<td class="col_10">2</td>
+<td class="col_10">12</td>
+<td class="col_20">3</td>
+<td class="col_20">2</td>
+<td class="col_20">13</td>
+<td class="col_25">3</td>
+<td class="col_25">2</td>
+<td class="col_25">13</td>
+<td class="col_35">3</td>
+<td class="col_35">2</td>
+<td class="col_35">13</td>
+</tr><tr><td>Violet</td>
+<td>Violet Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Wild_Horseradish">Wild Horseradish</a></td>
+<td><a href="http://stardewvalleywiki.com/Spring_Seeds">Spring Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>70</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Wisteria</td>
+<td>Wisteria Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.1</td>
+<td class="col_0">20</td>
+<td class="col_0">3</td>
+<td class="col_0">3</td>
+<td class="col_10">17</td>
+<td class="col_10">3</td>
+<td class="col_10">4</td>
+<td class="col_20">15</td>
+<td class="col_20">3</td>
+<td class="col_20">5</td>
+<td class="col_25">15</td>
+<td class="col_25">3</td>
+<td class="col_25">5</td>
+<td class="col_35">14</td>
+<td class="col_35">3</td>
+<td class="col_35">5</td>
+</tr></tbody>
+</table>
+</div>
+<div class="panel" id="TOC_Summer">
+<h2>Summer Crops</h2>
+
+<table class="sortable output">
+<thead>
+<tr>
+<th>Crop Name</th>
+<th>Seed Name</th>
+<th>Seed Vendor<br />(&amp; Requirements)</th>
+<th>Seed<br />Price</th>
+<th>Needs<br />Scythe?</th>
+<th>Has<br />Trellis?</th>
+<th>Average<br />Yield</th>
+<th class="col_0">Initial<br />Growth</th>
+<th class="col_0">Regrowth</th>
+<th class="col_0">Maximum<br />Harvests</th>
+<th class="col_10">Initial<br />Growth</th>
+<th class="col_10">Regrowth</th>
+<th class="col_10">Maximum<br />Harvests</th>
+<th class="col_20">Initial<br />Growth</th>
+<th class="col_20">Regrowth</th>
+<th class="col_20">Maximum<br />Harvests</th>
+<th class="col_25">Initial<br />Growth</th>
+<th class="col_25">Regrowth</th>
+<th class="col_25">Maximum<br />Harvests</th>
+<th class="col_35">Initial<br />Growth</th>
+<th class="col_35">Regrowth</th>
+<th class="col_35">Maximum<br />Harvests</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Adzuki Bean</td>
+<td>Adzuki Bean Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">9</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Allium</td>
+<td>Allium Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>Aloe</td>
+<td>Aloe Pod</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(Year 2+)</td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Ancient_Fruit">Ancient Fruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Ancient_Seeds">Ancient Seeds</a></td>
+<td><span class="note">None</span></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">28</td>
+<td class="col_0">7</td>
+<td class="col_0">0</td>
+<td class="col_10">25</td>
+<td class="col_10">7</td>
+<td class="col_10">1</td>
+<td class="col_20">23</td>
+<td class="col_20">7</td>
+<td class="col_20">1</td>
+<td class="col_25">22</td>
+<td class="col_25">7</td>
+<td class="col_25">1</td>
+<td class="col_35">19</td>
+<td class="col_35">7</td>
+<td class="col_35">2</td>
+</tr><tr><td>Beef</td>
+<td>Beefvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Blue Dream</td>
+<td>Blue Dream Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Blue Mist</td>
+<td>Blue Mist Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>180</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Blueberry">Blueberry</a></td>
+<td><a href="http://stardewvalleywiki.com/Blueberry_Seeds">Blueberry Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>3.02</td>
+<td class="col_0">13</td>
+<td class="col_0">4</td>
+<td class="col_0">4</td>
+<td class="col_10">11</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_20">10</td>
+<td class="col_20">4</td>
+<td class="col_20">5</td>
+<td class="col_25">9</td>
+<td class="col_25">4</td>
+<td class="col_25">5</td>
+<td class="col_35">9</td>
+<td class="col_35">4</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Cactus_Fruit">Cactus Fruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Cactus_Seeds">Cactus Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">10</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">9</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">7</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Cannabis</td>
+<td>Cannabis Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Carnation</td>
+<td>Carnation Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>45</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Cassava</td>
+<td>Cassava Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>60</td>
+<td>Yes</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Chevon</td>
+<td>Chevonvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Chicken</td>
+<td>Chickenvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Chives</td>
+<td>Chive Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">5</td>
+<td class="col_0">--</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">--</td>
+<td class="col_10">6</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Clary Sage</td>
+<td>Clary Sage Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Coal">Coal</a></td>
+<td>Coal Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Clint">Clint</a><br />(Spring)</td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>2.2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
+<td><a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
+<td><a href="http://stardewvalleywiki.com/Traveling_Cart">Traveling Cart</a></td>
+<td>2500</td>
+<td>--</td>
+<td>--</td>
+<td>4.02</td>
+<td class="col_0">10</td>
+<td class="col_0">2</td>
+<td class="col_0">9</td>
+<td class="col_10">8</td>
+<td class="col_10">2</td>
+<td class="col_10">10</td>
+<td class="col_20">7</td>
+<td class="col_20">2</td>
+<td class="col_20">11</td>
+<td class="col_25">7</td>
+<td class="col_25">2</td>
+<td class="col_25">11</td>
+<td class="col_35">6</td>
+<td class="col_35">2</td>
+<td class="col_35">11</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Corn">Corn</a></td>
+<td><a href="http://stardewvalleywiki.com/Corn_Seeds">Corn Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">14</td>
+<td class="col_0">4</td>
+<td class="col_0">4</td>
+<td class="col_10">12</td>
+<td class="col_10">4</td>
+<td class="col_10">4</td>
+<td class="col_20">11</td>
+<td class="col_20">4</td>
+<td class="col_20">5</td>
+<td class="col_25">10</td>
+<td class="col_25">4</td>
+<td class="col_25">5</td>
+<td class="col_35">9</td>
+<td class="col_35">4</td>
+<td class="col_35">5</td>
+</tr><tr><td>Cotton Boll</td>
+<td>Cotton Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">7</td>
+<td class="col_0">3</td>
+<td class="col_0">7</td>
+<td class="col_10">6</td>
+<td class="col_10">3</td>
+<td class="col_10">8</td>
+<td class="col_20">5</td>
+<td class="col_20">3</td>
+<td class="col_20">8</td>
+<td class="col_25">5</td>
+<td class="col_25">3</td>
+<td class="col_25">8</td>
+<td class="col_35">4</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Cucumber</td>
+<td>Cucumber Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>65</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">11</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">9</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">8</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">8</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">7</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Duck</td>
+<td>Duckvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Fragrant Lilac</td>
+<td>Fragrant Lilac Pod</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>25</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Girl Scout Cookies</td>
+<td>Girl Scout Cookies Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Gooseberry</td>
+<td>Gooseberry Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>3.2</td>
+<td class="col_0">13</td>
+<td class="col_0">3</td>
+<td class="col_0">5</td>
+<td class="col_10">11</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">10</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">9</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Green Crack</td>
+<td>Green Crack Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1500</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.2</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Green Peas</td>
+<td>Green Pea Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 3+)</td>
+<td>50</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.2</td>
+<td class="col_0">8</td>
+<td class="col_0">3</td>
+<td class="col_0">7</td>
+<td class="col_10">7</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">6</td>
+<td class="col_20">3</td>
+<td class="col_20">8</td>
+<td class="col_25">6</td>
+<td class="col_25">3</td>
+<td class="col_25">8</td>
+<td class="col_35">5</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Hemp</td>
+<td>Hemp Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">10</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">8</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">7</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">7</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">6</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Herbal Lavender</td>
+<td>Herbal Lavender Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Honeysuckle</td>
+<td>Honeysuckle Starter</td>
+<td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a><br />(Spring)</td>
+<td>100</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">8</td>
+<td class="col_0">3</td>
+<td class="col_0">7</td>
+<td class="col_10">7</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">6</td>
+<td class="col_20">3</td>
+<td class="col_20">8</td>
+<td class="col_25">6</td>
+<td class="col_25">3</td>
+<td class="col_25">8</td>
+<td class="col_35">5</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Hops">Hops</a></td>
+<td><a href="http://stardewvalleywiki.com/Hops_Starter">Hops Starter</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>Yes</td>
+<td>1</td>
+<td class="col_0">11</td>
+<td class="col_0">1</td>
+<td class="col_0">17</td>
+<td class="col_10">9</td>
+<td class="col_10">1</td>
+<td class="col_10">19</td>
+<td class="col_20">8</td>
+<td class="col_20">1</td>
+<td class="col_20">20</td>
+<td class="col_25">8</td>
+<td class="col_25">1</td>
+<td class="col_25">20</td>
+<td class="col_35">7</td>
+<td class="col_35">1</td>
+<td class="col_35">21</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Hot_Pepper">Hot Pepper</a></td>
+<td><a href="http://stardewvalleywiki.com/Pepper_Seeds">Pepper Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1.03</td>
+<td class="col_0">5</td>
+<td class="col_0">3</td>
+<td class="col_0">8</td>
+<td class="col_10">4</td>
+<td class="col_10">3</td>
+<td class="col_10">8</td>
+<td class="col_20">3</td>
+<td class="col_20">3</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">3</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">3</td>
+<td class="col_35">9</td>
+</tr><tr><td>Hybrid</td>
+<td>Hybrid Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2500</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Hydrangea</td>
+<td>Hydrangea Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">10</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">7</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td>Indica</td>
+<td>Indica Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1500</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Iron_Ore">Iron Ore</a></td>
+<td>Iron Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2.2</td>
+<td class="col_0">15</td>
+<td class="col_0">--</td>
+<td class="col_0">1</td>
+<td class="col_10">13</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">11</td>
+<td class="col_20">--</td>
+<td class="col_20">2</td>
+<td class="col_25">11</td>
+<td class="col_25">--</td>
+<td class="col_25">2</td>
+<td class="col_35">10</td>
+<td class="col_35">--</td>
+<td class="col_35">2</td>
+</tr><tr><td>Kiwi</td>
+<td>Kiwi Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>300</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.1</td>
+<td class="col_0">21</td>
+<td class="col_0">3</td>
+<td class="col_0">3</td>
+<td class="col_10">18</td>
+<td class="col_10">3</td>
+<td class="col_10">4</td>
+<td class="col_20">16</td>
+<td class="col_20">3</td>
+<td class="col_20">4</td>
+<td class="col_25">16</td>
+<td class="col_25">3</td>
+<td class="col_25">4</td>
+<td class="col_35">14</td>
+<td class="col_35">3</td>
+<td class="col_35">5</td>
+</tr><tr><td>Lavender</td>
+<td>Lavender Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">13</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">11</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">10</td>
+<td class="col_20">--</td>
+<td class="col_20">2</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">9</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Lettuce</td>
+<td>Lettuce Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>55</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Lily</td>
+<td>Lily Bulb</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>35</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">9</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td>Lotus</td>
+<td>Lotus Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>Yes</td>
+<td>1</td>
+<td class="col_0">11</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">9</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">8</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">8</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">7</td>
+<td class="col_35">5</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Melon">Melon</a></td>
+<td><a href="http://stardewvalleywiki.com/Melon_Seeds">Melon Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">10</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">9</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">8</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Mutton</td>
+<td>Muttonvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Navy Bean</td>
+<td>Navy Bean Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>Yes</td>
+<td>3.2</td>
+<td class="col_0">10</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">8</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">7</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">7</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">6</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Northern Lights</td>
+<td>Northern Lights Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1500</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">13</td>
+<td class="col_0">3</td>
+<td class="col_0">5</td>
+<td class="col_10">11</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">10</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">9</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>OG Kush</td>
+<td>OG Kush Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Oregano</td>
+<td>Oregano Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>Passion Flower</td>
+<td>Passion Flower Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>90</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Petunia</td>
+<td>Petunia Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>25</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Poppy">Poppy</a></td>
+<td><a href="http://stardewvalleywiki.com/Poppy_Seeds">Poppy Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Pork</td>
+<td>Porkvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Rabbit</td>
+<td>Rabbitvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Radish">Radish</a></td>
+<td><a href="http://stardewvalleywiki.com/Radish_Seeds">Radish Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Raspberry</td>
+<td>Raspberry Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>3.2</td>
+<td class="col_0">10</td>
+<td class="col_0">4</td>
+<td class="col_0">5</td>
+<td class="col_10">8</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_20">7</td>
+<td class="col_20">4</td>
+<td class="col_20">6</td>
+<td class="col_25">7</td>
+<td class="col_25">4</td>
+<td class="col_25">6</td>
+<td class="col_35">6</td>
+<td class="col_35">4</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Red_Cabbage">Red Cabbage</a></td>
+<td><a href="http://stardewvalleywiki.com/Red_Cabbage_Seeds">Red Cabbage Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">9</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Rose</td>
+<td>Rose Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>200</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">12</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">10</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">9</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">9</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Spice_Berry">Spice Berry</a></td>
+<td><a href="http://stardewvalleywiki.com/Summer_Seeds">Summer Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>110</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Starfruit">Starfruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Starfruit_Seeds">Starfruit Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>400</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">13</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">11</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">10</td>
+<td class="col_20">--</td>
+<td class="col_20">2</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">8</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Strawberry Cough</td>
+<td>Strawberry Cough Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">17</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">15</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">13</td>
+<td class="col_20">3</td>
+<td class="col_20">5</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">12</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Sugar Cane</td>
+<td>Sugar Cane Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>110</td>
+<td>Yes</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">10</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">7</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td>Summer Rose</td>
+<td>Summer Rose Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>200</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">12</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">10</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">9</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">9</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Summer_Spangle">Summer Spangle</a></td>
+<td><a href="http://stardewvalleywiki.com/Spangle_Seeds">Spangle Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Sunflower">Sunflower</a></td>
+<td><a href="http://stardewvalleywiki.com/Sunflower_Seeds">Sunflower Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Tea Leaf</td>
+<td>Tea Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">14</td>
+<td class="col_0">5</td>
+<td class="col_0">3</td>
+<td class="col_10">12</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">11</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">10</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">10</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td>Tobacco</td>
+<td>Tobacco Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Tomato">Tomato</a></td>
+<td><a href="http://stardewvalleywiki.com/Tomato_Seeds">Tomato Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1.05</td>
+<td class="col_0">11</td>
+<td class="col_0">4</td>
+<td class="col_0">5</td>
+<td class="col_10">9</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_20">8</td>
+<td class="col_20">4</td>
+<td class="col_20">5</td>
+<td class="col_25">8</td>
+<td class="col_25">4</td>
+<td class="col_25">5</td>
+<td class="col_35">7</td>
+<td class="col_35">4</td>
+<td class="col_35">6</td>
+</tr><tr><td>Unpolished Rice</td>
+<td>Rice Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
+<td>50</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>3.2</td>
+<td class="col_0">5</td>
+<td class="col_0">2</td>
+<td class="col_0">12</td>
+<td class="col_10">4</td>
+<td class="col_10">2</td>
+<td class="col_10">12</td>
+<td class="col_20">3</td>
+<td class="col_20">2</td>
+<td class="col_20">13</td>
+<td class="col_25">3</td>
+<td class="col_25">2</td>
+<td class="col_25">13</td>
+<td class="col_35">3</td>
+<td class="col_35">2</td>
+<td class="col_35">13</td>
+</tr><tr><td>Wasabi Root</td>
+<td>Wasabi Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Wheat">Wheat</a></td>
+<td><a href="http://stardewvalleywiki.com/Wheat_Seeds">Wheat Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>10</td>
+<td>Yes</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>White Widow</td>
+<td>White Widow Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>3000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">17</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">15</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">13</td>
+<td class="col_20">3</td>
+<td class="col_20">5</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">12</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr></tbody>
+</table>
+</div>
+<div class="panel" id="TOC_Fall">
+<h2>Fall Crops</h2>
+
+<table class="sortable output">
+<thead>
+<tr>
+<th>Crop Name</th>
+<th>Seed Name</th>
+<th>Seed Vendor<br />(&amp; Requirements)</th>
+<th>Seed<br />Price</th>
+<th>Needs<br />Scythe?</th>
+<th>Has<br />Trellis?</th>
+<th>Average<br />Yield</th>
+<th class="col_0">Initial<br />Growth</th>
+<th class="col_0">Regrowth</th>
+<th class="col_0">Maximum<br />Harvests</th>
+<th class="col_10">Initial<br />Growth</th>
+<th class="col_10">Regrowth</th>
+<th class="col_10">Maximum<br />Harvests</th>
+<th class="col_20">Initial<br />Growth</th>
+<th class="col_20">Regrowth</th>
+<th class="col_20">Maximum<br />Harvests</th>
+<th class="col_25">Initial<br />Growth</th>
+<th class="col_25">Regrowth</th>
+<th class="col_25">Maximum<br />Harvests</th>
+<th class="col_35">Initial<br />Growth</th>
+<th class="col_35">Regrowth</th>
+<th class="col_35">Maximum<br />Harvests</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><a href="http://stardewvalleywiki.com/Amaranth">Amaranth</a></td>
+<td><a href="http://stardewvalleywiki.com/Amaranth_Seeds">Amaranth Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>70</td>
+<td>Yes</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Ancient_Fruit">Ancient Fruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Ancient_Seeds">Ancient Seeds</a></td>
+<td><span class="note">None</span></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">28</td>
+<td class="col_0">7</td>
+<td class="col_0">0</td>
+<td class="col_10">25</td>
+<td class="col_10">7</td>
+<td class="col_10">1</td>
+<td class="col_20">23</td>
+<td class="col_20">7</td>
+<td class="col_20">1</td>
+<td class="col_25">22</td>
+<td class="col_25">7</td>
+<td class="col_25">1</td>
+<td class="col_35">19</td>
+<td class="col_35">7</td>
+<td class="col_35">2</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Artichoke">Artichoke</a></td>
+<td><a href="http://stardewvalleywiki.com/Artichoke_Seeds">Artichoke Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Barley</td>
+<td>Barley Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>10</td>
+<td>Yes</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>Bee Balm</td>
+<td>Bee Balm Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">9</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Beet">Beet</a></td>
+<td><a href="http://stardewvalleywiki.com/Beet_Seeds">Beet Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Bell Pepper</td>
+<td>Bell Pepper Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>130</td>
+<td>--</td>
+<td>--</td>
+<td>1.2</td>
+<td class="col_0">10</td>
+<td class="col_0">4</td>
+<td class="col_0">5</td>
+<td class="col_10">8</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_20">7</td>
+<td class="col_20">4</td>
+<td class="col_20">6</td>
+<td class="col_25">7</td>
+<td class="col_25">4</td>
+<td class="col_25">6</td>
+<td class="col_35">6</td>
+<td class="col_35">4</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Blackberry">Blackberry</a></td>
+<td>Blackberry Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1.2</td>
+<td class="col_0">10</td>
+<td class="col_0">4</td>
+<td class="col_0">5</td>
+<td class="col_10">8</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_20">7</td>
+<td class="col_20">4</td>
+<td class="col_20">6</td>
+<td class="col_25">7</td>
+<td class="col_25">4</td>
+<td class="col_25">6</td>
+<td class="col_35">6</td>
+<td class="col_35">4</td>
+<td class="col_35">6</td>
+</tr><tr><td>Blue Dream</td>
+<td>Blue Dream Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Bok_Choy">Bok Choy</a></td>
+<td><a href="http://stardewvalleywiki.com/Bok_Choy_Seeds">Bok Choy Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>Broccoli</td>
+<td>Broccoli Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Cabbage</td>
+<td>Cabbage Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Cactus_Fruit">Cactus Fruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Cactus_Seeds">Cactus Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">10</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">9</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">7</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Camellia</td>
+<td>Camellia Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>2.02</td>
+<td class="col_0">13</td>
+<td class="col_0">3</td>
+<td class="col_0">5</td>
+<td class="col_10">11</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">10</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">9</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Cannabis</td>
+<td>Cannabis Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Carrot</td>
+<td>Carrot Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Celery</td>
+<td>Celery Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>55</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Chevon</td>
+<td>Chevonvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Chrysanthemum</td>
+<td>Chrysanthemum Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>15</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>Clematis</td>
+<td>Clematis Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>50</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">10</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">8</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">7</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">7</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">6</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Common_Mushroom">Common Mushroom</a></td>
+<td><a href="http://stardewvalleywiki.com/Fall_Seeds">Fall Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>90</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Corn">Corn</a></td>
+<td><a href="http://stardewvalleywiki.com/Corn_Seeds">Corn Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">14</td>
+<td class="col_0">4</td>
+<td class="col_0">4</td>
+<td class="col_10">12</td>
+<td class="col_10">4</td>
+<td class="col_10">4</td>
+<td class="col_20">11</td>
+<td class="col_20">4</td>
+<td class="col_20">5</td>
+<td class="col_25">10</td>
+<td class="col_25">4</td>
+<td class="col_25">5</td>
+<td class="col_35">9</td>
+<td class="col_35">4</td>
+<td class="col_35">5</td>
+</tr><tr><td>Cotton Boll</td>
+<td>Cotton Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">7</td>
+<td class="col_0">3</td>
+<td class="col_0">7</td>
+<td class="col_10">6</td>
+<td class="col_10">3</td>
+<td class="col_10">8</td>
+<td class="col_20">5</td>
+<td class="col_20">3</td>
+<td class="col_20">8</td>
+<td class="col_25">5</td>
+<td class="col_25">3</td>
+<td class="col_25">8</td>
+<td class="col_35">4</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Cranberries">Cranberries</a></td>
+<td><a href="http://stardewvalleywiki.com/Cranberry_Seeds">Cranberry Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>240</td>
+<td>--</td>
+<td>--</td>
+<td>2.1</td>
+<td class="col_0">7</td>
+<td class="col_0">5</td>
+<td class="col_0">5</td>
+<td class="col_10">6</td>
+<td class="col_10">5</td>
+<td class="col_10">5</td>
+<td class="col_20">5</td>
+<td class="col_20">5</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">5</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">5</td>
+<td class="col_35">5</td>
+</tr><tr><td>Dahlia</td>
+<td>Dahlia Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Doubloom</td>
+<td>Doubloom Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
+<td>250</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">13</td>
+<td class="col_0">6</td>
+<td class="col_0">3</td>
+<td class="col_10">11</td>
+<td class="col_10">6</td>
+<td class="col_10">3</td>
+<td class="col_20">10</td>
+<td class="col_20">6</td>
+<td class="col_20">3</td>
+<td class="col_25">9</td>
+<td class="col_25">6</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">6</td>
+<td class="col_35">4</td>
+</tr><tr><td>Duck</td>
+<td>Duckvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Eggplant">Eggplant</a></td>
+<td><a href="http://stardewvalleywiki.com/Eggplant_Seeds">Eggplant Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1.002</td>
+<td class="col_0">5</td>
+<td class="col_0">5</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_10">5</td>
+<td class="col_20">3</td>
+<td class="col_20">5</td>
+<td class="col_20">5</td>
+<td class="col_25">3</td>
+<td class="col_25">5</td>
+<td class="col_25">5</td>
+<td class="col_35">3</td>
+<td class="col_35">5</td>
+<td class="col_35">5</td>
+</tr><tr><td>English Rose</td>
+<td>English Rose Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">10</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">9</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">8</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Fairy Duster</td>
+<td>Fairy Duster Pod</td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Fairy_Rose">Fairy Rose</a></td>
+<td><a href="http://stardewvalleywiki.com/Fairy_Seeds">Fairy Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>200</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">10</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">9</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">8</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Fall Rose</td>
+<td>Fall Rose Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>200</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">12</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">10</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">9</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">9</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td>Fennel</td>
+<td>Fennel Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>20</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">5</td>
+<td class="col_0">--</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">--</td>
+<td class="col_10">6</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Freesia</td>
+<td>Freesia Bulb</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Geranium</td>
+<td>Geranium Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">9</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td>Ginger</td>
+<td>Ginger Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>50</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Girl Scout Cookies</td>
+<td>Girl Scout Cookies Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Gold_Ore">Gold Ore</a></td>
+<td>Gold Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
+<td>200</td>
+<td>--</td>
+<td>--</td>
+<td>2.2</td>
+<td class="col_0">20</td>
+<td class="col_0">--</td>
+<td class="col_0">1</td>
+<td class="col_10">17</td>
+<td class="col_10">--</td>
+<td class="col_10">1</td>
+<td class="col_20">15</td>
+<td class="col_20">--</td>
+<td class="col_20">1</td>
+<td class="col_25">15</td>
+<td class="col_25">--</td>
+<td class="col_25">1</td>
+<td class="col_35">14</td>
+<td class="col_35">--</td>
+<td class="col_35">1</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Grape">Grape</a></td>
+<td><a href="http://stardewvalleywiki.com/Grape_Starter">Grape Starter</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>Yes</td>
+<td>1</td>
+<td class="col_0">10</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">8</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">7</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">7</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">6</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Green Crack</td>
+<td>Green Crack Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1500</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.2</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Hemp</td>
+<td>Hemp Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">10</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">8</td>
+<td class="col_10">3</td>
+<td class="col_10">7</td>
+<td class="col_20">7</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">7</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">6</td>
+<td class="col_35">3</td>
+<td class="col_35">8</td>
+</tr><tr><td>Hybrid</td>
+<td>Hybrid Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2500</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Iris</td>
+<td>Iris Bulb</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">10</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">7</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td>Kiwi</td>
+<td>Kiwi Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>300</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.1</td>
+<td class="col_0">21</td>
+<td class="col_0">3</td>
+<td class="col_0">3</td>
+<td class="col_10">18</td>
+<td class="col_10">3</td>
+<td class="col_10">4</td>
+<td class="col_20">16</td>
+<td class="col_20">3</td>
+<td class="col_20">4</td>
+<td class="col_25">16</td>
+<td class="col_25">3</td>
+<td class="col_25">4</td>
+<td class="col_35">14</td>
+<td class="col_35">3</td>
+<td class="col_35">5</td>
+</tr><tr><td>OG Kush</td>
+<td>OG Kush Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Peanut</td>
+<td>Peanut Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1.3</td>
+<td class="col_0">6</td>
+<td class="col_0">--</td>
+<td class="col_0">4</td>
+<td class="col_10">5</td>
+<td class="col_10">--</td>
+<td class="col_10">5</td>
+<td class="col_20">4</td>
+<td class="col_20">--</td>
+<td class="col_20">6</td>
+<td class="col_25">4</td>
+<td class="col_25">--</td>
+<td class="col_25">6</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Pork</td>
+<td>Porkvine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Pumpkin">Pumpkin</a></td>
+<td><a href="http://stardewvalleywiki.com/Pumpkin_Seeds">Pumpkin Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">13</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">11</td>
+<td class="col_10">--</td>
+<td class="col_10">2</td>
+<td class="col_20">10</td>
+<td class="col_20">--</td>
+<td class="col_20">2</td>
+<td class="col_25">9</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">9</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr><tr><td>Purple Coneflower</td>
+<td>Purple Coneflower Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">9</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">6</td>
+<td class="col_35">--</td>
+<td class="col_35">4</td>
+</tr><tr><td>Rose</td>
+<td>Rose Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>200</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">12</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">10</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">9</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">9</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">8</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td>Rosemary</td>
+<td>Rosemary Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Sage</td>
+<td>Sage Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">5</td>
+<td class="col_0">--</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">--</td>
+<td class="col_10">6</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Sativa</td>
+<td>Sativa Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>1500</td>
+<td>--</td>
+<td>Yes</td>
+<td>1.2</td>
+<td class="col_0">16</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">14</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">12</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">11</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Sour Diesel</td>
+<td>Sour Diesel Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2500</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">15</td>
+<td class="col_0">3</td>
+<td class="col_0">5</td>
+<td class="col_10">13</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">11</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">11</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">10</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td>Soybean</td>
+<td>Soybean Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>120</td>
+<td>--</td>
+<td>--</td>
+<td>1.2</td>
+<td class="col_0">9</td>
+<td class="col_0">5</td>
+<td class="col_0">4</td>
+<td class="col_10">8</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">7</td>
+<td class="col_20">5</td>
+<td class="col_20">5</td>
+<td class="col_25">6</td>
+<td class="col_25">5</td>
+<td class="col_25">5</td>
+<td class="col_35">5</td>
+<td class="col_35">5</td>
+<td class="col_35">5</td>
+</tr><tr><td>Spinach</td>
+<td>Spinach Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>15</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">3</td>
+<td class="col_0">--</td>
+<td class="col_0">9</td>
+<td class="col_10">2</td>
+<td class="col_10">--</td>
+<td class="col_10">13</td>
+<td class="col_20">2</td>
+<td class="col_20">--</td>
+<td class="col_20">13</td>
+<td class="col_25">2</td>
+<td class="col_25">--</td>
+<td class="col_25">13</td>
+<td class="col_35">1</td>
+<td class="col_35">--</td>
+<td class="col_35">27</td>
+</tr><tr><td>Strawberry Cough</td>
+<td>Strawberry Cough Starter</td>
+<td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>2000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">17</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">15</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">13</td>
+<td class="col_20">3</td>
+<td class="col_20">5</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">12</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Sunflower">Sunflower</a></td>
+<td><a href="http://stardewvalleywiki.com/Sunflower_Seeds">Sunflower Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Sweet_Gem_Berry">Sweet Gem Berry</a></td>
+<td><a href="http://stardewvalleywiki.com/Rare_Seed">Rare Seed</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>400</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">24</td>
+<td class="col_0">--</td>
+<td class="col_0">1</td>
+<td class="col_10">21</td>
+<td class="col_10">--</td>
+<td class="col_10">1</td>
+<td class="col_20">19</td>
+<td class="col_20">--</td>
+<td class="col_20">1</td>
+<td class="col_25">19</td>
+<td class="col_25">--</td>
+<td class="col_25">1</td>
+<td class="col_35">16</td>
+<td class="col_35">--</td>
+<td class="col_35">1</td>
+</tr><tr><td>Sweet Jasmine</td>
+<td>Sweet Jasmine Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>40</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">4</td>
+<td class="col_35">--</td>
+<td class="col_35">6</td>
+</tr><tr><td>Sweet Potato</td>
+<td>Sweet Potato Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>90</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">8</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">7</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">6</td>
+<td class="col_20">--</td>
+<td class="col_20">4</td>
+<td class="col_25">6</td>
+<td class="col_25">--</td>
+<td class="col_25">4</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr><tr><td>Tea Leaf</td>
+<td>Tea Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>2</td>
+<td class="col_0">14</td>
+<td class="col_0">5</td>
+<td class="col_0">3</td>
+<td class="col_10">12</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">11</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">10</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">10</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td>Thyme</td>
+<td>Thyme Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">5</td>
+<td class="col_0">--</td>
+<td class="col_0">5</td>
+<td class="col_10">4</td>
+<td class="col_10">--</td>
+<td class="col_10">6</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">3</td>
+<td class="col_35">--</td>
+<td class="col_35">9</td>
+</tr><tr><td>Unpolished Rice</td>
+<td>Rice Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
+<td>50</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>3.2</td>
+<td class="col_0">5</td>
+<td class="col_0">2</td>
+<td class="col_0">12</td>
+<td class="col_10">4</td>
+<td class="col_10">2</td>
+<td class="col_10">12</td>
+<td class="col_20">3</td>
+<td class="col_20">2</td>
+<td class="col_20">13</td>
+<td class="col_25">3</td>
+<td class="col_25">2</td>
+<td class="col_25">13</td>
+<td class="col_35">3</td>
+<td class="col_35">2</td>
+<td class="col_35">13</td>
+</tr><tr><td>Watermelon</td>
+<td>Watermelon Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>100</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">14</td>
+<td class="col_0">5</td>
+<td class="col_0">3</td>
+<td class="col_10">12</td>
+<td class="col_10">5</td>
+<td class="col_10">4</td>
+<td class="col_20">11</td>
+<td class="col_20">5</td>
+<td class="col_20">4</td>
+<td class="col_25">10</td>
+<td class="col_25">5</td>
+<td class="col_25">4</td>
+<td class="col_35">10</td>
+<td class="col_35">5</td>
+<td class="col_35">4</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Wheat">Wheat</a></td>
+<td><a href="http://stardewvalleywiki.com/Wheat_Seeds">Wheat Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>10</td>
+<td>Yes</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td>White Widow</td>
+<td>White Widow Starter</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ Hearts with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
+<td>3000</td>
+<td>--</td>
+<td>Yes</td>
+<td>2.1</td>
+<td class="col_0">17</td>
+<td class="col_0">3</td>
+<td class="col_0">4</td>
+<td class="col_10">15</td>
+<td class="col_10">3</td>
+<td class="col_10">5</td>
+<td class="col_20">13</td>
+<td class="col_20">3</td>
+<td class="col_20">5</td>
+<td class="col_25">12</td>
+<td class="col_25">3</td>
+<td class="col_25">6</td>
+<td class="col_35">12</td>
+<td class="col_35">3</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Yam">Yam</a></td>
+<td><a href="http://stardewvalleywiki.com/Yam_Seeds">Yam Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">10</td>
+<td class="col_0">--</td>
+<td class="col_0">2</td>
+<td class="col_10">8</td>
+<td class="col_10">--</td>
+<td class="col_10">3</td>
+<td class="col_20">7</td>
+<td class="col_20">--</td>
+<td class="col_20">3</td>
+<td class="col_25">7</td>
+<td class="col_25">--</td>
+<td class="col_25">3</td>
+<td class="col_35">7</td>
+<td class="col_35">--</td>
+<td class="col_35">3</td>
+</tr></tbody>
+</table>
+</div>
+<div class="panel" id="TOC_Winter">
+<h2>Winter Crops</h2>
+
+<table class="sortable output">
+<thead>
+<tr>
+<th>Crop Name</th>
+<th>Seed Name</th>
+<th>Seed Vendor<br />(&amp; Requirements)</th>
+<th>Seed<br />Price</th>
+<th>Needs<br />Scythe?</th>
+<th>Has<br />Trellis?</th>
+<th>Average<br />Yield</th>
+<th class="col_0">Initial<br />Growth</th>
+<th class="col_0">Regrowth</th>
+<th class="col_0">Maximum<br />Harvests</th>
+<th class="col_10">Initial<br />Growth</th>
+<th class="col_10">Regrowth</th>
+<th class="col_10">Maximum<br />Harvests</th>
+<th class="col_20">Initial<br />Growth</th>
+<th class="col_20">Regrowth</th>
+<th class="col_20">Maximum<br />Harvests</th>
+<th class="col_25">Initial<br />Growth</th>
+<th class="col_25">Regrowth</th>
+<th class="col_25">Maximum<br />Harvests</th>
+<th class="col_35">Initial<br />Growth</th>
+<th class="col_35">Regrowth</th>
+<th class="col_35">Maximum<br />Harvests</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><a href="http://stardewvalleywiki.com/Cactus_Fruit">Cactus Fruit</a></td>
+<td><a href="http://stardewvalleywiki.com/Cactus_Seeds">Cactus Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
+<td>150</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">12</td>
+<td class="col_0">3</td>
+<td class="col_0">6</td>
+<td class="col_10">10</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">9</td>
+<td class="col_20">3</td>
+<td class="col_20">7</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">7</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Elderberry</td>
+<td>Elderberry Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
+<td>70</td>
+<td>--</td>
+<td>--</td>
+<td>3.2</td>
+<td class="col_0">10</td>
+<td class="col_0">4</td>
+<td class="col_0">5</td>
+<td class="col_10">8</td>
+<td class="col_10">4</td>
+<td class="col_10">5</td>
+<td class="col_20">7</td>
+<td class="col_20">4</td>
+<td class="col_20">6</td>
+<td class="col_25">7</td>
+<td class="col_25">4</td>
+<td class="col_25">6</td>
+<td class="col_35">6</td>
+<td class="col_35">4</td>
+<td class="col_35">6</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Iridium_Ore">Iridium Ore</a></td>
+<td>Iridium Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
+<td>400</td>
+<td>--</td>
+<td>--</td>
+<td>2.2</td>
+<td class="col_0">24</td>
+<td class="col_0">--</td>
+<td class="col_0">1</td>
+<td class="col_10">21</td>
+<td class="col_10">--</td>
+<td class="col_10">1</td>
+<td class="col_20">19</td>
+<td class="col_20">--</td>
+<td class="col_20">1</td>
+<td class="col_25">19</td>
+<td class="col_25">--</td>
+<td class="col_25">1</td>
+<td class="col_35">16</td>
+<td class="col_35">--</td>
+<td class="col_35">1</td>
+</tr><tr><td>Juniper Berry</td>
+<td>Juniper Berry Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>80</td>
+<td>--</td>
+<td>--</td>
+<td>3.2</td>
+<td class="col_0">13</td>
+<td class="col_0">3</td>
+<td class="col_0">5</td>
+<td class="col_10">11</td>
+<td class="col_10">3</td>
+<td class="col_10">6</td>
+<td class="col_20">10</td>
+<td class="col_20">3</td>
+<td class="col_20">6</td>
+<td class="col_25">9</td>
+<td class="col_25">3</td>
+<td class="col_25">7</td>
+<td class="col_35">9</td>
+<td class="col_35">3</td>
+<td class="col_35">7</td>
+</tr><tr><td>Mint</td>
+<td>Mint Seeds</td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>30</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">4</td>
+<td class="col_0">--</td>
+<td class="col_0">6</td>
+<td class="col_10">3</td>
+<td class="col_10">--</td>
+<td class="col_10">9</td>
+<td class="col_20">3</td>
+<td class="col_20">--</td>
+<td class="col_20">9</td>
+<td class="col_25">3</td>
+<td class="col_25">--</td>
+<td class="col_25">9</td>
+<td class="col_35">2</td>
+<td class="col_35">--</td>
+<td class="col_35">13</td>
+</tr><tr><td><a href="http://stardewvalleywiki.com/Winter_Root">Winter Root</a></td>
+<td><a href="http://stardewvalleywiki.com/Winter_Seeds">Winter Seeds</a></td>
+<td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
+<td>60</td>
+<td>--</td>
+<td>--</td>
+<td>1</td>
+<td class="col_0">7</td>
+<td class="col_0">--</td>
+<td class="col_0">3</td>
+<td class="col_10">6</td>
+<td class="col_10">--</td>
+<td class="col_10">4</td>
+<td class="col_20">5</td>
+<td class="col_20">--</td>
+<td class="col_20">5</td>
+<td class="col_25">5</td>
+<td class="col_25">--</td>
+<td class="col_25">5</td>
+<td class="col_35">5</td>
+<td class="col_35">--</td>
+<td class="col_35">5</td>
+</tr></tbody>
+</table>
+</div>
+<div id="footer" class="panel">
+PPJA Docs:
+<a href="./crops.html">Crop Summary</a> || 
+<a href="./machines.html">Machine Summary</a>
+<br />
+Stardew Apps by MouseyPounds: <a href="https://mouseypounds.github.io/stardew-checkup/">Stardew Checkup</a> ||
+<a href="https://mouseypounds.github.io/stardew-predictor/">Stardew Predictor</a> || 
+<a href="https://mouseypounds.github.io/stardew-fair-helper/">Stardew Fair Helper</a>
+<br />
+Other Stardew Valley resources: <a href="http://stardewvalley.net/">Website</a> || 
+<a href="http://store.steampowered.com/app/413150/Stardew_Valley/">Steam Page</a> ||
+<a href="https://www.gog.com/game/stardew_valley">GOG Page</a> ||
+<a href="http://www.stardewvalleywiki.com/">Wiki</a> || 
+<a href="http://community.playstarbound.com/index.php?forums/stardew-valley.72/">Forums</a> ||
+<a href="https://www.reddit.com/r/StardewValley">Subreddit</a> ||
+<a href="https://discordapp.com/invite/StardewValley">Discord</a>
+<br />
+Stardew Valley was developed by <a href="http://twitter.com/concernedape">ConcernedApe</a> and published by 
+<a href="http://blog.chucklefish.org/about/">Chucklefish Games</a>.
+</div>
+</body>
+</html>

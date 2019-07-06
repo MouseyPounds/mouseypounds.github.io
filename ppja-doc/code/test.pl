@@ -4,22 +4,81 @@
 
 use strict;
 use Imager;
+use Math::Trig;
+use Imager::Color;
 
-my $img = Imager->new(xsize=>2048,ysize=>2048,channels=>4);
-$img->write(file=>"../img/2048_BLANK.png");
+my $img = Imager->new();
+$img->read(file=>"test_crop.png") or die $img->errstr;
 
-my $filename = 'C:/Program Files/Steam/steamapps\common/Stardew Valley/Content (unpacked)/Tilesheets/Craftables.png';
-my $img2 = Imager->new;
-$img2->read(file=>$filename) or die $img2->errstr;
+my $overlay = $img->crop(left=>112, top=>0, width=>16, height=>32);
 
-$img->paste(src=>$img2,
-		left => 0, top => 0,
-		src_minx => 0, src_miny => 96,
-		width=>16, height=>32);
-$img->write(file=>"../img/2048_NOTBLANK.png");
+$overlay->write(file=>"test_overlay.png");
+
+
+$img->read(file=>"test_crop.png") or die $img->errstr;
+my $target = Imager::Color->new(rgb=>[255, 70, 175]);
+my $new_h;
+my $new_s;
+($new_h, $new_s, $_, $_) = $target->hsv();
+
+# Let's brute force this shit
+for (my $x = 0; $x < $img->getwidth(); $x++) {
+	for (my $y = 0; $y < $img->getheight(); $y++) {
+		my $c = $img->getpixel(x=>$x, y=>$y);
+		my ($h, $s, $v, $a) = $c->hsv();
+		my $c2 = Imager::Color->new(hsv=>[$new_h, $new_s, $v], alpha=>$a);
+		$img->setpixel(x=>$x, y=>$y, color=>$c2);
+	}
+}
+$img->write(file=>"ColorsNew.png");
 
 __END__
+    "Colors": [
+		"255, 70, 175, 255",
+		"255, 0, 0, 255",
+		"255, 0, 100, 255"],
 
+		
+-------------
+# Trying stuff from http://beesbuzz.biz/code/16-hsv-color-transforms
+# $H is Hue angle (0 would be no change)
+# $S is Saturation scaling (1 would be no change)
+# $V is Value scaling (1 would be no change)
+my $H = 90;
+my $S = 1;
+my $V = 1;
+# Mechanics
+my $theta = pi*$H/180;
+my $U = cos($theta);
+my $W = sin($theta);
+$img = $img->convert(matrix=>[
+[ .299*$V + .701*$V*$S*$U + .168*$V*$S*$W, .587*$V - .587*$V*$S*$U + .330*$V*$S*$W, .114*$V - .114*$V*$S*$U - .497*$V*$S*$W ],
+[ .299*$V - .299*$V*$S*$U - .328*$V*$S*$W, .587*$V + .413*$V*$S*$U + .035*$V*$S*$W, .114*$V - .114*$V*$S*$U + .292*$V*$S*$W ],
+[ .299*$V - .300*$V*$S*$U + 1.25*$V*$S*$W, .587*$V - .588*$V*$S*$U + 1.05*$V*$S*$W, .114*$V + .886*$V*$S*$U - .203*$V*$S*$W ],
+]);
+	   
+$img->write(file=>"ColorsNew.png");
+--------------
+		
+$img->read(file=>"Colors.png") or die $img->errstr;
+my @map = map { int( $_*2 ) } 0..255;
+$img->map( red=>\@map );
+$img->write(file=>"ColorsNew.png");
+------------
+#This did nothing but throw errors
+my %opts = (
+	rpnexpr => 'x y getp1 !pix 128 128 255 rgb @pix',
+	);
+	# 'rpnexpr' => 'x y getp1 !pix @pix value 0.96 gt @pix sat 0.1 lt and 128 128 255 rgb @pix ifp',
+	# This transform gets pixel at x,y and stores it
+	# Then retrieves it and checks if value is greater than 0.96?
+	# Then retrieves again and checks if sat is less than 0.1
+	# then sets its rgb to 128, 128, 255?
+my $img2 = Imager->new();
+$img2->Imager::transform2(\%opts, $img);
+	   
+
+------------		
 my $img2 = $img->crop(left=>0, top=>96, width=>16, height=>32);
 $img2->write(file=>"../img/TEST_x1.png");
 $img2 = $img2->scale(scalefactor=>2.0, qtype=>'preview');

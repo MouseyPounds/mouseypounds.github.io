@@ -85,25 +85,39 @@ LogMessage("Script started", 1);
 ParseGameData($GameDir, $GameData);
 ParseModData($ModDir, $ModData, $ModInfo);
 
-LogMessage("Dumping full GameData", 2);
-LogMessage(Dumper($GameData), 2);
-LogMessage("Dumping full ModData", 2);
-LogMessage(Dumper($ModData), 2);
-LogMessage("Dumping full ModInfo", 2);
-LogMessage(Dumper($ModInfo), 2);
-
-LogMessage("Writing cache", 1);
-store $GameData, "cache_GameData";
-store $ModData, "cache_ModData";
-store $ModInfo, "cache_ModInfo";
-
 LogMessage("Copying game spritesheets", 1);
+# These are unchanged and so can be directly copied. Failure is only a warning
 copy("$GameDir/../Maps/springobjects.png", "../img/game_objects.png") or LogMessage("WARNING: Error copying game object sprites: $!", 1);
 copy("$GameDir/../Tilesheets/Craftables.png", "../img/game_craftables.png") or LogMessage("WARNING: Error copying game craftable sprites: $!", 1);
-copy("$GameDir/../Tilesheets/crops.png", "../img/game_crops.png") or LogMessage("WARNING: Error copying game crop sprites: $!", 1);
 copy("$GameDir/../Tilesheets/fruitTrees.png", "../img/game_trees.png") or LogMessage("WARNING: Error copying game tree sprites: $!", 1);
 copy("$GameDir/../Tilesheets/weapons.png", "../img/game_weapons.png") or LogMessage("WARNING: Error copying game weapon sprites: $!", 1);
 copy("$GameDir/../Characters/Farmer/hats.png", "../img/game_hats.png") or LogMessage("WARNING: Error copying game hat sprites: $!", 1);
+# Crops is somewhat special because we want to overlay the placeholder for colored items.
+my $game_crops = Imager->new();
+$game_crops->read(file=>"$GameDir/../Tilesheets/crops.png") or LogMessage("DIE: Error reading game crop sprites: $!", 1);
+my $sprites_per_row = floor($game_crops->getwidth() / $SS->{'crops'}{'width'});
+foreach my $c (keys %{$GameData->{'Crops'}}) {
+	my $index = $GameData->{'Crops'}{$c}{'split'}[2];
+	my $base_x = $SS->{'crops'}{'width'} * ($index % $sprites_per_row);
+	my $base_y = $SS->{'crops'}{'height'} * floor($index / $sprites_per_row);
+	my @phases = split(' ', $GameData->{'Crops'}{$c}{'split'}[0]);
+	my @colors = split(' ', $GameData->{'Crops'}{$c}{'split'}[8]);
+	my $has_colors = shift @colors;
+	my $x = $base_x + 16*(1 + scalar(@phases));
+	my $y = $base_y;
+	$GameData->{'Crops'}{$c}{'__SS_X'} = $x;
+	$GameData->{'Crops'}{$c}{'__SS_Y'} = $y;
+
+	if ($has_colors eq 'true') {
+		my ($r, $g, $b, @rest) = @colors;
+		my $target = Imager::Color->new(rgb=>[$r, $g, $b]);
+		my $overlay = $game_crops->crop(left=>$base_x + 16*(2 + scalar(@phases)), top=>$base_y, width=>16, height=>32);
+		$overlay = Colorize($overlay, $target);
+		$game_crops->rubthrough(src=>$overlay, tx=>$x, ty=>$y, src_maxx=>16, src_maxy=>32) or
+			LogMessage("DIE: Failed to overlay color placeholder: " . $game_crops->errstr, 1);
+	}
+}
+$game_crops->write(file=>"../img/game_crops.png") or LogMessage("DIE: Error writing game crop sprites: " . $game_crops->errstr, 1);
 
 LogMessage("Cropping and writing mod spritesheets", 1);
 foreach my $k (keys %$SS) {
@@ -115,16 +129,28 @@ foreach my $k (keys %$SS) {
 	my $max_width = $SS->{$k}{'width'} * min($sprites_per_row, ($index + 1));
 	my $max_height = $SS->{$k}{'height'} * (1 + floor($index / $sprites_per_row));
 	my $cropped_img = $SS->{$k}{'img'}->crop(left=>0, top=>0, width=>$max_width, height=>$max_height) or
-		die "Couldn't crop image: " . $SS->{$k}{'img'}->errstr;
+		LogMessage("DIE: Couldn't crop image: " . $SS->{$k}{'img'}->errstr, 1);
 	LogMessage(" Spritesheet for $k is now " . $cropped_img->getwidth() . " x " . $cropped_img->getheight(), 1);
 
 	my $filename = "../img/ss_${k}.png";
 	$cropped_img->write(file=>$filename) or 
-		die "Error writing normal spritesheet to $filename" . $cropped_img->errstr;
+		LogMessage("DIE: Error writing normal spritesheet to $filename" . $cropped_img->errstr, 1);;
 	$filename = "../img/ss_${k}_x2.png";
 	$cropped_img->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>$filename) or 
-		die "Error writing scaled spritesheet to $filename" . $cropped_img->errstr;
+		LogMessage("DIE: Error writing scaled spritesheet to $filename" . $cropped_img->errstr, 1);;
 }
+
+LogMessage("Writing cache", 1);
+store $GameData, "cache_GameData";
+store $ModData, "cache_ModData";
+store $ModInfo, "cache_ModInfo";
+
+LogMessage("Dumping full GameData", 2);
+LogMessage(Dumper($GameData), 2);
+LogMessage("Dumping full ModData", 2);
+LogMessage(Dumper($ModData), 2);
+LogMessage("Dumping full ModInfo", 2);
+LogMessage(Dumper($ModInfo), 2);
 
 LogMessage("Script ended", 1);
 exit;
@@ -242,7 +268,7 @@ sub ParseModData {
 									if (exists $machine->{'texture'}) {
 										my $x = 16*$tileindex;
 										my $y = 0;
-										($x, $y) = StoreNextImage("$BaseDir/$m/$machine->{'texture'}", 'craftables', $x, $y);
+										($x, $y) = StoreNextImageFile("$BaseDir/$m/$machine->{'texture'}", 'craftables', $x, $y);
 										$machine->{'__SS_X'} = $x;
 										$machine->{'__SS_Y'} = $y;
 									}
@@ -293,21 +319,38 @@ sub ParseModData {
 										my $other_x = -1;
 										my $other_y = -1;
 										if ($t eq 'BigCraftables') {
-											($x, $y) = StoreNextImage("$BaseDir/$m/$t/$i/big-craftable.png", 'craftables');
+											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/big-craftable.png", 'craftables');
 										} elsif ($t eq 'Crops') {
-											($x, $y) = StoreNextImage("$BaseDir/$m/$t/$i/crop.png", 'crops');
-											($other_x, $other_y) = StoreNextImage("$BaseDir/$m/$t/$i/seeds.png", 'objects');
+											# Colored crops are special and reserve the 5th sprite for the overlay
+											# Cannabis crops for some reason have a single transparent white defined which breaks everything.
+											if (exists $json->{'Colors'} and defined $json->{'Colors'}) {
+												my $base = Imager->new();
+												$base->read(file=>"$BaseDir/$m/$t/$i/crop.png", png_ignore_benign_errors => 1) or
+													die "Failed to read crop image: " . $base->errstr;
+												my $num_colors = scalar @{$json->{'Colors'}};
+												my $num_phases = scalar @{$json->{'Phases'}};
+												my $overlay = $base->crop(left=>16*(2+$num_phases), top=>0, width=>16, height=>32);
+												my ($r, $g, $b, $a) = split(/,/, $json->{'Colors'}[0]);
+												my $target = Imager::Color->new(rgb=>[$r, $g, $b], alpha=>$a);
+												$overlay = Colorize($overlay, $target);
+												$base->rubthrough(src=>$overlay, tx=> 16*(1+$num_phases), ty=>0, src_maxx=>16, src_maxy=>32) or
+													die "Failed to overlay colored crop: " . $base->errstr;
+												($x, $y) = StoreNextImage($base, 'crops');
+											} else {
+												($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/crop.png", 'crops');
+											}
+											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/seeds.png", 'objects');
 										} elsif ($t eq 'FruitTrees') {
-											($x, $y) = StoreNextImage("$BaseDir/$m/$t/$i/tree.png", 'trees');
-											($other_x, $other_y) = StoreNextImage("$BaseDir/$m/$t/$i/sapling.png", 'objects');
+											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/tree.png", 'trees');
+											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/sapling.png", 'objects');
 										} elsif ($t eq 'Objects') {
-											($x, $y) = StoreNextImage("$BaseDir/$m/$t/$i/object.png", 'objects');
-											($other_x, $other_y) = StoreNextImage("$BaseDir/$m/$t/$i/color.png", 'objects')
+											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/object.png", 'objects');
+											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/color.png", 'objects')
 												if (-e "$BaseDir/$m/$t/$i/color.png");
 										} elsif ($t eq 'Hats') {
-											($x, $y) = StoreNextImage("$BaseDir/$m/$t/$i/hat.png", 'hats');
+											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/hat.png", 'hats');
 										} elsif ($t eq 'Weapons') {
-											($x, $y) = StoreNextImage("$BaseDir/$m/$t/$i/weapon.png", 'objects');
+											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/weapon.png", 'objects');
 										}
 										$json->{'__SS_X'} = $x;
 										$json->{'__SS_Y'} = $y;
@@ -340,15 +383,66 @@ sub ParseModData {
 	}
 }
 
-# StoreNextImage
+# Colorize - Changes Hue and Saturation of an image to match an input color
+#   while preserving Luminance. Returns the new image
+#
+#   Image - Imager image object
+#   Color - Imager::Color object
+sub Colorize {
+	my $source = shift;
+	my $color = shift;
+
+	if (not defined $source or not defined $color) {
+		LogMessage("WARNING Colorize received invalid parameters", 1);
+		return undef;
+	}
+	my $image = $source->copy();
+	my ($ch, $cs, $cv, $ca) = $color->hsv();
+	# Here is where we deal with weirdness from Cannabis Kit crops
+	return $source if ($ca == 0);
+	for (my $x = 0; $x < $image->getwidth(); $x++) {
+		for (my $y = 0; $y < $image->getheight(); $y++) {
+			my ($h, $s, $v, $a) = $image->getpixel(x=>$x, y=>$y)->hsv();
+			my $new_color = Imager::Color->new(hsv=>[$ch, $cs, $v], alpha=>$a);
+			$image->setpixel(x=>$x, y=>$y, color=>$new_color);
+		}
+	}
+	return $image;
+}
+
+# StoreNextImageFile - wrapper for StoreNextImage
 #    Filename of image to copy from
 #	 Type of image (one of qw[crops craftables hats trees objects])
 #    X coordinate of source to start copy from (upper-left corner) [Optional; default is 0]
 #    Y coordinate of source to start copy from (upper-left corner) [Optional; default is 0]
 #
 #    Returns (x, y) on spritesheet or (-1, -1) if something bad happened
-sub StoreNextImage {
+sub StoreNextImageFile {
 	my $src_file = shift;
+	my $type = shift;
+	my $src_x = shift;
+	my $src_y = shift;
+	
+	# Passing everything off to another function, only thing we need to check is reading the $src_file
+	my $src_img = Imager->new();
+	my $ok = $src_img->read(file=>$src_file, png_ignore_benign_errors => 1);
+	if (not $ok) {
+		LogMessage("WARNING StoreNextImageFile unable to read image file {$src_file}: " . $src_img->errstr);
+		return (-1, -1);
+	}
+	
+	return StoreNextImage($src_img, $type, $src_x, $src_y);
+}
+
+# StoreNextImage
+#    Imager object of image to copy
+#	 Type of image (one of qw[crops craftables hats trees objects])
+#    X coordinate of source to start copy from (upper-left corner) [Optional; default is 0]
+#    Y coordinate of source to start copy from (upper-left corner) [Optional; default is 0]
+#
+#    Returns (x, y) on spritesheet or (-1, -1) if something bad happened
+sub StoreNextImage {
+	my $src_img = shift;
 	my $type = shift;
 	my $src_x = shift;
 	my $src_y = shift;
@@ -356,20 +450,13 @@ sub StoreNextImage {
 	$src_x = 0 if (not defined $src_x);
 	$src_y = 0 if (not defined $src_y);
 	
-	LogMessage("StoreNextImage called with parameters {$src_file} {$type} {$src_x} {$src_y}", 3);
+	LogMessage("StoreNextImage called with parameters {$src_img} {$type} {$src_x} {$src_y}", 3);
 
-	if (not defined $src_file or not defined $type or not exists $SS->{$type}) {
-		LogMessage("WARNING Missing required parameter for StoreNextImage {$src_file}, {$type}");
+	if (not defined $src_img or not defined $type or not exists $SS->{$type}) {
+		LogMessage("WARNING Missing required parameter for StoreNextImage {$src_img}, {$type}");
 		return (-1, -1);
 	}
 	
-	my $src_img = Imager->new();
-	my $ok = $src_img->read(file=>$src_file, png_ignore_benign_errors => 1);
-	if (not $ok) {
-		LogMessage("WARNING StoreNextImage unable to read image file {$src_file}: " . $src_img->errstr);
-		return (-1, -1);
-	}
-
 	if ($src_x < 0 or $src_y < 0) {
 		LogMessage("WARNING StoreNextImage: x or y coordinate of source is negative");
 		return (-1, -1);
@@ -395,7 +482,7 @@ sub StoreNextImage {
 		return (-1, -1);
 	}
 	
-	$ok = $SS->{$type}{'img'}->paste(src=>$src_img,
+	my $ok = $SS->{$type}{'img'}->paste(src=>$src_img,
             left => $next_x, top => $next_y, src_minx => $src_x, src_miny => $src_y,
 			width=>$copy_width, height=>$copy_height);
 	if (not $ok) {
@@ -416,7 +503,8 @@ sub LogMessage {
 	$level = 1 if (not defined $level);
 	
 	print STDOUT $message, "\n" if ($LogLevel >= $level);
-	print STDERR $message, "\n" if ($message =~ /WARNING/);
+	print STDERR $message, "\n" if ($message =~ /^(\w)*WARNING/);
+	die $message if ($message =~ /^(\w)*DIE/);
 }
 
 __END__

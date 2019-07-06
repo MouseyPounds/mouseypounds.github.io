@@ -19,6 +19,7 @@ my $ModInfo = retrieve("cache_ModInfo");
 my $DocBase = "..";
 
 my $SpriteInfo = {};
+GatherSpriteInfo($SpriteInfo);
 
 CropSummary();
 MachineSummary();
@@ -368,9 +369,11 @@ END_PRINT
 		if ($crop eq 'Garlic' or $crop eq 'Red Cabbage' or $crop eq 'Artichoke') {
 			$seed_vendor .= "<br />(Year 2+)";
 		}
+		my $sprite_id = "Crop_$sid";
 		
 		my $output = <<"END_PRINT";
-<tr><td>$cname</td>
+<tr><td><img class="game_crops" id="$sprite_id" src="img/blank.png"></td>
+<td>$cname</td>
 <td>$sname</td>
 <td>$seed_vendor</td>
 <td>$scost</td>
@@ -418,7 +421,13 @@ END_PRINT
 		$regrowth = (($regrowth > 0) ? $regrowth : "--");
 		my $need_scythe = ($ModData->{'Crops'}{$key}{'HarvestWithScythe'} ? "Yes" : "--");
 		my $is_trellis = ($ModData->{'Crops'}{$key}{'TrellisCrop'} ? "Yes" : "--");
-		#my @colors = @{$ModData->{'Crops'}{$key}{'Colors'}};
+		my @colors = ();
+		if (exists $ModData->{'Crops'}{$key}{'Colors'} and defined $ModData->{'Crops'}{$key}{'Colors'}) {
+			@colors = @{$ModData->{'Crops'}{$key}{'Colors'}};
+		}
+		if (scalar @colors > 1) {
+			# If we ever deal with the colors, it'd happen here.
+		}
 		my $num_harvest = $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'} + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
 		my $seed_vendor = Wikify("Pierre");
 		if (exists $ModData->{'Crops'}{$key}{'SeedPurchaseFrom'}) {
@@ -429,9 +438,12 @@ END_PRINT
 			# Note that the order here is not guaranteed. If we start getting crops with multiple different requirements we might have to deal with that
 			$seed_vendor .= '<br />' . join('<br />', @req);
 		}
+		my $sprite_id = "Crop_$key";
+		$sprite_id =~ s/ /_/g;
 		
 		my $output = <<"END_PRINT";
-<tr><td>$cname</td>
+<tr><td><img class="crops" id="$sprite_id" src="img/blank.png"></td>
+<td>$cname</td>
 <td>$sname</td>
 <td>$seed_vendor</td>
 <td>$scost</td>
@@ -483,6 +495,7 @@ END_PRINT
 <table class="sortable output">
 <thead>
 <tr>
+<th>Img</th>
 <th>Crop Name</th>
 <th>Seed Name</th>
 <th>Seed Vendor<br />(&amp; Requirements)</th>
@@ -658,10 +671,7 @@ END_PRINT
 			$id =~ s/ /_/g;
 			my $anchor = "TOC_$id";
 			$TOC{$m->{'name'}} = $anchor;
-			if (exists $SpriteInfo->{$id}) {
-				warn "Sprite ID {$id} will not be unique";
-			}
-			$SpriteInfo->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
+			$id .= "_x2";
 			my $output = <<"END_PRINT";
 <div class="panel" id="$anchor">
 <div class="container">
@@ -844,14 +854,74 @@ END_PRINT
 	close $FH or die "Error closing file";
 }
 
+# GatherSpriteInfo - Goes through the global GameData and ModData structures to find sprite locations
+#   and saves them all into a hash.
+#
+#   HashRef - reference to the hash to use for storage.
+sub GatherSpriteInfo {
+	my $HashRef = shift;
+	if (not defined $HashRef or not (ref $HashRef eq 'HASH')) {
+		warn "GatherSpriteInfo was not passed a valid hash ref. Aboring.";
+		return 0;
+	}
+	
+	# Vanilla data
+	# Crops - coords were saved by gather_data
+	foreach my $sid (keys %{$GameData->{'Crops'}}) {
+		my $id = "Crop_$sid";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - $GameData->{'Crops'}{$sid}{'__SS_X'}, 'y' => 0 - $GameData->{'Crops'}{$sid}{'__SS_Y'} };
+		$id .= "_x2";
+		$HashRef->{$id} = { 'x' => 0 - 2*($GameData->{'Crops'}{$sid}{'__SS_X'}), 'y' => 0 - 2*$GameData->{'Crops'}{$sid}{'__SS_Y'} };
+	}
+	
+	# Mod data
+	# Machines - because machines can have a variable number of sprites only the single idle animation was
+	#   transferred to the sprite sheet and we don't have any further processing to do.
+	foreach my $j (@{$ModData->{'Machines'}}) {
+		foreach my $m (@{$j->{'machines'}}) {
+			my $id = "Machine_$m->{'name'}";
+			$id =~ s/ /_/g;
+			my $anchor = "TOC_$id";
+			warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+			$HashRef->{$id} = { 'x' => 0 - $m->{'__SS_X'}, 'y' => 0 - $m->{'__SS_Y'} };
+			$id .= "_x2";
+			warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+			$HashRef->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
+		}
+	}
+	# Crops - the whole 128x32 crop image was transferred to our spritesheet and we need to point to the
+	#   "ready for harvest" sprite as well as setting up IDs for the objects for the seeds. The actual
+	#   harvested item will be handled by object processing in another section.
+	foreach my $key (keys %{$ModData->{'Crops'}}) {
+		my @phases = @{$ModData->{'Crops'}{$key}{'Phases'}};
+		my $offset = 1 + scalar(@phases);
+		my $id = "Crop_$key";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - ($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - $ModData->{'Crops'}{$key}{'__SS_Y'} };
+		$id .= "_x2";
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - 2*($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_Y'} };
+		my $seed = $ModData->{'Crops'}{$key}{'SeedName'};
+		$id = "Object_$key";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - $ModData->{'Crops'}{$key}{'__SS_OTHER_X'}, 'y' => 0 - $ModData->{'Crops'}{$key}{'__SS_OTHER_Y'} };
+		$id .= "_x2";
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_OTHER_X'}, 'y' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_OTHER_Y'} };
+	}
+
+	return 1;
+}
+
+# WriteCSS - Iterates through the SpriteInfo structure and writes out the appropriate CSS for each ID
 sub WriteCSS {
 	my $FH;
 	open $FH, ">$DocBase/ppja-doc-img.css" or die "Can't open ppja-doc-img.css for writing: $!";
 	select $FH;
-	
-	# Info for the machine sprites are already in %SpriteInfo, but other mod sprites need to be added now too
-	
-	
 
 	print <<"END_PRINT";
 /* ppja-doc-img.css
@@ -918,6 +988,67 @@ img.trees_x2 {
 	height: 160px;
 	background-image:url("./img/ss_trees_x2.png")
 }
+img.game_craftables {
+	vertical-align: -2px;
+	width: 16px;
+	height: 32px;
+	background-image:url("./img/game_craftables.png")
+}
+img.game_craftables_x2 {
+	vertical-align: -5px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/game_craftables_x2.png")
+}
+img.game_crops {
+	vertical-align: -2px;
+	/* Full sprite is 128px */
+	width: 16px;
+	height: 32px;
+	background-image:url("./img/game_crops.png")
+}
+img.game_crops_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/game_crops_x2.png")
+}
+img.game_hats {
+	vertical-align: -2px;
+	width: 20px;
+	height: 20px;
+	background-image:url("./img/game_hats.png")
+}
+img.game_hats_x2 {
+	vertical-align: -2px;
+	width: 40px;
+	height: 40px;
+	background-image:url("./img/game_hats_x2.png")
+}
+img.game_objects {
+	vertical-align: -2px;
+	width: 16px;
+	height: 16px;
+	background-image:url("./img/game_objects.png")
+}
+img.game_objects_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 32px;
+	background-image:url("./img/game_objects_x2.png")
+}
+img.game_trees {
+	vertical-align: -2px;
+	width: 48px;
+	height: 80px;
+	background-image:url("./img/game_trees.png")
+}
+img.game_trees_x2 {
+	vertical-align: -2px;
+	width: 96px;
+	height: 160px;
+	background-image:url("./img/game_trees_x2.png")
+}
 END_PRINT
 
 	foreach my $id (keys %$SpriteInfo) {
@@ -934,6 +1065,7 @@ END_PRINT
 }
 
 __END__ 
+
 
 my %options = (
 	"Base" => 0.0,
