@@ -81,6 +81,15 @@ table.recipe th {
 td {
 	color: black;
 }
+td.icon {
+	text-align: center;
+}
+td.name {
+	text-align: left;
+}
+td.value {
+	text-align: right;
+}
 table.output th, table.output td, table.recipe th, table.recipe td {
 	padding: 3px 8px;
 }

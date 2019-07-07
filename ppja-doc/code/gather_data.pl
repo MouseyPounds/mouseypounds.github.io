@@ -13,6 +13,7 @@ use Storable;
 use Imager;
 use POSIX qw(floor);
 use List::Util qw(min max);
+use Scalar::Util qw(looks_like_number);
 
 # Logging
 #   0: No logging (aside from warn/die)
@@ -85,21 +86,83 @@ LogMessage("Script started", 1);
 ParseGameData($GameDir, $GameData);
 ParseModData($ModDir, $ModData, $ModInfo);
 
-LogMessage("Copying game spritesheets", 1);
+LogMessage("Adding object info for mod crop seeds", 1);
+# It is a little less messy to do this here rather than trying to create a second json during file processing.
+foreach my $c (keys %{$ModData->{'Crops'}}) {
+	my $name = $ModData->{'Crops'}{$c}{'SeedName'};
+	my $desc = $ModData->{'Crops'}{$c}{'SeedDescription'};
+	my $price = $ModData->{'Crops'}{$c}{'SeedPurchasePrice'};
+	if (not exists $ModData->{'Objects'}{$name}) {
+		$ModData->{'Objects'}{$name} = {
+			'Name' => $name,
+			'Description' => $desc,
+			'Price' => $price,
+			'Category' => 'Seeds',
+			'Edibility' => -300,
+			'Recipe' => undef,
+			'__SS_X' => $ModData->{'Crops'}{$c}{'__SS_OTHER_X'},
+			'__SS_Y' => $ModData->{'Crops'}{$c}{'__SS_OTHER_Y'},
+			};
+	} else {
+		LogMessage("WARNING: Already have an object entry for $name while processing $c seeds", 1);
+	}
+}
+
+LogMessage("Copying some game spritesheets", 1);
 # These are unchanged and so can be directly copied. Failure is only a warning
 copy("$GameDir/../Maps/springobjects.png", "../img/game_objects.png") or LogMessage("WARNING: Error copying game object sprites: $!", 1);
 copy("$GameDir/../Tilesheets/Craftables.png", "../img/game_craftables.png") or LogMessage("WARNING: Error copying game craftable sprites: $!", 1);
-copy("$GameDir/../Tilesheets/fruitTrees.png", "../img/game_trees.png") or LogMessage("WARNING: Error copying game tree sprites: $!", 1);
 copy("$GameDir/../Tilesheets/weapons.png", "../img/game_weapons.png") or LogMessage("WARNING: Error copying game weapon sprites: $!", 1);
 copy("$GameDir/../Characters/Farmer/hats.png", "../img/game_hats.png") or LogMessage("WARNING: Error copying game hat sprites: $!", 1);
-# Crops is somewhat special because we want to overlay the placeholder for colored items.
+LogMessage("Modifying other game spritesheets", 1);
+# For Fruit Trees we are going to discard the final sprite which has just the stump and falling leaves and replace it
+#  with a fully stocked tree. This requires copying over the appropriate seasonal tree and then overlaying three
+#  of the product objects in appropriate spots. In game, these overlays are somewhat random but we will just pick
+#  some reasonable coordinates and use them for all sprites.
+my $game_trees = Imager->new();
+$game_trees->read(file=>"$GameDir/../Tilesheets/fruitTrees.png") or LogMessage("DIE: Error reading game tree sprites:" . $game_trees->errstr, 1);
+my $trees_per_row = floor($game_trees->getwidth() / $SS->{'trees'}{'width'});
+my $game_objects = Imager->new();
+$game_objects->read(file=>"$GameDir/../Maps/springobjects.png") or LogMessage("DIE: Error reading game object sprites:" . $game_objects->errstr, 1);
+my $objects_per_row = floor($game_objects->getwidth() / $SS->{'objects'}{'width'});
+foreach my $t (keys %{$GameData->{'FruitTrees'}}) {
+	# FruitTree Format -- SaplingID: SpritesheetIndex / Season / ProductID / SaplingPrice
+	# Grabbing the produce object first
+	my $index = $GameData->{'FruitTrees'}{$t}{'split'}[2];
+	my $base_x = $SS->{'objects'}{'width'} * ($index % $objects_per_row);
+	my $base_y = $SS->{'objects'}{'height'} * floor($index / $objects_per_row);
+	my $overlay = $game_objects->crop(left=>$base_x, top=>$base_y, width=>16, height=>16);
+	# There's actually only 1 tree per row and I don't have a good reason why I still do this stuff
+	$index = $GameData->{'FruitTrees'}{$t}{'split'}[0];
+	$base_x = $SS->{'trees'}{'width'} * ($index % $trees_per_row);
+	$base_y = $SS->{'trees'}{'height'} * floor($index / $trees_per_row);
+	my %seasons = ('spring'=>0,'summer'=>1,'fall'=>2,'winter'=>3);
+	my $offset = (4 + $seasons{$GameData->{'FruitTrees'}{$t}{'split'}[1]}) * 48;
+	my $tree_replacement = $game_trees->crop(left=>($base_x + $offset), top=>$base_y, width=>48, height=>80);
+	# Now overlay the fruits at hardcoded coordinates
+	$tree_replacement->rubthrough(src=>$overlay, tx=>2, ty=>14, src_maxx=>16, src_maxy=>16) or
+		LogMessage("DIE: Failed to overlay fruit #1: " . $tree_replacement->errstr, 1);
+	$tree_replacement->rubthrough(src=>$overlay, tx=>26, ty=>4, src_maxx=>16, src_maxy=>16) or
+		LogMessage("DIE: Failed to overlay fruit #2: " . $tree_replacement->errstr, 1);
+	$tree_replacement->rubthrough(src=>$overlay->flip(dir=>'h'), tx=>20, ty=>28, src_maxx=>16, src_maxy=>16) or
+		LogMessage("DIE: Failed to overlay fruit #3: " . $tree_replacement->errstr, 1);
+	# And finally, paste the complete tree over the stump sprite
+	$game_trees->paste(src=>$tree_replacement, left=>$base_x + 384, top=>$base_y, width=>48, height=>80) or
+		LogMessage("DIE: Failed to paste complete tree: " . $tree_replacement->errstr, 1);
+	$GameData->{'FruitTrees'}{$t}{'__SS_X'} = $base_x + 384;
+	$GameData->{'FruitTrees'}{$t}{'__SS_Y'} = $base_y;
+}
+$game_trees->write(file=>"../img/game_trees.png") or LogMessage("DIE: Error writing game tree sprites: " . $game_trees->errstr, 1);
+
+# For Crops we need to handle those cases where the crop has dynamic coloring.
+# We need to grab the greyscale placeholder, color it based on first color definition, and then overlay onto final growth phase.
 my $game_crops = Imager->new();
 $game_crops->read(file=>"$GameDir/../Tilesheets/crops.png") or LogMessage("DIE: Error reading game crop sprites: $!", 1);
-my $sprites_per_row = floor($game_crops->getwidth() / $SS->{'crops'}{'width'});
+my $crops_per_row = floor($game_crops->getwidth() / $SS->{'crops'}{'width'});
 foreach my $c (keys %{$GameData->{'Crops'}}) {
 	my $index = $GameData->{'Crops'}{$c}{'split'}[2];
-	my $base_x = $SS->{'crops'}{'width'} * ($index % $sprites_per_row);
-	my $base_y = $SS->{'crops'}{'height'} * floor($index / $sprites_per_row);
+	my $base_x = $SS->{'crops'}{'width'} * ($index % $crops_per_row);
+	my $base_y = $SS->{'crops'}{'height'} * floor($index / $crops_per_row);
 	my @phases = split(' ', $GameData->{'Crops'}{$c}{'split'}[0]);
 	my @colors = split(' ', $GameData->{'Crops'}{$c}{'split'}[8]);
 	my $has_colors = shift @colors;
@@ -118,6 +181,38 @@ foreach my $c (keys %{$GameData->{'Crops'}}) {
 	}
 }
 $game_crops->write(file=>"../img/game_crops.png") or LogMessage("DIE: Error writing game crop sprites: " . $game_crops->errstr, 1);
+
+LogMessage("Changing mod fruit tree sprites", 1);
+foreach my $t (keys %{$ModData->{'FruitTrees'}}) {
+	# Now we can make the same change we made for vanilla trees. Since fruit trees already use their _OTHER_ coordinates
+	#  for the sapling object, we don't change the saved co-ordinates, but that isn't too big of a problem since the
+	#  "full" tree sprite is always at the same offset (x+384,y)
+	my $product = $ModData->{'FruitTrees'}{$t}{'Product'};
+	my $overlay;
+	if (looks_like_number($product)) {
+		# oh shit, I can't handle this yet
+		LogMessage("WARNING: Mod Tree wants to make a vanilla product.", 1);
+		next;
+	} else {
+		$overlay = $SS->{'objects'}{'img'}->crop(left=>$ModData->{'Objects'}{$product}{'__SS_X'},
+			top=>$ModData->{'Objects'}{$product}{'__SS_Y'}, width=>16, height=>16);
+	}
+	my $base_x = $ModData->{'FruitTrees'}{$t}{'__SS_X'};
+	my $base_y = $ModData->{'FruitTrees'}{$t}{'__SS_Y'};
+	my %seasons = ('spring'=>0,'summer'=>1,'fall'=>2,'winter'=>3);
+	my $offset = (4 + $seasons{lc $ModData->{'FruitTrees'}{$t}{'Season'}}) * 48;
+	my $tree_replacement = $SS->{'trees'}{'img'}->crop(left=>($base_x + $offset), top=>$base_y, width=>48, height=>80);
+	# Now overlay the fruits at hardcoded coordinates
+	$tree_replacement->rubthrough(src=>$overlay, tx=>2, ty=>14, src_maxx=>16, src_maxy=>16) or
+		LogMessage("DIE: Failed to overlay fruit #1 on mod tree: " . $tree_replacement->errstr, 1);
+	$tree_replacement->rubthrough(src=>$overlay, tx=>26, ty=>4, src_maxx=>16, src_maxy=>16) or
+		LogMessage("DIE: Failed to overlay fruit #2 on mod tree: " . $tree_replacement->errstr, 1);
+	$tree_replacement->rubthrough(src=>$overlay->flip(dir=>'h'), tx=>20, ty=>28, src_maxx=>16, src_maxy=>16) or
+		LogMessage("DIE: Failed to overlay fruit #3 on mod tree: " . $tree_replacement->errstr, 1);
+	# And finally, paste the complete tree over the stump sprite
+	$SS->{'trees'}{'img'}->paste(src=>$tree_replacement, left=>$base_x + 384, top=>$base_y, width=>48, height=>80) or
+		LogMessage("DIE: Failed to paste complete mod tree: " . $SS->{'trees'}{'img'}->errstr, 1);
+}
 
 LogMessage("Cropping and writing mod spritesheets", 1);
 foreach my $k (keys %$SS) {
@@ -164,7 +259,7 @@ sub ParseGameData {
 
 	# There are only certain folders we explicitly want to open; these are hardcoded
 	# Files are assumed to be JSON format without headers, like those from StardewXNBHack
-	my @Filenames = qw(ObjectInformation Crops BigCraftablesInformation CookingRecipes CraftingRecipes);
+	my @Filenames = qw(ObjectInformation Crops BigCraftablesInformation CookingRecipes CraftingRecipes FruitTrees);
 	LogMessage("Parsing Game Data in $BaseDir", 1);
 	foreach my $f (@Filenames) {
 		LogMessage("  Checking for $f", 1);
@@ -340,13 +435,15 @@ sub ParseModData {
 												($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/crop.png", 'crops');
 											}
 											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/seeds.png", 'objects');
-										} elsif ($t eq 'FruitTrees') {
-											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/tree.png", 'trees');
-											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/sapling.png", 'objects');
 										} elsif ($t eq 'Objects') {
 											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/object.png", 'objects');
 											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/color.png", 'objects')
 												if (-e "$BaseDir/$m/$t/$i/color.png");
+										} elsif ($t eq 'FruitTrees') {
+											# We want to make the same change we made for the base game Fruit Trees, but there is
+											#  no guarantee the object sprites are available yet. So we'll put this off until later.
+											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/tree.png", 'trees');
+											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/sapling.png", 'objects');
 										} elsif ($t eq 'Hats') {
 											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/hat.png", 'hats');
 										} elsif ($t eq 'Weapons') {

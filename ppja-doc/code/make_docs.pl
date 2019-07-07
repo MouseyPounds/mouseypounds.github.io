@@ -11,6 +11,7 @@ use List::Util qw(min max);
 use Storable;
 use Math::Round;
 use Data::Dumper;
+use Imager;
 
 my $GameData = retrieve("cache_GameData");
 my $ModData = retrieve("cache_ModData");
@@ -62,49 +63,71 @@ sub StripHTML {
 	return $input;
 }
 
-# GetItem receives 1 or 2 inputs and will use the first one that is defined.
+# GetItem receives 1 or 2 inputs and will use the first one that is defined & not blank.
 # It then tries to resolve an ID into a name if it looks like a vanilla item
+# Optional 3rd parameter for Formatting (span or wiki link) defaults true.
 sub GetItem {
 	my $input = shift;
+	my $next = shift;
+	my $doFormat = shift;
 	if (not defined $input or $input eq "") {
 		# first one didn't work, now try second
-		$input = shift;
+		$input = $next;
 	}
 	if (not defined $input or $input eq "") {
 		# second didn't work either, give up
 		return "Unknown Item";
 	}
+	if (not defined $doFormat) {
+		$doFormat = 1;
+	}
+
 	my $output = "";
+	my $outputSimple = "";
 	if (looks_like_number($input)) {
 		if ($input < 0) {
 			# TODO: This needs better handling, either here or before it gets here
 			if ($input == -999) {
-				$output = qq(<span class="group">Same as Input</span>);
+				$outputSimple = "Same as Input";
+				$output = qq(<span class="group">$outputSimple</span>);
 			} else {
-				$output = '<span class="group">Any ' . Wikify(GetCategory($input)) . '</span>';
+				# We want to say "Any ___" but the wiki link should be on just the "___"
+				$outputSimple = GetCategory($input);
+				$output = '<span class="group">Any ' . Wikify($outputSimple) . '</span>';
+				$outputSimple = "Any $outputSimple";
 			}
 		}
 		elsif (exists $GameData->{'ObjectInformation'}{$input}) {
 			my $name = $GameData->{'ObjectInformation'}{$input}{'split'}[0];
+			$outputSimple = $name;
 			$output = Wikify($name);
 		}
 	} else {
 		# Custom, probably JA, but maybe not. JA takes priority
 		if (exists $ModData->{'Objects'}{$input}) {
 			# This is a JA item, but we have nothing to add yet.
+			$outputSimple = $input;
 			$output = $input;
 		} else {
 			foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
 				if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
+					$outputSimple = $input;
 					$output = Wikify($input);
 				}
 			}
 		}
 	}
-	if ($output eq '') {
-		$output = qq(<span class="note">Unknown Item: $input</span>);
+	if ($doFormat) {
+		if ($output eq '') {
+			$output = qq(<span class="note">Unknown Item: $input</span>);
+		}
+		return $output;
+	} else {
+		if ($outputSimple eq '') {
+			$outputSimple = "Unknown Item: $input";
+		}
+		return $outputSimple;
 	}
-	return $output;
 }
 
 # GetValue is a companion to GetItem and uses similar arguments & logic
@@ -147,6 +170,17 @@ sub GetValue {
 		}
 	}
 	return $output;
+}
+
+# GetXP returns the farming xp for a given crop value, by mimicing a formula used in
+#  the game function StardewValley.Crop.Harvest()
+sub GetXP {
+	my $value = shift;
+	if (not defined $value or not looks_like_number($value)) {
+		warn "GetXP was given an invalid argument: $value";
+		return -1;
+	}
+	return nearest(1, 16*log(0.018*$value + 1.0));
 }
 
 sub GetCategory {
@@ -198,6 +232,110 @@ sub GetCategory {
 		$output = "Category $input Item";
 	}
 	return $output;
+}
+
+# GetImgTag returns the appropriate image tag for an item.
+#   input - either ID num (vanilla) or name (mod)
+#   type - [optiona] 'machine', 'object', etc. Defaults to 'object'
+#   isBig - [optional] true value to use x2 sprites, false (default) otherwise
+#   extraClasses - [optional] for additional class tags that need to be added
+sub GetImgTag {
+	my $input = shift;
+	if (not defined $input or $input eq "") {
+		warn "GetImgTag can't understand the input";
+		return "";
+	}
+	my $type = shift;
+	if (not defined $type or $type eq "") {
+		$type = 'object';
+	}
+	my $isBig = shift;
+	if (not defined $isBig or $isBig eq "") {
+		$isBig = 0;
+	}
+	my $img_class = "";
+	my $extraClasses = shift;
+	if (not defined $extraClasses) {
+		$extraClasses = "";
+	} else {
+		$img_class = "$extraClasses ";
+	}
+
+	my $img_id = "";
+	my $img_alt = "";
+	if (looks_like_number($input)) {
+		if ($input < 0) {
+			# TODO: Should categories give an image?
+		} else {
+			if ($type =~ /^objects?/i) {
+				if (exists $GameData->{'ObjectInformation'}{$input}) {
+					my $name = $GameData->{'ObjectInformation'}{$input}{'split'}[0];
+					$img_class .= "game_objects";
+					$img_id = "Object_$input";
+					$img_alt = $name;
+				} else {
+					warn "GetImgTag failed on unknown vanilla object: $input";
+					return "";
+				}
+			} elsif ($type =~ /^crops?/i) {
+				if (exists $GameData->{'Crops'}{$input}) {
+					my $name = $GameData->{'ObjectInformation'}{$GameData->{'Crops'}{$input}{'split'}[3]}{'split'}[0];
+					$img_class .= "game_crops";
+					$img_id = "Crop_$input";
+					$img_alt = $name;
+				} else {
+					warn "GetImgTag failed on unknown vanilla crop: $input";
+					return "";
+				}
+			} else {
+				warn "GetImgTag doesn't understand type $type yet";
+				return "";
+			}
+		}
+	} else {
+		# Custom, probably JA, but maybe not. JA takes priority
+		if ($type =~ /^objects?/i) {
+			if (exists $ModData->{'Objects'}{$input}) {
+				$img_class .= 'objects';
+				$img_id = "Object_$input";
+				$img_alt = "$input";
+			} else {
+				foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
+					if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
+						$img_class .= "game_objects";
+						$img_id = "Object_$k";
+						$img_alt = $input;
+					}
+				}
+			}
+		} elsif ($type =~ /^crops?/i) {
+			if (exists $ModData->{'Crops'}{$input}) {
+				$img_class .= 'crops';
+				$img_id = "Crop_$input";
+				$img_alt = "$input";
+			} else {
+				warn "GetImgTag can't find crop $input";
+				return "";
+			}
+		} elsif ($type =~ /^machines?/i) {
+			# Machine data structure is a giant pain to search. We will trust the input.
+			$img_class .= 'craftables';
+			$img_id = "Machine_$input";
+			$img_alt = "$input";
+		} else {
+			warn "GetImgTag doesn't understand type $type yet";
+			return "";
+		}
+	}
+	$img_id =~ s/ /_/g;
+	if ($isBig) {
+		$img_class .= "_x2";
+		$img_id .= "_x2";
+	}
+	if ($img_class eq "" or $img_id eq "" or $img_alt = "") {
+		warn "GetImgTag failed ($input) ($type) ($isBig) ($extraClasses)";
+	}
+	return qq(<img class="$img_class" id="$img_id" src="img/blank.png" alt="$img_alt">);
 }
 
 # GetHeader - creates and returns HTML code for top of pages
@@ -296,7 +434,7 @@ sub CropSummary {
 	open $FH, ">$DocBase/crops.html" or die "Can't open crops.html for writing: $!";
 	select $FH;
 	my $longdesc = <<"END_PRINT";
-<p>A summary of growth information including base game crops as well as crops from the following mods:</p>
+<p>A summary of growth and other basic information for crops from the base game as well as the following mods:</p>
 <ul>
 <li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li>
 <li><a href="https://www.nexusmods.com/stardewvalley/mods/1610">$ModInfo->{'ParadigmNomad.FantasyCrops'}{'Name'}</a> version $ModInfo->{'ParadigmNomad.FantasyCrops'}{'Version'}</li>
@@ -305,7 +443,15 @@ sub CropSummary {
 <li><a href="https://www.nexusmods.com/stardewvalley/mods/1598">$ModInfo->{'ppja.fruitsandveggies'}{'Name'}</a> version $ModInfo->{'ppja.fruitsandveggies'}{'Version'}</li>
 <li><a href="https://www.nexusmods.com/stardewvalley/mods/2028">$ModInfo->{'mizu.flowers'}{'Name'}</a> version $ModInfo->{'mizu.flowers'}{'Version'}</li>
 </ul>
-<p>Growth speed option to apply to all crop tables:</p>
+<p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
+the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
+whether the crop has a trellis (or similar structure that blocks walking on it). The <span class="note">XP</span> column is the amount of
+experience gained on a single harvest. Normally this is Farming experience, but for the seasonal forage crops it is Foraging experience.
+The <span class="note">Seasonal Profit</span> column is an average full-season estimate that assumes the maximum number of harvests in the
+month with the product sold raw at base (no-star) quality without any value-increasing professions (like Tiller.)
+It also assumes all seeds are bought at the shown price and does not account for any other costs (such as purchasing fertilizer).
+The growth times, maximum number of harvests, and profit all depend on growth speed modifiers which can be set in the form
+below and apply to all the tables on this page.</p>
 <fieldset id="growth_speed_options" class="radio_set">
 <label><input type="radio" name="speed" value="0" checked="checked"> No speed modifiers</label><br />
 <label><input type="radio" name="speed" value="10"> 10% (Only one of <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession or <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
@@ -315,7 +461,7 @@ sub CropSummary {
 </fieldset>
 <input type="hidden" id="last_speed" value="0" />
 END_PRINT
-	print GetHeader("Crop Growth Summary", qq(PPJA Crop Growth Summary), $longdesc, "crops-form.js");
+	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA and base game), $longdesc, "crops-form.js");
 
 	# We will organize this by Season so we start with an array that will hold a hash of the table rows keyed by crop name.
 	my @Panel = ( 
@@ -323,6 +469,9 @@ END_PRINT
 		{ 'key' => 'Summer', 'row' => {}, },
 		{ 'key' => 'Fall', 'row' => {}, },
 		{ 'key' => 'Winter', 'row' => {}, },
+		{ 'key' => 'Indoor-Only', 'row' => {}, },
+		#{ 'key' => 'Winter', 'row' => {}, },
+		#{ 'key' => 'Winter', 'row' => {}, },
 		);
 
 	# Vanilla crop data
@@ -359,27 +508,63 @@ END_PRINT
 			$seed_vendor = Wikify("Sandy");
 			if ($crop eq 'Cactus Fruit') {
 				$scost = 150;
+				$season_str = "indoor-only";
 			}
+		} elsif ($crop eq 'Strawberry') {
+			$seed_vendor .= "<br />(at " . Wikify("Egg Festival") . ")";
+			$scost = 100;
 		} elsif ($crop eq 'Coffee Bean') {
 			$seed_vendor = Wikify("Traveling Cart");
 			$scost = 2500;
+		} elsif ($crop eq 'Sweet Gem Berry') {
+			$seed_vendor = Wikify("Traveling Cart");
+			$scost = 1000;
 		} elsif ($crop eq 'Ancient Fruit') {
 			$seed_vendor = qq(<span class="note">None</span>);
+			$scost = 0;
 		}
 		if ($crop eq 'Garlic' or $crop eq 'Red Cabbage' or $crop eq 'Artichoke') {
 			$seed_vendor .= "<br />(Year 2+)";
 		}
-		my $sprite_id = "Crop_$sid";
+		my $imgTag = GetImgTag($sid, "crop");
+		my $prodImg = GetImgTag($cid, "object");
+		my $seedImg = GetImgTag($sid, "object");
+		my $xp = GetXP($cprice);
+		# Adjustments for forage crops
+		# TODO: Handle value (perhaps an average for $cprice)
+		if ($crop eq "Wild Horseradish") {
+			$cname = qq(<span class="group">Spring Forage</span>);
+			$xp = 3;
+			$seed_vendor = qq(<span class="note">None</span>);
+			$scost = 0;
+		} elsif ($crop eq "Spice Berry") {
+			$cname = qq(<span class="group">Summer Forage</span>);
+			$xp = 3;
+			$seed_vendor = qq(<span class="note">None</span>);
+			$scost = 0;
+		} elsif ($crop eq "Common Mushroom") {
+			$cname = qq(<span class="group">Fall Forage</span>);
+			$xp = 3;
+			$seed_vendor = qq(<span class="note">None</span>);
+			$scost = 0;
+		} elsif ($crop eq "Winter Root") {
+			$cname = qq(<span class="group">Winter Forage</span>);
+			$xp = 3;
+			$seed_vendor = qq(<span class="note">None</span>);
+			$scost = 0;
+		} 
 		
 		my $output = <<"END_PRINT";
-<tr><td><img class="game_crops" id="$sprite_id" src="img/blank.png"></td>
-<td>$cname</td>
-<td>$sname</td>
+<tr><td class="icon">$imgTag</td>
+<td class="name">$prodImg $cname</td>
+<td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
-<td>$scost</td>
+<td class="value">$scost</td>
 <td>$need_scythe</td>
 <td>$is_trellis</td>
-<td>$num_harvest</td>
+<td class="value">$num_harvest</td>
+<td class="value">$cprice</td>
+<td class="value">$xp</td>
 END_PRINT
 		foreach my $opt (qw(0 10 20 25 35)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
@@ -391,10 +576,13 @@ END_PRINT
 					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
 				}
 			}
+			my $cost = ($regrowth > 0) ? $scost : $num_harvest*$scost;
+			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
 			$output .= <<"END_PRINT";
-<td class="col_$opt">$growth</td>
-<td class="col_$opt">$regrowth</td>
-<td class="col_$opt">$max_harvests</td>
+<td class="col_$opt value">$growth</td>
+<td class="col_$opt value">$regrowth</td>
+<td class="col_$opt value">$max_harvests</td>
+<td class="col_$opt value">$profit</td>
 END_PRINT
 		}
 		$output .= "</tr>";
@@ -438,18 +626,21 @@ END_PRINT
 			# Note that the order here is not guaranteed. If we start getting crops with multiple different requirements we might have to deal with that
 			$seed_vendor .= '<br />' . join('<br />', @req);
 		}
-		my $sprite_id = "Crop_$key";
-		$sprite_id =~ s/ /_/g;
-		
+		my $imgTag = GetImgTag($key, 'crop');
+		my $prodImg = GetImgTag($ModData->{'Crops'}{$key}{'Product'}, "object");
+		my $seedImg = GetImgTag($sname, "object");
+		my $xp = GetXP($cprice);
 		my $output = <<"END_PRINT";
-<tr><td><img class="crops" id="$sprite_id" src="img/blank.png"></td>
-<td>$cname</td>
-<td>$sname</td>
+<tr><td class="icon">$imgTag</td>
+<td class="name">$prodImg $cname</td>
+<td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
-<td>$scost</td>
+<td class="value">$scost</td>
 <td>$need_scythe</td>
 <td>$is_trellis</td>
-<td>$num_harvest</td>
+<td class="value">$num_harvest</td>
+<td class="value">$cprice</td>
+<td class="value">$xp</td>
 END_PRINT
 		foreach my $opt (qw(0 10 20 25 35)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
@@ -461,10 +652,13 @@ END_PRINT
 					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
 				}
 			}
+			my $cost = ($regrowth > 0) ? $scost : $num_harvest*$scost;
+			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
 			$output .= <<"END_PRINT";
-<td class="col_$opt">$growth</td>
-<td class="col_$opt">$regrowth</td>
-<td class="col_$opt">$max_harvests</td>
+<td class="col_$opt value">$growth</td>
+<td class="col_$opt value">$regrowth</td>
+<td class="col_$opt value">$max_harvests</td>
+<td class="col_$opt value">$profit</td>
 END_PRINT
 		}
 		$output .= "</tr>";
@@ -500,24 +694,31 @@ END_PRINT
 <th>Seed Name</th>
 <th>Seed Vendor<br />(&amp; Requirements)</th>
 <th>Seed<br />Price</th>
-<th>Needs<br />Scythe?</th>
-<th>Has<br />Trellis?</th>
-<th>Average<br />Yield</th>
+<th><img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"></th>
+<th><img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"></th>
+<th>Avg<br />Yield</th>
+<th>Crop<br >Value</th>
+<th>XP</th>
 <th class="col_0">Initial<br />Growth</th>
 <th class="col_0">Regrowth</th>
 <th class="col_0">Maximum<br />Harvests</th>
+<th class="col_0">Seasonal<br />Profit</th>
 <th class="col_10">Initial<br />Growth</th>
 <th class="col_10">Regrowth</th>
 <th class="col_10">Maximum<br />Harvests</th>
+<th class="col_10">Seasonal<br />Profit</th>
 <th class="col_20">Initial<br />Growth</th>
 <th class="col_20">Regrowth</th>
 <th class="col_20">Maximum<br />Harvests</th>
+<th class="col_20">Seasonal<br />Profit</th>
 <th class="col_25">Initial<br />Growth</th>
 <th class="col_25">Regrowth</th>
 <th class="col_25">Maximum<br />Harvests</th>
+<th class="col_25">Seasonal<br />Profit</th>
 <th class="col_35">Initial<br />Growth</th>
 <th class="col_35">Regrowth</th>
 <th class="col_35">Maximum<br />Harvests</th>
+<th class="col_35">Seasonal<br />Profit</th>
 </tr>
 </thead>
 <tbody>
@@ -594,7 +795,7 @@ sub TranslatePreconditions {
 			push @results, "(Year $1+)";
 		} elsif ($arg =~ /^f (\w+) (\d+)/) {
 			my $num_hearts = $2/250;
-			push @results, "($num_hearts+ Hearts with " . Wikify($1) . ")";
+			push @results, "($num_hearts+ &#x2665; with " . Wikify($1) . ")";
 		} elsif ($arg =~ /^z /) {
 			my @removal = split(/, ?/, $arg);
 			foreach my $r (@removal) {
@@ -640,7 +841,7 @@ and products while <span class="note">Profit (Hr)</span> takes the production ti
 machine takes. The latter is rounded to two decimal places.
 </p>
 END_PRINT
-	print GetHeader("Machine Summary", qq(PPJA Artisan Valley Machine Summary), $longdesc);
+	print GetHeader("Machines", qq(Sumary of products and timings for machines from PPJA mods), $longdesc);
 
 	my %TOC = ();
 
@@ -667,15 +868,15 @@ END_PRINT
 			if (exists $Panel{$key}) {
 				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
 			}
-			my $id = "Machine_$m->{'name'}";
-			$id =~ s/ /_/g;
-			my $anchor = "TOC_$id";
+			my $anchor = "TOC_$m->{'name'}";
+			$anchor =~ s/ /_/g;
 			$TOC{$m->{'name'}} = $anchor;
-			$id .= "_x2";
+			my $imgTag = GetImgTag($m->{'name'}, 'machine', 1, "container__image");
+			#HERE 1st img tag
 			my $output = <<"END_PRINT";
 <div class="panel" id="$anchor">
 <div class="container">
-<img class="container__image craftables_x2" id="$id" src="img/blank.png" alt="Machine Sprite" />
+$imgTag
 <div class="container__text">
 <h2>$m->{'name'}</h2>
 <span class="mach_desc">$m->{'description'}</span><br />
@@ -875,6 +1076,22 @@ sub GatherSpriteInfo {
 		$id .= "_x2";
 		$HashRef->{$id} = { 'x' => 0 - 2*($GameData->{'Crops'}{$sid}{'__SS_X'}), 'y' => 0 - 2*$GameData->{'Crops'}{$sid}{'__SS_Y'} };
 	}
+	# Objects - have to calculate coords ourselves
+	my $game_objects = Imager->new();
+	my $object_width = 16;
+	my $object_height = 16;
+	$game_objects->read(file=>"../img/game_objects.png") or die "Error reading game object sprites:" . $game_objects->errstr;
+	my $objects_per_row = floor($game_objects->getwidth() / 16);
+	foreach my $index (keys %{$GameData->{'ObjectInformation'}}) {
+		my $id = "Object_$index";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		my $x =  $object_width * ($index % $objects_per_row);
+		my $y = $object_height * floor($index / $objects_per_row);
+		$HashRef->{$id} = { 'x' => 0 - $x, 'y' => 0 - $y };
+		$id .= "_x2";
+		$HashRef->{$id} = { 'x' => 0 - 2*$x, 'y' => 0 - 2*$y };
+	}
 	
 	# Mod data
 	# Machines - because machines can have a variable number of sprites only the single idle animation was
@@ -904,14 +1121,17 @@ sub GatherSpriteInfo {
 		$id .= "_x2";
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		$HashRef->{$id} = { 'x' => 0 - 2*($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_Y'} };
-		my $seed = $ModData->{'Crops'}{$key}{'SeedName'};
-		$id = "Object_$key";
+		# The seeds should already have been turned into objects so we don't need to process them here
+	}
+	# Objects - these should have already been saved, so not much to do
+	foreach my $key (keys %{$ModData->{'Objects'}}) {
+		my $id = "Object_$key";
 		$id =~ s/ /_/g;
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		$HashRef->{$id} = { 'x' => 0 - $ModData->{'Crops'}{$key}{'__SS_OTHER_X'}, 'y' => 0 - $ModData->{'Crops'}{$key}{'__SS_OTHER_Y'} };
+		$HashRef->{$id} = { 'x' => 0 - $ModData->{'Objects'}{$key}{'__SS_X'}, 'y' => 0 - $ModData->{'Objects'}{$key}{'__SS_Y'} };
 		$id .= "_x2";
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		$HashRef->{$id} = { 'x' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_OTHER_X'}, 'y' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_OTHER_Y'} };
+		$HashRef->{$id} = { 'x' => 0 - 2*$ModData->{'Objects'}{$key}{'__SS_X'}, 'y' => 0 - 2*$ModData->{'Objects'}{$key}{'__SS_Y'} };
 	}
 
 	return 1;
@@ -923,6 +1143,7 @@ sub WriteCSS {
 	open $FH, ">$DocBase/ppja-doc-img.css" or die "Can't open ppja-doc-img.css for writing: $!";
 	select $FH;
 
+	# First, the basic classes for each spritesheet
 	print <<"END_PRINT";
 /* ppja-doc-img.css
  * https://mouseypounds.github.io/ppja-doc/
@@ -1049,9 +1270,40 @@ img.game_trees_x2 {
 	height: 160px;
 	background-image:url("./img/game_trees_x2.png")
 }
+img.game_weapons {
+	vertical-align: -2px;
+	width: 16px;
+	height: 16px;
+	background-image:url("./img/game_weapons.png")
+}
+img.game_weapons_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 32px;
+	background-image:url("./img/game_weapons_x2.png")
+}
 END_PRINT
 
-	foreach my $id (keys %$SpriteInfo) {
+	# Now a few hardcoded extras
+	# Trellis is first sprite for grapes (0,608)
+	# Scythe is on game_weapons (112,80)
+		print <<"END_PRINT";
+img#Special_Trellis {
+	background-position: 0px -608px;
+}
+img#Special_Trellis_x2 {
+	background-position: 0px -1216px;
+}
+img#Weapon_Scythe {
+	background-position: -112px -80px;
+}
+img#Weapon_Scythe_x2 {
+	background-position: -224px -160px;
+}
+END_PRINT
+	
+	# Finally, everything that was gathered in SpriteInfo
+	foreach my $id (sort keys %$SpriteInfo) {
 		my $x = $SpriteInfo->{$id}{'x'};
 		my $y = $SpriteInfo->{$id}{'y'};
 		print <<"END_PRINT";
@@ -1065,179 +1317,3 @@ END_PRINT
 }
 
 __END__ 
-
-
-my %options = (
-	"Base" => 0.0,
-	"SG/Ag" => 0.10,
-	"SG+Ag" => 0.20,
-	"DSG" => 0.25,
-	"DSG+Ag" => 0.35,
-);
-
-my %game_data = ( 'crops' => {}, 'obj' => {} , 'cook' => {} );
-my %ppja_data = ( 'crops' => {}, 'obj' => {} , 'cook' => {} );
-
-
-sub read_all_ja($+%) {
-	my $base_dir = shift;
-	my $hash_ref = shift;
-	my $DH;
-	my $FH;
-	my %count = ();
-	my @recipes = ();
-
-	opendir($DH, "$base_dir");
-	my @mods = readdir($DH);
-	closedir $DH;
-
-
-	foreach my $m (@mods) {
-		if (-d "$base_dir\\$m") {
-			$count{$m} = { 'regrow' => 0, 'onetime' => 0 };
-			# Parse Objects first
-			if (-d "$base_dir\\$m\\Objects") {
-				opendir($DH, "$base_dir\\$m\\Objects");
-				my @files = readdir($DH);
-				closedir $DH;
-				foreach my $f (@files) {
-					if (-d "$base_dir\\$m\\Objects\\$f") {
-						if (-e "$base_dir\\$m\\Objects\\$f\\object.json") {
-							map_file my $string, "$base_dir\\$m\\Objects\\$f\\object.json";
-							my $c = from_rjson($string);
-							my $id = $c->{'Name'};
-							my @fields = (
-								$c->{'Name'},
-								$c->{'Price'}/2,
-								$c->{'Edibility'},
-								$c->{'Category'}, # This should include a category number too
-								$c->{'Name'}, # Display Name
-								$c->{'Description'},
-								);
-							$hash_ref->{'obj'}{$id} = \@fields;
-
-							#print Dumper($c);
-							if (defined $c->{'Recipe'}) {
-								my $from = 'Pierre';
-								my $req = 'no prereqs';
-								if (defined $c->{'Recipe'}{'PurchaseFrom'}) {
-									$from = $c->{'Recipe'}{'PurchaseFrom'};
-								}
-								if (ref $c->{'Recipe'}{'PurchaseRequirements'} eq 'ARRAY') {
-									$req = join(', ', @{$c->{'Recipe'}{'PurchaseRequirements'}});
-								}
-								push @recipes, sprintf "%s from %s (%s)\n", $c->{'Name'}, $from, $req;
-							}
-						}
-					}
-				}
-			}
-			# Parse Crops
-			if (-d "$base_dir\\$m\\Crops") {
-				opendir($DH, "$base_dir\\$m\\Crops");
-				my @files = readdir($DH);
-				closedir $DH;
-				foreach my $f (@files) {
-					if (-d "$base_dir\\$m\\Crops\\$f") {
-						if (-e "$base_dir\\$m\\Crops\\$f\\crop.json") {
-							map_file my $string, "$base_dir\\$m\\Crops\\$f\\crop.json";
-							# Seed object
-							my $c = from_rjson($string);
-							my $id = $c->{'SeedName'};
-							# Object Entry
-							my @o_fields = (
-								$c->{'SeedName'},
-								$c->{'SeedPurchasePrice'},
-								-300, # Should this be blank instead?
-								"Seeds -74", # Should this be blank instead?
-								$c->{'SeedName'}, # Display Name
-								$c->{'SeedDescription'},
-								);
-							$hash_ref->{'obj'}{$id} = \@o_fields;
-							# Crop Entry
-							my $bonus = "false";
-							if ($c->{'Bonus'}{'MinimumPerHarvest'} > 1 or $c->{'Bonus'}{'ExtraChance'} > 0) {
-								$bonus = "true $c->{'Bonus'}{'MinimumPerHarvest'} $c->{'Bonus'}{'MaximumPerHarvest'} $c->{'Bonus'}{'MaxIncreasePerFarmLevel'} $c->{'Bonus'}{'ExtraChance'}";
-							}
-							my @c_fields = (
-								join(" ", @{$c->{'Phases'}}),
-								join(" ", @{$c->{'Seasons'}}),
-								0,
-								$c->{'Product'},
-								$c->{'RegrowthPhase'},
-								$c->{'HarvestWithScythe'} ? 1 : 0,
-								$bonus,
-								$c->{'TrellisCrop'} ? "true" : "false",
-								"", # This should eventually match "Colors"
-								);
-							$hash_ref->{'crops'}{$id} = \@c_fields;
-							if ($c->{'RegrowthPhase'} == -1) {
-								$count{$m}{'onetime'}++;
-							} else {
-								$count{$m}{'regrow'}++;
-							} 
-						}
-					}
-				}
-			}
-		}
-	}
-	print "Mod Crop Summary\n";
-	print "                   Mod Name                      Regrow  OneTime  Total\n";
-	print "  ---------------------------------------------  ------  -------  -----\n";
-	foreach my $k (%count) {
-		next unless ($k =~ /JA/);
-		printf "  %45s  %6d  %7d  %6d\n", $k, $count{$k}{'regrow'}, $count{$k}{'onetime'}, $count{$k}{'regrow'}+$count{$k}{'onetime'};
-	}
-	print "\n";
-	print "Recipe Summary\n";
-	print join("", sort @recipes);
-}
-	
-read_yaml("Game\\Crops.yaml", $game_data{'crops'});
-read_yaml("Game\\ObjectInformation.yaml", $game_data{'obj'});
-# Make some changes for things that have hardcoded price changes
-# Strawberry Seeds set to 100g & Rare seeds set to 1000g
-# Currently leaving Coffee Bean (433) at 15g; consider changing to 2500g
-$game_data{'obj'}{745}[1] = 100;
-$game_data{'obj'}{347}[1] = 1000;
-
-
-print "Vanilla crop total growth times\n";
-
-read_all_ja("PPJA", %ppja_data);
-
-print "\nPPJA crop total growth times\n";
-foreach my $k (sort {$a cmp $b} keys %{$ppja_data{'crops'}}) {
-	my $base = 0;
-	my $out = "";
-	foreach my $op (sort {$options{$a} <=> $options{$b}} keys %options) {
-		my $all_phases = $ppja_data{'crops'}{$k}[0];
-		my @phases = (split(' ', $all_phases));
-		$base = calc_reduction($options{$op}, \@phases);
-		my $cost = 2*$ppja_data{'obj'}{$k}[1];
-		my $sell = 0;
-		if (looks_like_number($ppja_data{'crops'}{$k}[3])) {
-			$sell = $game_data{'obj'}{$ppja_data{'crops'}{$k}[3]}[1];
-		} else {
-			$sell = $ppja_data{'obj'}{$ppja_data{'crops'}{$k}[3]}[1];
-		}
-		my @bonus = (split(' ', $ppja_data{'crops'}{$k}[6]));
-		my $harvest = 1;
-		if ($bonus[0] eq 'true') {
-			$harvest = $bonus[1]+$bonus[4];
-		}
-		my $income = $sell*$harvest;
-		my $profit = sprintf("%d   g(raw)",$income - $cost);
-		my $regrowth = "  ";
-		if ($ppja_data{'crops'}{$k}[4] > -1) {
-			$regrowth = sprintf("+%d",$ppja_data{'crops'}{$k}[4]);
-			$profit = sprintf("%.1f g/day ",$income/($ppja_data{'crops'}{$k}[4]));
-		}
-		my $trellis = ($ppja_data{'crops'}{$k}[7] eq "true")? "t": " ";
-		$out .= sprintf(" | %s (%d%%): %2d%2s%s %13s",$op,100*$options{$op},$base,$regrowth,$trellis,$profit);
-	}
-	printf("%28s $out\n", $k);
-}
-
-#print Dumper(\%ppja_data);
