@@ -24,6 +24,7 @@ GatherSpriteInfo($SpriteInfo);
 
 CropSummary();
 MachineSummary();
+FruitTreeSummary();
 WriteCSS();
 
 exit;
@@ -255,12 +256,29 @@ sub GetImgTag {
 	}
 	my $img_class = "";
 	my $extraClasses = shift;
-	if (not defined $extraClasses) {
+	if (not defined $extraClasses or $extraClasses eq "") {
 		$extraClasses = "";
 	} else {
 		$img_class = "$extraClasses ";
 	}
 
+	# Handle some special cases
+	if ($input =~ /^Any (\w+)/) {
+		if ($1 =~ /^milk/i) {
+			return GetImgTag("Milk", "object", $isBig, $extraClasses);
+		} elsif ($1 =~ /^egg/i) {
+			return GetImgTag("Egg", "object", $isBig, $extraClasses);
+		} elsif ($1 =~ /^fish/i) {
+			return GetImgTag("Sardine", "object", $isBig, $extraClasses);
+		} elsif ($1 =~ /^flower/i) {
+			return GetImgTag("Tulip", "object", $isBig, $extraClasses);
+		} elsif ($1 =~ /^fruit/i) {
+			return GetImgTag("Orange", "object", $isBig, $extraClasses);
+		} elsif ($1 =~ /^vegetable/i) {
+			return GetImgTag("Bok Choy", "object", $isBig, $extraClasses);
+		} 
+	}
+	
 	my $img_id = "";
 	my $img_alt = "";
 	if (looks_like_number($input)) {
@@ -287,6 +305,16 @@ sub GetImgTag {
 					warn "GetImgTag failed on unknown vanilla crop: $input";
 					return "";
 				}
+			} elsif ($type =~ /^trees?/i) {
+				if (exists $GameData->{'FruitTrees'}{$input}) {
+					my $name = $GameData->{'ObjectInformation'}{$GameData->{'FruitTrees'}{$input}{'split'}[2]}{'split'}[0];
+					$img_class .= "game_trees";
+					$img_id = "Tree_$input";
+					$img_alt = $name;
+				} else {
+					warn "GetImgTag failed on unknown vanilla tree: $input";
+					return "";
+				}
 			} else {
 				warn "GetImgTag doesn't understand type $type yet";
 				return "";
@@ -305,6 +333,7 @@ sub GetImgTag {
 						$img_class .= "game_objects";
 						$img_id = "Object_$k";
 						$img_alt = $input;
+						last;
 					}
 				}
 			}
@@ -315,6 +344,15 @@ sub GetImgTag {
 				$img_alt = "$input";
 			} else {
 				warn "GetImgTag can't find crop $input";
+				return "";
+			}
+		} elsif ($type =~ /^trees?/i) {
+			if (exists $ModData->{'FruitTrees'}{$input}) {
+				$img_class .= 'trees';
+				$img_id = "Tree_$input";
+				$img_alt = "$input";
+			} else {
+				warn "GetImgTag can't find tree $input";
 				return "";
 			}
 		} elsif ($type =~ /^machines?/i) {
@@ -365,7 +403,7 @@ sub GetHeader {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mousey's PPJA Documentation: $subtitle</title>
+<title>Mousey's PPJA Reference: $subtitle</title>
 
 <meta charset="UTF-8" />
 <meta property="og:title" content="PPJA $subtitle" />
@@ -386,7 +424,7 @@ $script
 
 </head>
 <body>
-<div class="panel" id="header"><h1>Mousey's PPJA Documentation: $subtitle</h1>
+<div class="panel" id="header"><h1>Mousey's PPJA Reference: $subtitle</h1>
 $longdesc
 </div>
 <div id="TOC">
@@ -403,9 +441,10 @@ END_PRINT
 sub GetFooter {
 	my $output = <<"END_PRINT";
 <div id="footer" class="panel">
-PPJA Docs:
-<a href="./crops.html">Crop Summary</a> || 
-<a href="./machines.html">Machine Summary</a>
+PPJA Reference:
+<a href="./crops.html">Crops</a> || 
+<a href="./machines.html">Machines</a> ||
+<a href="./trees.html">Fruit Trees</a>
 <br />
 Stardew Apps by MouseyPounds: <a href="https://mouseypounds.github.io/stardew-checkup/">Stardew Checkup</a> ||
 <a href="https://mouseypounds.github.io/stardew-predictor/">Stardew Predictor</a> || 
@@ -429,10 +468,586 @@ END_PRINT
 	return $output;
 }
 
+# CalcGrowth - Calculates the number of days it will take for a crop to grow from seed
+#
+#   factor - the pct reduction factor (e.g. .10 for basic speed-gro or agriculturist)
+#   phases_ref - a reference to the array of phase data
+sub CalcGrowth {
+	my $factor = shift;
+	my $phases_ref = shift;
+	my @phases = @$phases_ref;
+	my $days = 0;
+	my $num_phases = scalar @phases;
+	for (my $i = 0; $i < $num_phases; $i++) {
+		$days += $phases[$i];
+	}
+	my $reduction = ceil($factor * $days);
+	# The following mimics the game's imprecision errors due to excessive type casting
+	# For more on the growth mechanics and this error, see https://stardewvalleywiki.com/Talk:Speed-Gro
+	if (($days % 10 == 0 and $factor == 0.10) or ($days % 5 == 0 and $factor == 0.20)) {
+		$reduction++;
+	}
+	my $tries = 0;
+	while ($reduction > 0 and $tries < 3) {
+		for (my $i = 0; $i <= $num_phases; $i++) {
+			if ($i == 0) {
+				if ($phases[$i] > 1) {
+					$phases[$i]--;
+					$reduction--;
+					$days--;
+				}
+			} elsif ($i < $num_phases) {
+				if ($phases[$i] > 0) {
+					$phases[$i]--;
+					$reduction--;
+					$days--;
+				}
+			} else {
+				# lost reduction day in final phase
+				$reduction--;
+			}
+			last if ($reduction <= 0);
+		}
+		$tries++;
+	}
+	return $days;
+}
+
+# TranslatePreconditions - Receives an array of event preconditions and tries to make them human-readable
+#  Currently only supports `z`, `y`, and `f` since those are what we have needed to deal with so far.
+sub TranslatePreconditions {
+	my %seasons = ( 'Spring' => 1, 'Summer' => 2, 'Fall' => 3, 'Winter' => 4 );
+	my $changed_seasons = 0;
+	my @results = ();
+	
+	foreach my $arg (@_) {
+		if ($arg =~ /^y (\d+)/) {
+			push @results, "(Year $1+)";
+		} elsif ($arg =~ /^f (\w+) (\d+)/) {
+			my $num_hearts = $2/250;
+			push @results, "($num_hearts+ &#x2665; with " . Wikify($1) . ")";
+		} elsif ($arg =~ /^z /) {
+			my @removal = split(/, ?/, $arg);
+			foreach my $r (@removal) {
+				$r =~ s/^z //;
+				my $s = ucfirst $r;
+				delete $seasons{$s} if (exists $seasons{$s});
+				$changed_seasons = 1;
+			}
+		}
+	}
+	if ($changed_seasons) {
+		my $r = '(' . join(', ', (sort {$seasons{$a} <=> $seasons{$b}} (keys %seasons))) . ')';
+		push @results, $r;
+	}
+	return @results;
+}
+
+# GatherSpriteInfo - Goes through the global GameData and ModData structures to find sprite locations
+#   and saves them all into a hash.
+#
+#   HashRef - reference to the hash to use for storage.
+sub GatherSpriteInfo {
+	my $HashRef = shift;
+	if (not defined $HashRef or not (ref $HashRef eq 'HASH')) {
+		warn "GatherSpriteInfo was not passed a valid hash ref. Aboring.";
+		return 0;
+	}
+	
+	# Vanilla data
+	# Crops - coords were saved by gather_data
+	foreach my $sid (keys %{$GameData->{'Crops'}}) {
+		my $id = "Crop_$sid";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - $GameData->{'Crops'}{$sid}{'__SS_X'}, 'y' => 0 - $GameData->{'Crops'}{$sid}{'__SS_Y'} };
+		$id .= "_x2";
+		$HashRef->{$id} = { 'x' => 0 - 2*($GameData->{'Crops'}{$sid}{'__SS_X'}), 'y' => 0 - 2*$GameData->{'Crops'}{$sid}{'__SS_Y'} };
+	}
+	# Trees - coords were saved by gather_data
+	foreach my $sid (keys %{$GameData->{'FruitTrees'}}) {
+		my $id = "Tree_$sid";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - $GameData->{'FruitTrees'}{$sid}{'__SS_X'}, 'y' => 0 - $GameData->{'FruitTrees'}{$sid}{'__SS_Y'} };
+		$id .= "_x2";
+		$HashRef->{$id} = { 'x' => 0 - 2*($GameData->{'FruitTrees'}{$sid}{'__SS_X'}), 'y' => 0 - 2*$GameData->{'FruitTrees'}{$sid}{'__SS_Y'} };
+	}
+	# Objects - have to calculate coords ourselves
+	my $game_objects = Imager->new();
+	my $object_width = 16;
+	my $object_height = 16;
+	$game_objects->read(file=>"../img/game_objects.png") or die "Error reading game object sprites:" . $game_objects->errstr;
+	my $objects_per_row = floor($game_objects->getwidth() / 16);
+	foreach my $index (keys %{$GameData->{'ObjectInformation'}}) {
+		my $id = "Object_$index";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		my $x =  $object_width * ($index % $objects_per_row);
+		my $y = $object_height * floor($index / $objects_per_row);
+		$HashRef->{$id} = { 'x' => 0 - $x, 'y' => 0 - $y };
+		$id .= "_x2";
+		$HashRef->{$id} = { 'x' => 0 - 2*$x, 'y' => 0 - 2*$y };
+	}
+	
+	# Mod data
+	# Machines - because machines can have a variable number of sprites only the single idle animation was
+	#   transferred to the sprite sheet and we don't have any further processing to do.
+	foreach my $j (@{$ModData->{'Machines'}}) {
+		foreach my $m (@{$j->{'machines'}}) {
+			my $id = "Machine_$m->{'name'}";
+			$id =~ s/ /_/g;
+			my $anchor = "TOC_$id";
+			warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+			$HashRef->{$id} = { 'x' => 0 - $m->{'__SS_X'}, 'y' => 0 - $m->{'__SS_Y'} };
+			$id .= "_x2";
+			warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+			$HashRef->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
+		}
+	}
+	# Crops - the whole 128x32 crop image was transferred to our spritesheet and we need to point to the
+	#   "ready for harvest" sprite as well as setting up IDs for the objects for the seeds. The actual
+	#   harvested item will be handled by object processing in another section.
+	foreach my $key (keys %{$ModData->{'Crops'}}) {
+		my @phases = @{$ModData->{'Crops'}{$key}{'Phases'}};
+		my $offset = 1 + scalar(@phases);
+		my $id = "Crop_$key";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - ($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - $ModData->{'Crops'}{$key}{'__SS_Y'} };
+		$id .= "_x2";
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - 2*($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_Y'} };
+		# The seeds should already have been turned into objects so we don't need to process them here
+	}
+	# Objects - these should have already been saved, so not much to do
+	foreach my $key (keys %{$ModData->{'Objects'}}) {
+		my $id = "Object_$key";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - $ModData->{'Objects'}{$key}{'__SS_X'}, 'y' => 0 - $ModData->{'Objects'}{$key}{'__SS_Y'} };
+		$id .= "_x2";
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - 2*$ModData->{'Objects'}{$key}{'__SS_X'}, 'y' => 0 - 2*$ModData->{'Objects'}{$key}{'__SS_Y'} };
+	}
+	# Fruit Trees - The entire set of tree sprites are on the sheet, but the "full" tree is the last one on the list,
+	#  384 px beyond the start. This is backwards from how the vanilla tree sprite co-ordinates were saved. Oops.
+	foreach my $key (keys %{$ModData->{'FruitTrees'}}) {
+		my $id = "Tree_$key";
+		$id =~ s/ /_/g;
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - $ModData->{'FruitTrees'}{$key}{'__SS_X'} - 384, 'y' => 0 - $ModData->{'FruitTrees'}{$key}{'__SS_Y'} };
+		$id .= "_x2";
+		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
+		$HashRef->{$id} = { 'x' => 0 - 2*($ModData->{'FruitTrees'}{$key}{'__SS_X'} - 384), 'y' => 0 - 2*$ModData->{'FruitTrees'}{$key}{'__SS_Y'} };
+	}
+
+	return 1;
+}
+
+# FruitTreeSummary - main page generation for Fruit Trees
+sub FruitTreeSummary {
+	my $FH;
+	open $FH, ">$DocBase/trees.html" or die "Can't open trees.html for writing: $!";
+	select $FH;
+
+	print STDOUT "Generating Fruit Tree Summary\n";
+	my $longdesc = <<"END_PRINT";
+<p>A summary of fruit trees from the following mods:</p>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertoflorist'}{'Name'}</a> version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1721">$ModInfo->{'paradigmnomad.freshmeat'}{'Name'}</a> version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1671">$ModInfo->{'ppja.moretrees'}{'Name'}</a> version $ModInfo->{'ppja.moretrees'}{'Version'}</li>
+</ul>
+<p>The <span class="note">Break Even Amount</span> column is a simplistic measure of how many base (no-star) quality products need to be sold
+to recoup the cost of the initial sapling. Smaller numbers are better, although those who care about these kind of measurements will probably
+be processing the items in machines where possible rather than selling them raw.</p>
+END_PRINT
+	print GetHeader("Fruit Trees", qq(Sumary of fruit tree information from PPJA mods and base game.), $longdesc);
+
+	# We will organize this by Season so we start with an array that will hold a hash of the table rows keyed by tree name.
+	my @Panel = ( 
+		{ 'key' => 'Spring', 'row' => {}, },
+		{ 'key' => 'Summer', 'row' => {}, },
+		{ 'key' => 'Fall', 'row' => {}, },
+		{ 'key' => 'Winter', 'row' => {}, },
+		);
+
+	print STDOUT "  Processing Game Fruit Trees\n";
+	foreach my $sid (keys %{$GameData->{'FruitTrees'}}) {
+		# FruitTree Format -- SaplingID: SpritesheetIndex / Season / ProductID / SaplingPrice
+		# We will need to extract some info from ObjectInformation as well but don't sanity-check very often since we trust game data
+		my $sname = GetItem($sid);
+		my $sprite_index = $GameData->{'FruitTrees'}{$sid}{'split'}[0];
+		my $season = $GameData->{'FruitTrees'}{$sid}{'split'}[1];
+		my $cid = $GameData->{'FruitTrees'}{$sid}{'split'}[2];
+		my $scost = $GameData->{'FruitTrees'}{$sid}{'split'}[3];
+		my $cname = GetItem($cid);
+		my $cprice = $GameData->{'ObjectInformation'}{$cid}{'split'}[1];
+		my $seed_vendor = Wikify("Pierre");
+		my $imgTag = GetImgTag($sid, "tree");
+		my $prodImg = GetImgTag($cid, "object");
+		my $seedImg = GetImgTag($sid, "object");
+		my $amt = ceil($scost/$cprice);
+		
+		my $output = <<"END_PRINT";
+<tr><td class="icon">$imgTag</td>
+<td class="name">$prodImg $cname</td>
+<td class="name">$seedImg $sname</td>
+<td>$seed_vendor</td>
+<td class="value">$scost</td>
+<td class="value">$cprice</td>
+<td class="value">$amt</td>
+</tr>
+END_PRINT
+
+		foreach my $p (@Panel) {
+			my $check = lc $p->{'key'};
+			if ($season =~ /$check/) {
+				$p->{'row'}{StripHTML($cname)} = $output;
+			}
+		}
+	}
+
+	print STDOUT "  Processing Mod Fruit Trees\n";
+	foreach my $key (keys %{$ModData->{'FruitTrees'}}) {
+		# The keys for the Mod Trees hash should be the names of the trees but don't have to be
+		my $sname = $ModData->{'FruitTrees'}{$key}{'SaplingName'};
+		my $scost = $ModData->{'FruitTrees'}{$key}{'SaplingPurchasePrice'};
+		my $season = $ModData->{'FruitTrees'}{$key}{'Season'};
+		my $cname = GetItem($ModData->{'FruitTrees'}{$key}{'Product'});
+		my $cprice = GetValue($ModData->{'FruitTrees'}{$key}{'Product'});
+		my $seed_vendor = Wikify("Pierre");
+		if (exists $ModData->{'FruitTrees'}{$key}{'SaplingPurchaseFrom'}) {
+			$seed_vendor = Wikify($ModData->{'FruitTrees'}{$key}{'SaplingPurchaseFrom'});
+		}
+		if (exists $ModData->{'FruitTrees'}{$key}{'SaplingPurchaseRequirements'} and defined $ModData->{'FruitTrees'}{$key}{'SaplingPurchaseRequirements'}) {
+			my @req = TranslatePreconditions(@{$ModData->{'FruitTrees'}{$key}{'SaplingPurchaseRequirements'}});
+			# Note that the order here is not guaranteed. If we start getting crops with multiple different requirements we might have to deal with that
+			$seed_vendor .= '<br />' . join('<br />', @req);
+		}
+		my $imgTag = GetImgTag($key, 'tree');
+		my $prodImg = GetImgTag($ModData->{'FruitTrees'}{$key}{'Product'}, "object");
+		my $seedImg = GetImgTag($sname, "object");
+		my $amt = ceil($scost/$cprice);
+
+		my $output = <<"END_PRINT";
+<tr><td class="icon">$imgTag</td>
+<td class="name">$prodImg $cname</td>
+<td class="name">$seedImg $sname</td>
+<td>$seed_vendor</td>
+<td class="value">$scost</td>
+<td class="value">$cprice</td>
+<td class="value">$amt</td>
+</tr>
+END_PRINT
+
+		foreach my $p (@Panel) {
+			my $check = lc $p->{'key'};
+			if ($season =~ /$check/) {
+				$p->{'row'}{StripHTML($cname)} = $output;
+			}
+		}
+	}
+	
+	# Print the rest of the TOC
+	foreach my $p (@Panel) {
+		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'key'} Trees</a></li>);
+	}
+	print <<"END_PRINT";
+</ul>
+</div>
+</div>
+END_PRINT
+	
+	# Print the Panels
+	foreach my $p (@Panel) {
+		print <<"END_PRINT";
+<div class="panel" id="TOC_$p->{'key'}">
+<h2>$p->{'key'} Trees</h2>
+
+<table class="sortable output">
+<thead>
+<tr>
+<th>Image</th>
+<th>Product Name</th>
+<th>Sapling Name</th>
+<th>Sapling Vendor<br />(&amp; Requirements)</th>
+<th>Sapling<br />Price</th>
+<th>Product<br >Value</th>
+<th>Break Even<br >Amount</th></tr>
+</thead>
+<tbody>
+END_PRINT
+
+		foreach my $k (sort keys %{$p->{'row'}}) {
+			print $p->{'row'}{$k};
+		}
+		print <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
+	}
+	
+	print GetFooter();
+	close $FH or die "Error closing file";
+}
+
+# MachineSummary - main page generation for Machines
+sub MachineSummary {
+	my $FH;
+	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
+	select $FH;
+
+	print STDOUT "Generating Machine Summary\n";
+	my $longdesc = <<"END_PRINT";
+<p>A summary of machines from the following mods:</p>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.avcfr'}{'Name'}</a> version $ModInfo->{'ppja.avcfr'}{'Version'}
+including enabling recipes from:
+  <ul>
+  <li><a href="https://www.nexusmods.com/stardewvalley/mods/1897">$ModInfo->{'Aquilegia.SweetTooth'}{'Name'}</a> version $ModInfo->{'Aquilegia.SweetTooth'}{'Version'} (with <span class="note">Lavender</span> corrected to <span class="note">Herbal Lavender</span>).</li>
+  <!-- <li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li> -->
+  </ul>
+</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertofloristcfr'}{'Name'}</a> version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</li>
+</ul>
+<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
+the wiki which only shows base game items. All value and profit calculations assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>. Additonally, if a recipe calls for <span class="group">Any Milk</span>, the
+value of the small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> is used, and if a recipe calls for <span class="group">Any Egg</span>,
+the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is used.
+</p>
+
+<p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
+and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
+machine takes. The latter is rounded to two decimal places.
+</p>
+END_PRINT
+	print GetHeader("Machines", qq(Summary of products and timings for machines from PPJA mods), $longdesc);
+
+	my %TOC = ();
+
+	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
+	my %Panel = ();
+	foreach my $j (@{$ModData->{'Machines'}}) {
+		# These are the individual json files from each machine mod. Since mod names here don't necessarily reflect either the
+		#  manifest name or UniqueID, we hardcode the appropriate keys for ModInfo.
+		my $extra_info = "";
+		if ($j->{name} eq 'Artisan Valley Machine Machines') {
+			$extra_info = qq(<p><span class="note">From $ModInfo->{'ppja.avcfr'}{'Name'} version $ModInfo->{'ppja.avcfr'}{'Version'}</span></p>);
+		} elsif ($j->{name} eq 'Farmer to Florist Machines Redux') {
+			$extra_info = qq(<p><span class="note">From $ModInfo->{'kildarien.farmertofloristcfr'}{'Name'} version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</span></p>);
+		} 
+		foreach my $m (@{$j->{'machines'}}) {
+			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
+			my $key = $m->{'name'};
+			my $tries = 0;
+			my $max_tries = 10;
+			while (exists $Panel{$key} and $tries < $max_tries) {
+				$key = $m->{'name'} . "_$tries";
+				$tries++;
+			}
+			if (exists $Panel{$key}) {
+				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
+			}
+			my $anchor = "TOC_$m->{'name'}";
+			$anchor =~ s/ /_/g;
+			$TOC{$m->{'name'}} = $anchor;
+			my $imgTag = GetImgTag($m->{'name'}, 'machine', 1, "container__image");
+			#HERE 1st img tag
+			my $output = <<"END_PRINT";
+<div class="panel" id="$anchor">
+<div class="container">
+$imgTag
+<div class="container__text">
+<h2>$m->{'name'}</h2>
+<span class="mach_desc">$m->{'description'}</span><br />
+</div>
+$extra_info
+</div>
+<table class="recipe">
+<tbody><tr><th>Crafting Recipe</th><td class="name">
+END_PRINT
+
+			my @recipe = split(' ', $m->{'crafting'});
+			for (my $i = 0; $i < scalar(@recipe); $i += 2) {
+				my $num = $recipe[$i+1];
+				$output .= GetImgTag($recipe[$i]) . " " . GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
+			}
+			
+			$output .= <<"END_PRINT";
+</td></tbody></table>
+<table class="sortable output">
+<thead>
+<tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th><th>Profit<br />(Item)</th><th>Profit<br />(Hr)</th></tr>
+</thead>
+<tbody>
+END_PRINT
+			my $starter = "NO_STARTER";
+			if (exists $m->{'starter'}) {
+				$starter = GetItem($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
+			}
+			# Pre-scan production to handle "includes" by duplicating the production object for each additional item.
+			my @add = ();
+			foreach my $p (@{$m->{'production'}}) {
+				# We will assume that the materials array only contains one thing and that there are no other nested
+				#  objects which we care about. Thus, a shallow copy of the production object is acceptable.
+				if (exists $p->{'include'}) {
+					foreach my $p_inc (@{$p->{'include'}}) {
+						my %temp = %$p;
+						$temp{'materials'} = [];
+						$temp{'materials'}[0] = { 'index' => $p_inc };
+						push @add, \%temp;
+					}
+				}
+			}
+			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
+			my @rows = ();
+			foreach my $p (@{$m->{'production'}}, @add) {
+				my $name = GetItem($p->{'item'}, $p->{'index'});
+				my $starter_included = 0;
+				my %entry = { 'key1' => '', 'key2' => '', 'out' => '' };
+				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
+				# that a simple regex can do the job rather than needing a more robust general approach.
+				$entry{'key1'} = StripHTML($name);
+				my $img = GetImgTag($entry{'key1'});
+				$entry{'out'} = qq(<tr><td class="name">$img $name</td>);
+				$entry{'out'} .= qq(<td class="name">);
+				my $i_count = 0;
+				my $cost = 0;
+				foreach my $i (@{$p->{'materials'}}) {
+					$name = GetItem($i->{'name'}, $i->{'index'});
+					$img = GetImgTag(StripHTML($name));
+					if ($i_count > 0) {
+						#$name = "+ $name";
+					}
+					$i_count++;
+					my $stack_size = 1;
+					if (exists $i->{'stack'} and $i->{'stack'} > 1) {
+						$stack_size = $i->{'stack'};
+					}
+					if (not $starter_included and $starter eq $name) {
+						$stack_size++;
+						$starter_included = 1;
+					}
+					if ($stack_size > 1) {
+						$name .= " ($stack_size)";
+					}
+					$entry{'out'} .= "$img $name<br />";
+					if ($entry{'key2'} eq '') {
+						$entry{'key2'} = StripHTML($name);
+					}
+					$cost += $stack_size * GetValue($i->{'name'}, $i->{'index'});
+				}
+				if (not $starter_included and $starter ne "NO_STARTER") {
+					$img = GetImgTag(StripHTML($starter));
+					$entry{'out'} .= "$img $starter<br />";
+					$cost += GetValue($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
+				}
+				if (exists $p->{'exclude'}) {
+					$entry{'out'} .= '<span class="group">Except ' . join(', ', (map {GetItem($_)} @{$p->{'exclude'}})) . "</span><br />";
+				}
+				$entry{'out'} .= "</td>";
+				my $time = $p->{'time'};
+				if ($time > 1440) { 
+					$time = "$time min (~" . nearest(.1, $time/1440) . " days)";
+				} elsif ($time == 1440) {
+					$time = "$time min (~1 day)";
+				} elsif ($time >= 60) {
+					my $rem = $time%60;
+					my $hr = "hr" . ($time > 119 ? "s" : "");
+					if ($rem > 0) {
+						$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
+					} else {
+						$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
+					}
+				} else {
+					$time = "$time min";
+				}
+				$entry{'out'} .= "<td>$time</td>";
+				my $value = $p->{'price'};
+				if (not defined $value or $value eq "") {
+					$value = GetValue($p->{'item'}, $p->{'index'});
+				} elsif ($value =~ /original/) {
+					my $temp = GetValue($p->{'item'}, $p->{'index'});
+					if (looks_like_number($temp) and $temp > 0) {
+						$value =~ s/original/$temp/g;
+					}
+				}
+				if ($value =~ /input/) {
+					# We are trying to determine the main ingredient in order to better determine value & profit
+					# Since that ingredient was used for the second sort key, we try to look it up.
+					my $ingr_value = GetValue($entry{'key2'});
+					if (looks_like_number($ingr_value) and $ingr_value >= 0) {
+						$value =~ s/input/$ingr_value/g;
+					}
+				}
+				# Now let's do something a wee bit dangerous and try to evaluate the value equation.
+				# We aren't doing any sanity-checking on this, and there is the theoretical possibility somebody stuck
+				# some malicious perl code in their machine's output equation. But since this script is only being run
+				# on specific Stardew Valley mods from people we trust, we will take that risk.
+				my $eq_eval = eval $value;
+				#print STDOUT "Tried to eval {$value} and got {$eq_eval}\n";
+				if ($eq_eval ne '' and looks_like_number($eq_eval)) {
+					$value = floor($eq_eval);
+				}
+				$entry{'out'} .= qq(<td class="value">$value</td>);
+				my $profit = "";
+				if ($value =~ /original/ or $value =~ /input/) {
+					# This still looks like an equation
+					$profit = qq(<span class="note">Varies</span>);
+				} else {
+					$profit = $value - $cost;
+				}
+				$entry{'out'} .= qq(<td class="value">$profit</td>);
+				# reuse profit variable for per-hour version.
+				if (looks_like_number($profit)) {
+					$profit = nearest(.01,60*$profit/$p->{'time'});
+				}
+				$entry{'out'} .= qq(<td class="value">$profit</td>);
+				$entry{'out'} .= "</tr>";
+				push @rows, \%entry;
+			}
+			foreach my $e (sort {$a->{'key1'} cmp $b->{'key1'} or $a->{'key2'} cmp $b->{'key2'}} @rows) {
+				$output .= $e->{'out'};
+			}
+
+			$output .= <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
+			$Panel{$key} = $output;
+		} # end of machine loop
+	} # end of "json" loop
+
+	foreach my $p (sort keys %Panel) {
+		print qq(<li><a href="#$TOC{$p}">$p</a></li>);
+	}
+
+	print <<"END_PRINT";
+</ul>
+</div>
+</div>
+END_PRINT
+
+	foreach my $p (sort keys %Panel) {
+		print $Panel{$p};
+	}
+
+	print GetFooter();
+
+	close $FH or die "Error closing file";
+}
+
+# CropSummary - main page generation for crops
 sub CropSummary {
 	my $FH;
 	open $FH, ">$DocBase/crops.html" or die "Can't open crops.html for writing: $!";
 	select $FH;
+
+	print STDOUT "Generating Crop Summary\n";	
 	my $longdesc = <<"END_PRINT";
 <p>A summary of growth and other basic information for crops from the base game as well as the following mods:</p>
 <ul>
@@ -461,6 +1076,7 @@ below and apply to all the tables on this page.</p>
 </fieldset>
 <input type="hidden" id="last_speed" value="0" />
 END_PRINT
+
 	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA and base game), $longdesc, "crops-form.js");
 
 	# We will organize this by Season so we start with an array that will hold a hash of the table rows keyed by crop name.
@@ -474,6 +1090,7 @@ END_PRINT
 		#{ 'key' => 'Winter', 'row' => {}, },
 		);
 
+	print STDOUT "  Processing Game Crops\n";
 	# Vanilla crop data
 	foreach my $sid (keys %{$GameData->{'Crops'}}) {
 		# The keys for the Crops hash are the object ID numbers for the Seeds (hence the var $sid)
@@ -566,6 +1183,7 @@ END_PRINT
 <td class="value">$cprice</td>
 <td class="value">$xp</td>
 END_PRINT
+
 		foreach my $opt (qw(0 10 20 25 35)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
 			my $max_harvests = floor(27/$growth);
@@ -584,6 +1202,7 @@ END_PRINT
 <td class="col_$opt value">$max_harvests</td>
 <td class="col_$opt value">$profit</td>
 END_PRINT
+
 		}
 		$output .= "</tr>";
 		foreach my $p (@Panel) {
@@ -594,6 +1213,7 @@ END_PRINT
 		}
 	}
 
+	print STDOUT "  Processing Mod Crops\n";
 	# Mod crop data; uses similar variable names to the vanilla logic
 	foreach my $key (keys %{$ModData->{'Crops'}}) {
 		# The keys for the Mod Crops hash should be the names of the crops but don't have to be
@@ -642,6 +1262,7 @@ END_PRINT
 <td class="value">$cprice</td>
 <td class="value">$xp</td>
 END_PRINT
+
 		foreach my $opt (qw(0 10 20 25 35)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
 			my $max_harvests = floor(27/$growth);
@@ -660,6 +1281,7 @@ END_PRINT
 <td class="col_$opt value">$max_harvests</td>
 <td class="col_$opt value">$profit</td>
 END_PRINT
+
 		}
 		$output .= "</tr>";
 		foreach my $p (@Panel) {
@@ -723,6 +1345,7 @@ END_PRINT
 </thead>
 <tbody>
 END_PRINT
+
 		foreach my $k (sort keys %{$p->{'row'}}) {
 			print $p->{'row'}{$k};
 		}
@@ -731,410 +1354,12 @@ END_PRINT
 </table>
 </div>
 END_PRINT
+
 	}
 	
 	print GetFooter();
 
 	close $FH or die "Error closing file";
-}
-
-# CalcGrowth - Calculates the number of days it will take for a crop to grow from seed
-#
-#   factor - the pct reduction factor (e.g. .10 for basic speed-gro or agriculturist)
-#   phases_ref - a reference to the array of phase data
-sub CalcGrowth() {
-	my $factor = shift;
-	my $phases_ref = shift;
-	my @phases = @$phases_ref;
-	my $days = 0;
-	my $num_phases = scalar @phases;
-	for (my $i = 0; $i < $num_phases; $i++) {
-		$days += $phases[$i];
-	}
-	my $reduction = ceil($factor * $days);
-	# The following mimics the game's imprecision errors due to excessive type casting
-	# For more on the growth mechanics and this error, see https://stardewvalleywiki.com/Talk:Speed-Gro
-	if (($days % 10 == 0 and $factor == 0.10) or ($days % 5 == 0 and $factor == 0.20)) {
-		$reduction++;
-	}
-	my $tries = 0;
-	while ($reduction > 0 and $tries < 3) {
-		for (my $i = 0; $i <= $num_phases; $i++) {
-			if ($i == 0) {
-				if ($phases[$i] > 1) {
-					$phases[$i]--;
-					$reduction--;
-					$days--;
-				}
-			} elsif ($i < $num_phases) {
-				if ($phases[$i] > 0) {
-					$phases[$i]--;
-					$reduction--;
-					$days--;
-				}
-			} else {
-				# lost reduction day in final phase
-				$reduction--;
-			}
-			last if ($reduction <= 0);
-		}
-		$tries++;
-	}
-	return $days;
-}
-
-# TranslatePreconditions - Receives an array of event preconditions and tries to make them human-readable
-#  Currently only supports `z`, `y`, and `f` since those are what we have needed to deal with so far.
-sub TranslatePreconditions {
-	my %seasons = ( 'Spring' => 1, 'Summer' => 2, 'Fall' => 3, 'Winter' => 4 );
-	my $changed_seasons = 0;
-	my @results = ();
-	
-	foreach my $arg (@_) {
-		if ($arg =~ /^y (\d+)/) {
-			push @results, "(Year $1+)";
-		} elsif ($arg =~ /^f (\w+) (\d+)/) {
-			my $num_hearts = $2/250;
-			push @results, "($num_hearts+ &#x2665; with " . Wikify($1) . ")";
-		} elsif ($arg =~ /^z /) {
-			my @removal = split(/, ?/, $arg);
-			foreach my $r (@removal) {
-				$r =~ s/^z //;
-				my $s = ucfirst $r;
-				delete $seasons{$s} if (exists $seasons{$s});
-				$changed_seasons = 1;
-			}
-		}
-	}
-	if ($changed_seasons) {
-		my $r = '(' . join(', ', (sort {$seasons{$a} <=> $seasons{$b}} (keys %seasons))) . ')';
-		push @results, $r;
-	}
-	return @results;
-}
-
-sub MachineSummary {
-	my $FH;
-	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
-	select $FH;
-
-	my $longdesc = <<"END_PRINT";
-<p>A summary of machines from the following mods:</p>
-<ul>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.avcfr'}{'Name'}</a> version $ModInfo->{'ppja.avcfr'}{'Version'}
-including enabling recipes from:
-  <ul>
-  <li><a href="https://www.nexusmods.com/stardewvalley/mods/1897">$ModInfo->{'Aquilegia.SweetTooth'}{'Name'}</a> version $ModInfo->{'Aquilegia.SweetTooth'}{'Version'} (with <span class="note">Lavender</span> corrected to <span class="note">Herbal Lavender</span>).</li>
-  <!-- <li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li> -->
-  </ul>
-</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertofloristcfr'}{'Name'}</a> version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</li>
-</ul>
-<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
-the wiki which only shows base game items. All value and profit calculations assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>. Additonally, if a recipe calls for <span class="group">Any Milk</span>, the
-value of the small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> is used, and if a recipe calls for <span class="group">Any Egg</span>,
-the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is used.
-</p>
-
-<p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
-and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
-machine takes. The latter is rounded to two decimal places.
-</p>
-END_PRINT
-	print GetHeader("Machines", qq(Sumary of products and timings for machines from PPJA mods), $longdesc);
-
-	my %TOC = ();
-
-	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
-	my %Panel = ();
-	foreach my $j (@{$ModData->{'Machines'}}) {
-		# These are the individual json files from each machine mod. Since mod names here don't necessarily reflect either the
-		#  manifest name or UniqueID, we hardcode the appropriate keys for ModInfo.
-		my $extra_info = "";
-		if ($j->{name} eq 'Artisan Valley Machine Machines') {
-			$extra_info = qq(<p><span class="note">From $ModInfo->{'ppja.avcfr'}{'Name'} version $ModInfo->{'ppja.avcfr'}{'Version'}</span></p>);
-		} elsif ($j->{name} eq 'Farmer to Florist Machines Redux') {
-			$extra_info = qq(<p><span class="note">From $ModInfo->{'kildarien.farmertofloristcfr'}{'Name'} version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</span></p>);
-		} 
-		foreach my $m (@{$j->{'machines'}}) {
-			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
-			my $key = $m->{'name'};
-			my $tries = 0;
-			my $max_tries = 10;
-			while (exists $Panel{$key} and $tries < $max_tries) {
-				$key = $m->{'name'} . "_$tries";
-				$tries++;
-			}
-			if (exists $Panel{$key}) {
-				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
-			}
-			my $anchor = "TOC_$m->{'name'}";
-			$anchor =~ s/ /_/g;
-			$TOC{$m->{'name'}} = $anchor;
-			my $imgTag = GetImgTag($m->{'name'}, 'machine', 1, "container__image");
-			#HERE 1st img tag
-			my $output = <<"END_PRINT";
-<div class="panel" id="$anchor">
-<div class="container">
-$imgTag
-<div class="container__text">
-<h2>$m->{'name'}</h2>
-<span class="mach_desc">$m->{'description'}</span><br />
-</div>
-$extra_info
-</div>
-<table class="recipe">
-<tbody><tr><th>Crafting Recipe</th><td>
-END_PRINT
-
-			my @recipe = split(' ', $m->{'crafting'});
-			for (my $i = 0; $i < scalar(@recipe); $i += 2) {
-				my $num = $recipe[$i+1];
-				$output .= GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
-			}
-			
-			$output .= <<"END_PRINT";
-</td></tbody></table>
-<table class="sortable output">
-<thead>
-<tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th><th>Profit<br />(Item)</th><th>Profit<br />(Hr)</th></tr>
-</thead>
-<tbody>
-END_PRINT
-			my $starter = "NO_STARTER";
-			if (exists $m->{'starter'}) {
-				$starter = GetItem($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
-			}
-			# Pre-scan production to handle "includes" by duplicating the production object for each additional item.
-			my @add = ();
-			foreach my $p (@{$m->{'production'}}) {
-				# We will assume that the materials array only contains one thing and that there are no other nested
-				#  objects which we care about. Thus, a shallow copy of the production object is acceptable.
-				if (exists $p->{'include'}) {
-					foreach my $p_inc (@{$p->{'include'}}) {
-						my %temp = %$p;
-						$temp{'materials'} = [];
-						$temp{'materials'}[0] = { 'index' => $p_inc };
-						push @add, \%temp;
-					}
-				}
-			}
-			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
-			my @rows = ();
-			foreach my $p (@{$m->{'production'}}, @add) {
-				my $name = GetItem($p->{'item'}, $p->{'index'});
-				my $starter_included = 0;
-				my %entry = { 'key1' => '', 'key2' => '', 'out' => '' };
-				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
-				# that a simple regex can do the job rather than needing a more robust general approach.
-				$entry{'key1'} = StripHTML($name);
-				$entry{'out'} = "<tr><td>$name</td>";
-				$entry{'out'} .= "<td>";
-				my $i_count = 0;
-				my $cost = 0;
-				foreach my $i (@{$p->{'materials'}}) {
-					$name = GetItem($i->{'name'}, $i->{'index'});
-					if ($i_count > 0) {
-						$name = "+ $name";
-					}
-					$i_count++;
-					my $stack_size = 1;
-					if (exists $i->{'stack'} and $i->{'stack'} > 1) {
-						$stack_size = $i->{'stack'};
-					}
-					if (not $starter_included and $starter eq $name) {
-						$stack_size++;
-						$starter_included = 1;
-					}
-					if ($stack_size > 1) {
-						$name .= " ($stack_size)";
-					}
-					$entry{'out'} .= "$name<br />";
-					if ($entry{'key2'} eq '') {
-						$entry{'key2'} = StripHTML($name);
-					}
-					$cost += $stack_size * GetValue($i->{'name'}, $i->{'index'});
-				}
-				if (not $starter_included and $starter ne "NO_STARTER") {
-					$entry{'out'} .= "+ $starter<br />";
-					$cost += GetValue($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
-				}
-				if (exists $p->{'exclude'}) {
-					$entry{'out'} .= '<span class="group">Except ' . join(', ', (map {GetItem($_)} @{$p->{'exclude'}})) . "</span><br />";
-				}
-				$entry{'out'} .= "</td>";
-				my $time = $p->{'time'};
-				if ($time > 1440) { 
-					$time = "$time min (~" . nearest(.1, $time/1440) . " days)";
-				} elsif ($time == 1440) {
-					$time = "$time min (~1 day)";
-				} elsif ($time >= 60) {
-					my $rem = $time%60;
-					my $hr = "hr" . ($time > 119 ? "s" : "");
-					if ($rem > 0) {
-						$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
-					} else {
-						$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
-					}
-				} else {
-					$time = "$time min";
-				}
-				$entry{'out'} .= "<td>$time</td>";
-				my $value = $p->{'price'};
-				if (not defined $value or $value eq "") {
-					$value = GetValue($p->{'item'}, $p->{'index'});
-				} elsif ($value =~ /original/) {
-					my $temp = GetValue($p->{'item'}, $p->{'index'});
-					if (looks_like_number($temp) and $temp > 0) {
-						$value =~ s/original/$temp/g;
-					}
-				}
-				if ($value =~ /input/) {
-					# We are trying to determine the main ingredient in order to better determine value & profit
-					# Since that ingredient was used for the second sort key, we try to look it up.
-					my $ingr_value = GetValue($entry{'key2'});
-					if (looks_like_number($ingr_value) and $ingr_value >= 0) {
-						$value =~ s/input/$ingr_value/g;
-					}
-				}
-				# Now let's do something a wee bit dangerous and try to evaluate the value equation.
-				# We aren't doing any sanity-checking on this, and there is the theoretical possibility somebody stuck
-				# some malicious perl code in their machine's output equation. But since this script is only being run
-				# on specific Stardew Valley mods from people we trust, we will take that risk.
-				my $eq_eval = eval $value;
-				#print STDOUT "Tried to eval {$value} and got {$eq_eval}\n";
-				if ($eq_eval ne '' and looks_like_number($eq_eval)) {
-					$value = floor($eq_eval);
-				}
-				$entry{'out'} .= "<td>$value</td>";
-				my $profit = "";
-				if ($value =~ /original/ or $value =~ /input/) {
-					# This still looks like an equation
-					$profit = qq(<span class="note">Varies</span>);
-				} else {
-					$profit = $value - $cost;
-				}
-				$entry{'out'} .= "<td>$profit</td>";
-				# reuse profit variable for per-minute version.
-				if (looks_like_number($profit)) {
-					$profit = nearest(.01,60*$profit/$p->{'time'});
-				}
-				$entry{'out'} .= "<td>$profit</td>";
-				$entry{'out'} .= "</tr>";
-				push @rows, \%entry;
-			}
-			foreach my $e (sort {$a->{'key1'} cmp $b->{'key1'} or $a->{'key2'} cmp $b->{'key2'}} @rows) {
-				$output .= $e->{'out'};
-			}
-
-			$output .= <<"END_PRINT";
-</tbody>
-</table>
-</div>
-END_PRINT
-			$Panel{$key} = $output;
-		} # end of machine loop
-	} # end of "json" loop
-
-	foreach my $p (sort keys %Panel) {
-		print qq(<li><a href="#$TOC{$p}">$p</a></li>);
-	}
-
-	print <<"END_PRINT";
-</ul>
-</div>
-</div>
-END_PRINT
-
-	foreach my $p (sort keys %Panel) {
-		print $Panel{$p};
-	}
-
-	print GetFooter();
-
-	close $FH or die "Error closing file";
-}
-
-# GatherSpriteInfo - Goes through the global GameData and ModData structures to find sprite locations
-#   and saves them all into a hash.
-#
-#   HashRef - reference to the hash to use for storage.
-sub GatherSpriteInfo {
-	my $HashRef = shift;
-	if (not defined $HashRef or not (ref $HashRef eq 'HASH')) {
-		warn "GatherSpriteInfo was not passed a valid hash ref. Aboring.";
-		return 0;
-	}
-	
-	# Vanilla data
-	# Crops - coords were saved by gather_data
-	foreach my $sid (keys %{$GameData->{'Crops'}}) {
-		my $id = "Crop_$sid";
-		$id =~ s/ /_/g;
-		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		$HashRef->{$id} = { 'x' => 0 - $GameData->{'Crops'}{$sid}{'__SS_X'}, 'y' => 0 - $GameData->{'Crops'}{$sid}{'__SS_Y'} };
-		$id .= "_x2";
-		$HashRef->{$id} = { 'x' => 0 - 2*($GameData->{'Crops'}{$sid}{'__SS_X'}), 'y' => 0 - 2*$GameData->{'Crops'}{$sid}{'__SS_Y'} };
-	}
-	# Objects - have to calculate coords ourselves
-	my $game_objects = Imager->new();
-	my $object_width = 16;
-	my $object_height = 16;
-	$game_objects->read(file=>"../img/game_objects.png") or die "Error reading game object sprites:" . $game_objects->errstr;
-	my $objects_per_row = floor($game_objects->getwidth() / 16);
-	foreach my $index (keys %{$GameData->{'ObjectInformation'}}) {
-		my $id = "Object_$index";
-		$id =~ s/ /_/g;
-		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		my $x =  $object_width * ($index % $objects_per_row);
-		my $y = $object_height * floor($index / $objects_per_row);
-		$HashRef->{$id} = { 'x' => 0 - $x, 'y' => 0 - $y };
-		$id .= "_x2";
-		$HashRef->{$id} = { 'x' => 0 - 2*$x, 'y' => 0 - 2*$y };
-	}
-	
-	# Mod data
-	# Machines - because machines can have a variable number of sprites only the single idle animation was
-	#   transferred to the sprite sheet and we don't have any further processing to do.
-	foreach my $j (@{$ModData->{'Machines'}}) {
-		foreach my $m (@{$j->{'machines'}}) {
-			my $id = "Machine_$m->{'name'}";
-			$id =~ s/ /_/g;
-			my $anchor = "TOC_$id";
-			warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-			$HashRef->{$id} = { 'x' => 0 - $m->{'__SS_X'}, 'y' => 0 - $m->{'__SS_Y'} };
-			$id .= "_x2";
-			warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-			$HashRef->{$id} = { 'x' => 0 - 2*$m->{'__SS_X'}, 'y' => 0 - 2*$m->{'__SS_Y'} };
-		}
-	}
-	# Crops - the whole 128x32 crop image was transferred to our spritesheet and we need to point to the
-	#   "ready for harvest" sprite as well as setting up IDs for the objects for the seeds. The actual
-	#   harvested item will be handled by object processing in another section.
-	foreach my $key (keys %{$ModData->{'Crops'}}) {
-		my @phases = @{$ModData->{'Crops'}{$key}{'Phases'}};
-		my $offset = 1 + scalar(@phases);
-		my $id = "Crop_$key";
-		$id =~ s/ /_/g;
-		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		$HashRef->{$id} = { 'x' => 0 - ($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - $ModData->{'Crops'}{$key}{'__SS_Y'} };
-		$id .= "_x2";
-		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		$HashRef->{$id} = { 'x' => 0 - 2*($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - 2*$ModData->{'Crops'}{$key}{'__SS_Y'} };
-		# The seeds should already have been turned into objects so we don't need to process them here
-	}
-	# Objects - these should have already been saved, so not much to do
-	foreach my $key (keys %{$ModData->{'Objects'}}) {
-		my $id = "Object_$key";
-		$id =~ s/ /_/g;
-		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		$HashRef->{$id} = { 'x' => 0 - $ModData->{'Objects'}{$key}{'__SS_X'}, 'y' => 0 - $ModData->{'Objects'}{$key}{'__SS_Y'} };
-		$id .= "_x2";
-		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
-		$HashRef->{$id} = { 'x' => 0 - 2*$ModData->{'Objects'}{$key}{'__SS_X'}, 'y' => 0 - 2*$ModData->{'Objects'}{$key}{'__SS_Y'} };
-	}
-
-	return 1;
 }
 
 # WriteCSS - Iterates through the SpriteInfo structure and writes out the appropriate CSS for each ID

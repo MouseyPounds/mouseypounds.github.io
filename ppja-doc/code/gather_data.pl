@@ -86,7 +86,7 @@ LogMessage("Script started", 1);
 ParseGameData($GameDir, $GameData);
 ParseModData($ModDir, $ModData, $ModInfo);
 
-LogMessage("Adding object info for mod crop seeds", 1);
+LogMessage("Adding object info for mod crop seeds & tree saplings", 1);
 # It is a little less messy to do this here rather than trying to create a second json during file processing.
 foreach my $c (keys %{$ModData->{'Crops'}}) {
 	my $name = $ModData->{'Crops'}{$c}{'SeedName'};
@@ -105,6 +105,25 @@ foreach my $c (keys %{$ModData->{'Crops'}}) {
 			};
 	} else {
 		LogMessage("WARNING: Already have an object entry for $name while processing $c seeds", 1);
+	}
+}
+foreach my $t (keys %{$ModData->{'FruitTrees'}}) {
+	my $name = $ModData->{'FruitTrees'}{$t}{'SaplingName'};
+	my $desc = $ModData->{'FruitTrees'}{$t}{'SaplingDescription'};
+	my $price = $ModData->{'FruitTrees'}{$t}{'SaplingPurchasePrice'};
+	if (not exists $ModData->{'Objects'}{$name}) {
+		$ModData->{'Objects'}{$name} = {
+			'Name' => $name,
+			'Description' => $desc,
+			'Price' => $price,
+			'Category' => 'Seeds',
+			'Edibility' => -300,
+			'Recipe' => undef,
+			'__SS_X' => $ModData->{'FruitTrees'}{$t}{'__SS_OTHER_X'},
+			'__SS_Y' => $ModData->{'FruitTrees'}{$t}{'__SS_OTHER_Y'},
+			};
+	} else {
+		LogMessage("WARNING: Already have an object entry for $name while processing $t saplings", 1);
 	}
 }
 
