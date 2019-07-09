@@ -218,7 +218,7 @@ foreach my $c (keys %{$GameData->{'Crops'}}) {
 	}
 }
 $game_crops->write(file=>"../img/game_crops.png") or LogMessage("DIE: Error writing game crop sprites: " . $game_crops->errstr, 1);
-$game_crops->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_crops.png") or
+$game_crops->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_crops_x2.png") or
 	LogMessage("DIE: Error writing x2 game crop sprites: " . $game_crops->errstr, 1);
 
 LogMessage("Changing mod fruit tree sprites", 1);
