@@ -368,6 +368,8 @@ sub ParseModData {
 					next;
 				}
 				$MetaRef->{$id} = $json;
+				my $filter_id = "filter_$id";
+				$filter_id =~ s/\./_/g;
 				
 				if (exists $json->{'ContentPackFor'}{'UniqueID'}) {
 					my $packID = $json->{'ContentPackFor'}{'UniqueID'};
@@ -399,6 +401,7 @@ sub ParseModData {
 									if (exists $machine->{'tileindex'}) {
 										$tileindex = $machine->{'tileindex'};
 									}
+									$machine->{'__FILTER'} = $filter_id;
 									if (exists $machine->{'texture'}) {
 										my $x = 16*$tileindex;
 										my $y = 0;
@@ -488,6 +491,7 @@ sub ParseModData {
 										} elsif ($t eq 'Weapons') {
 											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/weapon.png", 'objects');
 										}
+										$json->{'__FILTER'} = $filter_id;
 										$json->{'__SS_X'} = $x;
 										$json->{'__SS_Y'} = $y;
 										$json->{'__SS_OTHER_X'} = $other_x if ($other_x > -1);

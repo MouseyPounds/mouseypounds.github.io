@@ -18,6 +18,7 @@ my $ModData = retrieve("../local/cache_ModData");
 my $ModInfo = retrieve("../local/cache_ModInfo");
 
 my $DocBase = "..";
+my $StardewVersion = "1.3.36";
 
 my $SpriteInfo = {};
 GatherSpriteInfo($SpriteInfo);
@@ -396,7 +397,6 @@ sub GetImgTag {
 #   subtitle - string to put in top header and title
 #   shortdesc - [optional] short description for social media embeds
 #   longdesc - [optional] any additonal info to include in top panel
-#   script - [optional] javascript to enable
 sub GetHeader {
 	my $subtitle = shift;
 	my $shortdesc = shift;
@@ -406,12 +406,6 @@ sub GetHeader {
 	my $longdesc = shift;
 	if (not defined $longdesc) {
 		$longdesc = "";
-	}
-	my $script = shift;
-	if (not defined $script or $script eq '') {
-		$script = "";
-	} else {
-		$script = qq(<script type="text/javascript" src="./$script"></script>);
 	}
 	
 	my $output = <<"END_PRINT";
@@ -435,7 +429,7 @@ sub GetHeader {
 
 <!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
 <script type="text/javascript" src="./sorttable.js"></script>
-$script
+<script type="text/javascript" src="./ppja-ref-filters.js"></script>
 
 </head>
 <body>
@@ -1481,15 +1475,30 @@ sub WriteCropSummary {
 
 	print STDOUT "Generating Crop Summary\n";	
 	my $longdesc = <<"END_PRINT";
-<p>A summary of growth and other basic information for crops from the base game as well as the following mods:</p>
-<ul>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1610">$ModInfo->{'ParadigmNomad.FantasyCrops'}{'Name'}</a> version $ModInfo->{'ParadigmNomad.FantasyCrops'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertoflorist'}{'Name'}</a> version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1721">$ModInfo->{'paradigmnomad.freshmeat'}{'Name'}</a> version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1598">$ModInfo->{'ppja.fruitsandveggies'}{'Name'}</a> version $ModInfo->{'ppja.fruitsandveggies'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2028">$ModInfo->{'mizu.flowers'}{'Name'}</a> version $ModInfo->{'mizu.flowers'}{'Version'}</li>
-</ul>
+<p>A summary of growth and other basic information for crops from the following sources. The checkboxes next to them can be used to
+show or hide content specific to that source:</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+<label><input class="filter_check" type="checkbox" name="filter_PPJA_cannabiskit" id="filter_PPJA_cannabiskit" value="show" checked="checked"> 
+$ModInfo->{'PPJA.cannabiskit'}{'Name'} version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</label> (<a href="https://www.nexusmods.com/stardewvalley/mods/1741">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_ParadigmNomad_FantasyCrops" id="filter_ParadigmNomad_FantasyCrops" value="show" checked="checked"> 
+$ModInfo->{'ParadigmNomad.FantasyCrops'}{'Name'} version $ModInfo->{'ParadigmNomad.FantasyCrops'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1610">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked"> 
+$ModInfo->{'kildarien.farmertoflorist'}{'Name'} version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked"> 
+$ModInfo->{'paradigmnomad.freshmeat'}{'Name'} version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_ppja_fruitsandveggies" id="filter_ppja_fruitsandveggies" value="show" checked="checked"> 
+$ModInfo->{'ppja.fruitsandveggies'}{'Name'} version $ModInfo->{'ppja.fruitsandveggies'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1598">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_mizu_flowers" id="filter_mizu_flowers" value="show" checked="checked"> 
+$ModInfo->{'mizu.flowers'}{'Name'} version $ModInfo->{'mizu.flowers'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/2028">Nexus page</a>)<br />
+</fieldset>
+
 <p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
 the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
 whether the crop has a trellis (or similar structure that blocks walking on it). The <span class="note">XP</span> column is the amount of
@@ -1509,7 +1518,7 @@ below and apply to all the tables on this page.</p>
 <input type="hidden" id="last_speed" value="0" />
 END_PRINT
 
-	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA and base game), $longdesc, "crops-form.js");
+	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA and base game), $longdesc);
 	print GetTOCStart();
 
 	# We will organize this by Season so we start with an array that will hold a hash of the table rows keyed by crop name.
@@ -1605,7 +1614,8 @@ END_PRINT
 		} 
 		
 		my $output = <<"END_PRINT";
-<tr><td class="icon">$imgTag</td>
+<tr class="filter_base_game">
+<td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
@@ -1684,7 +1694,8 @@ END_PRINT
 		my $seedImg = GetImgTag($sname, "object");
 		my $xp = GetXP($cprice);
 		my $output = <<"END_PRINT";
-<tr><td class="icon">$imgTag</td>
+<tr class="$ModData->{'Crops'}{$key}{'__FILTER'}">
+<td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>

@@ -18,20 +18,35 @@
 
 <!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
 <script type="text/javascript" src="./sorttable.js"></script>
-<script type="text/javascript" src="./crops-form.js"></script>
+<script type="text/javascript" src="./ppja-ref-filters.js"></script>
 
 </head>
 <body>
 <div class="panel" id="header"><h1>Mousey's PPJA Reference: Crop Summary</h1>
-<p>A summary of growth and other basic information for crops from the base game as well as the following mods:</p>
-<ul>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">Cannabis Kit for JsonAssets</a> version 1.6.0</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1610">Fantasy Crops</a> version 1.3.2</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">Farmer to Florist</a> version 1.3.2</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1721">Fresh Meat</a> version 1.3.2</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1598">Fruits and Veggies for JsonAssets</a> version 1.8.2</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2028">Mizu's Flowers for JsonAssets</a> version 1.5.1</li>
-</ul>
+<p>A summary of growth and other basic information for crops from the following sources. The checkboxes next to them can be used to
+show or hide content specific to that source:</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version 1.3.36</label><br />
+<label><input class="filter_check" type="checkbox" name="filter_PPJA_cannabiskit" id="filter_PPJA_cannabiskit" value="show" checked="checked"> 
+Cannabis Kit for JsonAssets version 1.6.0</label> (<a href="https://www.nexusmods.com/stardewvalley/mods/1741">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_ParadigmNomad_FantasyCrops" id="filter_ParadigmNomad_FantasyCrops" value="show" checked="checked"> 
+Fantasy Crops version 1.3.2</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1610">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked"> 
+Farmer to Florist version 1.3.2</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked"> 
+Fresh Meat version 1.3.2</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_ppja_fruitsandveggies" id="filter_ppja_fruitsandveggies" value="show" checked="checked"> 
+Fruits and Veggies for JsonAssets version 1.8.2</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1598">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_mizu_flowers" id="filter_mizu_flowers" value="show" checked="checked"> 
+Mizu's Flowers for JsonAssets version 1.5.1</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/2028">Nexus page</a>)<br />
+</fieldset>
+
 <p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
 the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
 whether the crop has a trellis (or similar structure that blocks walking on it). The <span class="note">XP</span> column is the amount of
@@ -98,7 +113,8 @@ below and apply to all the tables on this page.</p>
 </tr>
 </thead>
 <tbody>
-<tr><td class="icon"><img class="game_crops" id="Crop_499" src="img/blank.png" alt=""></td>
+<tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_499" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_454" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Ancient_Fruit">Ancient Fruit</a></td>
 <td class="name"><img class="game_objects" id="Object_499" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Ancient_Seeds">Ancient Seeds</a></td>
 <td><span class="note">None</span></td>
@@ -128,7 +144,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">7</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">1100</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Basil" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Basil" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Basil" src="img/blank.png" alt=""> Basil</td>
 <td class="name"><img class="objects" id="Object_Basil_Seeds" src="img/blank.png" alt=""> Basil Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -158,7 +175,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">295</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Beef" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Beef" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Beef" src="img/blank.png" alt=""> Beef</td>
 <td class="name"><img class="objects" id="Object_Beefvine_Seeds" src="img/blank.png" alt=""> Beefvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -188,7 +206,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">550</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_429" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_429" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_597" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Blue_Jazz">Blue Jazz</a></td>
 <td class="name"><img class="game_objects" id="Object_429" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Jazz_Seeds">Jazz Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -218,7 +237,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">270</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cabbage" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Cabbage" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cabbage" src="img/blank.png" alt=""> Cabbage</td>
 <td class="name"><img class="objects" id="Object_Cabbage_Seeds" src="img/blank.png" alt=""> Cabbage Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -248,7 +268,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">640</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Camellia" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Camellia" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Camellia" src="img/blank.png" alt=""> Camellia</td>
 <td class="name"><img class="objects" id="Object_Camellia_Seeds" src="img/blank.png" alt=""> Camellia Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -278,7 +299,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">7</td>
 <td class="col_35 value">647</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cannabis" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Cannabis" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cannabis" src="img/blank.png" alt=""> Cannabis</td>
 <td class="name"><img class="objects" id="Object_Cannabis_Starter" src="img/blank.png" alt=""> Cannabis Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -308,7 +330,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1898</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Carnation" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Carnation" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Carnation" src="img/blank.png" alt=""> Carnation</td>
 <td class="name"><img class="objects" id="Object_Carnation_Seeds" src="img/blank.png" alt=""> Carnation Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -338,7 +361,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">795</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_474" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_474" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_190" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cauliflower">Cauliflower</a></td>
 <td class="name"><img class="game_objects" id="Object_474" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cauliflower_Seeds">Cauliflower Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -368,7 +392,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">445</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Chamomile" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Chamomile" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chamomile" src="img/blank.png" alt=""> Chamomile</td>
 <td class="name"><img class="objects" id="Object_Chamomile_Seeds" src="img/blank.png" alt=""> Chamomile Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -398,7 +423,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">375</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Chicken" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Chicken" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chicken" src="img/blank.png" alt=""> Chicken</td>
 <td class="name"><img class="objects" id="Object_Chickenvine_Seeds" src="img/blank.png" alt=""> Chickenvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -428,7 +454,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">400</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Coal_Root" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ParadigmNomad_FantasyCrops">
+<td class="icon"><img class="crops" id="Crop_Coal_Root" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_382" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coal">Coal</a></td>
 <td class="name"><img class="objects" id="Object_Coal_Seeds" src="img/blank.png" alt=""> Coal Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Clint">Clint</a><br />(Spring)</td>
@@ -458,7 +485,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">99</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_433" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_433" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_433" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
 <td class="name"><img class="game_objects" id="Object_433" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
 <td><a href="http://stardewvalleywiki.com/Traveling_Cart">Traveling Cart</a></td>
@@ -488,7 +516,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">2</td>
 <td class="col_35 value">11</td>
 <td class="col_35 value">-1837</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Copper_Leaf" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ParadigmNomad_FantasyCrops">
+<td class="icon"><img class="crops" id="Crop_Copper_Leaf" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_378" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Copper_Ore">Copper Ore</a></td>
 <td class="name"><img class="objects" id="Object_Copper_Seeds" src="img/blank.png" alt=""> Copper Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
@@ -518,7 +547,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">-90</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Delphinium" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Delphinium" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Delphinium" src="img/blank.png" alt=""> Delphinium</td>
 <td class="name"><img class="objects" id="Object_Delphinium_Seeds" src="img/blank.png" alt=""> Delphinium Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -548,7 +578,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">750</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_476" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_476" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_248" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Garlic">Garlic</a></td>
 <td class="name"><img class="game_objects" id="Object_476" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Garlic_Seeds">Garlic Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -578,7 +609,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">740</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_473" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_473" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_188" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Green_Bean">Green Bean</a></td>
 <td class="name"><img class="game_objects" id="Object_473" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Bean_Starter">Bean Starter</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -608,7 +640,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">260</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Hemp" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Hemp" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Hemp" src="img/blank.png" alt=""> Hemp</td>
 <td class="name"><img class="objects" id="Object_Hemp_Starter" src="img/blank.png" alt=""> Hemp Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -638,7 +671,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">1856</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Herbal_Peony" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Herbal_Peony" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Herbal_Peony" src="img/blank.png" alt=""> Herbal Peony</td>
 <td class="name"><img class="objects" id="Object_Herbal_Peony_Seeds" src="img/blank.png" alt=""> Herbal Peony Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -668,7 +702,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">670</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Honeysuckle" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Honeysuckle" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Honeysuckle" src="img/blank.png" alt=""> Honeysuckle</td>
 <td class="name"><img class="objects" id="Object_Honeysuckle_Starter" src="img/blank.png" alt=""> Honeysuckle Starter</td>
 <td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a><br />(Spring)</td>
@@ -698,7 +733,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">1484</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Hyacinth" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Hyacinth" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Hyacinth" src="img/blank.png" alt=""> Hyacinth</td>
 <td class="name"><img class="objects" id="Object_Hyacinth_Seeds" src="img/blank.png" alt=""> Hyacinth Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -728,7 +764,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">520</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_477" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_477" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_250" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Kale">Kale</a></td>
 <td class="name"><img class="game_objects" id="Object_477" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Kale_Seeds">Kale Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -758,7 +795,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">920</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Lilac" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Lilac" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Lilac" src="img/blank.png" alt=""> Lilac</td>
 <td class="name"><img class="objects" id="Object_Lilac_Seeds" src="img/blank.png" alt=""> Lilac Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -788,7 +826,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">500</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Muskmelon" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Muskmelon" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Muskmelon" src="img/blank.png" alt=""> Muskmelon</td>
 <td class="name"><img class="objects" id="Object_Muskmelon_Seeds" src="img/blank.png" alt=""> Muskmelon Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -818,7 +857,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">820</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Mutton" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Mutton" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Mutton" src="img/blank.png" alt=""> Mutton</td>
 <td class="name"><img class="objects" id="Object_Muttonvine_Seeds" src="img/blank.png" alt=""> Muttonvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -848,7 +888,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Onion" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Onion" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Onion" src="img/blank.png" alt=""> Onion</td>
 <td class="name"><img class="objects" id="Object_Onion_Seeds" src="img/blank.png" alt=""> Onion Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -878,7 +919,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">495</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Parsley" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Parsley" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Parsley" src="img/blank.png" alt=""> Parsley</td>
 <td class="name"><img class="objects" id="Object_Parsley_Seeds" src="img/blank.png" alt=""> Parsley Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -908,7 +950,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">560</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_472" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_472" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_24" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Parsnip">Parsnip</a></td>
 <td class="name"><img class="game_objects" id="Object_472" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Parsnip_Seeds">Parsnip Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -938,7 +981,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">435</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Passion_Fruit" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Passion_Fruit" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Passion_Fruit" src="img/blank.png" alt=""> Passion Fruit</td>
 <td class="name"><img class="objects" id="Object_Passion_Fruit_Seeds" src="img/blank.png" alt=""> Passion Fruit Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -968,7 +1012,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">288</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Pineapple" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Pineapple" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Pineapple" src="img/blank.png" alt=""> Pineapple</td>
 <td class="name"><img class="objects" id="Object_Pineapple_Seeds" src="img/blank.png" alt=""> Pineapple Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
@@ -998,7 +1043,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">1125</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Pink_Cat" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Pink_Cat" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Pink_Cat" src="img/blank.png" alt=""> Pink Cat</td>
 <td class="name"><img class="objects" id="Object_Pink_Cat_Seeds" src="img/blank.png" alt=""> Pink Cat Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a></td>
@@ -1028,7 +1074,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">295</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_475" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_475" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_192" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Potato">Potato</a></td>
 <td class="name"><img class="game_objects" id="Object_475" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Potato_Seeds">Potato Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1058,7 +1105,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">804</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rabbit" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Rabbit" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Rabbit" src="img/blank.png" alt=""> Rabbit</td>
 <td class="name"><img class="objects" id="Object_Rabbitvine_Seeds" src="img/blank.png" alt=""> Rabbitvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1088,7 +1136,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">300</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_478" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_478" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_252" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Rhubarb">Rhubarb</a></td>
 <td class="name"><img class="game_objects" id="Object_478" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Rhubarb_Seeds">Rhubarb Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
@@ -1118,7 +1167,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">560</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rose" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Rose" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Rose" src="img/blank.png" alt=""> Rose</td>
 <td class="name"><img class="objects" id="Object_Rose_Starter" src="img/blank.png" alt=""> Rose Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1148,7 +1198,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">1336</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Shaded_Violet" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Shaded_Violet" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Shaded_Violet" src="img/blank.png" alt=""> Shaded Violet</td>
 <td class="name"><img class="objects" id="Object_Shaded_Violet_Seeds" src="img/blank.png" alt=""> Shaded Violet Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1178,7 +1229,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">195</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Spinach" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Spinach" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Spinach" src="img/blank.png" alt=""> Spinach</td>
 <td class="name"><img class="objects" id="Object_Spinach_Seeds" src="img/blank.png" alt=""> Spinach Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1208,7 +1260,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">27</td>
 <td class="col_35 value">930</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_495" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_495" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_16" src="img/blank.png" alt=""> <span class="group">Spring Forage</span></td>
 <td class="name"><img class="game_objects" id="Object_495" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Spring_Seeds">Spring Seeds</a></td>
 <td><span class="note">None</span></td>
@@ -1238,7 +1291,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">250</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Spring_Rose" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Spring_Rose" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Spring_Rose" src="img/blank.png" alt=""> Spring Rose</td>
 <td class="name"><img class="objects" id="Object_Spring_Rose_Starter" src="img/blank.png" alt=""> Spring Rose Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1268,7 +1322,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">1336</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_745" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_745" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_400" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Strawberry">Strawberry</a></td>
 <td class="name"><img class="game_objects" id="Object_745" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Strawberry_Seeds">Strawberry Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(at <a href="http://stardewvalleywiki.com/Egg_Festival">Egg Festival</a>)</td>
@@ -1298,7 +1353,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">634</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sugar_Beet" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Sugar_Beet" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sugar_Beet" src="img/blank.png" alt=""> Sugar Beet</td>
 <td class="name"><img class="objects" id="Object_Sugar_Beet_Seeds" src="img/blank.png" alt=""> Sugar Beet Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -1328,7 +1384,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sweet_Canary_Melon" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Sweet_Canary_Melon" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sweet_Canary_Melon" src="img/blank.png" alt=""> Sweet Canary Melon</td>
 <td class="name"><img class="objects" id="Object_Sweet_Canary_Melon_Seeds" src="img/blank.png" alt=""> Sweet Canary Melon Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -1358,7 +1415,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1280</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Tea" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Tea" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Tea_Leaf" src="img/blank.png" alt=""> Tea Leaf</td>
 <td class="name"><img class="objects" id="Object_Tea_Seeds" src="img/blank.png" alt=""> Tea Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
@@ -1388,7 +1446,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">210</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Tobacco" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Tobacco" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Tobacco" src="img/blank.png" alt=""> Tobacco</td>
 <td class="name"><img class="objects" id="Object_Tobacco_Seeds" src="img/blank.png" alt=""> Tobacco Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1418,7 +1477,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">570</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_427" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_427" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_591" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Tulip">Tulip</a></td>
 <td class="name"><img class="game_objects" id="Object_427" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Tulip_Bulb">Tulip Bulb</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1448,7 +1508,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">250</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rice" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Rice" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Unpolished_Rice" src="img/blank.png" alt=""> Unpolished Rice</td>
 <td class="name"><img class="objects" id="Object_Rice_Seeds" src="img/blank.png" alt=""> Rice Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
@@ -1478,7 +1539,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">2</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">782</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Violet" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Violet" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Violet" src="img/blank.png" alt=""> Violet</td>
 <td class="name"><img class="objects" id="Object_Violet_Seeds" src="img/blank.png" alt=""> Violet Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1508,7 +1570,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">790</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Wisteria" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Wisteria" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Wisteria" src="img/blank.png" alt=""> Wisteria</td>
 <td class="name"><img class="objects" id="Object_Wisteria_Seeds" src="img/blank.png" alt=""> Wisteria Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1580,7 +1643,8 @@ below and apply to all the tables on this page.</p>
 </tr>
 </thead>
 <tbody>
-<tr><td class="icon"><img class="crops" id="Crop_Adzuki_Bean" src="img/blank.png" alt=""></td>
+<tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Adzuki_Bean" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Adzuki_Bean" src="img/blank.png" alt=""> Adzuki Bean</td>
 <td class="name"><img class="objects" id="Object_Adzuki_Bean_Seeds" src="img/blank.png" alt=""> Adzuki Bean Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1610,7 +1674,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">400</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Allium" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Allium" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Allium" src="img/blank.png" alt=""> Allium</td>
 <td class="name"><img class="objects" id="Object_Allium_Seeds" src="img/blank.png" alt=""> Allium Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1640,7 +1705,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">590</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Aloe" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Aloe" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Aloe" src="img/blank.png" alt=""> Aloe</td>
 <td class="name"><img class="objects" id="Object_Aloe_Pod" src="img/blank.png" alt=""> Aloe Pod</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(Year 2+)</td>
@@ -1670,7 +1736,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">1720</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_499" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_499" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_454" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Ancient_Fruit">Ancient Fruit</a></td>
 <td class="name"><img class="game_objects" id="Object_499" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Ancient_Seeds">Ancient Seeds</a></td>
 <td><span class="note">None</span></td>
@@ -1700,7 +1767,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">7</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">1100</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Beef" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Beef" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Beef" src="img/blank.png" alt=""> Beef</td>
 <td class="name"><img class="objects" id="Object_Beefvine_Seeds" src="img/blank.png" alt=""> Beefvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1730,7 +1798,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">550</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Blue_Dream" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Blue_Dream" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Blue_Dream" src="img/blank.png" alt=""> Blue Dream</td>
 <td class="name"><img class="objects" id="Object_Blue_Dream_Starter" src="img/blank.png" alt=""> Blue Dream Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -1760,7 +1829,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">2284</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Blue_Mist" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Blue_Mist" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Blue_Mist" src="img/blank.png" alt=""> Blue Mist</td>
 <td class="name"><img class="objects" id="Object_Blue_Mist_Seeds" src="img/blank.png" alt=""> Blue Mist Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1790,7 +1860,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1320</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_481" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_481" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_258" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Blueberry">Blueberry</a></td>
 <td class="name"><img class="game_objects" id="Object_481" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Blueberry_Seeds">Blueberry Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1820,7 +1891,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">675</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cannabis" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Cannabis" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cannabis" src="img/blank.png" alt=""> Cannabis</td>
 <td class="name"><img class="objects" id="Object_Cannabis_Starter" src="img/blank.png" alt=""> Cannabis Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -1850,7 +1922,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1898</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Carnation" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Carnation" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Carnation" src="img/blank.png" alt=""> Carnation</td>
 <td class="name"><img class="objects" id="Object_Carnation_Seeds" src="img/blank.png" alt=""> Carnation Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1880,7 +1953,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">795</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cassava" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Cassava" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cassava" src="img/blank.png" alt=""> Cassava</td>
 <td class="name"><img class="objects" id="Object_Cassava_Seeds" src="img/blank.png" alt=""> Cassava Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -1910,7 +1984,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">420</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Chevon" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Chevon" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chevon" src="img/blank.png" alt=""> Chevon</td>
 <td class="name"><img class="objects" id="Object_Chevonvine_Seeds" src="img/blank.png" alt=""> Chevonvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1940,7 +2015,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Chicken" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Chicken" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chicken" src="img/blank.png" alt=""> Chicken</td>
 <td class="name"><img class="objects" id="Object_Chickenvine_Seeds" src="img/blank.png" alt=""> Chickenvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -1970,7 +2046,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">400</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Chives" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Chives" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chives" src="img/blank.png" alt=""> Chives</td>
 <td class="name"><img class="objects" id="Object_Chive_Seeds" src="img/blank.png" alt=""> Chive Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2000,7 +2077,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">295</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Clary_Sage" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Clary_Sage" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Clary_Sage" src="img/blank.png" alt=""> Clary Sage</td>
 <td class="name"><img class="objects" id="Object_Clary_Sage_Seeds" src="img/blank.png" alt=""> Clary Sage Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2030,7 +2108,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">550</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Coal_Root" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ParadigmNomad_FantasyCrops">
+<td class="icon"><img class="crops" id="Crop_Coal_Root" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_382" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coal">Coal</a></td>
 <td class="name"><img class="objects" id="Object_Coal_Seeds" src="img/blank.png" alt=""> Coal Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Clint">Clint</a><br />(Spring)</td>
@@ -2060,7 +2139,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">99</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_433" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_433" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_433" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
 <td class="name"><img class="game_objects" id="Object_433" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coffee_Bean">Coffee Bean</a></td>
 <td><a href="http://stardewvalleywiki.com/Traveling_Cart">Traveling Cart</a></td>
@@ -2090,7 +2170,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">2</td>
 <td class="col_35 value">11</td>
 <td class="col_35 value">-1837</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_487" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_487" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_270" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Corn">Corn</a></td>
 <td class="name"><img class="game_objects" id="Object_487" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Corn_Seeds">Corn Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2120,7 +2201,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">100</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cotton" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Cotton" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cotton_Boll" src="img/blank.png" alt=""> Cotton Boll</td>
 <td class="name"><img class="objects" id="Object_Cotton_Seeds" src="img/blank.png" alt=""> Cotton Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2150,7 +2232,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">960</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cucumber" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Cucumber" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cucumber" src="img/blank.png" alt=""> Cucumber</td>
 <td class="name"><img class="objects" id="Object_Cucumber_Starter" src="img/blank.png" alt=""> Cucumber Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -2180,7 +2263,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">7</td>
 <td class="col_35 value">691</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Duck" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Duck" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Duck" src="img/blank.png" alt=""> Duck</td>
 <td class="name"><img class="objects" id="Object_Duckvine_Seeds" src="img/blank.png" alt=""> Duckvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2210,7 +2294,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">650</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Fragrant_Lilac" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Fragrant_Lilac" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Fragrant_Lilac" src="img/blank.png" alt=""> Fragrant Lilac</td>
 <td class="name"><img class="objects" id="Object_Fragrant_Lilac_Pod" src="img/blank.png" alt=""> Fragrant Lilac Pod</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2240,7 +2325,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">215</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Girl_Scout_Cookies" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Girl_Scout_Cookies" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Girl_Scout_Cookies" src="img/blank.png" alt=""> Girl Scout Cookies</td>
 <td class="name"><img class="objects" id="Object_Girl_Scout_Cookies_Starter" src="img/blank.png" alt=""> Girl Scout Cookies Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -2270,7 +2356,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1024</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Gooseberry" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Gooseberry" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Gooseberry" src="img/blank.png" alt=""> Gooseberry</td>
 <td class="name"><img class="objects" id="Object_Gooseberry_Seeds" src="img/blank.png" alt=""> Gooseberry Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -2300,7 +2387,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">7</td>
 <td class="col_35 value">1040</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Green_Crack" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Green_Crack" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Green_Crack" src="img/blank.png" alt=""> Green Crack</td>
 <td class="name"><img class="objects" id="Object_Green_Crack_Starter" src="img/blank.png" alt=""> Green Crack Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -2330,7 +2418,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Green_Pea" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Green_Pea" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Green_Peas" src="img/blank.png" alt=""> Green Peas</td>
 <td class="name"><img class="objects" id="Object_Green_Pea_Seeds" src="img/blank.png" alt=""> Green Pea Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 3+)</td>
@@ -2360,7 +2449,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">478</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Hemp" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Hemp" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Hemp" src="img/blank.png" alt=""> Hemp</td>
 <td class="name"><img class="objects" id="Object_Hemp_Starter" src="img/blank.png" alt=""> Hemp Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -2390,7 +2480,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">1856</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Herbal_Lavender" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Herbal_Lavender" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Herbal_Lavender" src="img/blank.png" alt=""> Herbal Lavender</td>
 <td class="name"><img class="objects" id="Object_Herbal_Lavender_Seeds" src="img/blank.png" alt=""> Herbal Lavender Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2420,7 +2511,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">250</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Honeysuckle" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Honeysuckle" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Honeysuckle" src="img/blank.png" alt=""> Honeysuckle</td>
 <td class="name"><img class="objects" id="Object_Honeysuckle_Starter" src="img/blank.png" alt=""> Honeysuckle Starter</td>
 <td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a><br />(Spring)</td>
@@ -2450,7 +2542,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">1484</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_302" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_302" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_304" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Hops">Hops</a></td>
 <td class="name"><img class="game_objects" id="Object_302" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Hops_Starter">Hops Starter</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2480,7 +2573,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">1</td>
 <td class="col_35 value">21</td>
 <td class="col_35 value">465</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_482" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_482" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_260" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Hot_Pepper">Hot Pepper</a></td>
 <td class="name"><img class="game_objects" id="Object_482" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pepper_Seeds">Pepper Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2510,7 +2604,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">331</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Hybrid" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Hybrid" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Hybrid" src="img/blank.png" alt=""> Hybrid</td>
 <td class="name"><img class="objects" id="Object_Hybrid_Starter" src="img/blank.png" alt=""> Hybrid Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -2540,7 +2635,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">-844</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Hydrangea" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Hydrangea" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Hydrangea" src="img/blank.png" alt=""> Hydrangea</td>
 <td class="name"><img class="objects" id="Object_Hydrangea_Seeds" src="img/blank.png" alt=""> Hydrangea Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -2570,7 +2666,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">630</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Indica" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Indica" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Indica" src="img/blank.png" alt=""> Indica</td>
 <td class="name"><img class="objects" id="Object_Indica_Starter" src="img/blank.png" alt=""> Indica Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -2600,7 +2697,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">156</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Iron_Leaf" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ParadigmNomad_FantasyCrops">
+<td class="icon"><img class="crops" id="Crop_Iron_Leaf" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_380" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Iron_Ore">Iron Ore</a></td>
 <td class="name"><img class="objects" id="Object_Iron_Seeds" src="img/blank.png" alt=""> Iron Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
@@ -2630,7 +2728,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">-176</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Kiwi" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Kiwi" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Kiwi" src="img/blank.png" alt=""> Kiwi</td>
 <td class="name"><img class="objects" id="Object_Kiwi_Seeds" src="img/blank.png" alt=""> Kiwi Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2660,7 +2759,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">250</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Lavender" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Lavender" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Lavender" src="img/blank.png" alt=""> Lavender</td>
 <td class="name"><img class="objects" id="Object_Lavender_Seeds" src="img/blank.png" alt=""> Lavender Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2690,7 +2790,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">610</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Lettuce" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Lettuce" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Lettuce" src="img/blank.png" alt=""> Lettuce</td>
 <td class="name"><img class="objects" id="Object_Lettuce_Seeds" src="img/blank.png" alt=""> Lettuce Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2720,7 +2821,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">530</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Lily" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Lily" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Lily" src="img/blank.png" alt=""> Lily</td>
 <td class="name"><img class="objects" id="Object_Lily_Bulb" src="img/blank.png" alt=""> Lily Bulb</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2750,7 +2852,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">565</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Lotus" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Lotus" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Lotus" src="img/blank.png" alt=""> Lotus</td>
 <td class="name"><img class="objects" id="Object_Lotus_Starter" src="img/blank.png" alt=""> Lotus Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2780,7 +2883,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">310</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_479" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_479" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_254" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Melon">Melon</a></td>
 <td class="name"><img class="game_objects" id="Object_479" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Melon_Seeds">Melon Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2810,7 +2914,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">670</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Mutton" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Mutton" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Mutton" src="img/blank.png" alt=""> Mutton</td>
 <td class="name"><img class="objects" id="Object_Muttonvine_Seeds" src="img/blank.png" alt=""> Muttonvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2840,7 +2945,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Navy_Bean" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Navy_Bean" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Navy_Bean" src="img/blank.png" alt=""> Navy Bean</td>
 <td class="name"><img class="objects" id="Object_Navy_Bean_Seeds" src="img/blank.png" alt=""> Navy Bean Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2870,7 +2976,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">1860</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Northern_Lights" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Northern_Lights" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Northern_Lights" src="img/blank.png" alt=""> Northern Lights</td>
 <td class="name"><img class="objects" id="Object_Northern_Lights_Starter" src="img/blank.png" alt=""> Northern Lights Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -2900,7 +3007,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">7</td>
 <td class="col_35 value">2616</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_OG_Kush" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_OG_Kush" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_OG_Kush" src="img/blank.png" alt=""> OG Kush</td>
 <td class="name"><img class="objects" id="Object_OG_Kush_Starter" src="img/blank.png" alt=""> OG Kush Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -2930,7 +3038,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1780</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Oregano" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Oregano" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Oregano" src="img/blank.png" alt=""> Oregano</td>
 <td class="name"><img class="objects" id="Object_Oregano_Seeds" src="img/blank.png" alt=""> Oregano Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2960,7 +3069,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">620</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Passion_Flower" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Passion_Flower" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Passion_Flower" src="img/blank.png" alt=""> Passion Flower</td>
 <td class="name"><img class="objects" id="Object_Passion_Flower_Seeds" src="img/blank.png" alt=""> Passion Flower Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -2990,7 +3100,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">710</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Petunia" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Petunia" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Petunia" src="img/blank.png" alt=""> Petunia</td>
 <td class="name"><img class="objects" id="Object_Petunia_Seeds" src="img/blank.png" alt=""> Petunia Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -3020,7 +3131,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">695</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_453" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_453" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_376" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Poppy">Poppy</a></td>
 <td class="name"><img class="game_objects" id="Object_453" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Poppy_Seeds">Poppy Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3050,7 +3162,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">740</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Pork" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Pork" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Pork" src="img/blank.png" alt=""> Pork</td>
 <td class="name"><img class="objects" id="Object_Porkvine_Seeds" src="img/blank.png" alt=""> Porkvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3080,7 +3193,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">600</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rabbit" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Rabbit" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Rabbit" src="img/blank.png" alt=""> Rabbit</td>
 <td class="name"><img class="objects" id="Object_Rabbitvine_Seeds" src="img/blank.png" alt=""> Rabbitvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3110,7 +3224,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">300</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_484" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_484" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_264" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Radish">Radish</a></td>
 <td class="name"><img class="game_objects" id="Object_484" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Radish_Seeds">Radish Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3140,7 +3255,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">770</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Raspberry" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Raspberry" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Raspberry" src="img/blank.png" alt=""> Raspberry</td>
 <td class="name"><img class="objects" id="Object_Raspberry_Seeds" src="img/blank.png" alt=""> Raspberry Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -3170,7 +3286,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">516</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_485" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_485" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_266" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Red_Cabbage">Red Cabbage</a></td>
 <td class="name"><img class="game_objects" id="Object_485" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Red_Cabbage_Seeds">Red Cabbage Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -3200,7 +3317,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">1200</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rose" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Rose" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Rose" src="img/blank.png" alt=""> Rose</td>
 <td class="name"><img class="objects" id="Object_Rose_Starter" src="img/blank.png" alt=""> Rose Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3230,7 +3348,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">1336</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_486" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_486" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_268" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Starfruit">Starfruit</a></td>
 <td class="name"><img class="game_objects" id="Object_486" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Starfruit_Seeds">Starfruit Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
@@ -3260,7 +3379,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">1850</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Strawberry_Cough" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Strawberry_Cough" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Strawberry_Cough" src="img/blank.png" alt=""> Strawberry Cough</td>
 <td class="name"><img class="objects" id="Object_Strawberry_Cough_Starter" src="img/blank.png" alt=""> Strawberry Cough Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -3290,7 +3410,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">772</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sugar_Cane" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Sugar_Cane" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sugar_Cane" src="img/blank.png" alt=""> Sugar Cane</td>
 <td class="name"><img class="objects" id="Object_Sugar_Cane_Seeds" src="img/blank.png" alt=""> Sugar Cane Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
@@ -3320,7 +3441,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">810</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_496" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_496" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_396" src="img/blank.png" alt=""> <span class="group">Summer Forage</span></td>
 <td class="name"><img class="game_objects" id="Object_496" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Summer_Seeds">Summer Seeds</a></td>
 <td><span class="note">None</span></td>
@@ -3350,7 +3472,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">400</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Summer_Rose" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Summer_Rose" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Summer_Rose" src="img/blank.png" alt=""> Summer Rose</td>
 <td class="name"><img class="objects" id="Object_Summer_Rose_Starter" src="img/blank.png" alt=""> Summer Rose Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3380,7 +3503,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">1336</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_455" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_455" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_593" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Summer_Spangle">Summer Spangle</a></td>
 <td class="name"><img class="game_objects" id="Object_455" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Spangle_Seeds">Spangle Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3410,7 +3534,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">400</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_431" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_431" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_421" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sunflower">Sunflower</a></td>
 <td class="name"><img class="game_objects" id="Object_431" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sunflower_Seeds">Sunflower Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3440,7 +3565,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">360</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Tea" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Tea" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Tea_Leaf" src="img/blank.png" alt=""> Tea Leaf</td>
 <td class="name"><img class="objects" id="Object_Tea_Seeds" src="img/blank.png" alt=""> Tea Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
@@ -3470,7 +3596,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">210</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Tobacco" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Tobacco" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Tobacco" src="img/blank.png" alt=""> Tobacco</td>
 <td class="name"><img class="objects" id="Object_Tobacco_Seeds" src="img/blank.png" alt=""> Tobacco Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3500,7 +3627,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">570</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_480" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_480" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_256" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Tomato">Tomato</a></td>
 <td class="name"><img class="game_objects" id="Object_480" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Tomato_Seeds">Tomato Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3530,7 +3658,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">328</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rice" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Rice" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Unpolished_Rice" src="img/blank.png" alt=""> Unpolished Rice</td>
 <td class="name"><img class="objects" id="Object_Rice_Seeds" src="img/blank.png" alt=""> Rice Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
@@ -3560,7 +3689,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">2</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">782</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Wasabi" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Wasabi" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Wasabi_Root" src="img/blank.png" alt=""> Wasabi Root</td>
 <td class="name"><img class="objects" id="Object_Wasabi_Seeds" src="img/blank.png" alt=""> Wasabi Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3590,7 +3720,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">725</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_483" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_483" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_262" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Wheat">Wheat</a></td>
 <td class="name"><img class="game_objects" id="Object_483" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Wheat_Seeds">Wheat Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3620,7 +3751,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">315</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_White_Widow" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_White_Widow" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_White_Widow" src="img/blank.png" alt=""> White Widow</td>
 <td class="name"><img class="objects" id="Object_White_Widow_Starter" src="img/blank.png" alt=""> White Widow Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -3692,7 +3824,8 @@ below and apply to all the tables on this page.</p>
 </tr>
 </thead>
 <tbody>
-<tr><td class="icon"><img class="game_crops" id="Crop_299" src="img/blank.png" alt=""></td>
+<tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_299" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_300" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Amaranth">Amaranth</a></td>
 <td class="name"><img class="game_objects" id="Object_299" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Amaranth_Seeds">Amaranth Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3722,7 +3855,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">830</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_499" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_499" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_454" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Ancient_Fruit">Ancient Fruit</a></td>
 <td class="name"><img class="game_objects" id="Object_499" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Ancient_Seeds">Ancient Seeds</a></td>
 <td><span class="note">None</span></td>
@@ -3752,7 +3886,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">7</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">1100</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_489" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_489" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_274" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Artichoke">Artichoke</a></td>
 <td class="name"><img class="game_objects" id="Object_489" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Artichoke_Seeds">Artichoke Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -3782,7 +3917,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">770</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Barley" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Barley" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Barley" src="img/blank.png" alt=""> Barley</td>
 <td class="name"><img class="objects" id="Object_Barley_Seeds" src="img/blank.png" alt=""> Barley Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -3812,7 +3948,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">315</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Bee_Balm" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Bee_Balm" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Bee_Balm" src="img/blank.png" alt=""> Bee Balm</td>
 <td class="name"><img class="objects" id="Object_Bee_Balm_Seeds" src="img/blank.png" alt=""> Bee Balm Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Marnie">Marnie</a></td>
@@ -3842,7 +3979,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">400</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_494" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_494" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_284" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Beet">Beet</a></td>
 <td class="name"><img class="game_objects" id="Object_494" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Beet_Seeds">Beet Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
@@ -3872,7 +4010,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">880</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Bell_Pepper" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Bell_Pepper" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Bell_Pepper" src="img/blank.png" alt=""> Bell Pepper</td>
 <td class="name"><img class="objects" id="Object_Bell_Pepper_Seeds" src="img/blank.png" alt=""> Bell Pepper Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3902,7 +4041,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">374</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Blackberry" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Blackberry" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_410" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Blackberry">Blackberry</a></td>
 <td class="name"><img class="objects" id="Object_Blackberry_Seeds" src="img/blank.png" alt=""> Blackberry Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -3932,7 +4072,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">84</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Blue_Dream" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Blue_Dream" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Blue_Dream" src="img/blank.png" alt=""> Blue Dream</td>
 <td class="name"><img class="objects" id="Object_Blue_Dream_Starter" src="img/blank.png" alt=""> Blue Dream Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -3962,7 +4103,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">2284</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_491" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_491" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_278" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Bok_Choy">Bok Choy</a></td>
 <td class="name"><img class="game_objects" id="Object_491" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Bok_Choy_Seeds">Bok Choy Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -3992,7 +4134,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">990</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Broccoli" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Broccoli" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Broccoli" src="img/blank.png" alt=""> Broccoli</td>
 <td class="name"><img class="objects" id="Object_Broccoli_Seeds" src="img/blank.png" alt=""> Broccoli Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -4022,7 +4165,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">640</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cabbage" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Cabbage" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cabbage" src="img/blank.png" alt=""> Cabbage</td>
 <td class="name"><img class="objects" id="Object_Cabbage_Seeds" src="img/blank.png" alt=""> Cabbage Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4052,7 +4196,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">640</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Camellia" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Camellia" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Camellia" src="img/blank.png" alt=""> Camellia</td>
 <td class="name"><img class="objects" id="Object_Camellia_Seeds" src="img/blank.png" alt=""> Camellia Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -4082,7 +4227,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">7</td>
 <td class="col_35 value">647</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cannabis" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Cannabis" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cannabis" src="img/blank.png" alt=""> Cannabis</td>
 <td class="name"><img class="objects" id="Object_Cannabis_Starter" src="img/blank.png" alt=""> Cannabis Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -4112,7 +4258,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1898</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Carrot" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Carrot" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Carrot" src="img/blank.png" alt=""> Carrot</td>
 <td class="name"><img class="objects" id="Object_Carrot_Seeds" src="img/blank.png" alt=""> Carrot Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4142,7 +4289,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">535</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Celery" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Celery" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Celery" src="img/blank.png" alt=""> Celery</td>
 <td class="name"><img class="objects" id="Object_Celery_Seeds" src="img/blank.png" alt=""> Celery Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -4172,7 +4320,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">575</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Chevon" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Chevon" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chevon" src="img/blank.png" alt=""> Chevon</td>
 <td class="name"><img class="objects" id="Object_Chevonvine_Seeds" src="img/blank.png" alt=""> Chevonvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4202,7 +4351,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Chrysanthemum" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Chrysanthemum" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chrysanthemum" src="img/blank.png" alt=""> Chrysanthemum</td>
 <td class="name"><img class="objects" id="Object_Chrysanthemum_Seeds" src="img/blank.png" alt=""> Chrysanthemum Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4232,7 +4382,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">765</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Clematis" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Clematis" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Clematis" src="img/blank.png" alt=""> Clematis</td>
 <td class="name"><img class="objects" id="Object_Clematis_Starter" src="img/blank.png" alt=""> Clematis Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4262,7 +4413,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">526</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_487" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_487" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_270" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Corn">Corn</a></td>
 <td class="name"><img class="game_objects" id="Object_487" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Corn_Seeds">Corn Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4292,7 +4444,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">100</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Cotton" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Cotton" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cotton_Boll" src="img/blank.png" alt=""> Cotton Boll</td>
 <td class="name"><img class="objects" id="Object_Cotton_Seeds" src="img/blank.png" alt=""> Cotton Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4322,7 +4475,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">960</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_493" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_493" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_282" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cranberries">Cranberries</a></td>
 <td class="name"><img class="game_objects" id="Object_493" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cranberry_Seeds">Cranberry Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4352,7 +4506,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">548</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Dahlia" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Dahlia" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Dahlia" src="img/blank.png" alt=""> Dahlia</td>
 <td class="name"><img class="objects" id="Object_Dahlia_Seeds" src="img/blank.png" alt=""> Dahlia Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -4382,7 +4537,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">655</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Money_Plant" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ParadigmNomad_FantasyCrops">
+<td class="icon"><img class="crops" id="Crop_Money_Plant" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Doubloom" src="img/blank.png" alt=""> Doubloom</td>
 <td class="name"><img class="objects" id="Object_Doubloom_Seeds" src="img/blank.png" alt=""> Doubloom Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
@@ -4412,7 +4568,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">6</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">350</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Duck" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Duck" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Duck" src="img/blank.png" alt=""> Duck</td>
 <td class="name"><img class="objects" id="Object_Duckvine_Seeds" src="img/blank.png" alt=""> Duckvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4442,7 +4599,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">650</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_488" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_488" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_272" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Eggplant">Eggplant</a></td>
 <td class="name"><img class="game_objects" id="Object_488" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Eggplant_Seeds">Eggplant Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4472,7 +4630,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">281</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_English_Rose" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_English_Rose" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_English_Rose" src="img/blank.png" alt=""> English Rose</td>
 <td class="name"><img class="objects" id="Object_English_Rose_Seeds" src="img/blank.png" alt=""> English Rose Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4502,7 +4661,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">770</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Fairy_Duster" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Fairy_Duster" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Fairy_Duster" src="img/blank.png" alt=""> Fairy Duster</td>
 <td class="name"><img class="objects" id="Object_Fairy_Duster_Pod" src="img/blank.png" alt=""> Fairy Duster Pod</td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
@@ -4532,7 +4692,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">270</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_425" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_425" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_595" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fairy_Rose">Fairy Rose</a></td>
 <td class="name"><img class="game_objects" id="Object_425" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fairy_Seeds">Fairy Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4562,7 +4723,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">670</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_497" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_497" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_404" src="img/blank.png" alt=""> <span class="group">Fall Forage</span></td>
 <td class="name"><img class="game_objects" id="Object_497" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fall_Seeds">Fall Seeds</a></td>
 <td><span class="note">None</span></td>
@@ -4592,7 +4754,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">200</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Fall_Rose" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Fall_Rose" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Fall_Rose" src="img/blank.png" alt=""> Fall Rose</td>
 <td class="name"><img class="objects" id="Object_Fall_Rose_Starter" src="img/blank.png" alt=""> Fall Rose Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4622,7 +4785,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">1336</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Fennel" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Fennel" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Fennel" src="img/blank.png" alt=""> Fennel</td>
 <td class="name"><img class="objects" id="Object_Fennel_Seeds" src="img/blank.png" alt=""> Fennel Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -4652,7 +4816,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">295</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Freesia" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Freesia" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Freesia" src="img/blank.png" alt=""> Freesia</td>
 <td class="name"><img class="objects" id="Object_Freesia_Bulb" src="img/blank.png" alt=""> Freesia Bulb</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4682,7 +4847,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">710</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Geranium" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Geranium" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Geranium" src="img/blank.png" alt=""> Geranium</td>
 <td class="name"><img class="objects" id="Object_Geranium_Seeds" src="img/blank.png" alt=""> Geranium Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -4712,7 +4878,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">520</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Ginger" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Ginger" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Ginger" src="img/blank.png" alt=""> Ginger</td>
 <td class="name"><img class="objects" id="Object_Ginger_Seeds" src="img/blank.png" alt=""> Ginger Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
@@ -4742,7 +4909,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">430</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Girl_Scout_Cookies" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Girl_Scout_Cookies" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Girl_Scout_Cookies" src="img/blank.png" alt=""> Girl Scout Cookies</td>
 <td class="name"><img class="objects" id="Object_Girl_Scout_Cookies_Starter" src="img/blank.png" alt=""> Girl Scout Cookies Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -4772,7 +4940,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1024</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Gold_Leaf" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ParadigmNomad_FantasyCrops">
+<td class="icon"><img class="crops" id="Crop_Gold_Leaf" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_384" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Gold_Ore">Gold Ore</a></td>
 <td class="name"><img class="objects" id="Object_Gold_Seeds" src="img/blank.png" alt=""> Gold Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
@@ -4802,7 +4971,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">-385</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_301" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_301" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_398" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Grape">Grape</a></td>
 <td class="name"><img class="game_objects" id="Object_301" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Grape_Starter">Grape Starter</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4832,7 +5002,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">580</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Green_Crack" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Green_Crack" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Green_Crack" src="img/blank.png" alt=""> Green Crack</td>
 <td class="name"><img class="objects" id="Object_Green_Crack_Starter" src="img/blank.png" alt=""> Green Crack Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -4862,7 +5033,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Hemp" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Hemp" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Hemp" src="img/blank.png" alt=""> Hemp</td>
 <td class="name"><img class="objects" id="Object_Hemp_Starter" src="img/blank.png" alt=""> Hemp Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -4892,7 +5064,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">8</td>
 <td class="col_35 value">1856</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Hybrid" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Hybrid" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Hybrid" src="img/blank.png" alt=""> Hybrid</td>
 <td class="name"><img class="objects" id="Object_Hybrid_Starter" src="img/blank.png" alt=""> Hybrid Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -4922,7 +5095,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">-844</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Iris" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_kildarien_farmertoflorist">
+<td class="icon"><img class="crops" id="Crop_Iris" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Iris" src="img/blank.png" alt=""> Iris</td>
 <td class="name"><img class="objects" id="Object_Iris_Bulb" src="img/blank.png" alt=""> Iris Bulb</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4952,7 +5126,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">740</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Kiwi" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Kiwi" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Kiwi" src="img/blank.png" alt=""> Kiwi</td>
 <td class="name"><img class="objects" id="Object_Kiwi_Seeds" src="img/blank.png" alt=""> Kiwi Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -4982,7 +5157,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">250</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_OG_Kush" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_OG_Kush" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_OG_Kush" src="img/blank.png" alt=""> OG Kush</td>
 <td class="name"><img class="objects" id="Object_OG_Kush_Starter" src="img/blank.png" alt=""> OG Kush Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -5012,7 +5188,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1780</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Peanut" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Peanut" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Peanut" src="img/blank.png" alt=""> Peanut</td>
 <td class="name"><img class="objects" id="Object_Peanut_Seeds" src="img/blank.png" alt=""> Peanut Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -5042,7 +5219,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">800</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Pork" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_paradigmnomad_freshmeat">
+<td class="icon"><img class="crops" id="Crop_Pork" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Pork" src="img/blank.png" alt=""> Pork</td>
 <td class="name"><img class="objects" id="Object_Porkvine_Seeds" src="img/blank.png" alt=""> Porkvine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5072,7 +5250,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">600</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_490" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_490" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_276" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pumpkin">Pumpkin</a></td>
 <td class="name"><img class="game_objects" id="Object_490" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pumpkin_Seeds">Pumpkin Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5102,7 +5281,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">860</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Purple_Coneflower" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Purple_Coneflower" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Purple_Coneflower" src="img/blank.png" alt=""> Purple Coneflower</td>
 <td class="name"><img class="objects" id="Object_Purple_Coneflower_Seeds" src="img/blank.png" alt=""> Purple Coneflower Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5132,7 +5312,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">260</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rose" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Rose" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Rose" src="img/blank.png" alt=""> Rose</td>
 <td class="name"><img class="objects" id="Object_Rose_Starter" src="img/blank.png" alt=""> Rose Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5162,7 +5343,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">1336</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rosemary" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Rosemary" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Rosemary" src="img/blank.png" alt=""> Rosemary</td>
 <td class="name"><img class="objects" id="Object_Rosemary_Seeds" src="img/blank.png" alt=""> Rosemary Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5192,7 +5374,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">420</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sage" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Sage" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sage" src="img/blank.png" alt=""> Sage</td>
 <td class="name"><img class="objects" id="Object_Sage_Seeds" src="img/blank.png" alt=""> Sage Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5222,7 +5405,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">590</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sativa" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Sativa" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sativa" src="img/blank.png" alt=""> Sativa</td>
 <td class="name"><img class="objects" id="Object_Sativa_Starter" src="img/blank.png" alt=""> Sativa Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -5252,7 +5436,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">156</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sour_Diesel" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Sour_Diesel" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sour_Diesel" src="img/blank.png" alt=""> Sour Diesel</td>
 <td class="name"><img class="objects" id="Object_Sour_Diesel_Starter" src="img/blank.png" alt=""> Sour Diesel Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -5282,7 +5467,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1280</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Soybean" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Soybean" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Soybean" src="img/blank.png" alt=""> Soybean</td>
 <td class="name"><img class="objects" id="Object_Soybean_Seeds" src="img/blank.png" alt=""> Soybean Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -5312,7 +5498,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">360</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Spinach" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Spinach" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Spinach" src="img/blank.png" alt=""> Spinach</td>
 <td class="name"><img class="objects" id="Object_Spinach_Seeds" src="img/blank.png" alt=""> Spinach Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5342,7 +5529,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">27</td>
 <td class="col_35 value">930</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Strawberry_Cough" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_Strawberry_Cough" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Strawberry_Cough" src="img/blank.png" alt=""> Strawberry Cough</td>
 <td class="name"><img class="objects" id="Object_Strawberry_Cough_Starter" src="img/blank.png" alt=""> Strawberry Cough Starter</td>
 <td><a href="http://stardewvalleywiki.com/Harvey">Harvey</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -5372,7 +5560,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">772</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_431" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_431" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_421" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sunflower">Sunflower</a></td>
 <td class="name"><img class="game_objects" id="Object_431" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sunflower_Seeds">Sunflower Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5402,7 +5591,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">360</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_347" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_347" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_417" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sweet_Gem_Berry">Sweet Gem Berry</a></td>
 <td class="name"><img class="game_objects" id="Object_347" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Rare_Seed">Rare Seed</a></td>
 <td><a href="http://stardewvalleywiki.com/Traveling_Cart">Traveling Cart</a></td>
@@ -5432,7 +5622,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">2000</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sweet_Jasmine" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_mizu_flowers">
+<td class="icon"><img class="crops" id="Crop_Sweet_Jasmine" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sweet_Jasmine" src="img/blank.png" alt=""> Sweet Jasmine</td>
 <td class="name"><img class="objects" id="Object_Sweet_Jasmine_Seeds" src="img/blank.png" alt=""> Sweet Jasmine Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5462,7 +5653,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">530</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Sweet_Potato" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Sweet_Potato" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sweet_Potato" src="img/blank.png" alt=""> Sweet Potato</td>
 <td class="name"><img class="objects" id="Object_Sweet_Potato_Seeds" src="img/blank.png" alt=""> Sweet Potato Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5492,7 +5684,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">5</td>
 <td class="col_35 value">510</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Tea" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Tea" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Tea_Leaf" src="img/blank.png" alt=""> Tea Leaf</td>
 <td class="name"><img class="objects" id="Object_Tea_Seeds" src="img/blank.png" alt=""> Tea Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
@@ -5522,7 +5715,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">210</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Thyme" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Thyme" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Thyme" src="img/blank.png" alt=""> Thyme</td>
 <td class="name"><img class="objects" id="Object_Thyme_Seeds" src="img/blank.png" alt=""> Thyme Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5552,7 +5746,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">9</td>
 <td class="col_35 value">465</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Rice" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Rice" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Unpolished_Rice" src="img/blank.png" alt=""> Unpolished Rice</td>
 <td class="name"><img class="objects" id="Object_Rice_Seeds" src="img/blank.png" alt=""> Rice Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Spring, Summer)</td>
@@ -5582,7 +5777,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">2</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">782</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Watermelon_Mizu" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Watermelon_Mizu" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Watermelon" src="img/blank.png" alt=""> Watermelon</td>
 <td class="name"><img class="objects" id="Object_Watermelon_Seeds" src="img/blank.png" alt=""> Watermelon Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5612,7 +5808,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">5</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">1100</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_483" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_483" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_262" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Wheat">Wheat</a></td>
 <td class="name"><img class="game_objects" id="Object_483" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Wheat_Seeds">Wheat Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5642,7 +5839,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">315</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_White_Widow" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_PPJA_cannabiskit">
+<td class="icon"><img class="crops" id="Crop_White_Widow" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_White_Widow" src="img/blank.png" alt=""> White Widow</td>
 <td class="name"><img class="objects" id="Object_White_Widow_Starter" src="img/blank.png" alt=""> White Widow Starter</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(1+ &#x2665; with <a href="http://stardewvalleywiki.com/Sebastian">Sebastian</a>)</td>
@@ -5672,7 +5870,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">528</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_492" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_492" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_280" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Yam">Yam</a></td>
 <td class="name"><img class="game_objects" id="Object_492" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Yam_Seeds">Yam Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5744,7 +5943,8 @@ below and apply to all the tables on this page.</p>
 </tr>
 </thead>
 <tbody>
-<tr><td class="icon"><img class="crops" id="Crop_Elderberry" src="img/blank.png" alt=""></td>
+<tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Elderberry" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Elderberry" src="img/blank.png" alt=""> Elderberry</td>
 <td class="name"><img class="objects" id="Object_Elderberry_Seeds" src="img/blank.png" alt=""> Elderberry Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a><br />(Year 2+)</td>
@@ -5774,7 +5974,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">4</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">1082</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Iridium_Fern" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ParadigmNomad_FantasyCrops">
+<td class="icon"><img class="crops" id="Crop_Iridium_Fern" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_386" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Iridium_Ore">Iridium Ore</a></td>
 <td class="name"><img class="objects" id="Object_Iridium_Seeds" src="img/blank.png" alt=""> Iridium Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Krobus">Krobus</a></td>
@@ -5804,7 +6005,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">-660</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Juniper" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Juniper" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Juniper_Berry" src="img/blank.png" alt=""> Juniper Berry</td>
 <td class="name"><img class="objects" id="Object_Juniper_Berry_Seeds" src="img/blank.png" alt=""> Juniper Berry Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5834,7 +6036,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">3</td>
 <td class="col_35 value">7</td>
 <td class="col_35 value">1376</td>
-</tr><tr><td class="icon"><img class="crops" id="Crop_Mint" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_ppja_fruitsandveggies">
+<td class="icon"><img class="crops" id="Crop_Mint" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Mint" src="img/blank.png" alt=""> Mint</td>
 <td class="name"><img class="objects" id="Object_Mint_Seeds" src="img/blank.png" alt=""> Mint Seeds</td>
 <td><a href="http://stardewvalleywiki.com/Pierre">Pierre</a></td>
@@ -5864,7 +6067,8 @@ below and apply to all the tables on this page.</p>
 <td class="col_35 value">--</td>
 <td class="col_35 value">13</td>
 <td class="col_35 value">685</td>
-</tr><tr><td class="icon"><img class="game_crops" id="Crop_498" src="img/blank.png" alt=""></td>
+</tr><tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_498" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_412" src="img/blank.png" alt=""> <span class="group">Winter Forage</span></td>
 <td class="name"><img class="game_objects" id="Object_498" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Winter_Seeds">Winter Seeds</a></td>
 <td><span class="note">None</span></td>
@@ -5936,7 +6140,8 @@ below and apply to all the tables on this page.</p>
 </tr>
 </thead>
 <tbody>
-<tr><td class="icon"><img class="game_crops" id="Crop_802" src="img/blank.png" alt=""></td>
+<tr class="filter_base_game">
+<td class="icon"><img class="game_crops" id="Crop_802" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_90" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cactus_Fruit">Cactus Fruit</a></td>
 <td class="name"><img class="game_objects" id="Object_802" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cactus_Seeds">Cactus Seeds</a></td>
 <td><a href="http://stardewvalleywiki.com/Sandy">Sandy</a></td>
