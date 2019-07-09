@@ -188,7 +188,7 @@ foreach my $t (keys %{$GameData->{'FruitTrees'}}) {
 	$GameData->{'FruitTrees'}{$t}{'__SS_Y'} = $base_y;
 }
 $game_trees->write(file=>"../img/game_trees.png") or LogMessage("DIE: Error writing game tree sprites: " . $game_trees->errstr, 1);
-$game_trees->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_trees.png") or
+$game_trees->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_trees_x2.png") or
 	LogMessage("DIE: Error writing x2 game tree sprites: " . $game_trees->errstr, 1);
 
 # For Crops we need to handle those cases where the crop has dynamic coloring.

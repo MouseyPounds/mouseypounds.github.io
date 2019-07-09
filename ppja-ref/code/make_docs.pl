@@ -1083,12 +1083,22 @@ sub WriteFruitTreeSummary {
 
 	print STDOUT "Generating Fruit Tree Summary\n";
 	my $longdesc = <<"END_PRINT";
-<p>A summary of fruit trees from the following mods:</p>
-<ul>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertoflorist'}{'Name'}</a> version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1721">$ModInfo->{'paradigmnomad.freshmeat'}{'Name'}</a> version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1671">$ModInfo->{'ppja.moretrees'}{'Name'}</a> version $ModInfo->{'ppja.moretrees'}{'Version'}</li>
-</ul>
+<p>A summary of fruit trees from the following from the following sources. The checkboxes next to them can be used to
+show or hide content specific to that source:</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+<label><input class="filter_check" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked"> 
+$ModInfo->{'kildarien.farmertoflorist'}{'Name'} version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked"> 
+$ModInfo->{'paradigmnomad.freshmeat'}{'Name'} version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)<br />
+<label><input class="filter_check" type="checkbox" name="filter_ppja_moretrees" id="filter_ppja_moretrees" value="show" checked="checked"> 
+$ModInfo->{'ppja.moretrees'}{'Name'} version $ModInfo->{'ppja.moretrees'}{'Version'}</label> 
+(<a href="https://www.nexusmods.com/stardewvalley/mods/1671">Nexus page</a>)<br />
+</fieldset>
+
 <p>The <span class="note">Break Even Amount</span> column is a simplistic measure of how many base (no-star) quality products need to be sold
 to recoup the cost of the initial sapling. Smaller numbers are better, although those who care about these kind of measurements will probably
 be processing the items in machines where possible rather than selling them raw.</p>
@@ -1122,7 +1132,8 @@ END_PRINT
 		my $amt = ceil($scost/$cprice);
 		
 		my $output = <<"END_PRINT";
-<tr><td class="icon">$imgTag</td>
+<tr class="filter_base_game">
+<td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
@@ -1163,7 +1174,8 @@ END_PRINT
 		my $amt = ceil($scost/$cprice);
 
 		my $output = <<"END_PRINT";
-<tr><td class="icon">$imgTag</td>
+<tr class="$ModData->{'FruitTrees'}{$key}{'__FILTER'}">
+<td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
@@ -1231,6 +1243,8 @@ sub WriteMachineSummary {
 	print STDOUT "Generating Machine Summary\n";
 	my $longdesc = <<"END_PRINT";
 <p>A summary of machines from the following mods:</p>
+
+
 <ul>
 <li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.avcfr'}{'Name'}</a> version $ModInfo->{'ppja.avcfr'}{'Version'}
 including enabling recipes from:
@@ -1498,7 +1512,6 @@ $ModInfo->{'ppja.fruitsandveggies'}{'Name'} version $ModInfo->{'ppja.fruitsandve
 $ModInfo->{'mizu.flowers'}{'Name'} version $ModInfo->{'mizu.flowers'}{'Version'}</label> 
 (<a href="https://www.nexusmods.com/stardewvalley/mods/2028">Nexus page</a>)<br />
 </fieldset>
-
 <p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
 the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
 whether the crop has a trellis (or similar structure that blocks walking on it). The <span class="note">XP</span> column is the amount of
