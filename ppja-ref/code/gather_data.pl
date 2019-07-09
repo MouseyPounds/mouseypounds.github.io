@@ -133,6 +133,22 @@ copy("$GameDir/../Maps/springobjects.png", "../img/game_objects.png") or LogMess
 copy("$GameDir/../Tilesheets/Craftables.png", "../img/game_craftables.png") or LogMessage("WARNING: Error copying game craftable sprites: $!", 1);
 copy("$GameDir/../Tilesheets/weapons.png", "../img/game_weapons.png") or LogMessage("WARNING: Error copying game weapon sprites: $!", 1);
 copy("$GameDir/../Characters/Farmer/hats.png", "../img/game_hats.png") or LogMessage("WARNING: Error copying game hat sprites: $!", 1);
+# But to make the x2 versions we need to use Imager
+LogMessage("And scaling those spritesheets", 1);
+my $game_sprites = Imager->new();
+$game_sprites->read(file=>"$GameDir/../Maps/springobjects.png") or LogMessage("DIE: Error reading game object sprites:" . $game_sprites->errstr, 1);
+$game_sprites->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_objects_x2.png") or
+	LogMessage("DIE: Error writing x2 game object sprites: " . $game_sprites->errstr, 1);
+$game_sprites->read(file=>"$GameDir/../Tilesheets/Craftables.png") or LogMessage("DIE: Error reading game craftable sprites:" . $game_sprites->errstr, 1);
+$game_sprites->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_craftables_x2.png") or
+	LogMessage("DIE: Error writing x2 game craftable sprites: " . $game_sprites->errstr, 1);
+$game_sprites->read(file=>"$GameDir/../Tilesheets/weapons.png") or LogMessage("DIE: Error reading game weapon sprites:" . $game_sprites->errstr, 1);
+$game_sprites->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_weapons_x2.png") or
+	LogMessage("DIE: Error writing x2 game weapon sprites: " . $game_sprites->errstr, 1);
+$game_sprites->read(file=>"$GameDir/../Characters/Farmer/hats.png") or LogMessage("DIE: Error reading game hat sprites:" . $game_sprites->errstr, 1);
+$game_sprites->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_hats_x2.png") or
+	LogMessage("DIE: Error writing x2 game hat sprites: " . $game_sprites->errstr, 1);
+	
 LogMessage("Modifying other game spritesheets", 1);
 # For Fruit Trees we are going to discard the final sprite which has just the stump and falling leaves and replace it
 #  with a fully stocked tree. This requires copying over the appropriate seasonal tree and then overlaying three
@@ -172,6 +188,8 @@ foreach my $t (keys %{$GameData->{'FruitTrees'}}) {
 	$GameData->{'FruitTrees'}{$t}{'__SS_Y'} = $base_y;
 }
 $game_trees->write(file=>"../img/game_trees.png") or LogMessage("DIE: Error writing game tree sprites: " . $game_trees->errstr, 1);
+$game_trees->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_trees.png") or
+	LogMessage("DIE: Error writing x2 game tree sprites: " . $game_trees->errstr, 1);
 
 # For Crops we need to handle those cases where the crop has dynamic coloring.
 # We need to grab the greyscale placeholder, color it based on first color definition, and then overlay onto final growth phase.
@@ -200,6 +218,8 @@ foreach my $c (keys %{$GameData->{'Crops'}}) {
 	}
 }
 $game_crops->write(file=>"../img/game_crops.png") or LogMessage("DIE: Error writing game crop sprites: " . $game_crops->errstr, 1);
+$game_crops->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_crops.png") or
+	LogMessage("DIE: Error writing x2 game crop sprites: " . $game_crops->errstr, 1);
 
 LogMessage("Changing mod fruit tree sprites", 1);
 foreach my $t (keys %{$ModData->{'FruitTrees'}}) {
@@ -278,7 +298,7 @@ sub ParseGameData {
 
 	# There are only certain folders we explicitly want to open; these are hardcoded
 	# Files are assumed to be JSON format without headers, like those from StardewXNBHack
-	my @Filenames = qw(ObjectInformation Crops BigCraftablesInformation CookingRecipes CraftingRecipes FruitTrees);
+	my @Filenames = qw(ObjectInformation Crops BigCraftablesInformation CookingRecipes CraftingRecipes FruitTrees TV/CookingChannel);
 	LogMessage("Parsing Game Data in $BaseDir", 1);
 	foreach my $f (@Filenames) {
 		LogMessage("  Checking for $f", 1);

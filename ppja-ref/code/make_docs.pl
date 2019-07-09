@@ -285,7 +285,20 @@ sub GetImgTag {
 	my $img_alt = "";
 	if (looks_like_number($input)) {
 		if ($input < 0) {
-			# TODO: Should categories give an image?
+			# Hardcoding particular categories
+			if ($input == -6) {
+				return GetImgTag("Milk", "object", $isBig, $extraClasses);
+			} elsif ($input == -5) {
+				return GetImgTag("Egg", "object", $isBig, $extraClasses);
+			} elsif ($input == -4) {
+				return GetImgTag("Sardine", "object", $isBig, $extraClasses);
+			} elsif ($input == -80) {
+				return GetImgTag("Tulip", "object", $isBig, $extraClasses);
+			} elsif ($input == -79) {
+				return GetImgTag("Orange", "object", $isBig, $extraClasses);
+			} elsif ($input == -75) {
+				return GetImgTag("Bok Choy", "object", $isBig, $extraClasses);
+			} 
 		} else {
 			if ($type =~ /^objects?/i) {
 				if (exists $GameData->{'ObjectInformation'}{$input}) {
@@ -434,6 +447,32 @@ END_PRINT
 	return $output;
 }
 
+# GetHealthAndEnergy - returns health and energy from edibility and optional quality
+#   Uses formula from wiki template; should look up actual code ref to verify
+sub GetHealthAndEnergy {
+	my $edibility = shift;
+	my $quality = shift;
+	my $health = 0;
+	my $energy = 0;
+	if (not defined $quality) {
+		$quality = 0;
+	}
+	if (not defined $edibility) {
+		warn "GetHealthAndEnergy called with undefined edibility";
+	} else {
+		if ($edibility <= -300) {
+			# Technically, this is just inedible
+			$health = "--";
+			$energy = "--";
+		} else {
+			$energy = ceil((2.5 + $quality) * $edibility);
+			$health = max(0, floor(0.45 * $energy));
+		}
+	}
+	
+	return ($health, $energy);
+}
+
 # GetTOCStart - creates and returns HTML code for beginning of TOC
 sub GetTOCStart {
 	my $output = <<"END_PRINT";
@@ -550,13 +589,16 @@ sub TranslatePreconditions {
 			my $num_hearts = $2/250;
 			push @results, "($num_hearts+ &#x2665; with " . Wikify($1) . ")";
 		} elsif ($arg =~ /^z /) {
-			my @removal = split(/, ?/, $arg);
+			# This can look like either 'z summer, z fall, z winter' or 'z spring summer winter'
+			$arg =~ s/[z, ]+/|/g;
+			my @removal = split(/\|/, $arg);
 			foreach my $r (@removal) {
-				$r =~ s/^z //;
 				my $s = ucfirst $r;
 				delete $seasons{$s} if (exists $seasons{$s});
 				$changed_seasons = 1;
 			}
+		} else {
+			warn "TranslatePreconditions doesn't know how to deal with {$arg}";
 		}
 	}
 	if ($changed_seasons) {
@@ -668,6 +710,157 @@ sub GatherSpriteInfo {
 	return 1;
 }
 
+# GetIngredients - returns a list of cooking or crafting ingredients for a given item
+#
+#   item - this item (ID or Name; Name should only be given for mod items)
+#   type - [optional] 'cooking' (default) or 'crafting'
+sub GetIngredients {
+	my $item = shift;
+	my $type = shift;
+	# Defaults
+	my $cat_name = "Cooking";
+	my $cat_num = -7;
+	
+	if (not defined $item or $item eq "") {
+		warn "GetIngredients received invalid item ($item)";
+		return undef;
+	}
+	if (defined $type and (lc $type ne 'cooking') and (lc $type ne 'crafting')) {
+		warn "GetIngredients received invalid type ($type)";
+		return undef;
+	} elsif (not defined $type) {
+		$type = 'cooking';
+	}
+
+	if (lc $type eq 'crafting') {
+		$cat_name = "Crafting";
+		$cat_num  = -8;
+	}
+	my @ingr_list = ();
+	my $found_recipe = 0;
+	
+	
+	# For base game items, we look the ID up in the ObjectInformation structure and check the category
+	#  Then we have to see if we can find a recipe that has that ID as a product
+	# For mod items we check for a defined 'Recipe' along with the category.
+	if (looks_like_number($item)) {
+		if (exists $GameData->{'ObjectInformation'}{$item} and 
+			$GameData->{'ObjectInformation'}{$item}{'split'}[3] eq "$cat_name $cat_num") {
+			foreach my $cr (keys %{$GameData->{"${cat_name}Recipes"}}) {
+				my $id = $GameData->{"${cat_name}Recipes"}{$cr}{'split'}[2];
+				if ($id == $item) {
+					my @temp = split(/ /,  $GameData->{"${cat_name}Recipes"}{$cr}{'split'}[0]);
+					for (my $i = 0; $i < scalar(@temp); $i += 2) {
+						my $next_item = $temp[$i];
+						my $next_count = $temp[$i+1];
+						push @ingr_list, { 'item' => $next_item, 'count' => $next_count };
+					}
+				}
+			}
+		}
+	} else {
+		if (exists $ModData->{'Objects'}{$item} and 
+			defined $ModData->{'Objects'}{$item}{'Recipe'} and
+			$ModData->{'Objects'}{$item}{'Category'} eq $cat_name) {
+			foreach my $i (@{$ModData->{'Objects'}{$item}{'Recipe'}{'Ingredients'}}) {
+				my $next_item = $i->{'Object'};
+				my $next_count = $i->{'Count'};
+				push @ingr_list, { 'item' => $next_item, 'count' => $next_count };
+			}
+		}	
+	}
+
+	# Note, if we could not find a recipe for the item, this list is empty
+	return @ingr_list;
+}
+
+# AddAllIngredients - helper function for cooking/crafting summary which accumulates ingredient counts
+#
+#   HashRef - the data structure keeping track of the counts
+#   item - this item (ID or Name; Name should only be given for mod items)
+#   count - how many of this item
+#   type - [optional] 'cooking' (default) or 'crafting'
+sub AddAllIngredients {
+	my $HashRef = shift;
+	my $item = shift;
+	my $count = shift;
+	my $type = shift;
+	
+	if (not defined $HashRef or not (ref $HashRef eq 'HASH') or not defined $item or not defined $count or $count <= 0) {
+		warn "AddAllIngredients received invalid arguments ($HashRef,$item,$count,$type)";
+		return;
+	}
+	
+	if (defined $type and (lc $type ne 'cooking') and (lc $type ne 'crafting')) {
+		warn "AddAllIngredients received invalid type ($type)";
+		return;
+	} elsif (not defined $type) {
+		$type = 'cooking';
+	}
+	
+	# enter the recursion.
+	my @items_to_add = SearchIngredients($item, $count, $type);
+	foreach my $i (@items_to_add) {
+		if (not exists $HashRef->{$i->{'item'}}) {
+			$HashRef->{$i->{'item'}} = 0;
+		}
+		$HashRef->{$i->{'item'}} += $i->{'count'};
+	}
+}
+
+# SearchIngredients - the recursive portion of AddToIngredientList that actually finds the ingredients
+#
+#   item - this item (ID or Name; Name should only be given for mod items)
+#   count - how many of this item
+#   type - [optional] 'cooking' (default) or 'crafting'
+#   max_depth - [optional] how far to recurse before giving up
+sub SearchIngredients {
+	my $item = shift;
+	my $count = shift;
+	my $type = shift;
+	my $max_depth = shift;
+	
+	if (not defined $item or not defined $count or $count <= 0) {
+		warn "SearchIngredients received invalid arguments ($item,$count,$type,$max_depth)";
+		return undef;
+	}
+	if (defined $type and (lc $type ne 'cooking') and (lc $type ne 'crafting')) {
+		warn "SearchIngredients received invalid type ($type)";
+		return undef;
+	} elsif (not defined $type) {
+		$type = 'cooking';
+	}
+	if (not defined $max_depth) {
+		$max_depth = 5;
+	}
+
+	my @ingr_to_return = ();
+	
+	# Because we don't really have a guaranteed base case, we use the $max_depth value as a failsafe which
+	#  limits how deep we can go.
+	my $add_current_item_to_output = 1;
+	if ($max_depth > 0) {
+		my @ingredient_list = GetIngredients($item, $type);
+		# We do an explicit check first to know if we need to skip adding the current item to the output
+		if (scalar @ingredient_list > 0) {
+			$add_current_item_to_output = 0;
+			foreach my $i (@ingredient_list) {
+				my @temp = SearchIngredients($i->{'item'}, $i->{'count'}, $type, $max_depth-1);
+				foreach my $t (@temp) {
+					push @ingr_to_return, { 'item'=>$t->{'item'}, 'count'=>$count*$t->{'count'} };
+				}
+			}
+		}
+	}
+	if ($add_current_item_to_output) {
+		# If we got here, it is because either we've reached max depth or we couldn't find a recipe.
+		# In either case, we must put the item & count we were given on the list
+		push @ingr_to_return, { 'item'=> $item, 'count' => $count };
+	}
+	
+	return @ingr_to_return;
+}
+
 ###################################################################################################
 # WriteMainIndex - index page generation
 sub WriteMainIndex {
@@ -724,13 +917,165 @@ sub WriteCookingSummary {
 	open $FH, ">$DocBase/cooking.html" or die "Can't open index.html for writing: $!";
 	select $FH;
 
-	print STDOUT "Generating Main Index\n";
+	print STDOUT "Generating Cooking Summary\n";
 	my $longdesc = <<"END_PRINT";
 <p>Still working on this one; it's just a placeholder for now.</p>
 END_PRINT
 	print GetHeader("Cooking", qq(Cooking recipes from the PPJA mods for Stardew Valley.), $longdesc);
 	print GetTOCStart();
+	
+	my @Panel = ( 
+		{ 'key' => 'Base Game', 'row' => {}, },
+		{ 'key' => 'Mods', 'row' => {}, },
+		);
+		
+	my %IngredientCount = ();
+
+	print STDOUT "  Processing Game Cooking Recipes\n";
+	foreach my $key (keys %{$GameData->{'CookingRecipes'}}) {
+		my $cid = $GameData->{'CookingRecipes'}{$key}{'split'}[2];
+		my $cname = GetItem($cid);
+		my $imgTag = GetImgTag($cid, "object", 1);
+		my $ingr = "";
+		my @ingr_list = ();
+		my @temp = split(/ /,  $GameData->{'CookingRecipes'}{$key}{'split'}[0]);
+		for (my $i = 0; $i < scalar(@temp); $i += 2) {
+			my $item = GetItem($temp[$i]);
+			my $img = GetImgTag($temp[$i]);
+			my $qty = ($temp[$i+1] > 1 ? " ($temp[$i+1])" : "");
+			$ingr .= "$img $item$qty<br />";
+			AddAllIngredients(\%IngredientCount, $temp[$i], $temp[$i+1]);
+		}
+		my ($health, $energy) = GetHealthAndEnergy($GameData->{'ObjectInformation'}{$cid}{'split'}[2]);
+		my $buffs = "";
+		my $source = "";
+		my $recipe_cost = "";
+		my $value = "";
+		my $profit = "";
+		my $output = <<"END_PRINT";
+<tr>
+<td class="name">$imgTag $cname</td>
+<td class="name">$ingr</td>
+<td class="value">$health</td>
+<td class="value">$energy</td>
+<td class="name">$buffs</td>
+<td>$source</td>
+<td class="value">$recipe_cost</td>
+<td class="value">$value</td>
+<td class="value">$profit</td>
+</tr>
+END_PRINT
+
+		$Panel[0]->{'row'}{StripHTML($cname)} = $output;
+	}
+
+	#TODO: Figure out what to do with bouquets.
+	print STDOUT "  Processing Mod Cooking Recipes\n";
+	foreach my $key (keys %{$ModData->{'Objects'}}) {
+		next if (not defined $ModData->{'Objects'}{$key}{'Recipe'} or $ModData->{'Objects'}{$key}{'Category'} ne 'Cooking');
+		my $key = $ModData->{'Objects'}{$key}{'Name'};
+		my $cname = GetItem($key);
+		#my $cdesc = $ModData->{'Objects'}{$key}{'Description'};
+		my $imgTag = GetImgTag($key, "object", 1);
+		my $ingr = "";
+		my @ingr_list = @{$ModData->{'Objects'}{$key}{'Recipe'}{'Ingredients'}};
+		foreach my $i (@ingr_list) {
+			my $item = GetItem($i->{'Object'});
+			my $img = GetImgTag($i->{'Object'});
+			my $qty = ($i->{'Count'} > 1 ? " ($i->{'Count'})" : "");
+			$ingr .= "$img $item$qty<br />";
+			AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'});
+		}
+		my ($health, $energy) = GetHealthAndEnergy($ModData->{'Objects'}{$key}{'Edibility'});
+		my $buffs = "";
+		my $source = "";
+		my $recipe_cost = "";
+		my $value = "";
+		my $profit = "";
+		my $output = <<"END_PRINT";
+<tr>
+<td class="name">$imgTag $cname</td>
+<td class="name">$ingr</td>
+<td class="value">$health</td>
+<td class="value">$energy</td>
+<td class="name">$buffs</td>
+<td>$source</td>
+<td class="value">$recipe_cost</td>
+<td class="value">$value</td>
+<td class="value">$profit</td>
+</tr>
+END_PRINT
+
+		$Panel[1]->{'row'}{$key} = $output;
+	}
+		
+
+	# Print the rest of the TOC
+	foreach my $p (@Panel) {
+		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'key'}</a></li>);
+	}
+	print qq(<li><a href="#TOC_Ingredient_List">Ingredient List</a></li>);
 	print GetTOCEnd();
+	
+	# Print the Panels
+	foreach my $p (@Panel) {
+		print <<"END_PRINT";
+<div class="panel" id="TOC_$p->{'key'}">
+<h2>$p->{'key'}</h2>
+
+<table class="sortable output">
+<thead>
+<tr>
+<th>Name</th>
+<th>Ingredients</th>
+<th>H</th>
+<th>E</th>
+<th>Buffs</th>
+<th>Source</th>
+<th>Recipe<br />Cost</th>
+<th>Product<br />Value</th>
+<th>Profit</th></tr>
+</thead>
+<tbody>
+END_PRINT
+
+		foreach my $k (sort keys %{$p->{'row'}}) {
+			print $p->{'row'}{$k};
+		}
+		print <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
+	}
+	
+	print <<"END_PRINT";
+<div class="panel" id="TOC_Ingredient_List">
+<h2>Ingredient List</h2>
+<p>This is a count of the minimum number the basic ingredients necessary to cook 1 of every item on the above lists. If a cooked item
+uses another cooked item as an ingredient, this list counts that second item twice, which means it does overestimate some ingredients.</p>
+<table class="sortable output">
+<thead>
+<tr>
+<th>Name</th>
+<th>Amount Needed</th>
+</thead>
+<tbody>
+END_PRINT
+	
+	# loop the ingredients
+	foreach my $key (sort {GetItem($a, "", 0) cmp GetItem($b, "", 0)} keys %IngredientCount) {
+		my $imgTag = GetImgTag($key);
+		my $name = GetItem($key);
+		print qq(<tr><td class="name">$imgTag $name</td><td class="value">$IngredientCount{$key}</td></tr>);
+	}
+
+	print <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
+		
 	print GetFooter();
 	close $FH or die "Error closing file";
 }
@@ -862,8 +1207,8 @@ END_PRINT
 <th>Sapling Name</th>
 <th>Sapling Vendor<br />(&amp; Requirements)</th>
 <th>Sapling<br />Price</th>
-<th>Product<br >Value</th>
-<th>Break Even<br >Amount</th></tr>
+<th>Product<br />Value</th>
+<th>Break Even<br />Amount</th></tr>
 </thead>
 <tbody>
 END_PRINT
@@ -918,6 +1263,7 @@ END_PRINT
 
 	my %TOC = ();
 
+	print STDOUT "  Processind Mod Machines\n";
 	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
 	my %Panel = ();
 	foreach my $j (@{$ModData->{'Machines'}}) {
@@ -1402,7 +1748,7 @@ END_PRINT
 <th><img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"></th>
 <th><img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"></th>
 <th>Avg<br />Yield</th>
-<th>Crop<br >Value</th>
+<th>Crop<br />Value</th>
 <th>XP</th>
 <th class="col_0">Initial<br />Growth</th>
 <th class="col_0">Regrowth</th>
@@ -1501,7 +1847,7 @@ img.objects {
 	background-image:url("./img/ss_objects.png")
 }
 img.objects_x2 {
-	vertical-align: -2px;
+	vertical-align: -10px;
 	width: 32px;
 	height: 32px;
 	background-image:url("./img/ss_objects_x2.png")
@@ -1562,7 +1908,7 @@ img.game_objects {
 	background-image:url("./img/game_objects.png")
 }
 img.game_objects_x2 {
-	vertical-align: -2px;
+	vertical-align: -10px;
 	width: 32px;
 	height: 32px;
 	background-image:url("./img/game_objects_x2.png")
