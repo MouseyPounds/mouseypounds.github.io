@@ -57,6 +57,31 @@ sub Wikify {
 	}
 }
 
+# WikiShop: Get wikified link for the shop which corresponds to a given NPC. Defaults to Pierre
+sub WikiShop {
+	my $NPC = shift;
+	my $shop = "";
+	if (not defined $NPC) {
+		$NPC = "Pierre";
+	}
+	if ($NPC =~ /Pierre/i) { $shop = "Pierre%27s_General_Store"; } 
+	elsif ($NPC =~ /Clint/i) { $shop = "Blacksmith"; } 
+	elsif ($NPC =~ /Gus/i) { $shop = "The_Stardrop_Saloon";	}
+	elsif ($NPC =~ /Harvey/i) {	$shop = "Harvey%27s_Clinic"; }
+	elsif ($NPC =~ /Hatmouse/i) { $shop = "Abandoned_House"; }
+	elsif ($NPC =~ /Krobus/i) {	$shop = "Krobus"; }
+	elsif ($NPC =~ /Marlon/i) {	$shop = "Adventurer%27s_Guild";	}
+	elsif ($NPC =~ /Marnie/i) {	$shop = "Marnie%27s_Ranch";	} 
+	elsif ($NPC =~ /Robin/i) { $shop = "Carpenter%27s_Shop"; }
+	elsif ($NPC =~ /Sandy/i) { $shop = "Oasis"; }
+	elsif ($NPC =~ /Traveling Merchant/i) { $shop = "Traveling_Cart"; }
+	elsif ($NPC =~ /Willy/i) { $shop = "Fish_Shop";	}
+	else {
+		warn "WikiShop: unknown vendor ($NPC);"
+	}
+	return qq(<a href="http://stardewvalleywiki.com/$shop">$NPC</a>);
+}
+
 # StripHTML: Overly simplistic method of removing HTML tags from a string.
 # This is a terrible implementation for general use and some sort of package like HTML::Strip should be used
 #  for those cases, however since we are only using it to strip simple wiki links or spans that we ourselves
@@ -570,7 +595,7 @@ sub CalcGrowth {
 }
 
 # TranslatePreconditions - Receives an array of event preconditions and tries to make them human-readable
-#  Currently only supports `z`, `y`, and `f` since those are what we have needed to deal with so far.
+#  Currently only supports `z`, `y`, `f`, `s` since those are what we have needed to deal with so far.
 sub TranslatePreconditions {
 	my %seasons = ( 'Spring' => 1, 'Summer' => 2, 'Fall' => 3, 'Winter' => 4 );
 	my $changed_seasons = 0;
@@ -578,10 +603,13 @@ sub TranslatePreconditions {
 	
 	foreach my $arg (@_) {
 		if ($arg =~ /^y (\d+)/) {
-			push @results, "(Year $1+)";
+			push @results, "Year $1+";
 		} elsif ($arg =~ /^f (\w+) (\d+)/) {
-			my $num_hearts = $2/250;
-			push @results, "($num_hearts+ &#x2665; with " . Wikify($1) . ")";
+			# Normally, this is a point value and must be converted to hearts, but for cooking recipes it is
+			# just the heart value itself. So we guess that <= 10 is heart value and > 10 is points.
+			my $num_hearts = $2;
+			$num_hearts /= 250 if ($num_hearts > 10);
+			push @results, "$num_hearts&#x2665; with " . Wikify($1);
 		} elsif ($arg =~ /^z /) {
 			# This can look like either 'z summer, z fall, z winter' or 'z spring summer winter'
 			$arg =~ s/[z, ]+/|/g;
@@ -591,12 +619,21 @@ sub TranslatePreconditions {
 				delete $seasons{$s} if (exists $seasons{$s});
 				$changed_seasons = 1;
 			}
+		} elsif ($arg =~ /^s (\w+) (\d+)/) {
+			# Skill conditions for recipes
+			my $skill = ucfirst $1;
+			my $level = $2;
+			my $extra = "";
+			if ($skill =~ /luck/i) {
+				$extra = qq[ (requires <a href="https://www.nexusmods.com/stardewvalley/mods/521">mod</a>)];
+			}
+			push @results, "Level $level in " . Wikify($skill) . $extra;
 		} else {
 			warn "TranslatePreconditions doesn't know how to deal with {$arg}";
 		}
 	}
 	if ($changed_seasons) {
-		my $r = '(' . join(', ', (sort {$seasons{$a} <=> $seasons{$b}} (keys %seasons))) . ')';
+		my $r = join(', ', (sort {$seasons{$a} <=> $seasons{$b}} (keys %seasons)));
 		push @results, $r;
 	}
 	return @results;
@@ -855,6 +892,69 @@ sub SearchIngredients {
 	return @ingr_to_return;
 }
 
+# GetNexusKey - returns Nexus ID number for a given mod uniqueID
+#  Mainly used as a helper for GetModInfo. Returns "" if something went wrong.
+#
+#   modID - the uniqueID to lookup
+sub GetNexusKey {
+	my $modID = shift;
+
+	if (defined $modID and exists $ModInfo->{$modID} and defined $ModInfo->{$modID}{'UpdateKeys'}) {
+		foreach my $u (@{$ModInfo->{$modID}{'UpdateKeys'}}) {
+			if ($u =~ /Nexus:(\d+)/) {
+				return $1;
+			}
+		}
+	}
+	warn "** GetNexusKey did not find a key for ($modID) and is returning an empty string";
+	return "";
+}
+
+# GetModInfo - returns a formatted HTML string with name & version info for a given uniqueID
+#
+#   modID - the uniqueID to lookup; will return base game info string if this is missing/blank
+#   includeLink - [optional] link the name to Nexus page (default is true)
+sub GetModInfo {
+	my $modID = shift;
+	my $includeLink = shift;
+
+	my $name = "Stardew Valley (base game)";
+	my $version = $StardewVersion;
+	my $url = "https://stardewvalley.net/";
+	
+	if (not defined $includeLink) {
+		$includeLink = 1;
+	}
+
+	if (defined $modID and $modID ne "") {
+		if (exists $ModInfo->{$modID}) {
+			$name =$ModInfo->{$modID}{'Name'};
+			$version = $ModInfo->{$modID}{'Version'};
+			# Some known mod components don't contain an update key but are companions to other
+			#  known components which do. This section hardcodes that substitution.
+			my $lookupID = $modID;
+			if ($modID eq 'ppja.avcfr') {
+				$lookupID = 'ppja.artisanvalleymachinegoods';
+			} elsif ($modID eq 'ppja.MoreRecipesMeat') {
+				$lookupID = 'ppja.evenmorerecipes';
+			} elsif ($modID eq 'kildarien.farmertofloristcfr') {
+				$lookupID = 'kildarien.farmertoflorist';
+			}
+			my $NexusKey = GetNexusKey($lookupID);
+			$url = "https://www.nexusmods.com/stardewvalley/mods/$NexusKey";
+		} else {
+			warn "** GetModInfo received unknown modID ($modID)";
+			return undef;
+		}
+	}
+
+	if ($includeLink) {
+		return qq(<a href="$url">$name</a> version $version);
+	} else {
+		return qq($name version $version);
+	}
+}
+
 ###################################################################################################
 # WriteMainIndex - index page generation
 sub WriteMainIndex {
@@ -868,24 +968,18 @@ sub WriteMainIndex {
 The official documentation has always been 
 <a href="https://docs.google.com/spreadsheets/d/1D3Kb45faKsXGkT9wGhWaeHZiuFN7WSkewBbLF2Iuyug/edit?usp=sharing">a large spreadsheet</a>
 used by the PPJA team for organization, but I found it a bit difficult to use as a player. So this set of webpages was created by a set of
-perl scripts to automatically extract information from the various mods (as well as the base game) and put it all together into a
+custom perl scripts to automatically extract information from the various mods (as well as the base game) and put it all together into a
 (hopefully) more accessible format.</p>
-<p>This reference covers information from the following mods, although each page only includes what is relevant to that topic:</p>
+<p>This reference covers information from the following mods, although each page only includes those mods relevant to a specific topic:</p>
 <ul>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.avcfr'}{'Name'}</a> version $ModInfo->{'ppja.avcfr'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.artisanvalleymachinegoods'}{'Name'}</a> version $ModInfo->{'ppja.artisanvalleymachinegoods'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1742">$ModInfo->{'ppja.evenmorerecipes'}{'Name'}</a> version $ModInfo->{'ppja.evenmorerecipes'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1742">$ModInfo->{'ppja.MoreRecipesMeat'}{'Name'}</a> version $ModInfo->{'ppja.MoreRecipesMeat'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1610">$ModInfo->{'ParadigmNomad.FantasyCrops'}{'Name'}</a> version $ModInfo->{'ParadigmNomad.FantasyCrops'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertoflorist'}{'Name'}</a> version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1721">$ModInfo->{'paradigmnomad.freshmeat'}{'Name'}</a> version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1598">$ModInfo->{'ppja.fruitsandveggies'}{'Name'}</a> version $ModInfo->{'ppja.fruitsandveggies'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2028">$ModInfo->{'mizu.flowers'}{'Name'}</a> version $ModInfo->{'mizu.flowers'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1670">$ModInfo->{'paradigmnomad.morefood'}{'Name'}</a> version $ModInfo->{'paradigmnomad.morefood'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1671">$ModInfo->{'ppja.moretrees'}{'Name'}</a> version $ModInfo->{'ppja.moretrees'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1764">$ModInfo->{'ppja.starbrewvalley'}{'Name'}</a> version $ModInfo->{'ppja.starbrewvalley'}{'Version'}</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1897">$ModInfo->{'Aquilegia.SweetTooth'}{'Name'}</a> version $ModInfo->{'Aquilegia.SweetTooth'}{'Version'}</li>
+END_PRINT
+
+	foreach my $mod (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %$ModInfo) {
+		my $info_string = GetModInfo($mod, 1);
+		$longdesc .= qq(<li>$info_string</li>);
+	}
+
+	$longdesc .= <<"END_PRINT";
 </ul>
 <p>Below are the links to the various summary pages for this reference. In general, each is a set of sortable tables summarizing various
 aspects of the mods. There are some profit calculations included, but by necessity they are simplistic and assume base quality without
@@ -912,20 +1006,51 @@ sub WriteCookingSummary {
 	select $FH;
 
 	print STDOUT "Generating Cooking Summary\n";
-	my $longdesc = <<"END_PRINT";
-<p>Still working on this one; it's just a placeholder for now.</p>
-END_PRINT
-	print GetHeader("Cooking", qq(Cooking recipes from the PPJA mods for Stardew Valley.), $longdesc);
-	print GetTOCStart();
-	
+	# This function has been reorganized. In order to properly detect all mods that are referenced
+	#  and be able to automatically add them to the filter form in the header, we must process all
+	#  the recipes first before we print anything at all. Note that we technically only need to do
+	#  the mod items at this point, but it is a little less confusing if we do both base game and
+	#  mod items back-to-back.
 	my @Panel = ( 
-		{ 'key' => 'Base Game', 'row' => {}, },
-		{ 'key' => 'Mods', 'row' => {}, },
+		{ 'key' => 'food', 'name' => "Food Recipes", 'row' => {}, },
+		{ 'key' => 'drink', 'name' => "Drink Recipes", 'row' => {}, },
 		);
 		
 	my %IngredientCount = ();
+	my %ModList = ();
 
 	print STDOUT "  Processing Game Cooking Recipes\n";
+	# Recipe source information for game data is in a variety of locations. We'll start by scanning
+	#  the TV data to find out when each Queen of Sauce recipe airs.
+	# In that file, the keys are basically the week numbers from 1 to 31 (there is a 32, but it is
+	#  unused as that recipe does not exist in the base game.) We will translate these week numbers
+	#  into a nicer game date and save them into a hash keyed on recipe name.
+	my %TVDates = ();
+	foreach my $key (keys %{$GameData->{'TV/CookingChannel'}}) {
+		my $year = floor(($key + 15) / 16);
+		my $week_within_year = ($key - 1) % 16;
+		my @season = qw(Spring Summer Fall Winter);
+		my $season_num = floor($week_within_year / 4);
+		my $day_of_season = 7 + 7 * ($week_within_year % 4);
+		my $date_string = Wikify("Queen of Sauce") . qq( - $day_of_season $season[$season_num], Year $year<br />);
+		my $recipe_key = $GameData->{'TV/CookingChannel'}{$key}{'split'}[0];
+		$TVDates{$recipe_key} = $date_string;
+	}
+	# Some recipes can be purchased at the saloon. This is hardcoded in StardewValley.Utility.getSaloonStock()
+	#  and we'll copy the relevant info here.
+	my %SaloonRecipes = (
+		'Hashbrowns' => 250,
+		'Omelet' => 500,
+		'Pancakes' => 500,
+		'Bread' => 500,
+		'Tortilla' => 500,
+		'Pizza' => 750,
+		'Maki Roll' => 1500,
+		);
+	# And then there are some others that are just completely special
+	my %Special = (
+		'Cookies' => Wikify("Evelyn") . " 4&#x2665; Event",
+		);
 	foreach my $key (keys %{$GameData->{'CookingRecipes'}}) {
 		my $cid = $GameData->{'CookingRecipes'}{$key}{'split'}[2];
 		my $cname = GetItem($cid);
@@ -941,13 +1066,39 @@ END_PRINT
 			AddAllIngredients(\%IngredientCount, $temp[$i], $temp[$i+1]);
 		}
 		my ($health, $energy) = GetHealthAndEnergy($GameData->{'ObjectInformation'}{$cid}{'split'}[2]);
+		my $item_type = $GameData->{'ObjectInformation'}{$cid}{'split'}[6];
 		my $buffs = "";
+		# Buffs are part of the object data for the product
+		@temp = split(/ /,  $GameData->{'ObjectInformation'}{$cid}{'split'}[7]);
 		my $source = "";
+		# We will list sources in the order Special, Saloon purchase, TV,
+		#  and then the ones defined by condition (default, friend mail, skill bonus)
+		if (exists $Special{$key}) {
+			$source .= $Special{$key};
+		}
+		if (exists $SaloonRecipes{$key}) {
+			$source .= qq(Buy for $SaloonRecipes{$key}g from ) . WikiShop("Gus") . qq(<br />);
+		}
+		if (exists $TVDates{$key}) {
+			$source .= $TVDates{$key};
+		}
+		# Some conditions are defined in the last field of the recipe data
+		my $condition = $GameData->{'CookingRecipes'}{$key}{'split'}[3];
+		if ($condition eq 'default') {
+			$source .= "Given automatically";
+		} elsif ($condition =~ /^f/) {
+			my @temp = TranslatePreconditions($condition);
+			$source .= "Mail ($temp[0])<br />";
+		} elsif ($condition =~ /^s/) {
+			my @temp = TranslatePreconditions($condition);
+			$source .= "$temp[0]<br />";
+		} 
 		my $recipe_cost = "";
 		my $value = "";
 		my $profit = "";
+		my $filter = "filter_base_game";
 		my $output = <<"END_PRINT";
-<tr>
+<tr class="$filter">
 <td class="name">$imgTag $cname</td>
 <td class="name">$ingr</td>
 <td class="value">$health</td>
@@ -960,7 +1111,14 @@ END_PRINT
 </tr>
 END_PRINT
 
-		$Panel[0]->{'row'}{StripHTML($cname)} = $output;
+		# It is a little weird to do it this way when there are only 2 options, but it is consistent with
+		#  other pages and makes it easier to adjust if we change the categories later.
+		foreach my $p (@Panel) {
+			if ($p->{'key'} eq $item_type) {
+				$p->{'row'}{StripHTML($cname)} = $output;
+				last;
+			}
+		}
 	}
 
 	#TODO: Figure out what to do with bouquets.
@@ -981,13 +1139,18 @@ END_PRINT
 			AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'});
 		}
 		my ($health, $energy) = GetHealthAndEnergy($ModData->{'Objects'}{$key}{'Edibility'});
+		if (not exists $ModList{$ModData->{'Objects'}{$key}{'__MOD_ID'}}) {
+			$ModList{$ModData->{'Objects'}{$key}{'__MOD_ID'}} = 1;
+		}
+		my $item_type = ($ModData->{'Objects'}{$key}{'EdibleIsDrink'} == 1) ? "drink" : "food";
 		my $buffs = "";
 		my $source = "";
 		my $recipe_cost = "";
 		my $value = "";
 		my $profit = "";
+		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
 		my $output = <<"END_PRINT";
-<tr>
+<tr class="$filter">
 <td class="name">$imgTag $cname</td>
 <td class="name">$ingr</td>
 <td class="value">$health</td>
@@ -1000,13 +1163,42 @@ END_PRINT
 </tr>
 END_PRINT
 
-		$Panel[1]->{'row'}{$key} = $output;
+		foreach my $p (@Panel) {
+			if ($p->{'key'} eq $item_type) {
+				$p->{'row'}{$key} = $output;
+				last;
+			}
+		}
 	}
-		
+
+	my $longdesc = <<"END_PRINT";
+<p>A summary of cooking recipes from the following sources. The checkboxes next to them can be used to
+show or hide content specific to that source:</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+END_PRINT
+
+	foreach my $k (sort keys %ModList) {
+		my $filter = $ModInfo->{$k}{'__FILTER'};
+		my $info = GetModInfo($k, 1);
+		$longdesc .= <<"END_PRINT";
+<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$info</label><br />
+END_PRINT
+	}
+
+	$longdesc .= <<"END_PRINT";
+</fieldset>
+<p>The following tables only contain information about cooked items made in the kitchen.</p>
+END_PRINT
+	print GetHeader("Cooking", qq(Cooking recipes from the PPJA mods for Stardew Valley.), $longdesc);
+	print GetTOCStart();
+
 
 	# Print the rest of the TOC
 	foreach my $p (@Panel) {
-		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'key'}</a></li>);
+		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'name'}</a></li>);
 	}
 	print qq(<li><a href="#TOC_Ingredient_List">Ingredient List</a></li>);
 	print GetTOCEnd();
@@ -1015,7 +1207,7 @@ END_PRINT
 	foreach my $p (@Panel) {
 		print <<"END_PRINT";
 <div class="panel" id="TOC_$p->{'key'}">
-<h2>$p->{'key'}</h2>
+<h2>$p->{'name'}</h2>
 
 <table class="sortable output">
 <thead>
@@ -1125,7 +1317,7 @@ END_PRINT
 		my $scost = $GameData->{'FruitTrees'}{$sid}{'split'}[3];
 		my $cname = GetItem($cid);
 		my $cprice = $GameData->{'ObjectInformation'}{$cid}{'split'}[1];
-		my $seed_vendor = Wikify("Pierre");
+		my $seed_vendor = WikiShop("Pierre");
 		my $imgTag = GetImgTag($sid, "tree");
 		my $prodImg = GetImgTag($cid, "object");
 		my $seedImg = GetImgTag($sid, "object");
@@ -1159,14 +1351,14 @@ END_PRINT
 		my $season = $ModData->{'FruitTrees'}{$key}{'Season'};
 		my $cname = GetItem($ModData->{'FruitTrees'}{$key}{'Product'});
 		my $cprice = GetValue($ModData->{'FruitTrees'}{$key}{'Product'});
-		my $seed_vendor = Wikify("Pierre");
+		my $seed_vendor = WikiShop("Pierre");
 		if (exists $ModData->{'FruitTrees'}{$key}{'SaplingPurchaseFrom'}) {
-			$seed_vendor = Wikify($ModData->{'FruitTrees'}{$key}{'SaplingPurchaseFrom'});
+			$seed_vendor = WikiShop($ModData->{'FruitTrees'}{$key}{'SaplingPurchaseFrom'});
 		}
 		if (exists $ModData->{'FruitTrees'}{$key}{'SaplingPurchaseRequirements'} and defined $ModData->{'FruitTrees'}{$key}{'SaplingPurchaseRequirements'}) {
 			my @req = TranslatePreconditions(@{$ModData->{'FruitTrees'}{$key}{'SaplingPurchaseRequirements'}});
 			# Note that the order here is not guaranteed. If we start getting crops with multiple different requirements we might have to deal with that
-			$seed_vendor .= '<br />' . join('<br />', @req);
+			$seed_vendor .= '<br />' . join('<br />', map {"($_)"} @req);
 		}
 		my $imgTag = GetImgTag($key, 'tree');
 		my $prodImg = GetImgTag($ModData->{'FruitTrees'}{$key}{'Product'}, "object");
@@ -1243,8 +1435,6 @@ sub WriteMachineSummary {
 	print STDOUT "Generating Machine Summary\n";
 	my $longdesc = <<"END_PRINT";
 <p>A summary of machines from the following mods:</p>
-
-
 <ul>
 <li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.avcfr'}{'Name'}</a> version $ModInfo->{'ppja.avcfr'}{'Version'}
 including enabling recipes from:
@@ -1575,9 +1765,9 @@ END_PRINT
 		# This is all hard-coded since it is handled in the exe
 		# To make it easier to read we check the name rather than id, so we have to strip it
 		my $crop = StripHTML($cname);
-		my $seed_vendor = Wikify("Pierre");
+		my $seed_vendor = WikiShop("Pierre");
 		if ($crop eq 'Rhubarb' or $crop eq 'Starfruit' or $crop eq 'Beet' or $crop eq 'Cactus Fruit') {
-			$seed_vendor = Wikify("Sandy");
+			$seed_vendor = WikiShop("Sandy");
 			if ($crop eq 'Cactus Fruit') {
 				$scost = 150;
 				$season_str = "indoor-only";
@@ -1586,10 +1776,10 @@ END_PRINT
 			$seed_vendor .= "<br />(at " . Wikify("Egg Festival") . ")";
 			$scost = 100;
 		} elsif ($crop eq 'Coffee Bean') {
-			$seed_vendor = Wikify("Traveling Cart");
+			$seed_vendor = WikiShop("Traveling Merchant");
 			$scost = 2500;
 		} elsif ($crop eq 'Sweet Gem Berry') {
-			$seed_vendor = Wikify("Traveling Cart");
+			$seed_vendor = WikiShop("Traveling Merchant");
 			$scost = 1000;
 		} elsif ($crop eq 'Ancient Fruit') {
 			$seed_vendor = qq(<span class="note">None</span>);
@@ -1693,21 +1883,21 @@ END_PRINT
 			# If we ever deal with the colors, it'd happen here.
 		}
 		my $num_harvest = $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'} + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
-		my $seed_vendor = Wikify("Pierre");
+		my $seed_vendor = WikiShop("Pierre");
 		if (exists $ModData->{'Crops'}{$key}{'SeedPurchaseFrom'}) {
-			$seed_vendor = Wikify($ModData->{'Crops'}{$key}{'SeedPurchaseFrom'});
+			$seed_vendor = WikiShop($ModData->{'Crops'}{$key}{'SeedPurchaseFrom'});
 		}
 		if (exists $ModData->{'Crops'}{$key}{'SeedPurchaseRequirements'} and defined $ModData->{'Crops'}{$key}{'SeedPurchaseRequirements'}) {
 			my @req = TranslatePreconditions(@{$ModData->{'Crops'}{$key}{'SeedPurchaseRequirements'}});
 			# Note that the order here is not guaranteed. If we start getting crops with multiple different requirements we might have to deal with that
-			$seed_vendor .= '<br />' . join('<br />', @req);
+			$seed_vendor .= '<br />' . join('<br />', map {"($_)"} @req);
 		}
 		my $imgTag = GetImgTag($key, 'crop');
 		my $prodImg = GetImgTag($ModData->{'Crops'}{$key}{'Product'}, "object");
 		my $seedImg = GetImgTag($sname, "object");
 		my $xp = GetXP($cprice);
 		my $output = <<"END_PRINT";
-<tr class="$ModData->{'Crops'}{$key}{'__FILTER'}">
+<tr class="$ModInfo->{$ModData->{'Crops'}{$key}{'__MOD_ID'}}{'__FILTER'}">
 <td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
 <td class="name">$seedImg $sname</td>

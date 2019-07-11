@@ -355,10 +355,6 @@ sub ParseModData {
 				# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
 				$file_contents =~ s/^\x{feff}//;
 				my $json = from_rjson($file_contents);
-				# Saving directory to locate mod folder later
-				$json->{'__PATH'} = "$BaseDir/$m";
-				LogMessage("    Dumping json object", 3);
-				LogMessage(Dumper($json), 3);
 				my $id = $json->{'UniqueID'};
 				my $name = $json->{'Name'};
 				if (defined $id and defined $name) {
@@ -367,9 +363,15 @@ sub ParseModData {
 					LogMessage("    Manifest missing UniqueID and/or Name. Skipping.", 1);
 					next;
 				}
-				$MetaRef->{$id} = $json;
+				# Saving filter and path information in case we need them later
+				$json->{'__PATH'} = "$BaseDir/$m";
 				my $filter_id = "filter_$id";
 				$filter_id =~ s/\./_/g;
+				$json->{'__FILTER'} = $filter_id;
+				# Note, the json is only dumped if it had passed the name & ID check
+				LogMessage("    Dumping json object", 3);
+				LogMessage(Dumper($json), 3);
+				$MetaRef->{$id} = $json;
 				
 				if (exists $json->{'ContentPackFor'}{'UniqueID'}) {
 					my $packID = $json->{'ContentPackFor'}{'UniqueID'};
@@ -401,7 +403,7 @@ sub ParseModData {
 									if (exists $machine->{'tileindex'}) {
 										$tileindex = $machine->{'tileindex'};
 									}
-									$machine->{'__FILTER'} = $filter_id;
+									$machine->{'__MOD_ID'} = $id;
 									if (exists $machine->{'texture'}) {
 										my $x = 16*$tileindex;
 										my $y = 0;
@@ -491,7 +493,7 @@ sub ParseModData {
 										} elsif ($t eq 'Weapons') {
 											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/weapon.png", 'objects');
 										}
-										$json->{'__FILTER'} = $filter_id;
+										$json->{'__MOD_ID'} = $id;
 										$json->{'__SS_X'} = $x;
 										$json->{'__SS_Y'} = $y;
 										$json->{'__SS_OTHER_X'} = $other_x if ($other_x > -1);
