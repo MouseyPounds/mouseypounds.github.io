@@ -466,32 +466,6 @@ END_PRINT
 	return $output;
 }
 
-# GetHealthAndEnergy - returns health and energy from edibility and optional quality
-#   Uses formula from wiki template; should look up actual code ref to verify
-sub GetHealthAndEnergy {
-	my $edibility = shift;
-	my $quality = shift;
-	my $health = 0;
-	my $energy = 0;
-	if (not defined $quality) {
-		$quality = 0;
-	}
-	if (not defined $edibility) {
-		warn "GetHealthAndEnergy called with undefined edibility";
-	} else {
-		if ($edibility <= -300) {
-			# Technically, this is just inedible
-			$health = "--";
-			$energy = "--";
-		} else {
-			$energy = ceil((2.5 + $quality) * $edibility);
-			$health = max(0, floor(0.45 * $energy));
-		}
-	}
-	
-	return ($health, $energy);
-}
-
 # GetTOCStart - creates and returns HTML code for beginning of TOC
 sub GetTOCStart {
 	my $output = <<"END_PRINT";
@@ -547,6 +521,32 @@ Stardew Valley was developed by <a href="http://twitter.com/concernedape">Concer
 END_PRINT
 
 	return $output;
+}
+
+# GetHealthAndEnergy - returns health and energy from edibility and optional quality
+#   Uses formula from wiki template; should look up actual code ref to verify
+sub GetHealthAndEnergy {
+	my $edibility = shift;
+	my $quality = shift;
+	my $health = 0;
+	my $energy = 0;
+	if (not defined $quality) {
+		$quality = 0;
+	}
+	if (not defined $edibility) {
+		warn "GetHealthAndEnergy called with undefined edibility";
+	} else {
+		if ($edibility <= -300) {
+			# Technically, this is just inedible
+			$health = "--";
+			$energy = "--";
+		} else {
+			$energy = ceil((2.5 + $quality) * $edibility);
+			$health = max(0, floor(0.45 * $energy));
+		}
+	}
+	
+	return ($health, $energy);
 }
 
 # CalcGrowth - Calculates the number of days it will take for a crop to grow from seed
@@ -806,6 +806,7 @@ sub GetIngredients {
 }
 
 # AddAllIngredients - helper function for cooking/crafting summary which accumulates ingredient counts
+#  It returns the total value of all ingredients added or "varies" if that is not reasonable
 #
 #   HashRef - the data structure keeping track of the counts
 #   item - this item (ID or Name; Name should only be given for mod items)
@@ -816,6 +817,7 @@ sub AddAllIngredients {
 	my $item = shift;
 	my $count = shift;
 	my $type = shift;
+	my $ingr_value = 0;
 	
 	if (not defined $HashRef or not (ref $HashRef eq 'HASH') or not defined $item or not defined $count or $count <= 0) {
 		warn "AddAllIngredients received invalid arguments ($HashRef,$item,$count,$type)";
@@ -836,7 +838,14 @@ sub AddAllIngredients {
 			$HashRef->{$i->{'item'}} = 0;
 		}
 		$HashRef->{$i->{'item'}} += $i->{'count'};
+		my $this_value = GetValue($i->{'item'});
+		if (looks_like_number($ingr_value) and looks_like_number($this_value)) {
+			$ingr_value += $i->{'count'} * $this_value;
+		} else {
+			$ingr_value = "varies";
+		}
 	}
+	return $ingr_value;
 }
 
 # SearchIngredients - the recursive portion of AddToIngredientList that actually finds the ingredients
@@ -914,9 +923,13 @@ sub GetNexusKey {
 #
 #   modID - the uniqueID to lookup; will return base game info string if this is missing/blank
 #   includeLink - [optional] link the name to Nexus page (default is true)
+#   formatType - [optional] see below, 1 is default
+#                 1 is like <a href="url">Mod Name</a> Version
+#                 2 is like Mod Name Version (<a href="url">Nexus link</a>)
 sub GetModInfo {
 	my $modID = shift;
 	my $includeLink = shift;
+	my $formatType = shift;
 
 	my $name = "Stardew Valley (base game)";
 	my $version = $StardewVersion;
@@ -924,6 +937,9 @@ sub GetModInfo {
 	
 	if (not defined $includeLink) {
 		$includeLink = 1;
+	}
+	if (not defined $formatType) {
+		$formatType = 1;
 	}
 
 	if (defined $modID and $modID ne "") {
@@ -949,7 +965,13 @@ sub GetModInfo {
 	}
 
 	if ($includeLink) {
-		return qq(<a href="$url">$name</a> version $version);
+		if ($formatType == 1) {
+				return qq(<a href="$url">$name</a> version $version);
+		} elsif ($formatType == 2) {
+				return qq[$name version $version (<a href="$url">Nexus page</a>)];
+		} else {
+			warn "** GetModInfo unknown format type $formatType";
+		}
 	} else {
 		return qq($name version $version);
 	}
@@ -975,7 +997,7 @@ custom perl scripts to automatically extract information from the various mods (
 END_PRINT
 
 	foreach my $mod (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %$ModInfo) {
-		my $info_string = GetModInfo($mod, 1);
+		my $info_string = GetModInfo($mod, 1, 1);
 		$longdesc .= qq(<li>$info_string</li>);
 	}
 
@@ -1056,14 +1078,19 @@ sub WriteCookingSummary {
 		my $cname = GetItem($cid);
 		my $imgTag = GetImgTag($cid, "object", 1);
 		my $ingr = "";
-		my @ingr_list = ();
+		my $ingr_value = 0;
 		my @temp = split(/ /,  $GameData->{'CookingRecipes'}{$key}{'split'}[0]);
 		for (my $i = 0; $i < scalar(@temp); $i += 2) {
 			my $item = GetItem($temp[$i]);
 			my $img = GetImgTag($temp[$i]);
 			my $qty = ($temp[$i+1] > 1 ? " ($temp[$i+1])" : "");
 			$ingr .= "$img $item$qty<br />";
-			AddAllIngredients(\%IngredientCount, $temp[$i], $temp[$i+1]);
+			my $value_to_add = AddAllIngredients(\%IngredientCount, $temp[$i], $temp[$i+1]);
+			if (looks_like_number($ingr_value) and looks_like_number($value_to_add)) {
+				$ingr_value += $value_to_add;
+			} else {
+				$ingr_value = "Varies";
+			}
 		}
 		my ($health, $energy) = GetHealthAndEnergy($GameData->{'ObjectInformation'}{$cid}{'split'}[2]);
 		my $item_type = $GameData->{'ObjectInformation'}{$cid}{'split'}[6];
@@ -1093,9 +1120,9 @@ sub WriteCookingSummary {
 			my @temp = TranslatePreconditions($condition);
 			$source .= "$temp[0]<br />";
 		} 
-		my $recipe_cost = "";
-		my $value = "";
-		my $profit = "";
+		my $recipe_cost = "--";
+		my $value = GetValue($key);
+		my $profit = looks_like_number($ingr_value) ? $value - $ingr_value : $ingr_value;
 		my $filter = "filter_base_game";
 		my $output = <<"END_PRINT";
 <tr class="$filter">
@@ -1130,13 +1157,19 @@ END_PRINT
 		#my $cdesc = $ModData->{'Objects'}{$key}{'Description'};
 		my $imgTag = GetImgTag($key, "object", 1);
 		my $ingr = "";
+		my $ingr_value = 0;
 		my @ingr_list = @{$ModData->{'Objects'}{$key}{'Recipe'}{'Ingredients'}};
 		foreach my $i (@ingr_list) {
 			my $item = GetItem($i->{'Object'});
 			my $img = GetImgTag($i->{'Object'});
 			my $qty = ($i->{'Count'} > 1 ? " ($i->{'Count'})" : "");
 			$ingr .= "$img $item$qty<br />";
-			AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'});
+			my $value_to_add = AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'});
+			if (looks_like_number($ingr_value) and looks_like_number($value_to_add)) {
+				$ingr_value += $value_to_add;
+			} else {
+				$ingr_value = "Varies";
+			}
 		}
 		my ($health, $energy) = GetHealthAndEnergy($ModData->{'Objects'}{$key}{'Edibility'});
 		if (not exists $ModList{$ModData->{'Objects'}{$key}{'__MOD_ID'}}) {
@@ -1145,9 +1178,9 @@ END_PRINT
 		my $item_type = ($ModData->{'Objects'}{$key}{'EdibleIsDrink'} == 1) ? "drink" : "food";
 		my $buffs = "";
 		my $source = "";
-		my $recipe_cost = "";
-		my $value = "";
-		my $profit = "";
+		my $recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
+		my $value = GetValue($cname);
+		my $profit = looks_like_number($ingr_value) ? $value - $ingr_value : $ingr_value;
 		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
 		my $output = <<"END_PRINT";
 <tr class="$filter">
@@ -1157,7 +1190,7 @@ END_PRINT
 <td class="value">$energy</td>
 <td class="name">$buffs</td>
 <td>$source</td>
-<td class="value">$recipe_cost</td>
+<td class="value total_$item_type">$recipe_cost</td>
 <td class="value">$value</td>
 <td class="value">$profit</td>
 </tr>
@@ -1181,7 +1214,7 @@ END_PRINT
 
 	foreach my $k (sort keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
-		my $info = GetModInfo($k, 1);
+		my $info = GetModInfo($k, 1, 2);
 		$longdesc .= <<"END_PRINT";
 <label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
 $info</label><br />
@@ -1190,7 +1223,22 @@ END_PRINT
 
 	$longdesc .= <<"END_PRINT";
 </fieldset>
-<p>The following tables only contain information about cooked items made in the kitchen.</p>
+<p>The following tables only contain information about cooked items made in the kitchen. The <span class="note">H</span>
+and <span class="note">E</span> columns represent Health and Energy/Stamina restored respectively. The 
+<span class="note">Profit</span> column is meant to indicate whether cooking that item is better than selling the base
+ingredients raw. It is calculated by the difference between the finished product and the most basic ingredients; for
+example, when calculating the profit for Complete Breakfast, the value of the Complete Breakfast is compared to the total
+value of 2 eggs, 1 potato, 1 oil, and 1 wheat flour. If a recipe can take <span class="group">any Egg</span> or 
+<span class="group">any Milk</span>, the cheapest possibility is used, but for other categories like
+<span class="group">any Fish</span>, there is too much variation to get a useful answer.</p>
+<p>When calculating the total cost to buy all recipes, only mod recipes are included because all buyable base game recipes
+have alternative (free) ways to learn them such as from the Queen of Sauce TV channel or NPC friendship.</p>
+<p>The Ingredient list summarizes how many of each ingredient would be necessary to make one of every recipe on this page.
+Note that it is not truly minimal because it doesn't consider the possibility of reusing one product as an ingredient for
+a different product (for example, when calculating the ingredients for Complete Breakfast, it assumes a new Hashbrowns
+dish will be made during the process.)
+</p>
+
 END_PRINT
 	print GetHeader("Cooking", qq(Cooking recipes from the PPJA mods for Stardew Valley.), $longdesc);
 	print GetTOCStart();
@@ -1238,8 +1286,6 @@ END_PRINT
 	print <<"END_PRINT";
 <div class="panel" id="TOC_Ingredient_List">
 <h2>Ingredient List</h2>
-<p>This is a count of the minimum number the basic ingredients necessary to cook 1 of every item on the above lists. If a cooked item
-uses another cooked item as an ingredient, this list counts that second item twice, which means it does overestimate some ingredients.</p>
 <table class="sortable output">
 <thead>
 <tr>

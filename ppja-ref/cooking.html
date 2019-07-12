@@ -29,25 +29,40 @@ show or hide content specific to that source:</p>
 <label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
 Stardew Valley base game version 1.3.36</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_Aquilegia_SweetTooth" id="filter_Aquilegia_SweetTooth" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1897">Aquilegia's Sweet Tooth</a> version 1.4</label><br />
+Aquilegia's Sweet Tooth version 1.4 (<a href="https://www.nexusmods.com/stardewvalley/mods/1897">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_PPJA_cannabiskit" id="filter_PPJA_cannabiskit" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1741">Cannabis Kit for JsonAssets</a> version 1.6.0</label><br />
+Cannabis Kit for JsonAssets version 1.6.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/1741">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Farmer to Florist</a> version 1.3.2</label><br />
+Farmer to Florist version 1.3.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Fresh Meat</a> version 1.3.2</label><br />
+Fresh Meat version 1.3.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_morefood" id="filter_paradigmnomad_morefood" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1670">More Food: A Collection of Recipes for JsonAssets</a> version 1.8.0</label><br />
+More Food: A Collection of Recipes for JsonAssets version 1.8.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/1670">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_ppja_MoreRecipesMeat" id="filter_ppja_MoreRecipesMeat" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1742">Even More Recipes - Meat for JsonAssets</a> version 1.1.0</label><br />
+Even More Recipes - Meat for JsonAssets version 1.1.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/1742">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_ppja_artisanvalleymachinegoods" id="filter_ppja_artisanvalleymachinegoods" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1926">Artisan Valley Machine Goods</a> version 1.6.0</label><br />
+Artisan Valley Machine Goods version 1.6.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/1926">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_ppja_evenmorerecipes" id="filter_ppja_evenmorerecipes" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1742">Even More Recipes for JsonAssets</a> version 1.4.1</label><br />
+Even More Recipes for JsonAssets version 1.4.1 (<a href="https://www.nexusmods.com/stardewvalley/mods/1742">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_ppja_starbrewvalley" id="filter_ppja_starbrewvalley" value="show" checked="checked">
-<a href="https://www.nexusmods.com/stardewvalley/mods/1764">Starbrew Valley: A Collection of Alcoholic Drinks and Recipes</a> version 1.2.0</label><br />
+Starbrew Valley: A Collection of Alcoholic Drinks and Recipes version 1.2.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/1764">Nexus page</a>)</label><br />
 </fieldset>
-<p>The following tables only contain information about cooked items made in the kitchen.</p>
+<p>The following tables only contain information about cooked items made in the kitchen. The <span class="note">H</span>
+and <span class="note">E</span> columns represent Health and Energy/Stamina restored respectively. The 
+<span class="note">Profit</span> column is meant to indicate whether cooking that item is better than selling the base
+ingredients raw. It is calculated by the difference between the finished product and the most basic ingredients; for
+example, when calculating the profit for Complete Breakfast, the value of the Complete Breakfast is compared to the total
+value of 2 eggs, 1 potato, 1 oil, and 1 wheat flour. If a recipe can take <span class="group">any Egg</span> or 
+<span class="group">any Milk</span>, the cheapest possibility is used, but for other categories like
+<span class="group">any Fish</span>, there is too much variation to get a useful answer.</p>
+<p>When calculating the total cost to buy all recipes, only mod recipes are included because all buyable base game recipes
+have alternative (free) ways to learn them such as from the Queen of Sauce TV channel or NPC friendship.</p>
+<p>The Ingredient list summarizes how many of each ingredient would be necessary to make one of every recipe on this page.
+Note that it is not truly minimal because it doesn't consider the possibility of reusing one product as an ingredient for
+a different product (for example, when calculating the ingredients for Complete Breakfast, it assumes a new Hashbrowns
+dish will be made during the process.)
+</p>
+
 
 </div>
 <div id="TOC">
@@ -82,9 +97,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">75</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Clint">Clint</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">100</td>
+<td class="value">40</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Amethyst_Cookie_x2" src="img/blank.png" alt=""> Amethyst Cookie</td>
@@ -93,9 +108,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2400</td>
+<td class="value">400</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Apple_Pie_x2" src="img/blank.png" alt=""> Apple Pie</td>
@@ -104,9 +119,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">140</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2600</td>
+<td class="value">600</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_605_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Artichoke_Dip">Artichoke Dip</a></td>
@@ -115,9 +130,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 28 Fall, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">210</td>
+<td class="value">-75</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Autumn_Muffin_x2" src="img/blank.png" alt=""> Autumn Muffin</td>
@@ -126,9 +141,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2945</td>
+<td class="value">945</td>
+<td class="value">260</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_235_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Autumn's_Bounty">Autumn's Bounty</a></td>
@@ -137,9 +152,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">220</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Demetrius">Demetrius</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">350</td>
+<td class="value">-130</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Avocado_Eel_Roll_x2" src="img/blank.png" alt=""> Avocado Eel Roll</td>
@@ -148,9 +163,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">120</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2555</td>
+<td class="value">555</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Avocado_Toast_x2" src="img/blank.png" alt=""> Avocado Toast</td>
@@ -159,9 +174,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">120</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2410</td>
+<td class="value">410</td>
+<td class="value">160</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_BBQ_Sauce_x2" src="img/blank.png" alt=""> BBQ Sauce</td>
@@ -170,9 +185,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">--</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">120</td>
+<td class="value">75</td>
+<td class="value">-260</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Bacon_x2" src="img/blank.png" alt=""> Bacon</td>
@@ -181,9 +196,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">230</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Bacon_Hamburger_x2" src="img/blank.png" alt=""> Bacon Hamburger</td>
@@ -192,9 +207,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">410</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">680</td>
+<td class="value">950</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Bacon_n_Eggs_x2" src="img/blank.png" alt=""> Bacon n Eggs</td>
@@ -203,9 +218,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">168</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">800</td>
+<td class="value">245</td>
+<td class="value">65</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_198_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Baked_Fish">Baked Fish</a></td>
@@ -214,9 +229,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">75</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Summer, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">100</td>
+<td class="value">-25</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Baked_Sweet_Potato_x2" src="img/blank.png" alt=""> Baked Sweet Potato</td>
@@ -225,9 +240,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">50</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2270</td>
+<td class="value">270</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Banana_Bread_x2" src="img/blank.png" alt=""> Banana Bread</td>
@@ -236,9 +251,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2820</td>
+<td class="value">820</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Banana_Pudding_x2" src="img/blank.png" alt=""> Banana Pudding</td>
@@ -247,9 +262,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">130</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2430</td>
+<td class="value">430</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Banana_Strawberry_Cake_x2" src="img/blank.png" alt=""> Banana Strawberry Cake</td>
@@ -258,9 +273,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">210</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2590</td>
+<td class="value">590</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Bangers_Beans_and_Mash_x2" src="img/blank.png" alt=""> Bangers Beans and Mash</td>
@@ -269,9 +284,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">523</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">800</td>
+<td class="value">450</td>
+<td class="value">-455</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_207_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Bean_Hotpot">Bean Hotpot</a></td>
@@ -280,9 +295,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Clint">Clint</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">100</td>
+<td class="value">20</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Bear_Donut_x2" src="img/blank.png" alt=""> Bear Donut</td>
@@ -291,9 +306,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2725</td>
+<td class="value">725</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Beef_Burrito_x2" src="img/blank.png" alt=""> Beef Burrito</td>
@@ -302,9 +317,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">318</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">800</td>
+<td class="value">325</td>
+<td class="value">-60</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Beef_Ribs_x2" src="img/blank.png" alt=""> Beef Ribs</td>
@@ -313,9 +328,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">190</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1000</td>
+<td class="value">760</td>
+<td class="value">350</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Beef_Stock_x2" src="img/blank.png" alt=""> Beef Stock</td>
@@ -324,9 +339,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2475</td>
+<td class="value">475</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Berry_Popsicle_x2" src="img/blank.png" alt=""> Berry Popsicle</td>
@@ -335,9 +350,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">286</td>
+<td class="value">220</td>
+<td class="value">-150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Better_Pumpkin_Pie_x2" src="img/blank.png" alt=""> Better Pumpkin Pie</td>
@@ -346,9 +361,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2820</td>
+<td class="value">820</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Black_Forest_Cake_x2" src="img/blank.png" alt=""> Black Forest Cake</td>
@@ -357,9 +372,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">280</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">200</td>
+<td class="value">200</td>
+<td class="value">-30</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_611_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Blackberry_Cobbler">Blackberry Cobbler</a></td>
@@ -368,9 +383,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Fall, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">260</td>
+<td class="value">120</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Blue_Raspberry_Popsicle_x2" src="img/blank.png" alt=""> Blue Raspberry Popsicle</td>
@@ -379,9 +394,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">286</td>
+<td class="value">220</td>
+<td class="value">90</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Blueberry_Creme_Popsicle_x2" src="img/blank.png" alt=""> Blueberry Creme Popsicle</td>
@@ -390,9 +405,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">900</td>
+<td class="value">500</td>
+<td class="value">323</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Blueberry_Honey_Cake_x2" src="img/blank.png" alt=""> Blueberry Honey Cake</td>
@@ -401,9 +416,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2690</td>
+<td class="value">690</td>
+<td class="value">415</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Blueberry_Macaron_x2" src="img/blank.png" alt=""> Blueberry Macaron</td>
@@ -412,9 +427,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">240</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3350</td>
+<td class="value">1350</td>
+<td class="value">870</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_234_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Blueberry_Tart">Blueberry Tart</a></td>
@@ -423,9 +438,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Pierre">Pierre</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">150</td>
+<td class="value">-50</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Boiled_Greens_x2" src="img/blank.png" alt=""> Boiled Greens</td>
@@ -434,9 +449,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">200</td>
+<td class="value">20</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Bonito_Flakes_x2" src="img/blank.png" alt=""> Bonito Flakes</td>
@@ -445,9 +460,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">55</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">800</td>
+<td class="value">250</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_216_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Bread">Bread</a></td>
@@ -456,9 +471,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">50</td>
 <td class="name"></td>
 <td>Buy for 500g from <a href="http://stardewvalleywiki.com/The_Stardrop_Saloon">Gus</a><br /><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 28 Summer, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">60</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Broccoli_and_Cheese_x2" src="img/blank.png" alt=""> Broccoli and Cheese</td>
@@ -467,9 +482,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2420</td>
+<td class="value">420</td>
+<td class="value">-20</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Brown_Gravy_x2" src="img/blank.png" alt=""> Brown Gravy</td>
@@ -478,9 +493,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">188</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2775</td>
+<td class="value">775</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Brown_Sugar_x2" src="img/blank.png" alt=""> Brown Sugar</td>
@@ -489,9 +504,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1400</td>
+<td class="value">400</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Brownie_x2" src="img/blank.png" alt=""> Brownie</td>
@@ -500,9 +515,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">205</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2835</td>
+<td class="value">835</td>
+<td class="value">260</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_618_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Bruschetta">Bruschetta</a></td>
@@ -511,9 +526,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">113</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Winter, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">210</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Bulgogi_x2" src="img/blank.png" alt=""> Bulgogi</td>
@@ -522,9 +537,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">188</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">800</td>
+<td class="value">450</td>
+<td class="value">65</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Bunny_Cotton_Candy_x2" src="img/blank.png" alt=""> Bunny Cotton Candy</td>
@@ -533,9 +548,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">40</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1250</td>
+<td class="value">250</td>
+<td class="value">200</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Candied_Apple_x2" src="img/blank.png" alt=""> Candied Apple</td>
@@ -544,9 +559,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1300</td>
+<td class="value">300</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Candy_Corn_x2" src="img/blank.png" alt=""> Candy Corn</td>
@@ -555,9 +570,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">55</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">150</td>
+<td class="value">60</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Canned_Baked_Beans_x2" src="img/blank.png" alt=""> Canned Baked Beans</td>
@@ -566,9 +581,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">140</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2775</td>
+<td class="value">775</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Caramel_x2" src="img/blank.png" alt=""> Caramel</td>
@@ -577,9 +592,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">535</td>
+<td class="value">360</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Caramel_Apple_x2" src="img/blank.png" alt=""> Caramel Apple</td>
@@ -588,9 +603,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">220</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2785</td>
+<td class="value">785</td>
+<td class="value">510</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_209_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Carp_Surprise">Carp Surprise</a></td>
@@ -599,9 +614,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Summer, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">150</td>
+<td class="value">30</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Carrot_Cake_x2" src="img/blank.png" alt=""> Carrot Cake</td>
@@ -610,9 +625,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">145</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2490</td>
+<td class="value">490</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Cassava_Cake_x2" src="img/blank.png" alt=""> Cassava Cake</td>
@@ -621,9 +636,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2490</td>
+<td class="value">490</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Caviar_x2" src="img/blank.png" alt=""> Caviar</td>
@@ -632,9 +647,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2750</td>
+<td class="value">750</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Celery_and_Peanut_Butter_x2" src="img/blank.png" alt=""> Celery and Peanut Butter</td>
@@ -643,9 +658,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">65</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1380</td>
+<td class="value">380</td>
+<td class="value">160</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Cheese_Board_x2" src="img/blank.png" alt=""> Cheese Board</td>
@@ -654,9 +669,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">323</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">680</td>
+<td class="value">375</td>
+<td class="value">-190</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_197_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cheese_Cauliflower">Cheese Cauliflower</a></td>
@@ -665,9 +680,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Pam">Pam</a>)<br /></td>
+<td class="value">--</td>
 <td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">-375</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cheese_Fries_x2" src="img/blank.png" alt=""> Cheese Fries</td>
@@ -676,9 +691,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">145</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1260</td>
+<td class="value">260</td>
+<td class="value">-20</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Cheeseburger_x2" src="img/blank.png" alt=""> Cheeseburger</td>
@@ -687,9 +702,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">295</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1050</td>
+<td class="value">325</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cheesecake_x2" src="img/blank.png" alt=""> Cheesecake</td>
@@ -698,9 +713,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">180</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2690</td>
+<td class="value">690</td>
+<td class="value">270</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Chef_Salad_x2" src="img/blank.png" alt=""> Chef Salad</td>
@@ -709,9 +724,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">330</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2565</td>
+<td class="value">565</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cherry_Pie_x2" src="img/blank.png" alt=""> Cherry Pie</td>
@@ -720,9 +735,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">180</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2440</td>
+<td class="value">540</td>
+<td class="value">155</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Chicken_Stock_x2" src="img/blank.png" alt=""> Chicken Stock</td>
@@ -731,9 +746,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2460</td>
+<td class="value">460</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Chicken_and_Spinach_Crepe_x2" src="img/blank.png" alt=""> Chicken and Spinach Crepe</td>
@@ -742,9 +757,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">318</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2495</td>
+<td class="value">495</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Chili_Chocolate_Lava_Cake_x2" src="img/blank.png" alt=""> Chili Chocolate Lava Cake</td>
@@ -753,9 +768,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">280</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">200</td>
+<td class="value">200</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_x2" src="img/blank.png" alt=""> Chocolate</td>
@@ -764,9 +779,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1435</td>
+<td class="value">435</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_220_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Chocolate_Cake">Chocolate Cake</a></td>
@@ -775,9 +790,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Winter, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">200</td>
+<td class="value">50</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Covered_Strawberry_x2" src="img/blank.png" alt=""> Chocolate Covered Strawberry</td>
@@ -786,9 +801,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2695</td>
+<td class="value">695</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Creme_Cookie_x2" src="img/blank.png" alt=""> Chocolate Creme Cookie</td>
@@ -797,9 +812,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">350</td>
+<td class="value">125</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Eclair_x2" src="img/blank.png" alt=""> Chocolate Eclair</td>
@@ -808,9 +823,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">190</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">390</td>
+<td class="value">300</td>
+<td class="value">-175</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Mouse_Bread_x2" src="img/blank.png" alt=""> Chocolate Mouse Bread</td>
@@ -819,9 +834,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2675</td>
+<td class="value">675</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Pudding_x2" src="img/blank.png" alt=""> Chocolate Pudding</td>
@@ -830,9 +845,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">140</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2685</td>
+<td class="value">685</td>
+<td class="value">260</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Roll_Cake_x2" src="img/blank.png" alt=""> Chocolate Roll Cake</td>
@@ -841,9 +856,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">235</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2905</td>
+<td class="value">905</td>
+<td class="value">335</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Strawberry_Cake_x2" src="img/blank.png" alt=""> Chocolate Strawberry Cake</td>
@@ -852,9 +867,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">180</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2745</td>
+<td class="value">745</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_and_Banana_Crepe_x2" src="img/blank.png" alt=""> Chocolate and Banana Crepe</td>
@@ -863,9 +878,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">190</td>
+<td class="value">-255</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_727_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Chowder">Chowder</a></td>
@@ -874,9 +889,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Willy">Willy</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">135</td>
+<td class="value">-40</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Cinnamon_Bun_x2" src="img/blank.png" alt=""> Cinnamon Bun</td>
@@ -885,9 +900,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">250</td>
+<td class="value">-115</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Coconut_Popsicle_x2" src="img/blank.png" alt=""> Coconut Popsicle</td>
@@ -896,9 +911,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">15</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1000</td>
+<td class="value">450</td>
+<td class="value">348</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Coffee_Eclair_x2" src="img/blank.png" alt=""> Coffee Eclair</td>
@@ -907,9 +922,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">190</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">390</td>
+<td class="value">300</td>
+<td class="value">-25</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_648_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coleslaw">Coleslaw</a></td>
@@ -918,9 +933,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">213</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Spring, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">345</td>
+<td class="value">-205</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_201_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Complete_Breakfast">Complete Breakfast</a></td>
@@ -929,9 +944,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Spring, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">350</td>
+<td class="value">-105</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_223_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cookie">Cookie</a></td>
@@ -940,9 +955,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Evelyn">Evelyn</a> 4&#x2665; Event</td>
+<td class="value">--</td>
 <td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">-150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cookie_Bear_x2" src="img/blank.png" alt=""> Cookie Bear</td>
@@ -951,9 +966,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1500</td>
+<td class="value">500</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cookie_Cat_x2" src="img/blank.png" alt=""> Cookie Cat</td>
@@ -962,9 +977,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">265</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3015</td>
+<td class="value">1015</td>
+<td class="value">220</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cookie_Pig_x2" src="img/blank.png" alt=""> Cookie Pig</td>
@@ -973,9 +988,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3150</td>
+<td class="value">1150</td>
+<td class="value">-65</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Cookie_Pizza_x2" src="img/blank.png" alt=""> Cookie Pizza</td>
@@ -984,9 +999,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">350</td>
+<td class="value">125</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cookie_Squid_x2" src="img/blank.png" alt=""> Cookie Squid</td>
@@ -995,9 +1010,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1500</td>
+<td class="value">500</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Corndog_x2" src="img/blank.png" alt=""> Corndog</td>
@@ -1006,9 +1021,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">280</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">650</td>
+<td class="value">175</td>
+<td class="value">-660</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cotton_Candy_x2" src="img/blank.png" alt=""> Cotton Candy</td>
@@ -1017,9 +1032,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">40</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1250</td>
+<td class="value">250</td>
+<td class="value">200</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_732_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Crab_Cakes">Crab Cakes</a></td>
@@ -1028,9 +1043,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Fall, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">275</td>
+<td class="value">-25</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Crab_Roll_x2" src="img/blank.png" alt=""> Crab Roll</td>
@@ -1039,9 +1054,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">275</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2660</td>
+<td class="value">660</td>
+<td class="value">250</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_238_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cranberry_Sauce">Cranberry Sauce</a></td>
@@ -1050,9 +1065,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Gus">Gus</a>)<br /></td>
+<td class="value">--</td>
 <td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">-125</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cream_Cheese_x2" src="img/blank.png" alt=""> Cream Cheese</td>
@@ -1061,9 +1076,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">55</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">250</td>
+<td class="value">50</td>
+<td class="value">-75</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_214_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Crispy_Bass">Crispy Bass</a></td>
@@ -1072,9 +1087,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Kent">Kent</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">150</td>
+<td class="value">-100</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Cucumber_Roll_x2" src="img/blank.png" alt=""> Cucumber Roll</td>
@@ -1083,9 +1098,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2360</td>
+<td class="value">360</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Cucumber_Sandwich_x2" src="img/blank.png" alt=""> Cucumber Sandwich</td>
@@ -1094,9 +1109,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">120</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2400</td>
+<td class="value">400</td>
+<td class="value">70</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Cupcake_Cat_x2" src="img/blank.png" alt=""> Cupcake Cat</td>
@@ -1105,9 +1120,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1420</td>
+<td class="value">420</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Dashi_Stock_x2" src="img/blank.png" alt=""> Dashi Stock</td>
@@ -1116,9 +1131,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">620</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Deviled_Eggs_x2" src="img/blank.png" alt=""> Deviled Eggs</td>
@@ -1127,9 +1142,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">70</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">450</td>
+<td class="value">320</td>
+<td class="value">-20</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_242_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Dish_O'_The_Sea">Dish O' The Sea</a></td>
@@ -1138,9 +1153,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td>Level 3 in <a href="http://stardewvalleywiki.com/Fishing">Fishing</a><br /></td>
+<td class="value">--</td>
 <td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">-260</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Dragon_Fruit_Popsicle_x2" src="img/blank.png" alt=""> Dragon Fruit Popsicle</td>
@@ -1149,9 +1164,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">50</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1300</td>
+<td class="value">800</td>
+<td class="value">673</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Dumplings_x2" src="img/blank.png" alt=""> Dumplings</td>
@@ -1160,9 +1175,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">220</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2648</td>
+<td class="value">648</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_231_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Eggplant_Parmesan">Eggplant Parmesan</a></td>
@@ -1171,9 +1186,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Lewis">Lewis</a>)<br /></td>
+<td class="value">--</td>
 <td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">-120</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Ento_x2" src="img/blank.png" alt=""> Ento</td>
@@ -1182,9 +1197,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">220</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">845</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_729_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Escargot">Escargot</a></td>
@@ -1193,9 +1208,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td>Mail (5&#x2665; with <a href="http://stardewvalleywiki.com/Willy">Willy</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">125</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_240_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Farmer's_Lunch">Farmer's Lunch</a></td>
@@ -1204,9 +1219,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td>Level 3 in <a href="http://stardewvalleywiki.com/Farming">Farming</a><br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">150</td>
+<td class="value">-60</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Farofa_x2" src="img/blank.png" alt=""> Farofa</td>
@@ -1215,9 +1230,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2535</td>
+<td class="value">535</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Festive_Sprinkled_Sugar_Cookies_x2" src="img/blank.png" alt=""> Festive Sprinkled Sugar Cookies</td>
@@ -1226,9 +1241,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">113</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_649_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fiddlehead_Risotto">Fiddlehead Risotto</a></td>
@@ -1237,9 +1252,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 28 Fall, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">350</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Fig_Tart_x2" src="img/blank.png" alt=""> Fig Tart</td>
@@ -1248,9 +1263,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1350</td>
+<td class="value">350</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_728_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fish_Stew">Fish Stew</a></td>
@@ -1259,9 +1274,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Willy">Willy</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">175</td>
+<td class="value">-10</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_213_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fish_Taco">Fish Taco</a></td>
@@ -1270,9 +1285,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Linus">Linus</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">500</td>
+<td class="value">-100</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Fox_Donut_x2" src="img/blank.png" alt=""> Fox Donut</td>
@@ -1281,9 +1296,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2530</td>
+<td class="value">530</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_202_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fried_Calamari">Fried Calamari</a></td>
@@ -1292,9 +1307,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Jodi">Jodi</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">150</td>
+<td class="value">-80</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_225_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fried_Eel">Fried Eel</a></td>
@@ -1303,9 +1318,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">75</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/George">George</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">120</td>
+<td class="value">-65</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_194_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fried_Egg">Fried Egg</a></td>
@@ -1314,9 +1329,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">50</td>
 <td class="name"></td>
 <td>Given automatically</td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">35</td>
+<td class="value">-15</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_205_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fried_Mushroom">Fried Mushroom</a></td>
@@ -1325,9 +1340,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Demetrius">Demetrius</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">200</td>
+<td class="value">-90</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Fried_Rice_x2" src="img/blank.png" alt=""> Fried Rice</td>
@@ -1336,9 +1351,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2495</td>
+<td class="value">495</td>
+<td class="value">120</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Fried_Sweet_Bananas_x2" src="img/blank.png" alt=""> Fried Sweet Bananas</td>
@@ -1347,9 +1362,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">170</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2545</td>
+<td class="value">545</td>
+<td class="value">-20</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_610_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Fruit_Salad">Fruit Salad</a></td>
@@ -1358,9 +1373,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">263</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Fall, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">450</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Fudgesicle_x2" src="img/blank.png" alt=""> Fudgesicle</td>
@@ -1369,9 +1384,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">286</td>
+<td class="value">220</td>
+<td class="value">-130</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Garlic_Bread_x2" src="img/blank.png" alt=""> Garlic Bread</td>
@@ -1380,9 +1395,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">145</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2445</td>
+<td class="value">445</td>
+<td class="value">160</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Ginger_Cookies_x2" src="img/blank.png" alt=""> Ginger Cookies</td>
@@ -1391,9 +1406,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">120</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Gingerbread_Cookies_x2" src="img/blank.png" alt=""> Gingerbread Cookies</td>
@@ -1402,9 +1417,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">385</td>
+<td class="value">155</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_208_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Glazed_Yams">Glazed Yams</a></td>
@@ -1413,9 +1428,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Fall, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">200</td>
+<td class="value">-10</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Gooseberry_Pie_x2" src="img/blank.png" alt=""> Gooseberry Pie</td>
@@ -1424,9 +1439,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2410</td>
+<td class="value">410</td>
+<td class="value">-65</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Graham_Crackers_x2" src="img/blank.png" alt=""> Graham Crackers</td>
@@ -1435,9 +1450,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">55</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1450</td>
+<td class="value">450</td>
+<td class="value">250</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Green_Frog_Cake_x2" src="img/blank.png" alt=""> Green Frog Cake</td>
@@ -1446,9 +1461,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">168</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">150</td>
+<td class="value">-75</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Grilled_Cheese_x2" src="img/blank.png" alt=""> Grilled Cheese</td>
@@ -1457,9 +1472,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">265</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2535</td>
+<td class="value">535</td>
+<td class="value">110</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Grilled_Skewer_x2" src="img/blank.png" alt=""> Grilled Skewer</td>
@@ -1468,9 +1483,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">183</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">150</td>
+<td class="value">-150</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Ham_x2" src="img/blank.png" alt=""> Ham</td>
@@ -1479,9 +1494,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">850</td>
+<td class="value">380</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Hardboiled_Egg_x2" src="img/blank.png" alt=""> Hardboiled Egg</td>
@@ -1490,9 +1505,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">45</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">35</td>
+<td class="value">-15</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_210_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Hashbrowns">Hashbrowns</a></td>
@@ -1501,9 +1516,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td>Buy for 250g from <a href="http://stardewvalleywiki.com/The_Stardrop_Saloon">Gus</a><br /><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Spring, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">120</td>
+<td class="value">-60</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Heart_Lollipop_x2" src="img/blank.png" alt=""> Heart Lollipop</td>
@@ -1512,9 +1527,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1320</td>
+<td class="value">320</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Heart-Shaped_Cookies_x2" src="img/blank.png" alt=""> Heart-Shaped Cookies</td>
@@ -1523,9 +1538,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">200</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Herb-Crusted_Fish_x2" src="img/blank.png" alt=""> Herb-Crusted Fish</td>
@@ -1534,9 +1549,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">88</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">300</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Honey_Cake_x2" src="img/blank.png" alt=""> Honey Cake</td>
@@ -1545,9 +1560,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2500</td>
+<td class="value">500</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_PPJA_cannabiskit">
 <td class="name"><img class="objects_x2" id="Object_Honey_Stick_x2" src="img/blank.png" alt=""> Honey Stick</td>
@@ -1556,9 +1571,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">28</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1500</td>
+<td class="value">800</td>
+<td class="value">470</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Hot_Dog_x2" src="img/blank.png" alt=""> Hot Dog</td>
@@ -1567,9 +1582,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">348</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">175</td>
+<td class="value">50</td>
 </tr>
 <tr class="filter_ppja_artisanvalleymachinegoods">
 <td class="name"><img class="objects_x2" id="Object_Hot_Sauce_x2" src="img/blank.png" alt=""> Hot Sauce</td>
@@ -1578,9 +1593,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">860</td>
+<td class="value">175</td>
+<td class="value">-125</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_233_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Ice_Cream">Ice Cream</a></td>
@@ -1589,9 +1604,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Jodi">Jodi</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">120</td>
+<td class="value">-55</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Ice_Cream_Brownie_x2" src="img/blank.png" alt=""> Ice Cream Brownie</td>
@@ -1600,9 +1615,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">330</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3105</td>
+<td class="value">1105</td>
+<td class="value">355</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Ice_Cream_and_Jam_Cake_x2" src="img/blank.png" alt=""> Ice Cream and Jam Cake</td>
@@ -1611,9 +1626,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">195</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1125</td>
+<td class="value">350</td>
+<td class="value">-135</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Iced_Chocolate_Donut_x2" src="img/blank.png" alt=""> Iced Chocolate Donut</td>
@@ -1622,9 +1637,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">245</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3150</td>
+<td class="value">1150</td>
+<td class="value">400</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Iced_Strawberry_Donut_x2" src="img/blank.png" alt=""> Iced Strawberry Donut</td>
@@ -1633,9 +1648,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2540</td>
+<td class="value">540</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Iced_Vanilla_Donut_x2" src="img/blank.png" alt=""> Iced Vanilla Donut</td>
@@ -1644,9 +1659,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">155</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2500</td>
+<td class="value">500</td>
+<td class="value">-50</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Island_Salad_x2" src="img/blank.png" alt=""> Island Salad</td>
@@ -1655,9 +1670,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2570</td>
+<td class="value">570</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Ketchup_x2" src="img/blank.png" alt=""> Ketchup</td>
@@ -1666,9 +1681,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">--</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">50</td>
+<td class="value">-160</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Key_Lime_Pie_x2" src="img/blank.png" alt=""> Key Lime Pie</td>
@@ -1677,9 +1692,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">145</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2760</td>
+<td class="value">760</td>
+<td class="value">385</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Key_Lime_Tea_Cookies_x2" src="img/blank.png" alt=""> Key Lime Tea Cookies</td>
@@ -1688,9 +1703,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Lady_Fingers_x2" src="img/blank.png" alt=""> Lady Fingers</td>
@@ -1699,9 +1714,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1410</td>
+<td class="value">410</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Lavender_Cake_Bar_x2" src="img/blank.png" alt=""> Lavender Cake Bar</td>
@@ -1710,9 +1725,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">250</td>
+<td class="value">120</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Lavender_Vanilla_Cake_x2" src="img/blank.png" alt=""> Lavender Vanilla Cake</td>
@@ -1721,9 +1736,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">305</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">200</td>
+<td class="value">200</td>
+<td class="value">-370</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Lemon_Blueberry_Cake_Bar_x2" src="img/blank.png" alt=""> Lemon Blueberry Cake Bar</td>
@@ -1732,9 +1747,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">250</td>
+<td class="value">50</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Lemon_Drizzle_Cake_x2" src="img/blank.png" alt=""> Lemon Drizzle Cake</td>
@@ -1743,9 +1758,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">305</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">200</td>
+<td class="value">200</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Lemon_Pie_x2" src="img/blank.png" alt=""> Lemon Pie</td>
@@ -1754,9 +1769,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">145</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2760</td>
+<td class="value">760</td>
+<td class="value">385</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Lilac_Macaron_x2" src="img/blank.png" alt=""> Lilac Macaron</td>
@@ -1765,9 +1780,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">275</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3350</td>
+<td class="value">1350</td>
+<td class="value">890</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Lilac_Scones_x2" src="img/blank.png" alt=""> Lilac Scones</td>
@@ -1776,9 +1791,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">163</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">300</td>
+<td class="value">-105</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_730_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Lobster_Bisque">Lobster Bisque</a></td>
@@ -1787,9 +1802,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Winter, Year 2<br />Mail (9&#x2665; with <a href="http://stardewvalleywiki.com/Willy">Willy</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">205</td>
+<td class="value">-40</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Lotus_Mochi_x2" src="img/blank.png" alt=""> Lotus Mochi</td>
@@ -1798,9 +1813,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">250</td>
+<td class="value">30</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_204_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Lucky_Lunch">Lucky Lunch</a></td>
@@ -1809,9 +1824,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 28 Spring, Year 2<br />Level 8 in <a href="http://stardewvalleywiki.com/Luck">Luck</a> (requires <a href="https://www.nexusmods.com/stardewvalley/mods/521">mod</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">250</td>
+<td class="value">75</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_228_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Maki_Roll">Maki Roll</a></td>
@@ -1820,9 +1835,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td>Buy for 1500g from <a href="http://stardewvalleywiki.com/The_Stardrop_Saloon">Gus</a><br /><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Summer, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">220</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_731_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Maple_Bar">Maple Bar</a></td>
@@ -1831,9 +1846,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Summer, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">300</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Maple_Leaf_Cookies_x2" src="img/blank.png" alt=""> Maple Leaf Cookies</td>
@@ -1842,9 +1857,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Marmalade_x2" src="img/blank.png" alt=""> Marmalade</td>
@@ -1853,9 +1868,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">300</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Matcha_Cookies_x2" src="img/blank.png" alt=""> Matcha Cookies</td>
@@ -1864,9 +1879,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">15</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">525</td>
+<td class="value">100</td>
+<td class="value">-240</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Melon_Salad_x2" src="img/blank.png" alt=""> Melon Salad</td>
@@ -1875,9 +1890,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">365</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2925</td>
+<td class="value">925</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Mild_Curry_x2" src="img/blank.png" alt=""> Mild Curry</td>
@@ -1886,9 +1901,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">190</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">900</td>
+<td class="value">400</td>
+<td class="value">-5</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_243_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Miner's_Treat">Miner's Treat</a></td>
@@ -1897,9 +1912,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Level 3 in <a href="http://stardewvalleywiki.com/Mining">Mining</a><br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">200</td>
+<td class="value">-25</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Mint_Cake_x2" src="img/blank.png" alt=""> Mint Cake</td>
@@ -1908,9 +1923,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">250</td>
+<td class="value">95</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Mint_Chocolate_Cake_Bar_x2" src="img/blank.png" alt=""> Mint Chocolate Cake Bar</td>
@@ -1919,9 +1934,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">250</td>
+<td class="value">95</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Mochi_x2" src="img/blank.png" alt=""> Mochi</td>
@@ -1930,9 +1945,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2330</td>
+<td class="value">330</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Moonshine_Cherries_x2" src="img/blank.png" alt=""> Moonshine Cherries</td>
@@ -1941,9 +1956,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3700</td>
+<td class="value">700</td>
+<td class="value">310</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Mushroom_and_Pepper_Crepe_x2" src="img/blank.png" alt=""> Mushroom and Pepper Crepe</td>
@@ -1952,9 +1967,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">255</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2510</td>
+<td class="value">510</td>
+<td class="value">25</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Muskmelon_Strawberry_Popsicle_x2" src="img/blank.png" alt=""> Muskmelon Strawberry Popsicle</td>
@@ -1963,9 +1978,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">60</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1000</td>
+<td class="value">650</td>
+<td class="value">348</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Mustard_x2" src="img/blank.png" alt=""> Mustard</td>
@@ -1974,9 +1989,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">--</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">250</td>
+<td class="value">100</td>
+<td class="value">-300</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Neapolitan_Popsicle_x2" src="img/blank.png" alt=""> Neapolitan Popsicle</td>
@@ -1985,9 +2000,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1100</td>
+<td class="value">1060</td>
+<td class="value">438</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_195_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Omelet">Omelet</a></td>
@@ -1996,9 +2011,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td>Buy for 500g from <a href="http://stardewvalleywiki.com/The_Stardrop_Saloon">Gus</a><br /><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 28 Spring, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">125</td>
+<td class="value">-50</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Orange_Popsicle_x2" src="img/blank.png" alt=""> Orange Popsicle</td>
@@ -2007,9 +2022,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">286</td>
+<td class="value">220</td>
+<td class="value">70</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_PB&J_Sandwich_x2" src="img/blank.png" alt=""> PB&J Sandwich</td>
@@ -2018,9 +2033,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1530</td>
+<td class="value">530</td>
+<td class="value">170</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Paella_x2" src="img/blank.png" alt=""> Paella</td>
@@ -2029,9 +2044,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">278</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1000</td>
+<td class="value">550</td>
+<td class="value">-230</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_457_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pale_Broth">Pale Broth</a></td>
@@ -2040,9 +2055,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Marnie">Marnie</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">150</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_211_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pancakes">Pancakes</a></td>
@@ -2051,9 +2066,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td>Buy for 500g from <a href="http://stardewvalleywiki.com/The_Stardrop_Saloon">Gus</a><br /><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Summer, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">80</td>
+<td class="value">-20</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_199_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Parsnip_Soup">Parsnip Soup</a></td>
@@ -2062,9 +2077,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Caroline">Caroline</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">120</td>
+<td class="value">-140</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Pastel_Pink_Eclair_x2" src="img/blank.png" alt=""> Pastel Pink Eclair</td>
@@ -2073,9 +2088,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">190</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">390</td>
+<td class="value">300</td>
+<td class="value">-105</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Pastel_Purple_Eclair_x2" src="img/blank.png" alt=""> Pastel Purple Eclair</td>
@@ -2084,9 +2099,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">190</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">390</td>
+<td class="value">300</td>
+<td class="value">-365</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Peanut_Butter_x2" src="img/blank.png" alt=""> Peanut Butter</td>
@@ -2095,9 +2110,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">35</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">650</td>
+<td class="value">160</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Pecan_Pie_x2" src="img/blank.png" alt=""> Pecan Pie</td>
@@ -2106,9 +2121,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">250</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3035</td>
+<td class="value">1035</td>
+<td class="value">360</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_215_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pepper_Poppers">Pepper Poppers</a></td>
@@ -2117,9 +2132,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">130</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Shane">Shane</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">200</td>
+<td class="value">-40</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Pig_Donut_x2" src="img/blank.png" alt=""> Pig Donut</td>
@@ -2128,9 +2143,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2800</td>
+<td class="value">800</td>
+<td class="value">25</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_221_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pink_Cake">Pink Cake</a></td>
@@ -2139,9 +2154,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">250</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Summer, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">480</td>
+<td class="value">80</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Pink_Frog_Cake_x2" src="img/blank.png" alt=""> Pink Frog Cake</td>
@@ -2150,9 +2165,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">168</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">150</td>
+<td class="value">-75</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Pink_Strawberry_Cake_x2" src="img/blank.png" alt=""> Pink Strawberry Cake</td>
@@ -2161,9 +2176,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">205</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2520</td>
+<td class="value">520</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_206_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pizza">Pizza</a></td>
@@ -2172,9 +2187,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td>Buy for 750g from <a href="http://stardewvalleywiki.com/The_Stardrop_Saloon">Gus</a><br /><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Spring, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">300</td>
+<td class="value">-10</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Plain_Chocolate_Donut_x2" src="img/blank.png" alt=""> Plain Chocolate Donut</td>
@@ -2183,9 +2198,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2725</td>
+<td class="value">725</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Plain_Strawberry_Donut_x2" src="img/blank.png" alt=""> Plain Strawberry Donut</td>
@@ -2194,9 +2209,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2420</td>
+<td class="value">420</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Plain_Vanilla_Donut_x2" src="img/blank.png" alt=""> Plain Vanilla Donut</td>
@@ -2205,9 +2220,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2500</td>
+<td class="value">500</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_604_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Plum_Pudding">Plum Pudding</a></td>
@@ -2216,9 +2231,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Winter, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">260</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Poached_Pear_x2" src="img/blank.png" alt=""> Poached Pear</td>
@@ -2227,9 +2242,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2735</td>
+<td class="value">735</td>
+<td class="value">250</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Popcorn_x2" src="img/blank.png" alt=""> Popcorn</td>
@@ -2238,9 +2253,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">70</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1425</td>
+<td class="value">425</td>
+<td class="value">25</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_651_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Poppyseed_Muffin">Poppyseed Muffin</a></td>
@@ -2249,9 +2264,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Winter, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">250</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_PPJA_cannabiskit">
 <td class="name"><img class="objects_x2" id="Object_Pot_Brownie_x2" src="img/blank.png" alt=""> Pot Brownie</td>
@@ -2260,9 +2275,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">63</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">450</td>
+<td class="value">-5</td>
 </tr>
 <tr class="filter_ppja_MoreRecipesMeat">
 <td class="name"><img class="objects_x2" id="Object_Poutine_x2" src="img/blank.png" alt=""> Poutine</td>
@@ -2271,9 +2286,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">368</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3155</td>
+<td class="value">1155</td>
+<td class="value">320</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Powdered_Sugar_Lemon_Cookies_x2" src="img/blank.png" alt=""> Powdered Sugar Lemon Cookies</td>
@@ -2282,9 +2297,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Prismatic_Popsicle_x2" src="img/blank.png" alt=""> Prismatic Popsicle</td>
@@ -2293,9 +2308,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">155</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2500</td>
+<td class="value">3325</td>
+<td class="value">-777</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Pumpkin_Cake_Bar_x2" src="img/blank.png" alt=""> Pumpkin Cake Bar</td>
@@ -2304,9 +2319,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">250</td>
+<td class="value">-170</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_608_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pumpkin_Pie">Pumpkin Pie</a></td>
@@ -2315,9 +2330,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Winter, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">385</td>
+<td class="value">-160</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_236_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Pumpkin_Soup">Pumpkin Soup</a></td>
@@ -2326,9 +2341,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Robin">Robin</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">300</td>
+<td class="value">-145</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Purple_Pastel_Cake_x2" src="img/blank.png" alt=""> Purple Pastel Cake</td>
@@ -2337,9 +2352,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2450</td>
+<td class="value">450</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_609_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Radish_Salad">Radish Salad</a></td>
@@ -2348,9 +2363,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 21 Spring, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">300</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Rainbow_Candy_Cookies_x2" src="img/blank.png" alt=""> Rainbow Candy Cookies</td>
@@ -2359,9 +2374,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">205</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2835</td>
+<td class="value">835</td>
+<td class="value">260</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Rainbow_Cotton_Candy_x2" src="img/blank.png" alt=""> Rainbow Cotton Candy</td>
@@ -2370,9 +2385,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">265</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3220</td>
+<td class="value">1220</td>
+<td class="value">200</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Ramen_x2" src="img/blank.png" alt=""> Ramen</td>
@@ -2381,9 +2396,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">220</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">450</td>
+<td class="value">200</td>
+<td class="value">80</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Raspberry_Tart_x2" src="img/blank.png" alt=""> Raspberry Tart</td>
@@ -2392,9 +2407,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1280</td>
+<td class="value">280</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_230_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Red_Plate">Red Plate</a></td>
@@ -2403,9 +2418,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">240</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Emily">Emily</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">400</td>
+<td class="value">50</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_222_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Rhubarb_Pie">Rhubarb Pie</a></td>
@@ -2414,9 +2429,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">215</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Marnie">Marnie</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">400</td>
+<td class="value">80</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Rice_Pilaf_x2" src="img/blank.png" alt=""> Rice Pilaf</td>
@@ -2425,9 +2440,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">88</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2450</td>
+<td class="value">450</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_232_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Rice_Pudding">Rice Pudding</a></td>
@@ -2436,9 +2451,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">115</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Evelyn">Evelyn</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">260</td>
+<td class="value">-15</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Rich_Tiramisu_x2" src="img/blank.png" alt=""> Rich Tiramisu</td>
@@ -2447,9 +2462,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3095</td>
+<td class="value">1095</td>
+<td class="value">420</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_607_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Roasted_Hazelnuts">Roasted Hazelnuts</a></td>
@@ -2458,9 +2473,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 28 Summer, Year 2<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">270</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_244_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Roots_Platter">Roots Platter</a></td>
@@ -2469,9 +2484,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Level 3 in <a href="http://stardewvalleywiki.com/Combat">Combat</a><br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">100</td>
+<td class="value">5</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Rose_Nougat_x2" src="img/blank.png" alt=""> Rose Nougat</td>
@@ -2480,9 +2495,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">225</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">500</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Rose_Petal_Cake_x2" src="img/blank.png" alt=""> Rose Petal Cake</td>
@@ -2491,9 +2506,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">305</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">200</td>
+<td class="value">200</td>
+<td class="value">-270</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Rose_Pistachio_Shortbread_Cookies_x2" src="img/blank.png" alt=""> Rose Pistachio Shortbread Cookies</td>
@@ -2502,9 +2517,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">385</td>
+<td class="value">-85</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_196_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Salad">Salad</a></td>
@@ -2513,9 +2528,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">113</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Emily">Emily</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">110</td>
+<td class="value">-90</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Salami_x2" src="img/blank.png" alt=""> Salami</td>
@@ -2524,9 +2539,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">13</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">200</td>
+<td class="value">45</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_212_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Salmon_Dinner">Salmon Dinner</a></td>
@@ -2535,9 +2550,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Gus">Gus</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">300</td>
+<td class="value">-35</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Salsa_x2" src="img/blank.png" alt=""> Salsa</td>
@@ -2546,9 +2561,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">200</td>
+<td class="value">100</td>
+<td class="value">-90</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Salt_Flavored_Chips_x2" src="img/blank.png" alt=""> Salt Flavored Chips</td>
@@ -2557,9 +2572,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">40</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">120</td>
+<td class="value">-10</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_227_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sashimi">Sashimi</a></td>
@@ -2568,9 +2583,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">75</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Linus">Linus</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">75</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Sausage_x2" src="img/blank.png" alt=""> Sausage</td>
@@ -2579,9 +2594,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">345</td>
+<td class="value">160</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Sauteed_Onions_x2" src="img/blank.png" alt=""> Sauteed Onions</td>
@@ -2590,9 +2605,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">70</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">250</td>
+<td class="value">100</td>
+<td class="value">-1040</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Seaweed_Chips_x2" src="img/blank.png" alt=""> Seaweed Chips</td>
@@ -2601,9 +2616,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">30</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1250</td>
+<td class="value">250</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Shrimp_Cocktail_x2" src="img/blank.png" alt=""> Shrimp Cocktail</td>
@@ -2612,9 +2627,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">130</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">650</td>
+<td class="value">425</td>
+<td class="value">-250</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Smores_x2" src="img/blank.png" alt=""> Smores</td>
@@ -2623,9 +2638,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">450</td>
+<td class="value">80</td>
+<td class="value">-650</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Snickerdoodle_Cookies_x2" src="img/blank.png" alt=""> Snickerdoodle Cookies</td>
@@ -2634,9 +2649,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">60</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Soft_Pretzel_x2" src="img/blank.png" alt=""> Soft Pretzel</td>
@@ -2645,9 +2660,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">25</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">650</td>
+<td class="value">120</td>
+<td class="value">20</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Souffle_x2" src="img/blank.png" alt=""> Souffle</td>
@@ -2656,9 +2671,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">200</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Southern_Sweet_Tea_x2" src="img/blank.png" alt=""> Southern Sweet Tea</td>
@@ -2667,9 +2682,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">70</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1430</td>
+<td class="value">430</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_224_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Spaghetti">Spaghetti</a></td>
@@ -2678,9 +2693,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">75</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Lewis">Lewis</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">120</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_226_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Spicy_Eel">Spicy Eel</a></td>
@@ -2689,9 +2704,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">115</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/George">George</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">175</td>
+<td class="value">50</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Sprinkled_Chocolate_Donut_x2" src="img/blank.png" alt=""> Sprinkled Chocolate Donut</td>
@@ -2700,9 +2715,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">180</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2985</td>
+<td class="value">985</td>
+<td class="value">485</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Sprinkled_Lavender_Donut_x2" src="img/blank.png" alt=""> Sprinkled Lavender Donut</td>
@@ -2711,9 +2726,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2330</td>
+<td class="value">330</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Sprinkled_Strawberry_Donut_x2" src="img/blank.png" alt=""> Sprinkled Strawberry Donut</td>
@@ -2722,9 +2737,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2620</td>
+<td class="value">620</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Sprinkled_Vanilla_Donut_x2" src="img/blank.png" alt=""> Sprinkled Vanilla Donut</td>
@@ -2733,9 +2748,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2700</td>
+<td class="value">700</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Sprinkles_x2" src="img/blank.png" alt=""> Sprinkles</td>
@@ -2744,9 +2759,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">40</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">50</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Sriracha_x2" src="img/blank.png" alt=""> Sriracha</td>
@@ -2755,9 +2770,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">860</td>
+<td class="value">180</td>
+<td class="value">-110</td>
 </tr>
 <tr class="filter_paradigmnomad_freshmeat">
 <td class="name"><img class="objects_x2" id="Object_Steak_x2" src="img/blank.png" alt=""> Steak</td>
@@ -2766,9 +2781,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2350</td>
+<td class="value">350</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_606_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Stir_Fry">Stir Fry</a></td>
@@ -2777,9 +2792,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">200</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Spring, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">335</td>
+<td class="value">60</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_203_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Strange_Bun">Strange Bun</a></td>
@@ -2788,9 +2803,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td>Mail (3&#x2665; with <a href="http://stardewvalleywiki.com/Shane">Shane</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">225</td>
+<td class="value">-120</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Cake_x2" src="img/blank.png" alt=""> Strawberry Cake</td>
@@ -2799,9 +2814,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">205</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2600</td>
+<td class="value">600</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Cake_Bar_x2" src="img/blank.png" alt=""> Strawberry Cake Bar</td>
@@ -2810,9 +2825,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">100</td>
+<td class="value">250</td>
+<td class="value">30</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Creme_Popsicle_x2" src="img/blank.png" alt=""> Strawberry Creme Popsicle</td>
@@ -2821,9 +2836,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1000</td>
+<td class="value">620</td>
+<td class="value">373</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Kiwi_Popsicle_x2" src="img/blank.png" alt=""> Strawberry Kiwi Popsicle</td>
@@ -2832,9 +2847,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">105</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1000</td>
+<td class="value">725</td>
+<td class="value">503</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Macaron_x2" src="img/blank.png" alt=""> Strawberry Macaron</td>
@@ -2843,9 +2858,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">240</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3350</td>
+<td class="value">1350</td>
+<td class="value">730</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Popsicle_x2" src="img/blank.png" alt=""> Strawberry Popsicle</td>
@@ -2854,9 +2869,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">286</td>
+<td class="value">220</td>
+<td class="value">50</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Preserves_x2" src="img/blank.png" alt=""> Strawberry Preserves</td>
@@ -2865,9 +2880,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2320</td>
+<td class="value">320</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Pudding_x2" src="img/blank.png" alt=""> Strawberry Pudding</td>
@@ -2876,9 +2891,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2440</td>
+<td class="value">440</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Roll_Cake_x2" src="img/blank.png" alt=""> Strawberry Roll Cake</td>
@@ -2887,9 +2902,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2420</td>
+<td class="value">420</td>
+<td class="value">-90</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Tart_x2" src="img/blank.png" alt=""> Strawberry Tart</td>
@@ -2898,9 +2913,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2370</td>
+<td class="value">370</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_and_Cream_Crepe_x2" src="img/blank.png" alt=""> Strawberry and Cream Crepe</td>
@@ -2909,9 +2924,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2480</td>
+<td class="value">480</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Stuffed_Bell_Peppers_x2" src="img/blank.png" alt=""> Stuffed Bell Peppers</td>
@@ -2920,9 +2935,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2580</td>
+<td class="value">580</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Stuffed_Petals_x2" src="img/blank.png" alt=""> Stuffed Petals</td>
@@ -2931,9 +2946,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">113</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">350</td>
+<td class="value">-275</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_239_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Stuffing">Stuffing</a></td>
@@ -2942,9 +2957,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">170</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Pam">Pam</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">165</td>
+<td class="value">-50</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Sugar_Cookies_x2" src="img/blank.png" alt=""> Sugar Cookies</td>
@@ -2953,9 +2968,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">550</td>
+<td class="value">350</td>
+<td class="value">200</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_237_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Super_Meal">Super Meal</a></td>
@@ -2964,9 +2979,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">160</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Kent">Kent</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">220</td>
+<td class="value">-95</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Surimi_x2" src="img/blank.png" alt=""> Surimi</td>
@@ -2975,9 +2990,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">140</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food"></td>
+<td class="value">250</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_241_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Survival_Burger">Survival Burger</a></td>
@@ -2986,9 +3001,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td>Level 2 in <a href="http://stardewvalleywiki.com/Foraging">Foraging</a><br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">180</td>
+<td class="value">45</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Sweet_Potato_Fries_x2" src="img/blank.png" alt=""> Sweet Potato Fries</td>
@@ -2997,9 +3012,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">75</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2490</td>
+<td class="value">490</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Tiramisu_x2" src="img/blank.png" alt=""> Tiramisu</td>
@@ -3008,9 +3023,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">188</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">500</td>
+<td class="value">500</td>
+<td class="value">250</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Tofu_x2" src="img/blank.png" alt=""> Tofu</td>
@@ -3019,9 +3034,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">55</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1310</td>
+<td class="value">310</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_218_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Tom_Kha_Soup">Tom Kha Soup</a></td>
@@ -3030,9 +3045,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Sandy">Sandy</a>)<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">250</td>
+<td class="value">50</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_229_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Tortilla">Tortilla</a></td>
@@ -3041,9 +3056,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">50</td>
 <td class="name"></td>
 <td>Buy for 500g from <a href="http://stardewvalleywiki.com/The_Stardrop_Saloon">Gus</a><br /><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 7 Fall, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">50</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Tropical_Fruit_Salad_x2" src="img/blank.png" alt=""> Tropical Fruit Salad</td>
@@ -3052,9 +3067,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">240</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">3005</td>
+<td class="value">1005</td>
+<td class="value">175</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_219_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Trout_Soup">Trout Soup</a></td>
@@ -3063,9 +3078,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 14 Fall, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">100</td>
+<td class="value">20</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Vanilla_Creme_Popsicle_x2" src="img/blank.png" alt=""> Vanilla Creme Popsicle</td>
@@ -3074,9 +3089,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">286</td>
+<td class="value">220</td>
+<td class="value">-30</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Vanilla_Eclair_x2" src="img/blank.png" alt=""> Vanilla Eclair</td>
@@ -3085,9 +3100,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">190</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">390</td>
+<td class="value">300</td>
+<td class="value">-75</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_200_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Vegetable_Medley">Vegetable Medley</a></td>
@@ -3096,9 +3111,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td>Mail (7&#x2665; with <a href="http://stardewvalleywiki.com/Caroline">Caroline</a>)<br /></td>
+<td class="value">--</td>
 <td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">-160</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Vegetable_Stir_Fry_x2" src="img/blank.png" alt=""> Vegetable Stir Fry</td>
@@ -3107,9 +3122,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">105</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">2660</td>
+<td class="value">660</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_Aquilegia_SweetTooth">
 <td class="name"><img class="objects_x2" id="Object_Victoria_Sponge_Cake_x2" src="img/blank.png" alt=""> Victoria Sponge Cake</td>
@@ -3118,9 +3133,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">280</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">200</td>
+<td class="value">200</td>
+<td class="value">-110</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Waffles_x2" src="img/blank.png" alt=""> Waffles</td>
@@ -3129,9 +3144,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">55</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">700</td>
+<td class="value">100</td>
+<td class="value">0</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Wasabi_Peas_x2" src="img/blank.png" alt=""> Wasabi Peas</td>
@@ -3140,9 +3155,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">35</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">950</td>
+<td class="value">175</td>
+<td class="value">5</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Wisteria_Popsicle_x2" src="img/blank.png" alt=""> Wisteria Popsicle</td>
@@ -3151,9 +3166,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">15</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_food">1000</td>
+<td class="value">500</td>
+<td class="value">313</td>
 </tr>
 </tbody>
 </table>
@@ -3182,9 +3197,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">323</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6960</td>
+<td class="value">1960</td>
+<td class="value">535</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Americano_x2" src="img/blank.png" alt=""> Americano</td>
@@ -3193,9 +3208,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">123</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1776</td>
+<td class="value">704</td>
+<td class="value">169</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Angel_Face_x2" src="img/blank.png" alt=""> Angel Face</td>
@@ -3204,9 +3219,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">105</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5600</td>
+<td class="value">600</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Autumnal_Tea_x2" src="img/blank.png" alt=""> Autumnal Tea</td>
@@ -3215,9 +3230,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">250</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">350</td>
+<td class="value">90</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Aviation_x2" src="img/blank.png" alt=""> Aviation</td>
@@ -3226,9 +3241,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">188</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5690</td>
+<td class="value">690</td>
+<td class="value">200</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Barley_Tea_x2" src="img/blank.png" alt=""> Barley Tea</td>
@@ -3237,9 +3252,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">53</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1325</td>
+<td class="value">325</td>
+<td class="value">275</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Barracuda_x2" src="img/blank.png" alt=""> Barracuda</td>
@@ -3248,9 +3263,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">155</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6070</td>
+<td class="value">1070</td>
+<td class="value">175</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Basil_Cranberry_Julep_x2" src="img/blank.png" alt=""> Basil Cranberry Julep</td>
@@ -3259,9 +3274,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">180</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5775</td>
+<td class="value">775</td>
+<td class="value">315</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Bay_Breeze_x2" src="img/blank.png" alt=""> Bay Breeze</td>
@@ -3270,9 +3285,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">170</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5900</td>
+<td class="value">900</td>
+<td class="value">230</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Bellini_x2" src="img/blank.png" alt=""> Bellini</td>
@@ -3281,9 +3296,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5590</td>
+<td class="value">590</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Berry_Fusion_Tea_x2" src="img/blank.png" alt=""> Berry Fusion Tea</td>
@@ -3292,9 +3307,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">53</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1525</td>
+<td class="value">525</td>
+<td class="value">480</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Black_Junimo_x2" src="img/blank.png" alt=""> Black Junimo</td>
@@ -3303,9 +3318,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">105</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5930</td>
+<td class="value">930</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Black_Tea_x2" src="img/blank.png" alt=""> Black Tea</td>
@@ -3314,9 +3329,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">13</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink"></td>
+<td class="value">375</td>
+<td class="value">240</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Bloody_Mary_x2" src="img/blank.png" alt=""> Bloody Mary</td>
@@ -3325,9 +3340,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1440</td>
+<td class="value">600</td>
+<td class="value">-90</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Blue_Mist_Tea_x2" src="img/blank.png" alt=""> Blue Mist Tea</td>
@@ -3336,9 +3351,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">58</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1445</td>
+<td class="value">445</td>
+<td class="value">-55</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Boba_Tea_x2" src="img/blank.png" alt=""> Boba Tea</td>
@@ -3347,9 +3362,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">800</td>
+<td class="value">625</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Brandy_Alexander_x2" src="img/blank.png" alt=""> Brandy Alexander</td>
@@ -3358,9 +3373,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">188</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1000</td>
+<td class="value">500</td>
+<td class="value">25</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Breakfast_Tea_x2" src="img/blank.png" alt=""> Breakfast Tea</td>
@@ -3369,9 +3384,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">83</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1490</td>
+<td class="value">490</td>
+<td class="value">135</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Chai_Tea_x2" src="img/blank.png" alt=""> Chai Tea</td>
@@ -3380,9 +3395,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">13</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1600</td>
+<td class="value">600</td>
+<td class="value">280</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Chamomile_Tea_x2" src="img/blank.png" alt=""> Chamomile Tea</td>
@@ -3391,9 +3406,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">103</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1275</td>
+<td class="value">275</td>
+<td class="value">185</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Chocolate_Liqueur_x2" src="img/blank.png" alt=""> Chocolate Liqueur</td>
@@ -3402,9 +3417,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">218</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6300</td>
+<td class="value">1300</td>
+<td class="value">400</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Clover_Club_x2" src="img/blank.png" alt=""> Clover Club</td>
@@ -3413,9 +3428,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5680</td>
+<td class="value">680</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Coffee_Liqueur_x2" src="img/blank.png" alt=""> Coffee Liqueur</td>
@@ -3424,9 +3439,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">53</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5480</td>
+<td class="value">480</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Cosmo_x2" src="img/blank.png" alt=""> Cosmo</td>
@@ -3435,9 +3450,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">175</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5730</td>
+<td class="value">730</td>
+<td class="value">205</td>
 </tr>
 <tr class="filter_base_game">
 <td class="name"><img class="game_objects_x2" id="Object_612_x2" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cranberry_Candy">Cranberry Candy</a></td>
@@ -3446,9 +3461,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td><a href="http://stardewvalleywiki.com/Queen_of_Sauce">Queen of Sauce</a> - 28 Winter, Year 1<br /></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value">--</td>
+<td class="value">175</td>
+<td class="value">-50</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Cranberry_Pomegranate_Tea_x2" src="img/blank.png" alt=""> Cranberry Pomegranate Tea</td>
@@ -3457,9 +3472,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">140</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1600</td>
+<td class="value">600</td>
+<td class="value">155</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Crocus_White_Tea_x2" src="img/blank.png" alt=""> Crocus White Tea</td>
@@ -3468,9 +3483,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">40</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1375</td>
+<td class="value">375</td>
+<td class="value">210</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Cuba_Libre_x2" src="img/blank.png" alt=""> Cuba Libre</td>
@@ -3479,9 +3494,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">113</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5575</td>
+<td class="value">575</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Daiquiri_x2" src="img/blank.png" alt=""> Daiquiri</td>
@@ -3490,9 +3505,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">133</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5630</td>
+<td class="value">630</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Dandelion_Tea_x2" src="img/blank.png" alt=""> Dandelion Tea</td>
@@ -3501,9 +3516,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">68</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1245</td>
+<td class="value">245</td>
+<td class="value">165</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Dark_and_Stormy_x2" src="img/blank.png" alt=""> Dark and Stormy</td>
@@ -3512,9 +3527,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5780</td>
+<td class="value">780</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Death_in_the_Afternoon_x2" src="img/blank.png" alt=""> Death in the Afternoon</td>
@@ -3523,9 +3538,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">105</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5750</td>
+<td class="value">750</td>
+<td class="value">45</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Derby_x2" src="img/blank.png" alt=""> Derby</td>
@@ -3534,9 +3549,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">130</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5800</td>
+<td class="value">800</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Earl_Grey_Tea_x2" src="img/blank.png" alt=""> Earl Grey Tea</td>
@@ -3545,9 +3560,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">50</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1380</td>
+<td class="value">380</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Espresso_Martini_x2" src="img/blank.png" alt=""> Espresso Martini</td>
@@ -3556,9 +3571,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">53</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5650</td>
+<td class="value">650</td>
+<td class="value">305</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Estival_Tea_x2" src="img/blank.png" alt=""> Estival Tea</td>
@@ -3567,9 +3582,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">138</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">350</td>
+<td class="value">120</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Flower_Soda_x2" src="img/blank.png" alt=""> Flower Soda</td>
@@ -3578,9 +3593,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">125</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">550</td>
+<td class="value">10</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_French_75_x2" src="img/blank.png" alt=""> French 75</td>
@@ -3589,9 +3604,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">155</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5900</td>
+<td class="value">900</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_French_Martini_x2" src="img/blank.png" alt=""> French Martini</td>
@@ -3600,9 +3615,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">165</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5800</td>
+<td class="value">800</td>
+<td class="value">175</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Fresh_Lemonade_x2" src="img/blank.png" alt=""> Fresh Lemonade</td>
@@ -3611,9 +3626,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">450</td>
+<td class="value">350</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Fruit_Tea_x2" src="img/blank.png" alt=""> Fruit Tea</td>
@@ -3622,9 +3637,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">55</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1425</td>
+<td class="value">425</td>
+<td class="value">Varies</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Gin_Fizz_x2" src="img/blank.png" alt=""> Gin Fizz</td>
@@ -3633,9 +3648,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">950</td>
+<td class="value">650</td>
+<td class="value">165</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Gin_n_Tonic_x2" src="img/blank.png" alt=""> Gin n Tonic</td>
@@ -3644,9 +3659,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">63</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">750</td>
+<td class="value">350</td>
+<td class="value">-95</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Green_Junimo_x2" src="img/blank.png" alt=""> Green Junimo</td>
@@ -3655,9 +3670,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">145</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6040</td>
+<td class="value">1040</td>
+<td class="value">180</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Green_Tea_x2" src="img/blank.png" alt=""> Green Tea</td>
@@ -3666,9 +3681,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">13</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink"></td>
+<td class="value">250</td>
+<td class="value">160</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Hard_Iced_Tea_x2" src="img/blank.png" alt=""> Hard Iced Tea</td>
@@ -3677,9 +3692,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">90</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5590</td>
+<td class="value">590</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Hemingway_Special_x2" src="img/blank.png" alt=""> Hemingway Special</td>
@@ -3688,9 +3703,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">143</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5720</td>
+<td class="value">720</td>
+<td class="value">90</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Hibernal_Tea_x2" src="img/blank.png" alt=""> Hibernal Tea</td>
@@ -3699,9 +3714,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">100</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">350</td>
+<td class="value">170</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Irish_Coffee_x2" src="img/blank.png" alt=""> Irish Coffee</td>
@@ -3710,9 +3725,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">148</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6100</td>
+<td class="value">1100</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Jasmine_Tea_x2" src="img/blank.png" alt=""> Jasmine Tea</td>
@@ -3721,9 +3736,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">60</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1425</td>
+<td class="value">425</td>
+<td class="value">240</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Latte_x2" src="img/blank.png" alt=""> Latte</td>
@@ -3732,9 +3747,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">25</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">300</td>
+<td class="value">25</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Lavender_Milk_Tea_x2" src="img/blank.png" alt=""> Lavender Milk Tea</td>
@@ -3743,9 +3758,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">130</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1600</td>
+<td class="value">600</td>
+<td class="value">350</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Lemon_Tea_x2" src="img/blank.png" alt=""> Lemon Tea</td>
@@ -3754,9 +3769,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1375</td>
+<td class="value">375</td>
+<td class="value">185</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Lemon-Lime_Soda_x2" src="img/blank.png" alt=""> Lemon-Lime Soda</td>
@@ -3765,9 +3780,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">53</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1400</td>
+<td class="value">400</td>
+<td class="value">265</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Limeade_x2" src="img/blank.png" alt=""> Limeade</td>
@@ -3776,9 +3791,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">80</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">450</td>
+<td class="value">350</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Long_Island_Iced_Tea_x2" src="img/blank.png" alt=""> Long Island Iced Tea</td>
@@ -3787,9 +3802,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">160</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6575</td>
+<td class="value">1575</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Mai_Tai_x2" src="img/blank.png" alt=""> Mai Tai</td>
@@ -3798,9 +3813,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">128</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5820</td>
+<td class="value">820</td>
+<td class="value">175</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Margarita_x2" src="img/blank.png" alt=""> Margarita</td>
@@ -3809,9 +3824,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">83</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5600</td>
+<td class="value">600</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Martini_x2" src="img/blank.png" alt=""> Martini</td>
@@ -3820,9 +3835,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">93</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5600</td>
+<td class="value">600</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Mimosa_x2" src="img/blank.png" alt=""> Mimosa</td>
@@ -3831,9 +3846,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">3550</td>
+<td class="value">550</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Mint_Julep_x2" src="img/blank.png" alt=""> Mint Julep</td>
@@ -3842,9 +3857,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">85</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5650</td>
+<td class="value">650</td>
+<td class="value">245</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Mint_Tea_x2" src="img/blank.png" alt=""> Mint Tea</td>
@@ -3853,9 +3868,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">40</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1260</td>
+<td class="value">260</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Mojito_x2" src="img/blank.png" alt=""> Mojito</td>
@@ -3864,9 +3879,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">110</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1490</td>
+<td class="value">650</td>
+<td class="value">160</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Monkey_Gland_x2" src="img/blank.png" alt=""> Monkey Gland</td>
@@ -3875,9 +3890,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">143</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5950</td>
+<td class="value">950</td>
+<td class="value">45</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Moscow_Mule_x2" src="img/blank.png" alt=""> Moscow Mule</td>
@@ -3886,9 +3901,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">185</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5835</td>
+<td class="value">835</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Night_on_the_Beach_x2" src="img/blank.png" alt=""> Night on the Beach</td>
@@ -3897,9 +3912,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">193</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5880</td>
+<td class="value">880</td>
+<td class="value">-195</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Oolong_Tea_x2" src="img/blank.png" alt=""> Oolong Tea</td>
@@ -3908,9 +3923,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">15</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1375</td>
+<td class="value">375</td>
+<td class="value">195</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Orange_Juice_x2" src="img/blank.png" alt=""> Orange Juice</td>
@@ -3919,9 +3934,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">83</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">450</td>
+<td class="value">300</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Paradise_x2" src="img/blank.png" alt=""> Paradise</td>
@@ -3930,9 +3945,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">148</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5700</td>
+<td class="value">700</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Pina_Colada_x2" src="img/blank.png" alt=""> Pina Colada</td>
@@ -3941,9 +3956,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">63</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5820</td>
+<td class="value">820</td>
+<td class="value">175</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Planters_Punch_x2" src="img/blank.png" alt=""> Planters Punch</td>
@@ -3952,9 +3967,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">185</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5950</td>
+<td class="value">950</td>
+<td class="value">175</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Porto_Flip_x2" src="img/blank.png" alt=""> Porto Flip</td>
@@ -3963,9 +3978,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">108</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5680</td>
+<td class="value">680</td>
+<td class="value">280</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Queens_Park_Swizzle_x2" src="img/blank.png" alt=""> Queens Park Swizzle</td>
@@ -3974,9 +3989,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">83</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6000</td>
+<td class="value">1000</td>
+<td class="value">475</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Ramos_Gin_Fizz_x2" src="img/blank.png" alt=""> Ramos Gin Fizz</td>
@@ -3985,9 +4000,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">170</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1900</td>
+<td class="value">950</td>
+<td class="value">310</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Rose_Tea_x2" src="img/blank.png" alt=""> Rose Tea</td>
@@ -3996,9 +4011,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">65</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1620</td>
+<td class="value">320</td>
+<td class="value">-150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Rum_and_Cola_x2" src="img/blank.png" alt=""> Rum and Cola</td>
@@ -4007,9 +4022,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">38</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5475</td>
+<td class="value">475</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Rum_and_Cola_Float_x2" src="img/blank.png" alt=""> Rum and Cola Float</td>
@@ -4018,9 +4033,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5595</td>
+<td class="value">595</td>
+<td class="value">95</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Russian_Spring_Punch_x2" src="img/blank.png" alt=""> Russian Spring Punch</td>
@@ -4029,9 +4044,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">158</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5820</td>
+<td class="value">820</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Screwdriver_x2" src="img/blank.png" alt=""> Screwdriver</td>
@@ -4040,9 +4055,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">95</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5550</td>
+<td class="value">550</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Sea_Breeze_x2" src="img/blank.png" alt=""> Sea Breeze</td>
@@ -4051,9 +4066,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">170</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6200</td>
+<td class="value">1200</td>
+<td class="value">635</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Snakebite_x2" src="img/blank.png" alt=""> Snakebite</td>
@@ -4062,9 +4077,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">93</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5750</td>
+<td class="value">750</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Spice_Tea_x2" src="img/blank.png" alt=""> Spice Tea</td>
@@ -4073,9 +4088,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">120</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">1565</td>
+<td class="value">565</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Grapefruit_Tea_x2" src="img/blank.png" alt=""> Strawberry Grapefruit Tea</td>
@@ -4084,9 +4099,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">145</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">2500</td>
+<td class="value">1000</td>
+<td class="value">455</td>
 </tr>
 <tr class="filter_ppja_evenmorerecipes">
 <td class="name"><img class="objects_x2" id="Object_Strawberry_Lemonade_x2" src="img/blank.png" alt=""> Strawberry Lemonade</td>
@@ -4095,9 +4110,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">135</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">450</td>
+<td class="value">230</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_Sun_Tea_x2" src="img/blank.png" alt=""> Sun Tea</td>
@@ -4106,9 +4121,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">45</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">2250</td>
+<td class="value">1250</td>
+<td class="value">940</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Tea_x2" src="img/blank.png" alt=""> Tea</td>
@@ -4117,9 +4132,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">25</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">150</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Tequila_Sunrise_x2" src="img/blank.png" alt=""> Tequila Sunrise</td>
@@ -4128,9 +4143,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">130</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5730</td>
+<td class="value">730</td>
+<td class="value">230</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_The_Last_Word_x2" src="img/blank.png" alt=""> The Last Word</td>
@@ -4139,9 +4154,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">150</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5705</td>
+<td class="value">705</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Tres_Coops_x2" src="img/blank.png" alt=""> Tres Coops</td>
@@ -4150,9 +4165,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">118</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5980</td>
+<td class="value">980</td>
+<td class="value">600</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Vampiro_x2" src="img/blank.png" alt=""> Vampiro</td>
@@ -4161,9 +4176,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">88</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">940</td>
+<td class="value">470</td>
+<td class="value">-210</td>
 </tr>
 <tr class="filter_kildarien_farmertoflorist">
 <td class="name"><img class="objects_x2" id="Object_Vernal_Tea_x2" src="img/blank.png" alt=""> Vernal Tea</td>
@@ -4172,9 +4187,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">113</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">500</td>
+<td class="value">350</td>
+<td class="value">100</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_Whiskey_Sour_x2" src="img/blank.png" alt=""> Whiskey Sour</td>
@@ -4183,9 +4198,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">133</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5680</td>
+<td class="value">680</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_White_Junimo_x2" src="img/blank.png" alt=""> White Junimo</td>
@@ -4194,9 +4209,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">148</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">6040</td>
+<td class="value">1040</td>
+<td class="value">285</td>
 </tr>
 <tr class="filter_ppja_starbrewvalley">
 <td class="name"><img class="objects_x2" id="Object_White_Lady_x2" src="img/blank.png" alt=""> White Lady</td>
@@ -4205,9 +4220,9 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">128</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink">5650</td>
+<td class="value">650</td>
+<td class="value">150</td>
 </tr>
 <tr class="filter_paradigmnomad_morefood">
 <td class="name"><img class="objects_x2" id="Object_White_Tea_x2" src="img/blank.png" alt=""> White Tea</td>
@@ -4216,17 +4231,15 @@ Stardew Valley base game version 1.3.36</label><br />
 <td class="value">15</td>
 <td class="name"></td>
 <td></td>
-<td class="value"></td>
-<td class="value"></td>
-<td class="value"></td>
+<td class="value total_drink"></td>
+<td class="value">195</td>
+<td class="value">150</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="panel" id="TOC_Ingredient_List">
 <h2>Ingredient List</h2>
-<p>This is a count of the minimum number the basic ingredients necessary to cook 1 of every item on the above lists. If a cooked item
-uses another cooked item as an ingredient, this list counts that second item twice, which means it does overestimate some ingredients.</p>
 <table class="sortable output">
 <thead>
 <tr>
