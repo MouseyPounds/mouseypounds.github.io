@@ -1607,7 +1607,7 @@ sub WriteMachineSummary {
 		my $extra_info = "";
 		my $filter = "";
 		if (exists $ModInfo->{$j->{'__MOD_ID'}}) {
-			$extra_info = qq(<p><span class="note">From) . GetModInfo($j->{'__MOD_ID'},0) . qq(</span></p>);
+			$extra_info = qq(<p><span class="note">From ) . GetModInfo($j->{'__MOD_ID'},0) . qq(</span></p>);
 			if (not exists $ModList{$j->{'__MOD_ID'}}) {
 				$ModList{$j->{'__MOD_ID'}} = 1;
 			}
