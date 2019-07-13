@@ -42,6 +42,10 @@ h2 {
 .note,.group {
 	font-style: italic;
 }
+.duration {
+	font-style: italic;
+	padding-left: 1.5em;
+}
 /* Sortable Table indicators from https://www.kryogenix.org/code/browser/sorttable/#symbolsbeforesorting */
 /*
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
@@ -88,6 +92,9 @@ td.name {
 	text-align: left;
 }
 td.value {
+	text-align: right;
+}
+td.foot_total {
 	text-align: right;
 }
 table.output th, table.output td, table.recipe th, table.recipe td {

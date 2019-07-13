@@ -32,6 +32,15 @@ WriteCSS();
 
 exit;
 
+# AddCommas - Adds appropriate commas to a number as thousands separators
+#  This is the `commify` function from O'Reilly's Perl Cookbook by Nathan Torkington and Tom Christiansen
+#  See https://www.oreilly.com/library/view/perl-cookbook/1565922433/ch02s18.html
+sub AddCommas {
+	my $text = reverse $_[0];
+    $text =~ s/(\d\d\d)(?=\d)(?!\d*\.)/$1,/g;
+    return scalar reverse $text;
+}
+
 # Wikify: Conversion of a javascript function from Stardew Checkup that adds a wiki link for an item.
 #   item name
 #   page name [optional] - used when the item is just an anchor on another page rather than having its own page
@@ -1030,12 +1039,10 @@ sub WriteCookingSummary {
 	print STDOUT "Generating Cooking Summary\n";
 	# This function has been reorganized. In order to properly detect all mods that are referenced
 	#  and be able to automatically add them to the filter form in the header, we must process all
-	#  the recipes first before we print anything at all. Note that we technically only need to do
-	#  the mod items at this point, but it is a little less confusing if we do both base game and
-	#  mod items back-to-back.
+	#  the recipes first before we print anything at all.
 	my @Panel = ( 
-		{ 'key' => 'food', 'name' => "Food Recipes", 'row' => {}, },
-		{ 'key' => 'drink', 'name' => "Drink Recipes", 'row' => {}, },
+		{ 'key' => 'food', 'name' => "Food Recipes", 'count' => 0, 'total_cost' => 0, 'row' => {}, },
+		{ 'key' => 'drink', 'name' => "Drink Recipes", 'count' => 0, 'total_cost' => 0, 'row' => {}, },
 		);
 		
 	my %IngredientCount = ();
@@ -1073,6 +1080,21 @@ sub WriteCookingSummary {
 	my %Special = (
 		'Cookies' => Wikify("Evelyn") . " 4&#x2665; Event",
 		);
+	# Buff descriptions will be shared by vanilla and mods
+	my @buff_desc = (
+		Wikify("Farming") . " level",
+		Wikify("Fishing") . " level",
+		Wikify("Mining") . " level",
+		"UNUSED",
+		Wikify("Luck") . " level",
+		Wikify("Foraging") . " level",
+		"UNUSED",
+		"Max " . Wikify("Energy"),
+		Wikify("Magnetism"),
+		Wikify("Speed"),
+		Wikify("Defense"),
+		Wikify("Attack"),
+	);
 	foreach my $key (keys %{$GameData->{'CookingRecipes'}}) {
 		my $cid = $GameData->{'CookingRecipes'}{$key}{'split'}[2];
 		my $cname = GetItem($cid);
@@ -1096,7 +1118,25 @@ sub WriteCookingSummary {
 		my $item_type = $GameData->{'ObjectInformation'}{$cid}{'split'}[6];
 		my $buffs = "";
 		# Buffs are part of the object data for the product
-		@temp = split(/ /,  $GameData->{'ObjectInformation'}{$cid}{'split'}[7]);
+		@temp = split(/ /, $GameData->{'ObjectInformation'}{$cid}{'split'}[7]);
+		for (my $i = 0; $i < scalar(@buff_desc); $i++) {
+			if ($temp[$i] != 0) {
+				my $sign = "";
+				if ($temp[$i] > 0) {
+					$sign = "+";
+				}
+				next if ($buff_desc[$i] eq "UNUSED");
+				$buffs .= "$sign$temp[$i] $buff_desc[$i]<br />";
+			}
+		}
+		if ($buffs ne "") {
+			my $dur_ticks = $GameData->{'ObjectInformation'}{$cid}{'split'}[8];
+			my $dur_mins = $dur_ticks * 7 / 600;
+			my $min = floor($dur_mins);
+			my $sec = floor(60 * ($dur_mins - $min));
+			$buffs .= sprintf(qq(<span class="duration"> for %d:%02d</span>), $min, $sec);
+		}
+		$buffs = qq(<span class="duration">(None)</span>) if ($buffs eq "");
 		my $source = "";
 		# We will list sources in the order Special, Saloon purchase, TV,
 		#  and then the ones defined by condition (default, friend mail, skill bonus)
@@ -1132,7 +1172,7 @@ sub WriteCookingSummary {
 <td class="value">$energy</td>
 <td class="name">$buffs</td>
 <td>$source</td>
-<td class="value">$recipe_cost</td>
+<td class="value total_$item_type">$recipe_cost</td>
 <td class="value">$value</td>
 <td class="value">$profit</td>
 </tr>
@@ -1143,6 +1183,10 @@ END_PRINT
 		foreach my $p (@Panel) {
 			if ($p->{'key'} eq $item_type) {
 				$p->{'row'}{StripHTML($cname)} = $output;
+				$p->{'count'}++;
+				if (looks_like_number($recipe_cost)) {
+					$p->{'total_cost'} += $recipe_cost;
+				}
 				last;
 			}
 		}
@@ -1177,8 +1221,46 @@ END_PRINT
 		}
 		my $item_type = ($ModData->{'Objects'}{$key}{'EdibleIsDrink'} == 1) ? "drink" : "food";
 		my $buffs = "";
-		my $source = "";
-		my $recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
+		if (defined $ModData->{'Objects'}{$key}{'EdibleBuffs'}) {
+			# Buffs will be ordered the same way the vanilla array is ordered
+			my %buff_keys = (
+				0 => 'Farming',
+				1 => 'Fishing',
+				2 => 'Mining',
+				4 => 'Luck',
+				5 => 'Foraging',
+				7 => 'MaxStamina',
+				8 => 'MagnetRadius',
+				9 => 'Speed',
+				10 => 'Defense',
+				11 => 'Attack',
+			);
+			foreach my $i (sort keys %buff_keys) {
+				if (exists $ModData->{'Objects'}{$key}{'EdibleBuffs'}{$buff_keys{$i}} and
+					$ModData->{'Objects'}{$key}{'EdibleBuffs'}{$buff_keys{$i}} != 0) {
+					my $sign = "";
+					if ($ModData->{'Objects'}{$key}{'EdibleBuffs'}{$buff_keys{$i}} > 0) {
+						$sign = "+";
+					}
+					$buffs .= "$sign$ModData->{'Objects'}{$key}{'EdibleBuffs'}{$buff_keys{$i}} $buff_desc[$i]<br />";
+				}
+			}
+			if ($buffs ne "") {
+				my $dur_ticks = $ModData->{'Objects'}{$key}{'EdibleBuffs'}{'Duration'};
+				my $dur_mins = $dur_ticks * 7 / 600;
+				my $min = floor($dur_mins);
+				my $sec = floor(60 * ($dur_mins - $min));
+				$buffs .= sprintf(qq(<span class="duration"> for %d:%02d</span>), $min, $sec);
+			}
+		}
+		$buffs = qq(<span class="duration">(None)</span>) if ($buffs eq "");
+		my $source = "Given automatically";
+		my $recipe_cost = "--";
+		if (not $ModData->{'Objects'}{$key}{'Recipe'}{'IsDefault'}) {
+			$source = qq(Buy for $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'}g from ) .
+				WikiShop($ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseFrom'}) . qq(<br />);
+			$recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
+		}
 		my $value = GetValue($cname);
 		my $profit = looks_like_number($ingr_value) ? $value - $ingr_value : $ingr_value;
 		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
@@ -1199,6 +1281,10 @@ END_PRINT
 		foreach my $p (@Panel) {
 			if ($p->{'key'} eq $item_type) {
 				$p->{'row'}{$key} = $output;
+				$p->{'count'}++;
+				if (looks_like_number($recipe_cost)) {
+					$p->{'total_cost'} += $recipe_cost;
+				}
 				last;
 			}
 		}
@@ -1231,12 +1317,14 @@ example, when calculating the profit for Complete Breakfast, the value of the Co
 value of 2 eggs, 1 potato, 1 oil, and 1 wheat flour. If a recipe can take <span class="group">any Egg</span> or 
 <span class="group">any Milk</span>, the cheapest possibility is used, but for other categories like
 <span class="group">any Fish</span>, there is too much variation to get a useful answer.</p>
-<p>When calculating the total cost to buy all recipes, only mod recipes are included because all buyable base game recipes
+<p>The recipe tables have a footer that shows the total cost to buy every shown recipe.
+When calculating this total, only mod recipes are included because all buyable base game recipes also 
 have alternative (free) ways to learn them such as from the Queen of Sauce TV channel or NPC friendship.</p>
 <p>The Ingredient list summarizes how many of each ingredient would be necessary to make one of every recipe on this page.
 Note that it is not truly minimal because it doesn't consider the possibility of reusing one product as an ingredient for
 a different product (for example, when calculating the ingredients for Complete Breakfast, it assumes a new Hashbrowns
-dish will be made during the process.)
+dish will be made during the process.) The ingredient list does not auto-adjust to the filters and always includes
+every item from all sources.
 </p>
 
 END_PRINT
@@ -1256,7 +1344,6 @@ END_PRINT
 		print <<"END_PRINT";
 <div class="panel" id="TOC_$p->{'key'}">
 <h2>$p->{'name'}</h2>
-
 <table class="sortable output">
 <thead>
 <tr>
@@ -1276,8 +1363,20 @@ END_PRINT
 		foreach my $k (sort keys %{$p->{'row'}}) {
 			print $p->{'row'}{$k};
 		}
+		# Note we take the easy way out on plural vs singular because of the javascript filters changing the counts
+		my $total_desc = qq(Total purchase cost for <span id="foot_count_$p->{'key'}">$p->{'count'}</span> shown recipe(s):);
+		my $pretty_cost = AddCommas($p->{'total_cost'});
+		
 		print <<"END_PRINT";
 </tbody>
+<tfoot>
+<tr>
+<td class="foot_total" colspan="6">$total_desc</td>
+<td id="foot_total_$p->{'key'}" class="value">$pretty_cost</td>
+<td>--</td>
+<td>--</td>
+</tr>
+</tfoot>
 </table>
 </div>
 END_PRINT
@@ -1286,6 +1385,7 @@ END_PRINT
 	print <<"END_PRINT";
 <div class="panel" id="TOC_Ingredient_List">
 <h2>Ingredient List</h2>
+<p class="note">Note: This list is based on all the recipes and does not currently adjust based on the filtering options.</p>
 <table class="sortable output">
 <thead>
 <tr>
