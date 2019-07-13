@@ -27,11 +27,16 @@ window.onload = function () {
 			var row = document.getElementsByClassName(filterName);
 			for(var j = 0; j < row.length; j++){
 				var old_style = row[j].style.display;
-				row[j].style.display = (this.checked ? "table-row" : "none");
+				// We are filtering multiple types now, so we need to handle that properly
+				var visible_style = "block";
+				if (row[j].nodeName.toLowerCase() === "tr") {
+					visible_style = "table-row";
+				}
+				row[j].style.display = (this.checked ? visible_style : "none");
 				// All of the rest of this is to deal with auto-changing the count & total
 				//  costs for the cooking page.
 				var adjust = 0;
-				if ((old_style === "table-row" || old_style === "") && !this.checked) {
+				if ((old_style == visible_style || old_style === "") && !this.checked) {
 					// this row was just hidden so counts are going down
 					adjust = -1;
 				} else if (old_style === "none" && this.checked) {

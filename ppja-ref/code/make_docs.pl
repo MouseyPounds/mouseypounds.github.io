@@ -1,4 +1,4 @@
-#!/bin/perl
+#!/bin/perl -w
 #
 # make_docs.pl
 #
@@ -75,6 +75,7 @@ sub WikiShop {
 	}
 	if ($NPC =~ /Pierre/i) { $shop = "Pierre%27s_General_Store"; } 
 	elsif ($NPC =~ /Clint/i) { $shop = "Blacksmith"; } 
+	elsif ($NPC =~ /Dwarf/i) { $shop = "Dwarf"; } 
 	elsif ($NPC =~ /Gus/i) { $shop = "The_Stardrop_Saloon";	}
 	elsif ($NPC =~ /Harvey/i) {	$shop = "Harvey%27s_Clinic"; }
 	elsif ($NPC =~ /Hatmouse/i) { $shop = "Abandoned_House"; }
@@ -1120,6 +1121,8 @@ sub WriteCookingSummary {
 		# Buffs are part of the object data for the product
 		@temp = split(/ /, $GameData->{'ObjectInformation'}{$cid}{'split'}[7]);
 		for (my $i = 0; $i < scalar(@buff_desc); $i++) {
+			# There are supposed to be 12 fields here, but often there are only 11.
+			last if ($i > $#temp);
 			if ($temp[$i] != 0) {
 				my $sign = "";
 				if ($temp[$i] > 0) {
@@ -1162,7 +1165,7 @@ sub WriteCookingSummary {
 		} 
 		my $recipe_cost = "--";
 		my $value = GetValue($key);
-		my $profit = looks_like_number($ingr_value) ? $value - $ingr_value : $ingr_value;
+		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
 		my $filter = "filter_base_game";
 		my $output = <<"END_PRINT";
 <tr class="$filter">
@@ -1262,7 +1265,7 @@ END_PRINT
 			$recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
 		}
 		my $value = GetValue($cname);
-		my $profit = looks_like_number($ingr_value) ? $value - $ingr_value : $ingr_value;
+		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
 		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
 		my $output = <<"END_PRINT";
 <tr class="$filter">
@@ -1420,29 +1423,8 @@ sub WriteFruitTreeSummary {
 	select $FH;
 
 	print STDOUT "Generating Fruit Tree Summary\n";
-	my $longdesc = <<"END_PRINT";
-<p>A summary of fruit trees from the following from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
-<fieldset id="filter_options" class="filter_set">
-<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
-Stardew Valley base game version $StardewVersion</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked"> 
-$ModInfo->{'kildarien.farmertoflorist'}{'Name'} version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)<br />
-<label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked"> 
-$ModInfo->{'paradigmnomad.freshmeat'}{'Name'} version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)<br />
-<label><input class="filter_check" type="checkbox" name="filter_ppja_moretrees" id="filter_ppja_moretrees" value="show" checked="checked"> 
-$ModInfo->{'ppja.moretrees'}{'Name'} version $ModInfo->{'ppja.moretrees'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/1671">Nexus page</a>)<br />
-</fieldset>
-
-<p>The <span class="note">Break Even Amount</span> column is a simplistic measure of how many base (no-star) quality products need to be sold
-to recoup the cost of the initial sapling. Smaller numbers are better, although those who care about these kind of measurements will probably
-be processing the items in machines where possible rather than selling them raw.</p>
-END_PRINT
-	print GetHeader("Fruit Trees", qq(Sumary of fruit tree information from PPJA mods and base game.), $longdesc);
-	print GetTOCStart();
+	# As with Cooking, we are reorganizing so that the list of mods in use is auto-generated
+	my %ModList = ();
 
 	# We will organize this by Season so we start with an array that will hold a hash of the table rows keyed by tree name.
 	my @Panel = ( 
@@ -1451,7 +1433,7 @@ END_PRINT
 		{ 'key' => 'Fall', 'row' => {}, },
 		{ 'key' => 'Winter', 'row' => {}, },
 		);
-
+	
 	print STDOUT "  Processing Game Fruit Trees\n";
 	foreach my $sid (keys %{$GameData->{'FruitTrees'}}) {
 		# FruitTree Format -- SaplingID: SpritesheetIndex / Season / ProductID / SaplingPrice
@@ -1468,9 +1450,10 @@ END_PRINT
 		my $prodImg = GetImgTag($cid, "object");
 		my $seedImg = GetImgTag($sid, "object");
 		my $amt = ceil($scost/$cprice);
+		my $filter = "filter_base_game";
 		
 		my $output = <<"END_PRINT";
-<tr class="filter_base_game">
+<tr class="$filter">
 <td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
 <td class="name">$seedImg $sname</td>
@@ -1510,9 +1493,13 @@ END_PRINT
 		my $prodImg = GetImgTag($ModData->{'FruitTrees'}{$key}{'Product'}, "object");
 		my $seedImg = GetImgTag($sname, "object");
 		my $amt = ceil($scost/$cprice);
+		if (not exists $ModList{$ModData->{'FruitTrees'}{$key}{'__MOD_ID'}}) {
+			$ModList{$ModData->{'FruitTrees'}{$key}{'__MOD_ID'}} = 1;
+		}
+		my $filter = $ModInfo->{$ModData->{'FruitTrees'}{$key}{'__MOD_ID'}}{'__FILTER'};
 
 		my $output = <<"END_PRINT";
-<tr class="$ModData->{'FruitTrees'}{$key}{'__FILTER'}">
+<tr class="$filter">
 <td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
 <td class="name">$seedImg $sname</td>
@@ -1531,6 +1518,33 @@ END_PRINT
 		}
 	}
 	
+	my $longdesc = <<"END_PRINT";
+<p>A summary of fruit trees from the following from the following sources. The checkboxes next to them can be used to
+show or hide content specific to that source:</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+END_PRINT
+	
+	foreach my $k (sort keys %ModList) {
+		my $filter = $ModInfo->{$k}{'__FILTER'};
+		my $info = GetModInfo($k, 1, 2);
+		$longdesc .= <<"END_PRINT";
+<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$info</label><br />
+END_PRINT
+	}
+
+	$longdesc .= <<"END_PRINT";
+</fieldset>
+<p>The <span class="note">Break Even Amount</span> column is a simplistic measure of how many base (no-star) quality products need to be sold
+to recoup the cost of the initial sapling. Smaller numbers are better, although those who care about these kind of measurements will probably
+be processing the items in machines where possible rather than selling them raw.</p>
+END_PRINT
+
+	print GetHeader("Fruit Trees", qq(Sumary of fruit tree information from PPJA mods and base game.), $longdesc);
+	print GetTOCStart();
+
 	# Print the rest of the TOC
 	foreach my $p (@Panel) {
 		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'key'} Trees</a></li>);
@@ -1578,47 +1592,27 @@ sub WriteMachineSummary {
 	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
 	select $FH;
 
+	# This is a difficult one to filter because the Artisan Valley machines have extra recipes that
+	#  can be enabled. For now, we are only going to filter out entire machines and if some extra
+	#  recipes are shown that involve items people don't have, they must deal with it.
+	
 	print STDOUT "Generating Machine Summary\n";
-	my $longdesc = <<"END_PRINT";
-<p>A summary of machines from the following mods:</p>
-<ul>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/1926">$ModInfo->{'ppja.avcfr'}{'Name'}</a> version $ModInfo->{'ppja.avcfr'}{'Version'}
-including enabling recipes from:
-  <ul>
-  <li><a href="https://www.nexusmods.com/stardewvalley/mods/1897">$ModInfo->{'Aquilegia.SweetTooth'}{'Name'}</a> version $ModInfo->{'Aquilegia.SweetTooth'}{'Version'}</li>
-  <!-- <li><a href="https://www.nexusmods.com/stardewvalley/mods/1741">$ModInfo->{'PPJA.cannabiskit'}{'Name'}</a> version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</li> -->
-  </ul>
-</li>
-<li><a href="https://www.nexusmods.com/stardewvalley/mods/2075">$ModInfo->{'kildarien.farmertofloristcfr'}{'Name'}</a> version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</li>
-</ul>
-<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
-the wiki which only shows base game items. All value and profit calculations assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>. Additonally, if a recipe calls for <span class="group">Any Milk</span>, the
-value of the small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> is used, and if a recipe calls for <span class="group">Any Egg</span>,
-the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is used.
-</p>
-
-<p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
-and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
-machine takes. The latter is rounded to two decimal places.
-</p>
-END_PRINT
-	print GetHeader("Machines", qq(Summary of products and timings for machines from PPJA mods), $longdesc);
-	print GetTOCStart();
-
+	my %ModList = ();
 	my %TOC = ();
 
-	print STDOUT "  Processind Mod Machines\n";
+	print STDOUT "  Processing Mod Machines\n";
 	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
 	my %Panel = ();
 	foreach my $j (@{$ModData->{'Machines'}}) {
-		# These are the individual json files from each machine mod. Since mod names here don't necessarily reflect either the
-		#  manifest name or UniqueID, we hardcode the appropriate keys for ModInfo.
 		my $extra_info = "";
-		if ($j->{name} eq 'Artisan Valley Machine Machines') {
-			$extra_info = qq(<p><span class="note">From $ModInfo->{'ppja.avcfr'}{'Name'} version $ModInfo->{'ppja.avcfr'}{'Version'}</span></p>);
-		} elsif ($j->{name} eq 'Farmer to Florist Machines Redux') {
-			$extra_info = qq(<p><span class="note">From $ModInfo->{'kildarien.farmertofloristcfr'}{'Name'} version $ModInfo->{'kildarien.farmertofloristcfr'}{'Version'}</span></p>);
-		} 
+		my $filter = "";
+		if (exists $ModInfo->{$j->{'__MOD_ID'}}) {
+			$extra_info = qq(<p><span class="note">From) . GetModInfo($j->{'__MOD_ID'},0) . qq(</span></p>);
+			if (not exists $ModList{$j->{'__MOD_ID'}}) {
+				$ModList{$j->{'__MOD_ID'}} = 1;
+			}
+			$filter = $ModInfo->{$j->{'__MOD_ID'}}{'__FILTER'};
+		}
 		foreach my $m (@{$j->{'machines'}}) {
 			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
 			my $key = $m->{'name'};
@@ -1633,11 +1627,10 @@ END_PRINT
 			}
 			my $anchor = "TOC_$m->{'name'}";
 			$anchor =~ s/ /_/g;
-			$TOC{$m->{'name'}} = $anchor;
+			$TOC{$m->{'name'}} = {'anchor' => $anchor, 'filter' => $filter};
 			my $imgTag = GetImgTag($m->{'name'}, 'machine', 1, "container__image");
-			#HERE 1st img tag
 			my $output = <<"END_PRINT";
-<div class="panel" id="$anchor">
+<div class="panel $filter" id="$anchor">
 <div class="container">
 $imgTag
 <div class="container__text">
@@ -1687,7 +1680,7 @@ END_PRINT
 			foreach my $p (@{$m->{'production'}}, @add) {
 				my $name = GetItem($p->{'item'}, $p->{'index'});
 				my $starter_included = 0;
-				my %entry = { 'key1' => '', 'key2' => '', 'out' => '' };
+				my %entry = ( 'key1' => '', 'key2' => '', 'out' => '' );
 				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
 				# that a simple regex can do the job rather than needing a more robust general approach.
 				$entry{'key1'} = StripHTML($name);
@@ -1718,12 +1711,22 @@ END_PRINT
 					if ($entry{'key2'} eq '') {
 						$entry{'key2'} = StripHTML($name);
 					}
-					$cost += $stack_size * GetValue($i->{'name'}, $i->{'index'});
+					my $this_value = GetValue($i->{'name'}, $i->{'index'});
+					if (looks_like_number($cost) and looks_like_number($this_value)) {
+						$cost += $stack_size * $this_value;
+					} else {
+						$cost = "Varies";
+					}
 				}
 				if (not $starter_included and $starter ne "NO_STARTER") {
 					$img = GetImgTag(StripHTML($starter));
 					$entry{'out'} .= "$img $starter<br />";
-					$cost += GetValue($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
+					my $this_value = GetValue($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
+					if (looks_like_number($cost) and looks_like_number($this_value)) {
+						$cost += $this_value;
+					} else {
+						$cost = "Varies";
+					}
 				}
 				if (exists $p->{'exclude'}) {
 					$entry{'out'} .= '<span class="group">Except ' . join(', ', (map {GetItem($_)} @{$p->{'exclude'}})) . "</span><br />";
@@ -1768,7 +1771,7 @@ END_PRINT
 				# some malicious perl code in their machine's output equation. But since this script is only being run
 				# on specific Stardew Valley mods from people we trust, we will take that risk.
 				my $eq_eval = eval $value;
-				#print STDOUT "Tried to eval {$value} and got {$eq_eval}\n";
+				$eq_eval = '' if (not defined $eq_eval);
 				if ($eq_eval ne '' and looks_like_number($eq_eval)) {
 					$value = floor($eq_eval);
 				}
@@ -1777,8 +1780,10 @@ END_PRINT
 				if ($value =~ /original/ or $value =~ /input/) {
 					# This still looks like an equation
 					$profit = qq(<span class="note">Varies</span>);
-				} else {
+				} elsif (looks_like_number($value) and looks_like_number($cost)) {
 					$profit = $value - $cost;
+				} else {
+					$profit = qq(<span class="note">--</span>);
 				}
 				$entry{'out'} .= qq(<td class="value">$profit</td>);
 				# reuse profit variable for per-hour version.
@@ -1802,8 +1807,44 @@ END_PRINT
 		} # end of machine loop
 	} # end of "json" loop
 
-	foreach my $p (sort keys %Panel) {
-		print qq(<li><a href="#$TOC{$p}">$p</a></li>);
+	my $longdesc = <<"END_PRINT";
+<p>A summary of machines from the following from the following sources. The checkboxes next to them can be used to
+show or hide content specific to that source:</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+END_PRINT
+	
+	foreach my $k (sort keys %ModList) {
+		my $filter = $ModInfo->{$k}{'__FILTER'};
+		my $info = GetModInfo($k, 1, 2);
+		$longdesc .= <<"END_PRINT";
+<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$info</label><br />
+END_PRINT
+	}
+
+	$longdesc .= <<"END_PRINT";
+</fieldset>
+<p>Note that only the machines themselves can be currently filtered, so some of the recipes shown here may not be available if the mod their
+products or ingredients are from is not installed. Eventually this will have some base game machines too (which is why the base game is
+listed in the filters), but probably only those which process similar types of items to the mod machines.</p>
+<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
+the wiki which only shows base game items. All value and profit calculations assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>. Additonally, if a recipe calls for <span class="group">Any Milk</span>, the
+value of the small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> is used, and if a recipe calls for <span class="group">Any Egg</span>,
+the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is used.
+</p>
+<p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
+and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
+machine takes. The latter is rounded to two decimal places.
+</p>
+END_PRINT
+	print GetHeader("Machines", qq(Summary of products and timings for machines from PPJA mods), $longdesc);
+	print GetTOCStart();
+
+
+	foreach my $p (sort keys %TOC) {
+		print qq(<li class="$TOC{$p}{'filter'}"><a href="#$TOC{$p}{'anchor'}">$p</a></li>);
 	}
 	print GetTOCEnd();
 
@@ -1986,7 +2027,7 @@ END_PRINT
 					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
 				}
 			}
-			my $cost = ($regrowth > 0) ? $scost : $num_harvest*$scost;
+			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
 			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
 			$output .= <<"END_PRINT";
 <td class="col_$opt value">$growth</td>
@@ -2066,7 +2107,7 @@ END_PRINT
 					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
 				}
 			}
-			my $cost = ($regrowth > 0) ? $scost : $num_harvest*$scost;
+			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
 			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
 			$output .= <<"END_PRINT";
 <td class="col_$opt value">$growth</td>

@@ -391,7 +391,8 @@ sub ParseModData {
 							# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
 							$file_contents =~ s/^\x{feff}//;
 							my $json = from_rjson($file_contents);
-							# Saving directory just in case
+							# Saving directory just in case. Also want the ModID in the main json too
+							$json->{'__MOD_ID'} = $id;
 							$json->{'__PATH'} = "$BaseDir/$m";
 							LogMessage("      Dumping json object", 3);
 							LogMessage(Dumper($json), 3);
