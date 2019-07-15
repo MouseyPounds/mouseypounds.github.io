@@ -1000,7 +1000,8 @@ sub WriteMainIndex {
 
 	print STDOUT "Generating Main Index\n";
 	my $longdesc = <<"END_PRINT";
-<p>Welcome to my personal collection of reference documentation for the PPJA (Project Populate JSON Assets) family of Stardew Valley mods.
+<p>Welcome to my personal collection of reference documentation for the PPJA (Project Populate JSON Assets) family of Stardew Valley mods,
+and some closely related mods that may not actually fall under the PPJA umbrella.
 The official documentation has always been 
 <a href="https://docs.google.com/spreadsheets/d/1D3Kb45faKsXGkT9wGhWaeHZiuFN7WSkewBbLF2Iuyug/edit?usp=sharing">a large spreadsheet</a>
 used by the PPJA team for organization, but I found it a bit difficult to use as a player. So this set of webpages was created by a set of
@@ -1308,7 +1309,7 @@ show or hide content specific to that source:</p>
 Stardew Valley base game version $StardewVersion</label><br />
 END_PRINT
 
-	foreach my $k (sort keys %ModList) {
+	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetModInfo($k, 1, 2);
 		$longdesc .= <<"END_PRINT";
@@ -1533,7 +1534,7 @@ show or hide content specific to that source:</p>
 Stardew Valley base game version $StardewVersion</label><br />
 END_PRINT
 	
-	foreach my $k (sort keys %ModList) {
+	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetModInfo($k, 1, 2);
 		$longdesc .= <<"END_PRINT";
@@ -1822,7 +1823,7 @@ show or hide content specific to that source:</p>
 Stardew Valley base game version $StardewVersion</label><br />
 END_PRINT
 	
-	foreach my $k (sort keys %ModList) {
+	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetModInfo($k, 1, 2);
 		$longdesc .= <<"END_PRINT";
@@ -1865,7 +1866,7 @@ END_PRINT
 }
 
 ###################################################################################################
-# CropSummary - main page generation for crops
+# WriteCropSummary - main page generation for crops
 sub WriteCropSummary {
 	my $FH;
 	open $FH, ">$DocBase/crops.html" or die "Can't open crops.html for writing: $!";
@@ -2098,7 +2099,7 @@ show or hide content specific to that source:</p>
 Stardew Valley base game version $StardewVersion</label><br />
 END_PRINT
 
-	foreach my $k (sort keys %ModList) {
+	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetModInfo($k, 1, 2);
 		$longdesc .= <<"END_PRINT";
