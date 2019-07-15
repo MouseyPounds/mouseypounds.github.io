@@ -416,7 +416,7 @@ sub GetImgTag {
 			return "";
 		}
 	}
-	$img_id =~ s/ /_/g;
+	$img_id = GetIDString($img_id);
 	if ($isBig) {
 		$img_class .= "_x2";
 		$img_id .= "_x2";
@@ -649,6 +649,17 @@ sub TranslatePreconditions {
 	return @results;
 }
 
+# GetIDString - Does some filtering on names to make a valid ID/Class for css
+#
+# Basically we are turning anything that isn't a letter (either case), number, hyphen or underscore into an underscore.
+# There are other rectrictions on identifiers we aren't dealing with currently
+# https://www.w3.org/TR/CSS21/syndata.html#characters
+sub GetIDString {
+	my $str = shift;
+	$str =~ s/[^-_a-zA-Z0-9]/_/g;
+	return $str;
+}
+
 # GatherSpriteInfo - Goes through the global GameData and ModData structures to find sprite locations
 #   and saves them all into a hash.
 #
@@ -663,8 +674,7 @@ sub GatherSpriteInfo {
 	# Vanilla data
 	# Crops - coords were saved by gather_data
 	foreach my $sid (keys %{$GameData->{'Crops'}}) {
-		my $id = "Crop_$sid";
-		$id =~ s/ /_/g;
+		my $id = GetIDString("Crop_$sid");
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		$HashRef->{$id} = { 'x' => 0 - $GameData->{'Crops'}{$sid}{'__SS_X'}, 'y' => 0 - $GameData->{'Crops'}{$sid}{'__SS_Y'} };
 		$id .= "_x2";
@@ -672,8 +682,7 @@ sub GatherSpriteInfo {
 	}
 	# Trees - coords were saved by gather_data
 	foreach my $sid (keys %{$GameData->{'FruitTrees'}}) {
-		my $id = "Tree_$sid";
-		$id =~ s/ /_/g;
+		my $id = GetIDString("Tree_$sid");
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		$HashRef->{$id} = { 'x' => 0 - $GameData->{'FruitTrees'}{$sid}{'__SS_X'}, 'y' => 0 - $GameData->{'FruitTrees'}{$sid}{'__SS_Y'} };
 		$id .= "_x2";
@@ -686,8 +695,7 @@ sub GatherSpriteInfo {
 	$game_objects->read(file=>"../img/game_objects.png") or die "Error reading game object sprites:" . $game_objects->errstr;
 	my $objects_per_row = floor($game_objects->getwidth() / 16);
 	foreach my $index (keys %{$GameData->{'ObjectInformation'}}) {
-		my $id = "Object_$index";
-		$id =~ s/ /_/g;
+		my $id = GetIDString("Object_$index");
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		my $x =  $object_width * ($index % $objects_per_row);
 		my $y = $object_height * floor($index / $objects_per_row);
@@ -701,8 +709,7 @@ sub GatherSpriteInfo {
 	#   transferred to the sprite sheet and we don't have any further processing to do.
 	foreach my $j (@{$ModData->{'Machines'}}) {
 		foreach my $m (@{$j->{'machines'}}) {
-			my $id = "Machine_$m->{'name'}";
-			$id =~ s/ /_/g;
+			my $id = GetIDString("Machine_$m->{'name'}");
 			my $anchor = "TOC_$id";
 			warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 			$HashRef->{$id} = { 'x' => 0 - $m->{'__SS_X'}, 'y' => 0 - $m->{'__SS_Y'} };
@@ -717,8 +724,7 @@ sub GatherSpriteInfo {
 	foreach my $key (keys %{$ModData->{'Crops'}}) {
 		my @phases = @{$ModData->{'Crops'}{$key}{'Phases'}};
 		my $offset = 1 + scalar(@phases);
-		my $id = "Crop_$key";
-		$id =~ s/ /_/g;
+		my $id = GetIDString("Crop_$key");
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		$HashRef->{$id} = { 'x' => 0 - ($ModData->{'Crops'}{$key}{'__SS_X'} + $offset*16), 'y' => 0 - $ModData->{'Crops'}{$key}{'__SS_Y'} };
 		$id .= "_x2";
@@ -728,8 +734,7 @@ sub GatherSpriteInfo {
 	}
 	# Objects - these should have already been saved, so not much to do
 	foreach my $key (keys %{$ModData->{'Objects'}}) {
-		my $id = "Object_$key";
-		$id =~ s/ /_/g;
+		my $id = GetIDString("Object_$key");
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		$HashRef->{$id} = { 'x' => 0 - $ModData->{'Objects'}{$key}{'__SS_X'}, 'y' => 0 - $ModData->{'Objects'}{$key}{'__SS_Y'} };
 		$id .= "_x2";
@@ -739,8 +744,7 @@ sub GatherSpriteInfo {
 	# Fruit Trees - The entire set of tree sprites are on the sheet, but the "full" tree is the last one on the list,
 	#  384 px beyond the start. This is backwards from how the vanilla tree sprite co-ordinates were saved. Oops.
 	foreach my $key (keys %{$ModData->{'FruitTrees'}}) {
-		my $id = "Tree_$key";
-		$id =~ s/ /_/g;
+		my $id = ("Tree_$key");
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		$HashRef->{$id} = { 'x' => 0 - $ModData->{'FruitTrees'}{$key}{'__SS_X'} - 384, 'y' => 0 - $ModData->{'FruitTrees'}{$key}{'__SS_Y'} };
 		$id .= "_x2";
@@ -1867,53 +1871,8 @@ sub WriteCropSummary {
 	open $FH, ">$DocBase/crops.html" or die "Can't open crops.html for writing: $!";
 	select $FH;
 
-	print STDOUT "Generating Crop Summary\n";	
-	my $longdesc = <<"END_PRINT";
-<p>A summary of growth and other basic information for crops from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
-<fieldset id="filter_options" class="filter_set">
-<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
-Stardew Valley base game version $StardewVersion</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_PPJA_cannabiskit" id="filter_PPJA_cannabiskit" value="show" checked="checked"> 
-$ModInfo->{'PPJA.cannabiskit'}{'Name'} version $ModInfo->{'PPJA.cannabiskit'}{'Version'}</label> (<a href="https://www.nexusmods.com/stardewvalley/mods/1741">Nexus page</a>)<br />
-<label><input class="filter_check" type="checkbox" name="filter_ParadigmNomad_FantasyCrops" id="filter_ParadigmNomad_FantasyCrops" value="show" checked="checked"> 
-$ModInfo->{'ParadigmNomad.FantasyCrops'}{'Name'} version $ModInfo->{'ParadigmNomad.FantasyCrops'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/1610">Nexus page</a>)<br />
-<label><input class="filter_check" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked"> 
-$ModInfo->{'kildarien.farmertoflorist'}{'Name'} version $ModInfo->{'kildarien.farmertoflorist'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)<br />
-<label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked"> 
-$ModInfo->{'paradigmnomad.freshmeat'}{'Name'} version $ModInfo->{'paradigmnomad.freshmeat'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)<br />
-<label><input class="filter_check" type="checkbox" name="filter_ppja_fruitsandveggies" id="filter_ppja_fruitsandveggies" value="show" checked="checked"> 
-$ModInfo->{'ppja.fruitsandveggies'}{'Name'} version $ModInfo->{'ppja.fruitsandveggies'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/1598">Nexus page</a>)<br />
-<label><input class="filter_check" type="checkbox" name="filter_mizu_flowers" id="filter_mizu_flowers" value="show" checked="checked"> 
-$ModInfo->{'mizu.flowers'}{'Name'} version $ModInfo->{'mizu.flowers'}{'Version'}</label> 
-(<a href="https://www.nexusmods.com/stardewvalley/mods/2028">Nexus page</a>)<br />
-</fieldset>
-<p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
-the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
-whether the crop has a trellis (or similar structure that blocks walking on it). The <span class="note">XP</span> column is the amount of
-experience gained on a single harvest. Normally this is Farming experience, but for the seasonal forage crops it is Foraging experience.
-The <span class="note">Seasonal Profit</span> column is an average full-season estimate that assumes the maximum number of harvests in the
-month with the product sold raw at base (no-star) quality without any value-increasing professions (like Tiller.)
-It also assumes all seeds are bought at the shown price and does not account for any other costs (such as purchasing fertilizer).
-The growth times, maximum number of harvests, and profit all depend on growth speed modifiers which can be set in the form
-below and apply to all the tables on this page.</p>
-<fieldset id="growth_speed_options" class="radio_set">
-<label><input type="radio" name="speed" value="0" checked="checked"> No speed modifiers</label><br />
-<label><input type="radio" name="speed" value="10"> 10% (Only one of <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession or <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
-<label><input type="radio" name="speed" value="20"> 20% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
-<label><input type="radio" name="speed" value="25"> 25% (Only <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label><br />
-<label><input type="radio" name="speed" value="35"> 35% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label>
-</fieldset>
-<input type="hidden" id="last_speed" value="0" />
-END_PRINT
-
-	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA and base game), $longdesc);
-	print GetTOCStart();
-
+	print STDOUT "Generating Crop Summary\n";
+	my %ModList = ();
 	# We will organize this by Season so we start with an array that will hold a hash of the table rows keyed by crop name.
 	my @Panel = ( 
 		{ 'key' => 'Spring', 'row' => {}, },
@@ -1921,8 +1880,6 @@ END_PRINT
 		{ 'key' => 'Fall', 'row' => {}, },
 		{ 'key' => 'Winter', 'row' => {}, },
 		{ 'key' => 'Indoor-Only', 'row' => {}, },
-		#{ 'key' => 'Winter', 'row' => {}, },
-		#{ 'key' => 'Winter', 'row' => {}, },
 		);
 
 	print STDOUT "  Processing Game Crops\n";
@@ -2086,6 +2043,10 @@ END_PRINT
 		my $prodImg = GetImgTag($ModData->{'Crops'}{$key}{'Product'}, "object");
 		my $seedImg = GetImgTag($sname, "object");
 		my $xp = GetXP($cprice);
+		if (not exists $ModList{$ModData->{'Crops'}{$key}{'__MOD_ID'}}) {
+			$ModList{$ModData->{'Crops'}{$key}{'__MOD_ID'}} = 1;
+		}
+
 		my $output = <<"END_PRINT";
 <tr class="$ModInfo->{$ModData->{'Crops'}{$key}{'__MOD_ID'}}{'__FILTER'}">
 <td class="icon">$imgTag</td>
@@ -2128,6 +2089,48 @@ END_PRINT
 			}
 		}
 	}
+	
+	my $longdesc = <<"END_PRINT";
+<p>A summary of growth and other basic information for crops from the following sources. The checkboxes next to them can be used to
+show or hide content specific to that source:</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+END_PRINT
+
+	foreach my $k (sort keys %ModList) {
+		my $filter = $ModInfo->{$k}{'__FILTER'};
+		my $info = GetModInfo($k, 1, 2);
+		$longdesc .= <<"END_PRINT";
+<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$info</label><br />
+END_PRINT
+	}
+
+	$longdesc .= <<"END_PRINT";
+</fieldset>
+<p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
+the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
+whether the crop has a trellis (or similar structure that blocks walking on it). The <span class="note">XP</span> column is the amount of
+experience gained on a single harvest. Normally this is Farming experience, but for the seasonal forage crops it is Foraging experience.
+The <span class="note">Seasonal Profit</span> column is an average full-season estimate that assumes the maximum number of harvests in the
+month with the product sold raw at base (no-star) quality without any value-increasing professions (like Tiller.)
+It also assumes all seeds are bought at the shown price and does not account for any other costs (such as purchasing fertilizer).
+The growth times, maximum number of harvests, and profit all depend on growth speed modifiers which can be set in the form
+below and apply to all the tables on this page.</p>
+<fieldset id="growth_speed_options" class="radio_set">
+<label><input type="radio" name="speed" value="0" checked="checked"> No speed modifiers</label><br />
+<label><input type="radio" name="speed" value="10"> 10% (Only one of <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession or <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
+<label><input type="radio" name="speed" value="20"> 20% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
+<label><input type="radio" name="speed" value="25"> 25% (Only <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label><br />
+<label><input type="radio" name="speed" value="35"> 35% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label>
+</fieldset>
+<input type="hidden" id="last_speed" value="0" />
+END_PRINT
+
+	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA and base game), $longdesc);
+	print GetTOCStart();
+
 
 	# Print the rest of the TOC
 	foreach my $p (@Panel) {
