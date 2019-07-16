@@ -744,7 +744,7 @@ sub GatherSpriteInfo {
 	# Fruit Trees - The entire set of tree sprites are on the sheet, but the "full" tree is the last one on the list,
 	#  384 px beyond the start. This is backwards from how the vanilla tree sprite co-ordinates were saved. Oops.
 	foreach my $key (keys %{$ModData->{'FruitTrees'}}) {
-		my $id = ("Tree_$key");
+		my $id = GetIDString("Tree_$key");
 		warn "Sprite ID {$id} will not be unique" if (exists $HashRef->{$id});
 		$HashRef->{$id} = { 'x' => 0 - $ModData->{'FruitTrees'}{$key}{'__SS_X'} - 384, 'y' => 0 - $ModData->{'FruitTrees'}{$key}{'__SS_Y'} };
 		$id .= "_x2";
@@ -1000,8 +1000,8 @@ sub WriteMainIndex {
 
 	print STDOUT "Generating Main Index\n";
 	my $longdesc = <<"END_PRINT";
-<p>Welcome to my personal collection of reference documentation for the PPJA (Project Populate JSON Assets) family of Stardew Valley mods,
-and some closely related mods that may not actually fall under the PPJA umbrella.
+<p>Welcome to my personal collection of reference documentation for the PPJA (Project Populate JSON Assets) family of Stardew Valley mods
+and some closely-related mods that may not actually fall under the PPJA umbrella.
 The official documentation has always been 
 <a href="https://docs.google.com/spreadsheets/d/1D3Kb45faKsXGkT9wGhWaeHZiuFN7WSkewBbLF2Iuyug/edit?usp=sharing">a large spreadsheet</a>
 used by the PPJA team for organization, but I found it a bit difficult to use as a player. So this set of webpages was created by a set of
