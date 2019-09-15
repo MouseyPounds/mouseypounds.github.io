@@ -1686,7 +1686,14 @@ END_PRINT
 			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
 			my @rows = ();
 			foreach my $p (@{$m->{'production'}}, @add) {
-				my $name = GetItem($p->{'item'}, $p->{'index'});
+				# 
+				my $pname = "";
+				if (exists $p->{'item'}) {
+					$pname = $p->{'item'};
+				} elsif (!exists $p->{'index'} and exists $p->{'name'}) {
+					$pname = $p->{'name'};
+				}
+				my $name = GetItem($pname, $p->{'index'});
 				my $starter_included = 0;
 				my %entry = ( 'key1' => '', 'key2' => '', 'out' => '' );
 				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
