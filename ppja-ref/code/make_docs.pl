@@ -605,10 +605,12 @@ sub CalcGrowth {
 }
 
 # TranslatePreconditions - Receives an array of event preconditions and tries to make them human-readable
-#  Currently only supports `z`, `y`, `f`, `s` since those are what we have needed to deal with so far.
+#  Does not support every possible condition
 sub TranslatePreconditions {
 	my %seasons = ( 'Spring' => 1, 'Summer' => 2, 'Fall' => 3, 'Winter' => 4 );
 	my $changed_seasons = 0;
+	my %days = ( 'Mon' => 1, 'Tue' => 2, 'Wed' => 3, 'Thu' => 4, 'Fri' => 5, 'Sat' => 6, 'Sun' => 7, );
+	my $changed_days = 0;
 	my @results = ();
 	
 	foreach my $arg (@_) {
@@ -629,8 +631,22 @@ sub TranslatePreconditions {
 				delete $seasons{$s} if (exists $seasons{$s});
 				$changed_seasons = 1;
 			}
+		} elsif ($arg =~ /^d /) {
+			# This can look like either 'd mon, d tue' or 'd mon tue'
+			$arg =~ s/[d, ]+/|/g;
+			my @removal = split(/\|/, $arg);
+			foreach my $r (@removal) {
+				my $d = ucfirst $r;
+				delete $days{$d} if (exists $days{$d});
+				$changed_days = 1;
+			}
+		} elsif ($arg =~ /^s (\d+) (\d+)/) {
+			# Shipping precondition
+			my $item = GetItem($1);
+			my $num = $2;
+			push @results, "Shipped at least $num of $item";
 		} elsif ($arg =~ /^s (\w+) (\d+)/) {
-			# Skill conditions for recipes
+			# Skill conditions for recipes defined in Data\CookingRecipes
 			my $skill = ucfirst $1;
 			my $level = $2;
 			my $extra = "";
@@ -638,12 +654,24 @@ sub TranslatePreconditions {
 				$extra = qq[ (requires <a href="https://www.nexusmods.com/stardewvalley/mods/521">mod</a>)];
 			}
 			push @results, "Level $level in " . Wikify($skill) . $extra;
+		} elsif ($arg =~ /^h (\w+)/) {
+			my $pet = $1;
+			push @results, "Have no pet, but prefer $pet";
+		} elsif ($arg =~ /^r ([\.\d]+)/) {
+			my $chance = $1 * 100;
+			push @results, "Random chance (${chance}\%)";
+		} elsif ($arg =~ /^w (\w+)/) {
+			my $type = ucfirst $1;
+			push @results, "$type weather";
 		} else {
 			warn "TranslatePreconditions doesn't know how to deal with {$arg}";
 		}
 	}
 	if ($changed_seasons) {
 		my $r = join(', ', (sort {$seasons{$a} <=> $seasons{$b}} (keys %seasons)));
+		push @results, $r;
+	} elsif ($changed_days) {
+		my $r = join(', ', (sort {$days{$a} <=> $days{$b}} (keys %days)));
 		push @results, $r;
 	}
 	return @results;
@@ -1272,6 +1300,15 @@ END_PRINT
 				WikiShop($ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseFrom'}) . qq(<br />);
 			$recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
 		}
+		my @conditions = ();
+		if (defined $ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseRequirements'}) {
+			@conditions = @{$ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseRequirements'}};
+		}
+		foreach my $condition (@conditions) {
+			my @temp = TranslatePreconditions($condition);
+			$source .= "$temp[0]<br />";
+		}
+
 		my $value = GetValue($cname);
 		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
 		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
