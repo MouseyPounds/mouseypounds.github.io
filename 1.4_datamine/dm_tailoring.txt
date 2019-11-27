@@ -1,0 +1,921 @@
+Experiments in data-mining (Stardew 1.4)
+========================================
+
+Tailoring (304 recipes) 
+----------------------------
+Cloth + Dinosaur Mayonnaise
+Result: (ID 5) Dinosaur Pants
+----------------------------
+Cloth + Seafoam Pudding
+Result: (ID 1290) Mineral Dog Jacket
+----------------------------
+Lucky Purple Shorts + Gold Bar
+Result: (ID -71) Trimmed Lucky Purple Shorts (object ID 71, clothing ID 15)
+----------------------------
+Cloth + Artifact Trove
+Result: (ID 1288) Trinket Shirt
+----------------------------
+Cloth + Wilted Bouquet
+Result: (ID 1289) Darkness Suit
+----------------------------
+Cloth + Magic Rock Candy
+Result: (ID 1997) Magic Sprinkle Shirt
+----------------------------
+Cloth + Red Mushroom
+Result: (ID 2052) Spotted Headscarf (Hat)
+----------------------------
+Cloth + Shrimp Cocktail
+Result: (ID 1286) Shrimp Enthusiast Shirt
+----------------------------
+Cloth + Golden Pumpkin
+Result: (ID 2070) Witch Hat (Hat)
+----------------------------
+Cloth + Geode
+Result: (ID 1160) Gray Hoodie
+----------------------------
+Cloth + Frozen Geode
+Result: (ID 1161) Blue Hoodie
+----------------------------
+Cloth + Magma Geode
+Result: (ID 1162) Red Hoodie
+----------------------------
+Cloth + Field Snack
+Result: (ID 1163) Denim Jacket
+----------------------------
+Cloth + Pancakes
+Result: (ID 1164) Track Jacket
+----------------------------
+Cloth + Pale Broth
+Result: (ID 1165) White Gi
+----------------------------
+Cloth + Vinegar
+Result: (ID 1166) Orange Gi (Dyeable)
+----------------------------
+Cloth + Rice
+Result: (ID 1268) White Overalls
+----------------------------
+Cloth + Quartz
+Result: (ID 1167) Gray Vest
+----------------------------
+Cloth + Seaweed
+Result: (ID 1168) Kelp Shirt
+----------------------------
+Cloth + Obsidian
+Result: (ID 1169) Studded Vest
+----------------------------
+Cloth + Soapstone
+Result: (ID 1170) Gaudy Shirt
+----------------------------
+Cloth + Tom Kha Soup
+Result: (ID 1171) Oasis Gown
+----------------------------
+Cloth + Fiddlehead Risotto
+Result: (ID 1172) Blacksmith Apron
+----------------------------
+Cloth + Autumns Bounty
+Result: (ID 1221) Belted Coat
+----------------------------
+Cloth + Refined Quartz
+Result: (ID 1220) Necklace Shirt (Dyeable)
+----------------------------
+Cloth + Torch
+Result: (ID 1225) High Heat Shirt
+----------------------------
+Cloth + Spicy Eel
+Result: (ID 1226) Flames Shirt
+----------------------------
+Cloth + Dinosaur Egg
+Result: (ID 2043) Dinosaur Hat (Hat)
+----------------------------
+Cloth + Prehistoric Skull
+Result: (ID 1004) Skull Shirt; available in character creator as choice 5)
+----------------------------
+Cloth + Prehistoric Tool
+Result: (ID 1156) Caveman Shirt
+----------------------------
+Cloth + Prehistoric Handaxe
+Result: (ID 1156) Caveman Shirt
+----------------------------
+Cloth + Prehistoric Tibia
+Result: (ID 2049) Hair Bone (Hat)
+----------------------------
+Cloth + (Any of Amphibian Fossil, Nautilus Fossil, Palm Fossil, Trilobite)
+Result: (ID 1208) Excavator Shirt
+----------------------------
+Cloth + Bone Flute
+Result: (ID 1242) Blue Long Vest
+----------------------------
+Cloth + (Any of Prehistoric Rib, Prehistoric Scapula, Prehistoric Vertebra, Skeletal Hand, Skeletal Tail)
+Result: (ID 1014) Skeleton Shirt; available in character creator as choice 15)
+----------------------------
+Cloth + (Any of Dwarf Scroll I, Dwarf Scroll II, Dwarf Scroll III, Dwarf Scroll IV)
+Result: (ID 1222) Gold Trimmed Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Dwarf Gadget, Dwarvish Helm)
+Result: (ID 2046) Wearable Dwarf Helm (Hat)
+----------------------------
+Cloth + (Any of Rain Totem, Warp Totem: Beach, Warp Totem: Desert, Warp Totem: Farm, Warp Totem: Mountains)
+Result: (ID 2044) Totem Mask (Hat)
+----------------------------
+Cloth + Jack-o-lantern
+Result: (ID 2048) Pumpkin Mask (Hat)
+----------------------------
+Cloth + Rusty Spur
+Result: (ID 1131) Cowboy Poncho (Dyeable)
+----------------------------
+Cloth + Ancient Sword
+Result: (ID 1034) Green Tunic; available in character creator as choice 35)
+----------------------------
+Cloth + Energy Tonic
+Result: (ID 1137) Letterman Jacket (Dyeable)
+----------------------------
+Cloth + (Any of Beer, Mead, Pale Ale, Wine)
+Result: (ID 1138) Black Leather Jacket
+----------------------------
+Cloth + Hay
+Result: (ID 6) Grass Skirt
+----------------------------
+Cloth + Rainbow Shell
+Result: (ID 1134) Bikini Top (Dyeable)
+----------------------------
+Cloth + (Any of Fairy Rose, Sunflower)
+Result: (ID 2) Long Dress (Dyeable)
+----------------------------
+Cloth + Sweet Pea
+Result: (ID 1050) Shirt; available in character creator as choice 51)
+----------------------------
+Cloth + (Any of Poppy, Summer Spangle)
+Result: (ID 4) Pleated Skirt (Dyeable)
+----------------------------
+Cloth + Fiber
+Result: (ID 1176) Basic Pullover (Dyeable)
+----------------------------
+Cloth + Clay
+Result: (ID 1001) Shirt; available in character creator as choice 2)
+----------------------------
+Cloth + Dandelion
+Result: (ID 1002) Mint Blouse; available in character creator as choice 3)
+----------------------------
+Cloth + Bat Wing
+Result: (ID 1003) Dark Shirt; available in character creator as choice 4)
+----------------------------
+Cloth + Mayonnaise
+Result: (ID 1005) Light Blue Shirt; available in character creator as choice 6)
+----------------------------
+Cloth + (Any of Bomb, Cherry Bomb, Mega Bomb)
+Result: (ID 1155) Bomber Jacket
+----------------------------
+Cloth + Coffee Bean
+Result: (ID 1154) Flannel Shirt (Dyeable)
+----------------------------
+Cloth + Duck Egg
+Result: (ID 1270) Green Jacket Shirt (Dyeable)
+----------------------------
+Cloth + Plum Pudding
+Result: (ID 1271) Short Jacket (Dyeable)
+----------------------------
+Cloth + Crab Cakes
+Result: (ID 1276) Crab Cake Shirt
+----------------------------
+Cloth + Maple Bar
+Result: (ID 1275) Dirt Shirt
+----------------------------
+Cloth + Rhubarb
+Result: (ID 1281) Green Buttoned Vest (Dyeable)
+----------------------------
+Cloth + Spice Berry
+Result: (ID 1281) Green Buttoned Vest (Dyeable)
+----------------------------
+Cloth + Octopus
+Result: (ID 1278) Blue Buttoned Vest (Dyeable)
+----------------------------
+Cloth + Tomato
+Result: (ID 1282) Tomato Shirt
+----------------------------
+Cloth + Salmon
+Result: (ID 1279) Faded Denim Shirt
+----------------------------
+Cloth + Ghostfish
+Result: (ID 1158) Fish Shirt (Dyeable)
+----------------------------
+Cloth + Sandfish
+Result: (ID 1158) Fish Shirt (Dyeable)
+----------------------------
+Cloth + Stir Fry
+Result: (ID 1274) Camo Shirt
+----------------------------
+Cloth + Radish Salad
+Result: (ID 1277) Silky Shirt (Dyeable)
+----------------------------
+Cloth + Chowder
+Result: (ID 1283) Fringed Vest (Dyeable)
+----------------------------
+Cloth + Squid Ink
+Result: (ID 1285) Midnight Dog Jacket
+----------------------------
+Cloth + Roe
+Result: (ID 1272) Polka Dot Shirt (Dyeable)
+----------------------------
+Cloth + Aged Roe
+Result: (ID 1284) Globby Shirt (Dyeable)
+----------------------------
+Cloth + Poppyseed Muffin
+Result: (ID 1273) White Dot Shirt (Dyeable)
+----------------------------
+Cloth + Triple Shot Espresso
+Result: (ID 1269) Pour-Over Shirt
+----------------------------
+Cloth + Coffee
+Result: (ID 1269) Pour-Over Shirt
+----------------------------
+Cloth + Green Tea
+Result: (ID 1287) Tea Shirt
+----------------------------
+Cloth + Muscle Remedy
+Result: (ID 1153) Fake Muscles Shirt (Dyeable)
+----------------------------
+Cloth + Sap
+Result: (ID 1006) Tan Striped Shirt; available in character creator as choice 7)
+----------------------------
+Cloth + Fiddlehead Fern
+Result: (ID 1007) Green Overalls; available in character creator as choice 8)
+----------------------------
+Cloth + Wild Horseradish
+Result: (ID 1008) "Good Grief" Shirt; available in character creator as choice 9)
+----------------------------
+Cloth + Duck Mayonnaise
+Result: (ID 1009) Aquamarine Shirt; available in character creator as choice 10)
+----------------------------
+Cloth + Bouquet
+Result: (ID 1010) Suit Top; available in character creator as choice 11)
+----------------------------
+Cloth + Ornamental Fan
+Result: (ID 1265) Bridal Shirt
+----------------------------
+Cloth + Honey
+Result: (ID 11) Simple Dress (Dyeable)
+----------------------------
+Cloth + Pearl
+Result: (ID 2069) Bridal Veil (Hat)
+----------------------------
+Cloth + Frozen Tear
+Result: (ID 1211) Dark Jacket
+----------------------------
+Cloth + Dish O The Sea
+Result: (ID 1214) Shirt O' The Sea
+----------------------------
+Cloth + Glazed Yams
+Result: (ID 1212) Sunset Shirt
+----------------------------
+Cloth + Escargot
+Result: (ID 1213) Chef Coat
+----------------------------
+Cloth + Void Essence
+Result: (ID 1215) Arcane Shirt
+----------------------------
+Cloth + Cave Carrot
+Result: (ID 1011) Green Belted Shirt; available in character creator as choice 12)
+----------------------------
+Cloth + Duck Feather
+Result: (ID 1012) Lime Green Striped Shirt; available in character creator as choice 13)
+----------------------------
+Cloth + Cranberry Candy
+Result: (ID 1013) Red Striped Shirt; available in character creator as choice 14)
+----------------------------
+Cloth + Chanterelle
+Result: (ID 1015) Orange Shirt; available in character creator as choice 16)
+----------------------------
+Cloth + Blueberry Tart
+Result: (ID 1016) Night Sky Shirt; available in character creator as choice 17)
+----------------------------
+Cloth + Vegetable Medley
+Result: (ID 1017) Mayoral Suspenders; available in character creator as choice 18)
+----------------------------
+Cloth + Mudstone
+Result: (ID 1018) Brown Jacket; available in character creator as choice 19)
+----------------------------
+Cloth + Bean Hotpot
+Result: (ID 1020) Green Vest; available in character creator as choice 21)
+----------------------------
+Cloth + Complete Breakfast
+Result: (ID 1000) Classic Overalls; available in character creator as choice 1)
+----------------------------
+Cloth + Survival Burger
+Result: (ID 1247) Burger Shirt
+----------------------------
+Cloth + Lava Eel
+Result: (ID 2045) Logo Cap (Hat)
+----------------------------
+Cloth + Caviar
+Result: (ID 2047) Fashion Hat (Hat)
+----------------------------
+Cloth + Emerald
+Result: (ID 1144) Shirt
+----------------------------
+Cloth + Aquamarine
+Result: (ID 1145) Shirt
+----------------------------
+Cloth + Topaz
+Result: (ID 1146) Shirt
+----------------------------
+Cloth + Iron Bar
+Result: (ID 1148) Steel Breastplate
+----------------------------
+Cloth + Copper Bar
+Result: (ID 1149) Copper Breastplate
+----------------------------
+Cloth + Gold Bar
+Result: (ID 1150) Gold Breastplate
+----------------------------
+Cloth + Iridium Bar
+Result: (ID 1151) Iridium Breastplate
+----------------------------
+Cloth + Goat Milk
+Result: (ID 1024) Shirt; available in character creator as choice 25)
+----------------------------
+Cloth + L. Goat Milk
+Result: (ID 1025) Shirt; available in character creator as choice 26)
+----------------------------
+Cloth + Rice Pudding
+Result: (ID 1026) Light Blue Striped Shirt; available in character creator as choice 27)
+----------------------------
+Cloth + Bug Meat
+Result: (ID 1027) Pink Striped Shirt; available in character creator as choice 28)
+----------------------------
+Cloth + Strange Bun
+Result: (ID 1210) Heart Shirt (Dyeable)
+----------------------------
+Cloth + Stone
+Result: (ID 1029) Work Shirt; available in character creator as choice 30)
+----------------------------
+Cloth + Fried Calamari
+Result: (ID 1030) Store Owner's Jacket; available in character creator as choice 31)
+----------------------------
+Cloth + Baked Fish
+Result: (ID 1031) Shirt; available in character creator as choice 32)
+----------------------------
+Cloth + Salmonberry
+Result: (ID 1032) Shirt; available in character creator as choice 33)
+----------------------------
+Cloth + Salad
+Result: (ID 1033) Shirt; available in character creator as choice 34)
+----------------------------
+Cloth + Holly
+Result: (ID 1035) Fancy Red Blouse; available in character creator as choice 36)
+----------------------------
+Cloth + Sashimi
+Result: (ID 1036) Shirt; available in character creator as choice 37)
+----------------------------
+Cloth + Maki Roll
+Result: (ID 1037) Shirt; available in character creator as choice 38)
+----------------------------
+Cloth + Wool
+Result: (ID 1038) Plain Shirt; available in character creator as choice 39)
+----------------------------
+Cloth + Ice Cream
+Result: (ID 1039) Retro Rainbow Shirt; available in character creator as choice 40)
+----------------------------
+Cloth + Leek
+Result: (ID 1042) Lime Green Tunic; available in character creator as choice 43)
+----------------------------
+Cloth + Snow Yam
+Result: (ID 1044) Shirt; available in character creator as choice 45)
+----------------------------
+Cloth + Hardwood
+Result: (ID 1047) Shirt; available in character creator as choice 48)
+----------------------------
+Cloth + Wood
+Result: (ID 1176) Basic Pullover (Dyeable)
+----------------------------
+Cloth + Coal
+Result: (ID 1048) Shirt; available in character creator as choice 49)
+----------------------------
+Cloth + Pink Cake
+Result: (ID 1051) Shirt; available in character creator as choice 52)
+----------------------------
+Cloth + Lucky Lunch
+Result: (ID 1052) Shirt; available in character creator as choice 53)
+----------------------------
+Cloth + Void Mayonnaise
+Result: (ID 1272) Polka Dot Shirt (Dyeable)
+----------------------------
+Cloth + Roasted Hazelnuts
+Result: (ID 1053) Shirt; available in character creator as choice 54)
+----------------------------
+Cloth + Jade
+Result: (ID 1147) Shirt
+----------------------------
+Cloth + Fried Eel
+Result: (ID 1055) Shirt; available in character creator as choice 56)
+----------------------------
+Cloth + Cheese Cauliflower
+Result: (ID 1249) Toasted Shirt
+----------------------------
+Cloth + Carp Surprise
+Result: (ID 1250) Carp Shirt
+----------------------------
+Cloth + Hashbrowns
+Result: (ID 1251) Red Flannel Shirt
+----------------------------
+Cloth + Tortilla
+Result: (ID 1252) Tortilla Shirt
+----------------------------
+Cloth + Morel
+Result: (ID 1257) Morel Shirt
+----------------------------
+Cloth + Spring Onion
+Result: (ID 1258) Spring Shirt
+----------------------------
+Cloth + Super Meal
+Result: (ID 1255) Green Flannel Shirt
+----------------------------
+Cloth + Miners Treat
+Result: (ID 2068) Propeller Hat (Hat)
+----------------------------
+Cloth + Wheat Flour
+Result: (ID 1253) Warm Flannel Shirt
+----------------------------
+Cloth + Sugar
+Result: (ID 1254) Sugar Shirt
+----------------------------
+Cloth + Oil
+Result: (ID 1256) Oil Stained Shirt
+----------------------------
+Cloth + Spaghetti
+Result: (ID 1236) Sauce-Stained Shirt
+----------------------------
+Cloth + Fire Quartz
+Result: (ID 1057) Shirt; available in character creator as choice 58)
+----------------------------
+Cloth + Blackberry Cobbler
+Result: (ID 1058) Shirt; available in character creator as choice 59)
+----------------------------
+Cloth + Pizza
+Result: (ID 2057) Party Hat (Hat)
+----------------------------
+Cloth + Chocolate Cake
+Result: (ID 2058) Party Hat (Hat)
+----------------------------
+Cloth + Fish Taco
+Result: (ID 2059) Party Hat (Hat)
+----------------------------
+Cloth + Pumpkin Soup
+Result: (ID 1059) Shirt; available in character creator as choice 60)
+----------------------------
+Cloth + Pumpkin Pie
+Result: (ID 1186) Holiday Shirt
+----------------------------
+Cloth + Baryte
+Result: (ID 1181) Shirt
+----------------------------
+Cloth + Calcite
+Result: (ID 1182) Shirt
+----------------------------
+Cloth + Esperite
+Result: (ID 1183) Gray Suit
+----------------------------
+Cloth + Helvite
+Result: (ID 1201) Classy Top
+----------------------------
+Cloth + Jagoite
+Result: (ID 1187) Leafy Top
+----------------------------
+Cloth + Lunarite
+Result: (ID 1188) Goodnight Shirt
+----------------------------
+Cloth + Malachite
+Result: (ID 1189) Green Belted Shirt
+----------------------------
+Cloth + Lemon Stone
+Result: (ID 1190) Happy Shirt
+----------------------------
+Cloth + Orpiment
+Result: (ID 1191) Shirt with Bow (Dyeable)
+----------------------------
+Cloth + Pyrite
+Result: (ID 1192) Jester Shirt
+----------------------------
+Cloth + Ocean Stone
+Result: (ID 1193) Ocean Shirt
+----------------------------
+Cloth + Tigerseye
+Result: (ID 1194) Dark Striped Shirt (Dyeable)
+----------------------------
+Cloth + Jasper
+Result: (ID 1195) Bandana Shirt
+----------------------------
+Cloth + Sandstone
+Result: (ID 1196) Backpack Shirt (Dyeable)
+----------------------------
+Cloth + Fire Opal
+Result: (ID 1197) Purple Blouse
+----------------------------
+Cloth + Hematite
+Result: (ID 1198) Vintage Polo
+----------------------------
+Cloth + Marble
+Result: (ID 1199) Toga Shirt
+----------------------------
+Cloth + Star Shards
+Result: (ID 1200) Star Shirt (Dyeable)
+----------------------------
+Cloth + Kyanite
+Result: (ID 1203) Bandana Shirt
+----------------------------
+Cloth + Coconut
+Result: (ID 1204) Vacation Shirt
+----------------------------
+Cloth + Jamborite
+Result: (ID 1205) Green Thumb Shirt
+----------------------------
+Cloth + Fluorapatite
+Result: (ID 1206) Bandana Shirt
+----------------------------
+Cloth + Petrified Slime
+Result: (ID 1207) Slime Shirt
+----------------------------
+Cloth + Rare Disc
+Result: (ID 1185) Navy Tuxedo
+----------------------------
+Cloth + Bread
+Result: (ID 1061) Shirt; available in character creator as choice 62)
+----------------------------
+Cloth + Opal
+Result: (ID 1062) Shirt; available in character creator as choice 63)
+----------------------------
+Cloth + Rhubarb Pie
+Result: (ID 1063) Shirt; available in character creator as choice 64)
+----------------------------
+Cloth + Crystal Fruit
+Result: (ID 1064) Shirt; available in character creator as choice 65)
+----------------------------
+Cloth + Cheese
+Result: (ID 1066) Shirt; available in character creator as choice 67)
+----------------------------
+Cloth + Daffodil
+Result: (ID 1067) Shirt; available in character creator as choice 68)
+----------------------------
+Cloth + Farmers Lunch
+Result: (ID 1068) Shirt; available in character creator as choice 69)
+----------------------------
+Cloth + Algae Soup
+Result: (ID 1069) Shirt; available in character creator as choice 70)
+----------------------------
+Cloth + Fairy Stone
+Result: (ID 1070) Shirt; available in character creator as choice 71)
+----------------------------
+Cloth + Milk
+Result: (ID 1071) White Overalls Shirt; available in character creator as choice 72)
+----------------------------
+Cloth + Egg
+Result: (ID 1216) Plain Overalls (Dyeable)
+----------------------------
+Cloth + Large Egg
+Result: (ID 1218) Cardigan (Dyeable)
+----------------------------
+Cloth + Fruit Salad
+Result: (ID 1072) Shirt; available in character creator as choice 73)
+----------------------------
+Cloth + Thunder Egg
+Result: (ID 1073) Shirt; available in character creator as choice 74)
+----------------------------
+Cloth + Common Mushroom
+Result: (ID 1074) Shirt; available in character creator as choice 75)
+----------------------------
+Cloth + Wild Bait
+Result: (ID 1075) Shirt; available in character creator as choice 76)
+----------------------------
+Cloth + Cookie
+Result: (ID 1077) Shirt; available in character creator as choice 78)
+----------------------------
+Cloth + Crocus
+Result: (ID 1078) Shirt; available in character creator as choice 79)
+----------------------------
+Cloth + Blackberry
+Result: (ID 1079) Shirt; available in character creator as choice 80)
+----------------------------
+Cloth + Alamite
+Result: (ID 1081) Shirt; available in character creator as choice 82)
+----------------------------
+Cloth + Void Egg
+Result: (ID 1083) Shirt; available in character creator as choice 84)
+----------------------------
+Cloth + Strange Doll (green)
+Result: (ID 1135) Wumbus Shirt
+----------------------------
+Cloth + Strange Doll (yellow)
+Result: (ID 1245) Bobo Shirt
+----------------------------
+Cloth + (Any of Green Algae, White Algae)
+Result: (ID 1248) Collared Shirt (Dyeable)
+----------------------------
+Cloth + Ancient Drum
+Result: (ID 1243) Regal Mantle
+----------------------------
+Cloth + Golden Relic
+Result: (ID 1244) Relic Shirt
+----------------------------
+Cloth + Golden Mask
+Result: (ID 2067) Golden Mask (Hat)
+----------------------------
+Cloth + Fried Egg
+Result: (ID 1246) Fried Egg Shirt
+----------------------------
+Cloth + Omelet
+Result: (ID 1021) Yellow and Green Shirt; available in character creator as choice 22)
+----------------------------
+Cloth + Ruby
+Result: (ID 1085) Shirt; available in character creator as choice 86)
+----------------------------
+Cloth + Slate
+Result: (ID 1086) Shirt; available in character creator as choice 87)
+----------------------------
+Cloth + Large Milk
+Result: (ID 1217) Sleeveless Overalls (Dyeable)
+----------------------------
+Cloth + Parsnip Soup
+Result: (ID 1088) Shirt; available in character creator as choice 89)
+----------------------------
+Cloth + Amethyst
+Result: (ID 1089) Shirt; available in character creator as choice 90)
+----------------------------
+Cloth + Juice
+Result: (ID 1209) Sports Shirt (Dyeable)
+----------------------------
+Cloth + Pickles
+Result: (ID 1091) Shirt; available in character creator as choice 92)
+----------------------------
+Cloth + Jelly
+Result: (ID 1092) Shirt; available in character creator as choice 93)
+----------------------------
+Cloth + Goat Cheese
+Result: (ID 1093) Shirt; available in character creator as choice 94)
+----------------------------
+Cloth + Earth Crystal
+Result: (ID 1094) Shirt; available in character creator as choice 95)
+----------------------------
+Cloth + Rabbits Foot
+Result: (ID 1095) Shirt; available in character creator as choice 96)
+----------------------------
+Cloth + Slime
+Result: (ID 1096) Shirt; available in character creator as choice 97)
+----------------------------
+Cloth + Basalt
+Result: (ID 1097) Shirt; available in character creator as choice 98)
+----------------------------
+Cloth + Neptunite
+Result: (ID 1098) Shirt; available in character creator as choice 99)
+----------------------------
+Cloth + Purple Mushroom
+Result: (ID 1099) Shirt; available in character creator as choice 100)
+----------------------------
+Cloth + Celestine
+Result: (ID 1100) Shirt; available in character creator as choice 101)
+----------------------------
+Cloth + Bixite
+Result: (ID 1101) Shirt; available in character creator as choice 102)
+----------------------------
+Cloth + Limestone
+Result: (ID 1102) Shirt; available in character creator as choice 103)
+----------------------------
+Cloth + Ghost Crystal
+Result: (ID 1103) Shirt; available in character creator as choice 104)
+----------------------------
+Cloth + Geminite
+Result: (ID 1104) Shirt; available in character creator as choice 105)
+----------------------------
+Cloth + Joja Cola
+Result: (ID 1105) Shirt; available in character creator as choice 106)
+----------------------------
+Cloth + Battery Pack
+Result: (ID 1106) Shirt; available in character creator as choice 107)
+----------------------------
+Cloth + Nekoite
+Result: (ID 1107) Shirt; available in character creator as choice 108)
+----------------------------
+Cloth + Crispy Bass
+Result: (ID 1111) Shirt; available in character creator as choice 112)
+----------------------------
+Cloth + Fried Mushroom
+Result: (ID 1112) Shirt
+----------------------------
+Cloth + Pepper Poppers
+Result: (ID 1180) Tunnelers Jersey
+----------------------------
+Cloth + Dolomite
+Result: (ID 1113) Shirt
+----------------------------
+Cloth + Red Plate
+Result: (ID 1184) Red Tuxedo
+----------------------------
+Cloth + Solar Essence
+Result: (ID 1219) Yoba Shirt
+----------------------------
+Cloth + Diamond
+Result: (ID 1224) Pendant Shirt (Dyeable)
+----------------------------
+Cloth + Prismatic Shard
+Result: Random chance of: 
+  (ID 1223) Prismatic Shirt
+  (ID 1998) Prismatic Shirt
+  (ID 1999) Prismatic Shirt
+  (ID 998) Prismatic Pants
+  (ID 999) Prismatic Genie Pants
+----------------------------
+Cloth + Treasure Chest
+Result: (ID 2062) Pirate Hat (Hat)
+----------------------------
+Cloth + Eggplant Parmesan
+Result: (ID 1114) Shirt
+----------------------------
+Cloth + Aerinite
+Result: (ID 1115) Shirt
+----------------------------
+Cloth + Salmon Dinner
+Result: (ID 1116) Shirt
+----------------------------
+Cloth + Roots Platter
+Result: (ID 1117) Shirt
+----------------------------
+Cloth + Granite
+Result: (ID 1122) Shirt
+----------------------------
+Cloth + Bruschetta
+Result: (ID 1123) Shirt And Tie (Dyeable)
+----------------------------
+Cloth + (Any of Cranberry Sauce, Stuffing)
+Result: (ID 2063) Flat Topped Hat (Hat)
+----------------------------
+Cloth + Fish Stew
+Result: (ID 1124) Shirt
+----------------------------
+Cloth + Lobster Bisque
+Result: (ID 1125) Shirt
+----------------------------
+Cloth + Coleslaw
+Result: (ID 1126) Shirt
+----------------------------
+Cloth + Blobfish
+Result: (ID 2056) Blobfish Mask (Hat)
+----------------------------
+Cloth + Iridium Ore
+Result: (ID 1179) Iridium Energy Shirt
+----------------------------
+Cloth + Chipped Amphora
+Result: (ID 1227) Antiquity Shirt
+----------------------------
+Cloth + Arrowhead
+Result: (ID 1228) Soft Arrow Shirt
+----------------------------
+Cloth + Ancient Doll
+Result: (ID 1229) Doll Shirt
+----------------------------
+Cloth + Elvish Jewelry
+Result: (ID 1230) Jewelry Shirt
+----------------------------
+Cloth + Chewing Stick
+Result: (ID 1231) Canvas Jacket
+----------------------------
+Cloth + (Any of Broken CD, Broken Glasses, Driftwood, Soggy Newspaper, Trash)
+Result: (ID 1232) Trash Can Shirt
+----------------------------
+Cloth + Rusty Spoon
+Result: (ID 1233) Rusty Shirt
+----------------------------
+Cloth + Rusty Cog
+Result: (ID 1234) Circuitboard Shirt
+----------------------------
+Cloth + Chicken Statue
+Result: (ID 1235) Fluffy Shirt
+----------------------------
+Cloth + Ancient Seed
+Result: (ID 1237) Brown Suit
+----------------------------
+Cloth + Dried Starfish
+Result: (ID 1238) Golden Shirt
+----------------------------
+Cloth + Anchor
+Result: (ID 1239) Captain's Uniform
+----------------------------
+Cloth + Glass Shards
+Result: (ID 1240) Officer Uniform
+----------------------------
+Cloth + Trout Soup
+Result: (ID 1241) Ranger Uniform
+----------------------------
+Cloth + (Any of Life Elixir, Oil of Garlic)
+Result: (ID 1263) Dark Highlight Shirt (Dyeable)
+----------------------------
+Cloth + Starfruit
+Result: (ID 8) Genie Pants (Dyeable)
+----------------------------
+Cloth + Ancient Fruit
+Result: (ID 8) Genie Pants (Dyeable)
+----------------------------
+Cloth + Sweet Gem Berry
+Result: (ID 2065) White Turban (Hat)
+----------------------------
+Cloth + Omni Geode
+Result: (ID 1264) Omni Shirt
+----------------------------
+Cloth + Truffle
+Result: (ID 1262) Dark Bandana Shirt (Dyeable)
+----------------------------
+Cloth + Truffle Oil
+Result: (ID 1262) Dark Bandana Shirt (Dyeable)
+----------------------------
+Cloth + Artichoke Dip
+Result: (ID 1065) Shirt; available in character creator as choice 66)
+----------------------------
+Cloth + Hazelnut
+Result: (ID 1266) Brown Overalls
+----------------------------
+Cloth + Winter Root
+Result: (ID 1267) Orange Bow Shirt
+----------------------------
+Cloth + (Any of Orange, Peach)
+Result: (ID 13) Relaxed Fit Shorts (Dyeable)
+----------------------------
+Cloth + (Any of Apple, Apricot, Cherry, Pomegranate)
+Result: (ID 12) Relaxed Fit Pants (Dyeable)
+----------------------------
+Cloth + (Any of Blue Slime Egg, Green Slime Egg, Purple Slime Egg, Red Slime Egg)
+Result: (ID 10) Baggy Pants (Dyeable)
+----------------------------
+Cloth + (Any of Copper Ore, Gold Ore, Iron Ore)
+Result: (ID 1178) Turtleneck Sweater (Dyeable)
+----------------------------
+Cloth + (Any of Blue Jazz, Tulip)
+Result: (ID 3) Skirt (Dyeable)
+----------------------------
+Cloth + (ALL INGREDIENTS ALREADY USED BY PREVIOUS RECIPE(S))
+Result: (ID 2) Long Dress (Dyeable)
+----------------------------
+Cloth + Corn
+Result: (ID 1128) Striped Shirt (Dyeable)
+----------------------------
+Cloth + Sea Cucumber
+Result: (ID 1142) Tube Top (Dyeable)
+----------------------------
+Cloth + Super Cucumber
+Result: (ID 1142) Tube Top (Dyeable)
+----------------------------
+Cloth + Cactus Fruit
+Result: (ID 1136) 80's Shirt (Dyeable)
+----------------------------
+Cloth + Wheat
+Result: (ID 1132) Crop Tank Top (Dyeable)
+----------------------------
+Cloth + Amaranth
+Result: (ID 1141) Crop Top Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Radish, Red Cabbage)
+Result: (ID 1129) Tank Top (Dyeable)
+----------------------------
+Cloth + (Any of Artichoke, Beet, Bok Choy, Eggplant, Pumpkin, Yam)
+Result: (ID 1140) Button Down Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Acorn, Maple Seed, Pine Cone)
+Result: (ID 2053) Beanie (Hat)
+----------------------------
+Cloth + (Any of Maple Syrup, Oak Resin, Pine Tar)
+Result: (ID 2054) Floppy Beanie (Hat)
+----------------------------
+Cloth + (Any of Cauliflower, Garlic, Green Bean, Hops, Kale, Parsnip, Potato, Tea Leaves, Unmilled Rice)
+Result: (ID 1159) Shirt And Belt (Dyeable)
+----------------------------
+Cloth + (Any of Basic Fertilizer, Basic Retaining Soil, Speed-Gro, Tree Fertilizer)
+Result: (ID 1174) High-Waisted Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Deluxe Speed-Gro, Quality Fertilizer, Quality Retaining Soil)
+Result: (ID 1175) High-Waisted Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Ice Pip, Midnight Squid, Scorpion Carp, Slimejack, Spook Fish, Stonefish, Void Salmon)
+Result: (ID 2055) Fishing Hat (Hat)
+----------------------------
+Cloth + (Any of Clam, Cockle, Crab, Lobster, Mussel, Oyster, Shrimp)
+Result: (ID 1261) Sailor Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Crayfish, Periwinkle, Snail)
+Result: (ID 1260) Rain Coat
+----------------------------
+Cloth + (Any of Albacore, Anchovy, Eel, Flounder, Halibut, Herring, Pufferfish, Red Mullet, Red Snapper, Sardine, Squid, Tilapia, Tuna)
+Result: (ID 1259) Sailor Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Bullhead, Carp, Chub, Largemouth Bass, Lingcod, Midnight Carp, Perch, Sturgeon, Walleye)
+Result: (ID 1157) Fishing Vest
+----------------------------
+Cloth + (Any of Pike, Smallmouth Bass, Woodskip)
+Result: (ID 1157) Fishing Vest
+----------------------------
+Cloth + (Any of Bream, Catfish, Dorado, Rainbow Trout, Shad, Sunfish, Tiger Trout)
+Result: (ID 1158) Fish Shirt (Dyeable)
+----------------------------
+Cloth + (Any of Coral, Nautilus Shell, Sea Urchin)
+Result: (ID 1139) Strapped Top (Dyeable)
+----------------------------
+Cloth + (Any of Blueberry, Grape, Hot Pepper, Melon)
+Result: (ID 1) Shorts (Dyeable)
+----------------------------
+Cloth + (Any of Cranberries, Strawberry, Wild Plum)
+Result: (ID 0) Farmer Pants (Dyeable)

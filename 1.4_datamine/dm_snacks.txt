@@ -1,0 +1,196 @@
+Experiments in data-mining (Stardew 1.4)
+========================================
+
+Movie Concessions (24) Love Like Dislike
+~~~~~~~~~~~~~~~~~~~~~~ ~~~~ ~~~~ ~~~~~~~
+          Apple Slices   1   21    11
+        Black Licorice   3    0    30
+Cappuccino Mousse Cake   4   20     9
+     Chocolate Popcorn   1   27     5
+          Cotton Candy   2   20    11
+                 Fries   1   21    11
+     Hummus Snack Pack   1   19    13
+    Ice Cream Sandwich   1   29     3
+           Jasmine Tea   4   18    11
+            Jawbreaker   1   21    11
+             Joja Cola   1    1    31
+              JojaCorn   1    1    31
+         Kale Smoothie   1   17    15
+                Nachos   2   20    11
+      Panzanella Salad   2   17    14
+        Personal Pizza   3   21     9
+               Popcorn   2   22     9
+            Rock Candy   2   20    11
+         Salmon Burger   3   30     0
+        Salted Peanuts   1   22    10
+           Sour Slimes   1   21    11
+           Star Cookie   3   27     3
+       Stardrop Sorbet  32    0     1
+       Truffle Popcorn   3   20    10
+
+NPC Taste Preferences
+----------------------------
+Abigail
+* Love: Rock Candy, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Fries, Ice Cream Sandwich, Jawbreaker, Nachos, Personal Pizza, Popcorn, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Hummus Snack Pack, Jasmine Tea, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad
+----------------------------
+Alex
+* Love: Salmon Burger, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Salted Peanuts, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Cotton Candy, Jawbreaker, Joja Cola, JojaCorn, Rock Candy, Sour Slimes
+----------------------------
+Caroline
+* Love: Jasmine Tea, Stardrop Sorbet, Truffle Popcorn
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Hummus Snack Pack, Ice Cream Sandwich, Kale Smoothie, Panzanella Salad, Popcorn, Salmon Burger, Salted Peanuts, Star Cookie
+* Dislike: Black Licorice, Cotton Candy, Fries, Jawbreaker, Joja Cola, JojaCorn, Nachos, Personal Pizza, Rock Candy, Sour Slimes
+----------------------------
+Clint
+* Love: Fries, Stardrop Sorbet
+* Like: Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Ice Cream Sandwich, Jawbreaker, Nachos, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Apple Slices, Black Licorice, Hummus Snack Pack, Jasmine Tea, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad
+----------------------------
+Demetrius
+* Love: Popcorn, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Fries, Ice Cream Sandwich, Jawbreaker, Nachos, Personal Pizza, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Hummus Snack Pack, Jasmine Tea, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad
+----------------------------
+Dwarf
+* Love: Rock Candy, Stardrop Sorbet
+* Like: Cotton Candy, Ice Cream Sandwich, Jawbreaker, Salmon Burger, Sour Slimes, Star Cookie
+* Dislike: Apple Slices, Black Licorice, Cappuccino Mousse Cake, Chocolate Popcorn, Fries, Hummus Snack Pack, Jasmine Tea, Joja Cola, JojaCorn, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Salted Peanuts, Truffle Popcorn
+----------------------------
+Elliott
+* Love: Cappuccino Mousse Cake, Stardrop Sorbet, Truffle Popcorn
+* Like: Apple Slices, Chocolate Popcorn, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Kale Smoothie, Panzanella Salad, Salmon Burger, Star Cookie
+* Dislike: Black Licorice, Cotton Candy, Fries, Jawbreaker, Joja Cola, JojaCorn, Nachos, Personal Pizza, Popcorn, Rock Candy, Salted Peanuts, Sour Slimes
+----------------------------
+Emily
+* Love: Kale Smoothie, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Panzanella Salad, Rock Candy, Salmon Burger, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Fries, Joja Cola, JojaCorn, Nachos, Personal Pizza, Popcorn, Salted Peanuts
+----------------------------
+Evelyn
+* Love: Cappuccino Mousse Cake, Star Cookie, Stardrop Sorbet
+* Like: Apple Slices, Chocolate Popcorn, Cotton Candy, Hummus Snack Pack, Ice Cream Sandwich, Jawbreaker, Kale Smoothie, Panzanella Salad, Rock Candy, Salmon Burger, Sour Slimes
+* Dislike: Black Licorice, Fries, Jasmine Tea, Joja Cola, JojaCorn, Nachos, Personal Pizza, Popcorn, Salted Peanuts, Truffle Popcorn
+----------------------------
+George
+* Love: Black Licorice, Stardrop Sorbet
+* Like: Fries, Nachos, Personal Pizza, Popcorn, Salmon Burger, Salted Peanuts, Sour Slimes, Truffle Popcorn
+* Dislike: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad, Rock Candy, Star Cookie
+----------------------------
+Gus
+* Love: Cappuccino Mousse Cake, Panzanella Salad, Stardrop Sorbet, Truffle Popcorn
+* Like: Chocolate Popcorn, Fries, Ice Cream Sandwich, Nachos, Personal Pizza, Popcorn, Salmon Burger, Salted Peanuts, Star Cookie
+* Dislike: Apple Slices, Black Licorice, Cotton Candy, Hummus Snack Pack, Jasmine Tea, Jawbreaker, Joja Cola, JojaCorn, Kale Smoothie, Rock Candy, Sour Slimes
+----------------------------
+Haley
+* Love: Cappuccino Mousse Cake, Stardrop Sorbet
+* Like: Apple Slices, Chocolate Popcorn, Cotton Candy, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Kale Smoothie, Panzanella Salad, Rock Candy, Salmon Burger, Sour Slimes, Star Cookie
+* Dislike: Black Licorice, Fries, Joja Cola, JojaCorn, Nachos, Personal Pizza, Popcorn, Salted Peanuts, Truffle Popcorn
+----------------------------
+Harvey
+* Love: Apple Slices, Jasmine Tea, Stardrop Sorbet
+* Like: Cappuccino Mousse Cake, Hummus Snack Pack, Kale Smoothie, Panzanella Salad, Salmon Burger, Sour Slimes, Truffle Popcorn
+* Dislike: Black Licorice, Chocolate Popcorn, Cotton Candy, Fries, Ice Cream Sandwich, Jawbreaker, Joja Cola, JojaCorn, Nachos, Personal Pizza, Popcorn, Rock Candy, Salted Peanuts, Star Cookie
+----------------------------
+Jas
+* Love: Sour Slimes, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Ice Cream Sandwich, Jawbreaker, Personal Pizza, Rock Candy, Salmon Burger, Star Cookie
+* Dislike: Black Licorice, Fries, Hummus Snack Pack, Jasmine Tea, Joja Cola, JojaCorn, Kale Smoothie, Nachos, Panzanella Salad, Popcorn, Salted Peanuts, Truffle Popcorn
+----------------------------
+Jodi
+* Love: Chocolate Popcorn, Stardrop Sorbet
+* Like: Cappuccino Mousse Cake, Fries, Ice Cream Sandwich, Jasmine Tea, Nachos, Personal Pizza, Popcorn, Salmon Burger, Salted Peanuts, Star Cookie
+* Dislike: Apple Slices, Black Licorice, Cotton Candy, Hummus Snack Pack, Jawbreaker, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad, Rock Candy, Sour Slimes, Truffle Popcorn
+----------------------------
+Kent
+* Love: Popcorn, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Salmon Burger, Salted Peanuts, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Cotton Candy, Jawbreaker, Joja Cola, JojaCorn, Rock Candy, Sour Slimes
+----------------------------
+Krobus
+* Love: Black Licorice
+* Like: Fries, Hummus Snack Pack, Jasmine Tea, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Salmon Burger, Salted Peanuts, Sour Slimes, Truffle Popcorn
+* Dislike: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Ice Cream Sandwich, Jawbreaker, Joja Cola, JojaCorn, Rock Candy, Star Cookie, Stardrop Sorbet
+----------------------------
+Leah
+* Love: Panzanella Salad, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Kale Smoothie, Rock Candy, Salmon Burger, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Fries, Joja Cola, JojaCorn, Nachos, Personal Pizza, Popcorn, Salted Peanuts
+----------------------------
+Lewis
+* Love: Jasmine Tea, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jawbreaker, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Joja Cola, JojaCorn, Sour Slimes
+----------------------------
+Linus
+* Love: Salmon Burger, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Rock Candy, Salted Peanuts, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Joja Cola, JojaCorn
+----------------------------
+Marnie
+* Love: Ice Cream Sandwich, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Hummus Snack Pack, Jasmine Tea, Jawbreaker, Kale Smoothie, Panzanella Salad, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Sour Slimes, Star Cookie
+* Dislike: Black Licorice, Fries, Joja Cola, JojaCorn, Nachos, Salted Peanuts, Truffle Popcorn
+----------------------------
+Maru
+* Love: Star Cookie, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Truffle Popcorn
+* Dislike: Black Licorice, Joja Cola, JojaCorn
+----------------------------
+Pam
+* Love: Nachos, Stardrop Sorbet
+* Like: Chocolate Popcorn, Cotton Candy, Fries, Ice Cream Sandwich, Jawbreaker, Joja Cola, JojaCorn, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Apple Slices, Black Licorice, Cappuccino Mousse Cake, Hummus Snack Pack, Jasmine Tea, Kale Smoothie, Panzanella Salad
+----------------------------
+Penny
+* Love: Cotton Candy, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Joja Cola, JojaCorn, Sour Slimes
+----------------------------
+Pierre
+* Love: Personal Pizza, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Kale Smoothie, Nachos, Panzanella Salad, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Joja Cola, JojaCorn
+----------------------------
+Robin
+* Love: Salted Peanuts, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Salmon Burger, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Cotton Candy, Jawbreaker, Joja Cola, JojaCorn, Rock Candy, Sour Slimes
+----------------------------
+Sam
+* Love: Personal Pizza, Stardrop Sorbet
+* Like: Chocolate Popcorn, Cotton Candy, Fries, Ice Cream Sandwich, Jawbreaker, Nachos, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie
+* Dislike: Apple Slices, Black Licorice, Cappuccino Mousse Cake, Hummus Snack Pack, Jasmine Tea, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad, Truffle Popcorn
+----------------------------
+Sandy
+* Love: Cotton Candy, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Joja Cola, JojaCorn, Sour Slimes
+----------------------------
+Sebastian
+* Love: Jasmine Tea, Stardrop Sorbet
+* Like: Apple Slices, Chocolate Popcorn, Cotton Candy, Fries, Hummus Snack Pack, Ice Cream Sandwich, Jawbreaker, Nachos, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie, Truffle Popcorn
+* Dislike: Black Licorice, Cappuccino Mousse Cake, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad
+----------------------------
+Shane
+* Love: Hummus Snack Pack, Joja Cola, JojaCorn, Nachos, Personal Pizza, Stardrop Sorbet
+* Like: Chocolate Popcorn, Cotton Candy, Fries, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie
+* Dislike: Apple Slices, Black Licorice, Cappuccino Mousse Cake, Kale Smoothie, Panzanella Salad, Truffle Popcorn
+----------------------------
+Vincent
+* Love: Jawbreaker, Stardrop Sorbet
+* Like: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Cotton Candy, Fries, Ice Cream Sandwich, Nachos, Personal Pizza, Popcorn, Rock Candy, Salmon Burger, Salted Peanuts, Sour Slimes, Star Cookie
+* Dislike: Black Licorice, Hummus Snack Pack, Jasmine Tea, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad, Truffle Popcorn
+----------------------------
+Willy
+* Love: Salmon Burger, Stardrop Sorbet
+* Like: Chocolate Popcorn, Fries, Ice Cream Sandwich, Jasmine Tea, Nachos, Personal Pizza, Popcorn, Salted Peanuts, Star Cookie, Truffle Popcorn
+* Dislike: Apple Slices, Black Licorice, Cappuccino Mousse Cake, Cotton Candy, Hummus Snack Pack, Jawbreaker, Joja Cola, JojaCorn, Kale Smoothie, Panzanella Salad, Rock Candy, Sour Slimes
+----------------------------
+Wizard
+* Love: Black Licorice, Star Cookie, Stardrop Sorbet
+* Like: Cotton Candy, Ice Cream Sandwich, Jasmine Tea, Jawbreaker, Rock Candy, Salmon Burger, Sour Slimes
+* Dislike: Apple Slices, Cappuccino Mousse Cake, Chocolate Popcorn, Fries, Hummus Snack Pack, Joja Cola, JojaCorn, Kale Smoothie, Nachos, Panzanella Salad, Personal Pizza, Popcorn, Salted Peanuts, Truffle Popcorn

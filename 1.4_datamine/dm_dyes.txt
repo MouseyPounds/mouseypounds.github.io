@@ -1,0 +1,194 @@
+Experiments in data-mining (Stardew 1.4)
+========================================
+
+Dyes (34 colors) 
+-------------------------------
+* Color: aquamarine
+    Strong - (None)
+    Medium - (None)
+    Weak - Aquamarine
+-------------------------------
+* Color: black
+    Strong - (None)
+    Medium - (None)
+    Weak - Bat Wing, Bixite, Bomb, Caviar, Coal, Maki Roll, Neptunite, Obsidian, Squid Ink, Trash, Void Egg
+-------------------------------
+* Color: blue
+    Strong - Ancient Doll, Blueberry, Dwarf Scroll III
+    Medium - Blue Jazz
+    Weak - Albacore, Anchovy, Blue Slime Egg, Blueberry Tart, Bream, Crystal Fruit, Glacierfish, Herring, Ice Pip, Joja Cola, Midnight Squid, Sardine, Seafoam Pudding, Spook Fish, Tuna
+-------------------------------
+* Color: brown
+    Strong - Chewing Stick, Chipped Amphora, Dwarvish Helm, Rusty Cog, Rusty Spur
+    Medium - Potato, Yam
+    Weak - Acorn, Autumn's Bounty, Basic Fertilizer, Basic Retaining Soil, Bread, Bullhead, Carp Surprise, Cave Carrot, Chanterelle, Chocolate Cake, Clay, Coffee Bean, Cookie, Crab Cakes, Crab Pot, Crispy Bass, Deluxe Speed-Gro, Driftwood, Farmer's Lunch, Field Snack, Flounder, Fried Mushroom, Geode, Glazed Yams, Hardwood, Hashbrowns, Hazelnut, Lingcod, Lumber, Maple Bar, Maple Seed, Maple Syrup, Morel, Mudstone, Pancakes, Pepper Poppers, Pine Cone, Pine Tar, Plum Pudding, Quality Fertilizer, Quality Retaining Soil, Rain Totem, Roots Platter, Scorpion Carp, Smallmouth Bass, Speed-Gro, Stir Fry, Stonefish, Stuffing, Survival Burger, Tiger Trout, Tortilla, Tree Fertilizer, Trout Soup, Truffle, Unmilled Rice, Warp Totem: Beach, Warp Totem: Desert, Warp Totem: Farm, Warp Totem: Mountains, Wild Horseradish, Wood
+-------------------------------
+* Color: copper
+    Strong - (None)
+    Medium - (None)
+    Weak - Copper Bar, Copper Ore, Earth Crystal, Eel, Hematite, Rotten Plant
+-------------------------------
+* Color: cyan
+    Strong - Glass Shards
+    Medium - (None)
+    Weak - Aerinite, Ancient Fruit, Battery Pack, Broken CD, Broken Glasses, Frozen Geode, Frozen Tear, Periwinkle, Sturgeon
+-------------------------------
+* Color: dark_blue
+    Strong - (None)
+    Medium - (None)
+    Weak - Blackberry, Blackberry Cobbler, Kyanite
+-------------------------------
+* Color: dark_brown
+    Strong - Triple Shot Espresso
+    Medium - (None)
+    Weak - Coconut, Coffee, Common Mushroom, Roasted Hazelnuts
+-------------------------------
+* Color: dark_gray
+    Strong - Rare Disc
+    Medium - (None)
+    Weak - Cockle, Crayfish, Halibut
+-------------------------------
+* Color: dark_green
+    Strong - (None)
+    Medium - (None)
+    Weak - Algae Soup, Green Algae
+-------------------------------
+* Color: dark_pink
+    Strong - (None)
+    Medium - (None)
+    Weak - Bug Meat, Life Elixir, Pomegranate
+-------------------------------
+* Color: dark_purple
+    Strong - Beet
+    Medium - (None)
+    Weak - Fire Opal, Thunder Egg, Void Salmon, Wild Plum, Wine
+-------------------------------
+* Color: dark_red
+    Strong - (None)
+    Medium - (None)
+    Weak - Jelly
+-------------------------------
+* Color: dark_yellow
+    Strong - (None)
+    Medium - (None)
+    Weak - Muscle Remedy
+-------------------------------
+* Color: gold
+    Strong - Golden Mask, Golden Relic
+    Medium - (None)
+    Weak - Gold Bar, Gold Ore, Golden Pumpkin, Jagoite, Mead, Pale Ale, Pyrite, Topaz
+-------------------------------
+* Color: gray
+    Strong - Anchor, Ancient Sword, Arrowhead, Dwarf Gadget, Prehistoric Handaxe, Prehistoric Tool, Rusty Spoon
+    Medium - (None)
+    Weak - Alamite, Basalt, Catfish, Chub, Escargot, Fish Stew, Geminite, Ghost Crystal, Granite, Limestone, Marble, Mussel, Omni Geode, Oyster, Slate, Slime, Soggy Newspaper, Stone, Tilapia
+-------------------------------
+* Color: green
+    Strong - Dinosaur Egg, Dwarf Scroll II, Fiddlehead Fern, Kale, Strange Doll (green)
+    Medium - Artichoke, Bok Choy, Green Bean
+    Weak - Bean Hotpot, Cactus Fruit, Coleslaw, Duck Feather, Emerald, Esperite, Fiber, Fiddlehead Risotto, Green Slime Egg, Green Tea, Hops, Juice, Largemouth Bass, Legend, Malachite, Mutant Carp, Oak Resin, Ocean Stone, Petrified Slime, Pickles, Salad, Seaweed, Shad, Slimejack, Super Meal, Tea Leaves, Vegetable Medley
+-------------------------------
+* Color: iridium
+    Strong - (None)
+    Medium - (None)
+    Weak - Iridium Bar, Iridium Milk, Iridium Ore, Midnight Carp, Refined Quartz
+-------------------------------
+* Color: iron
+    Strong - (None)
+    Medium - (None)
+    Weak - Celestine, Iron Bar, Iron Ore
+-------------------------------
+* Color: jade
+    Strong - (None)
+    Medium - (None)
+    Weak - Jade
+-------------------------------
+* Color: light_cyan
+    Strong - (None)
+    Medium - (None)
+    Weak - Clam, Opal, Spirit Torch
+-------------------------------
+* Color: lime
+    Strong - (None)
+    Medium - (None)
+    Weak - Jamborite
+-------------------------------
+* Color: orange
+    Strong - (None)
+    Medium - Poppy, Pumpkin
+    Weak - Aged Roe, Apricot, Dorado, Jack-O-Lantern, Lemon Stone, Nautilus Shell, Octopus, Orange, Orpiment, Pumpkin Pie, Pumpkin Soup, Rainbow Trout, Roe, Spice Berry, Sunfish, Tigerseye, Winter Root, Woodskip
+-------------------------------
+* Color: pale_violet_red
+    Strong - (None)
+    Medium - Amaranth
+    Weak - Coral
+-------------------------------
+* Color: pink
+    Strong - (None)
+    Medium - Fairy Rose, Melon
+    Weak - Bait, Bouquet, Dolomite, Nekoite, Peach, Pink Cake, Salmon Dinner, Sashimi, Shrimp, Shrimp Cocktail, Star Shards, Strange Bun
+-------------------------------
+* Color: poppyseed
+    Strong - (None)
+    Medium - (None)
+    Weak - Poppyseed Muffin
+-------------------------------
+* Color: prismatic
+    Strong - (None)
+    Medium - (None)
+    Weak - Prismatic Shard, Rainbow Shell
+-------------------------------
+* Color: purple
+    Strong - Ancient Drum
+    Medium - Crocus, Eggplant, Red Cabbage, Sweet Pea
+    Weak - Amethyst, Fairy Stone, Fluorapatite, Grape, Purple Mushroom, Purple Slime Egg, Sea Urchin, Super Cucumber, Void Essence
+-------------------------------
+* Color: red
+    Strong - Cranberries, Cranberry Candy, Cranberry Sauce, Dwarf Scroll I
+    Medium - Eggplant Parmesan, Hot Pepper, Radish, Rhubarb, Spaghetti, Strawberry, Tomato, Tulip
+    Weak - Apple, Baryte, Bruschetta, Cherry, Cherry Bomb, Crab, Crimsonfish, Energy Tonic, Explosive Ammo, Fire Quartz, Helvite, Holly, Jasper, Lava Eel, Lobster, Magma Geode, Mega Bomb, Miner's Treat, Pizza, Radish Salad, Red Mullet, Red Mushroom, Red Plate, Red Slime Egg, Red Snapper, Rhubarb Pie, Ruby, Salmonberry, Spicy Eel, Sweet Gem Berry, Void Mayonnaise
+-------------------------------
+* Color: salmon
+    Strong - (None)
+    Medium - (None)
+    Weak - Salmon
+-------------------------------
+* Color: sand
+    Strong - Bone Flute, Chicken Statue
+    Medium - (None)
+    Weak - Blobfish, Sandstone
+-------------------------------
+* Color: white
+    Strong - Lunarite, Ornamental Fan
+    Medium - Cauliflower, Garlic
+    Weak - Amphibian Fossil, Artichoke Dip, Cheese Cauliflower, Chowder, Cloth, Diamond, Dinosaur Mayonnaise, Duck Egg, Duck Mayonnaise, Egg, Fried Egg, Ghostfish, Goat Milk, Ice Cream, L. Goat Milk, Large Egg, Large Milk, Leek, Lobster Bisque, Mayonnaise, Milk, Nautilus Fossil, Omelet, Pale Broth, Palm Fossil, Pearl, Prehistoric Rib, Prehistoric Scapula, Prehistoric Skull, Prehistoric Tibia, Prehistoric Vertebra, Quartz, Rice, Rice Pudding, Skeletal Hand, Skeletal Tail, Snow Yam, Soapstone, Spring Onion, Squid, Sugar, Tom Kha Soup, Trilobite, Vinegar, Wheat Flour, White Algae, Wool
+-------------------------------
+* Color: yellow
+    Strong - Dried Starfish, Dwarf Scroll IV, Elvish Jewelry, Strange Doll (yellow)
+    Medium - Corn, Parsnip, Summer Spangle, Sunflower
+    Weak - Angler, Baked Fish, Beer, Calcite, Carp, Cheese, Complete Breakfast, Daffodil, Dandelion, Dish O' The Sea, Fish Taco, Fried Calamari, Fried Eel, Fruit Salad, Goat Cheese, Hay, Honey, Lucky Lunch, Oil, Parsnip Soup, Perch, Pike, Pufferfish, Rabbit's Foot, Sandfish, Sap, Sea Cucumber, Snail, Solar Essence, Starfruit, Torch, Treasure Chest, Truffle Oil, Walleye, Wheat
+-------------------------------
+* Color: yellow_green
+    Strong - (None)
+    Medium - (None)
+    Weak - Oil of Garlic
+
+Emily's Magic Dye Pots
+-------------------------------
+* Red Pot (Any items with dye tags of dark_red, pink, red, salmon)
+  - Apple, Bait, Baryte, Bouquet, Bruschetta, Cherry, Cherry Bomb, Crab, Cranberries, Cranberry Candy, Cranberry Sauce, Crimsonfish, Dolomite, Dwarf Scroll I, Eggplant Parmesan, Energy Tonic, Explosive Ammo, Fairy Rose, Fire Quartz, Helvite, Holly, Hot Pepper, Jasper, Jelly, Lava Eel, Lobster, Magma Geode, Mega Bomb, Melon, Miner's Treat, Nekoite, Peach, Pink Cake, Pizza, Radish, Radish Salad, Red Mullet, Red Mushroom, Red Plate, Red Slime Egg, Red Snapper, Rhubarb, Rhubarb Pie, Ruby, Salmon, Salmon Dinner, Salmonberry, Sashimi, Shrimp, Shrimp Cocktail, Spaghetti, Spicy Eel, Star Shards, Strange Bun, Strawberry, Sweet Gem Berry, Tomato, Tulip, Void Mayonnaise
+-------------------------------
+* Orange Pot (Any items with dye tags of brown, copper, dark_brown, dark_orange, orange)
+  - Acorn, Aged Roe, Apricot, Autumn's Bounty, Basic Fertilizer, Basic Retaining Soil, Bread, Bullhead, Carp Surprise, Cave Carrot, Chanterelle, Chewing Stick, Chipped Amphora, Chocolate Cake, Clay, Coconut, Coffee, Coffee Bean, Common Mushroom, Cookie, Copper Bar, Copper Ore, Crab Cakes, Crab Pot, Crispy Bass, Deluxe Speed-Gro, Dorado, Driftwood, Dwarvish Helm, Earth Crystal, Eel, Farmer's Lunch, Field Snack, Flounder, Fried Mushroom, Geode, Glazed Yams, Hardwood, Hashbrowns, Hazelnut, Hematite, Jack-O-Lantern, Lemon Stone, Lingcod, Lumber, Maple Bar, Maple Seed, Maple Syrup, Morel, Mudstone, Nautilus Shell, Octopus, Orange, Orpiment, Pancakes, Pepper Poppers, Pine Cone, Pine Tar, Plum Pudding, Poppy, Potato, Pumpkin, Pumpkin Pie, Pumpkin Soup, Quality Fertilizer, Quality Retaining Soil, Rain Totem, Rainbow Trout, Roasted Hazelnuts, Roe, Roots Platter, Rotten Plant, Rusty Cog, Rusty Spur, Scorpion Carp, Smallmouth Bass, Speed-Gro, Spice Berry, Stir Fry, Stonefish, Stuffing, Sunfish, Survival Burger, Tiger Trout, Tigerseye, Tortilla, Tree Fertilizer, Triple Shot Espresso, Trout Soup, Truffle, Unmilled Rice, Warp Totem: Beach, Warp Totem: Desert, Warp Totem: Farm, Warp Totem: Mountains, Wild Horseradish, Winter Root, Wood, Woodskip, Yam
+-------------------------------
+* Yellow Pot (Any items with dye tags of dark_yellow, gold, sand, yellow)
+  - Angler, Baked Fish, Beer, Blobfish, Bone Flute, Calcite, Carp, Cheese, Chicken Statue, Complete Breakfast, Corn, Daffodil, Dandelion, Dish O' The Sea, Dried Starfish, Dwarf Scroll IV, Elvish Jewelry, Fish Taco, Fried Calamari, Fried Eel, Fruit Salad, Goat Cheese, Gold Bar, Gold Ore, Golden Mask, Golden Pumpkin, Golden Relic, Hay, Honey, Jagoite, Lucky Lunch, Mead, Muscle Remedy, Oil, Pale Ale, Parsnip, Parsnip Soup, Perch, Pike, Pufferfish, Pyrite, Rabbit's Foot, Sandfish, Sandstone, Sap, Sea Cucumber, Snail, Solar Essence, Starfruit, Strange Doll (yellow), Summer Spangle, Sunflower, Topaz, Torch, Treasure Chest, Truffle Oil, Walleye, Wheat
+-------------------------------
+* Green Pot (Any items with dye tags of dark_green, green, jade, lime, yellow_green)
+  - Algae Soup, Artichoke, Bean Hotpot, Bok Choy, Cactus Fruit, Coleslaw, Dinosaur Egg, Duck Feather, Dwarf Scroll II, Emerald, Esperite, Fiber, Fiddlehead Fern, Fiddlehead Risotto, Green Algae, Green Bean, Green Slime Egg, Green Tea, Hops, Jade, Jamborite, Juice, Kale, Largemouth Bass, Legend, Malachite, Mutant Carp, Oak Resin, Ocean Stone, Oil of Garlic, Petrified Slime, Pickles, Salad, Seaweed, Shad, Slimejack, Strange Doll (green), Super Meal, Tea Leaves, Vegetable Medley
+-------------------------------
+* Blue Pot (Any items with dye tags of aquamarine, blue, cyan, dark_blue, dark_cyan, light_cyan)
+  - Aerinite, Albacore, Anchovy, Ancient Doll, Ancient Fruit, Aquamarine, Battery Pack, Blackberry, Blackberry Cobbler, Blue Jazz, Blue Slime Egg, Blueberry, Blueberry Tart, Bream, Broken CD, Broken Glasses, Clam, Crystal Fruit, Dwarf Scroll III, Frozen Geode, Frozen Tear, Glacierfish, Glass Shards, Herring, Ice Pip, Joja Cola, Kyanite, Midnight Squid, Opal, Periwinkle, Sardine, Seafoam Pudding, Spirit Torch, Spook Fish, Sturgeon, Tuna
+-------------------------------
+* Purple Pot (Any items with dye tags of dark_pink, dark_purple, iridium, pale_violet_red, poppyseed, purple)
+  - Amaranth, Amethyst, Ancient Drum, Beet, Bug Meat, Coral, Crocus, Eggplant, Fairy Stone, Fire Opal, Fluorapatite, Grape, Iridium Bar, Iridium Milk, Iridium Ore, Life Elixir, Midnight Carp, Pomegranate, Poppyseed Muffin, Purple Mushroom, Purple Slime Egg, Red Cabbage, Refined Quartz, Sea Urchin, Super Cucumber, Sweet Pea, Thunder Egg, Void Essence, Void Salmon, Wild Plum, Wine

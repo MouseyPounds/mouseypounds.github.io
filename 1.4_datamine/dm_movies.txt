@@ -1,0 +1,108 @@
+Experiments in data-mining (Stardew 1.4)
+========================================
+
+Movie Info
+-------------------------------
+The Brave Little Sapling
+- Desc: An animated family comedy about a little sprout on a magical adventure to become a tree!
+- Tags: comedy, family
+- Shows: First Spring after theater opens
+* Love: Caroline, Dwarf, Jas, Penny(*), Sandy, Vincent
+* Like: Abigail, Alex, Clint, Demetrius, Elliott, Emily, Evelyn, George, Gus, Haley, Harvey, Jodi, Kent, Leah, Lewis, Marlon, Marnie, Maru, Pam, Pierre, Robin, Sam, Willy
+* Dislike: Krobus, Linus, Sebastian, Shane, Wizard
+-------------------------------
+Journey Of The Prairie King: The Motion Picture
+- Desc: The beloved video game comes to the silver screen!
+- Tags: action
+- Shows: First Summer after theater opens
+* Love: Caroline, Dwarf, Jas, Robin, Sandy, Vincent
+* Like: Abigail(*), Alex, Clint, Demetrius, Emily, Evelyn, Gus, Jodi, Kent, Lewis(*), Marlon, Marnie, Maru, Pam, Penny, Pierre, Sam, Sebastian, Shane(*), Willy
+* Dislike: Elliott, George, Haley, Harvey, Krobus, Leah, Linus, Wizard
+-------------------------------
+Mysterium
+- Desc: Peer behind the midnight veil... You must experience to believe!
+- Tags: art, horror
+- Shows: First Fall after theater opens
+* Love: Abigail, Dwarf, Elliott, Leah, Sandy, Sebastian, Wizard(*)
+* Like: Alex, Caroline, Clint, Demetrius, Haley, Jodi, Krobus(*), Marlon, Marnie, Maru, Pam, Pierre, Robin, Sam, Shane, Willy
+* Dislike: Emily, Evelyn, George, Gus, Harvey, Jas, Kent, Lewis, Linus, Penny(*), Vincent
+-------------------------------
+The Miracle At Coldstar Ranch
+- Desc: Against all odds, a family keeps the spirit of the Winter Star alive...
+- Tags: classic, family
+- Shows: First Winter after theater opens
+* Love: Dwarf, Emily, Evelyn, Gus, Harvey, Marnie, Sandy
+* Like: Alex, Caroline, Clint, Elliott, George, Haley, Jas, Jodi, Kent, Leah, Lewis, Marlon, Maru, Pam, Penny(*), Pierre, Robin, Willy
+* Dislike: Abigail, Demetrius, Krobus, Linus, Sam, Sebastian, Shane, Vincent, Wizard
+-------------------------------
+Natural Wonders: Exploring Our Vibrant World
+- Desc: Take a tour through the lands of the Ferngill Republic... from The Fern Islands to Zuzu City, this world is full of life!
+- Tags: documentary, family
+- Shows: Second Spring after theater opens
+* Love: Demetrius(*), Dwarf, Jas, Lewis, Maru(*), Sandy
+* Like: Abigail(*), Caroline, Clint, Elliott, Emily, Evelyn, George, Gus, Haley, Harvey(*), Jodi, Kent, Leah, Marlon, Marnie, Pam, Penny(*), Pierre, Robin, Sam, Sebastian, Shane, Willy
+* Dislike: Alex, Krobus, Linus(*), Vincent, Wizard
+-------------------------------
+Wumbus
+- Desc: An absurd sci-fi comedy centered around the life and times of a lumpy guy from another star.
+- Tags: comedy, family, sci-fi
+- Shows: Second Summer after theater opens
+* Love: Alex, Demetrius, Dwarf, Gus, Jas, Maru, Pierre, Sam(*), Sandy, Shane, Vincent
+* Like: Abigail, Clint, Elliott, Emily, Evelyn, George, Harvey, Jodi, Kent, Leah, Lewis, Marlon, Marnie, Pam, Penny(*), Robin, Sebastian, Willy
+* Dislike: Caroline, Haley, Krobus, Linus, Wizard
+-------------------------------
+It Howls In The Rain
+- Desc: A group of youngsters set out to discover the source of a mysterious sound. (Parental Supervision Required)
+- Tags: horror
+- Shows: Second Fall after theater opens
+* Love: Abigail, Alex, Dwarf, Sandy, Sebastian, Shane
+* Like: Caroline, Clint, Demetrius, Gus, Haley, Jodi, Marlon, Marnie, Maru, Pam, Pierre, Robin, Sam, Willy
+* Dislike: Elliott, Emily, Evelyn, George, Harvey, Jas, Kent, Krobus, Leah, Lewis, Linus, Penny(*), Vincent, Wizard
+-------------------------------
+The Zuzu City Express
+- Desc: A beloved movie classic, carefully restored for modern theaters.
+- Tags: classic, romance
+- Shows: Second Winter after theater opens
+* Love: Dwarf, Evelyn, George, Harvey, Jodi, Sandy
+* Like: Alex, Caroline, Elliott, Emily, Gus, Haley, Jas, Kent, Leah, Lewis, Marlon, Marnie, Maru, Pam, Penny, Pierre, Robin, Willy
+* Dislike: Abigail, Clint(*), Demetrius(*), Krobus, Linus, Sam, Sebastian, Shane, Vincent, Wizard
+-------------------------------
+Note, the following special reactions override the normal preferences listed above:
+- Penny will 'love' any movie if the following people are also present: Pam
+Also, if an NPC has a '(*)' after their name, they have unique dialogue reactions during the film.
+
+NPC preference summary (Love-Like-Dislike)
+Abigail: (2-4-2)
+Alex: (2-5-1)
+Caroline: (2-5-1)
+Clint: (0-7-1)
+Demetrius: (2-4-2)
+Dwarf: (8-0-0)
+Elliott: (1-5-2)
+Emily: (1-5-2)
+Evelyn: (2-4-2)
+George: (1-4-3)
+Gus: (2-5-1)
+Haley: (0-6-2)
+Harvey: (2-3-3)
+Jas: (4-2-2)
+Jodi: (1-7-0)
+Kent: (0-6-2)
+Krobus: (0-1-7)
+Leah: (1-5-2)
+Lewis: (1-5-2)
+Linus: (0-0-8)
+Marlon: (0-8-0)
+Marnie: (1-7-0)
+Maru: (2-6-0)
+Pam: (0-8-0)
+Penny: (1-5-2)
+Pierre: (1-7-0)
+Robin: (1-7-0)
+Sam: (1-5-2)
+Sandy: (8-0-0)
+Sebastian: (2-3-3)
+Shane: (2-3-3)
+Vincent: (3-0-5)
+Willy: (0-8-0)
+Wizard: (1-0-7)

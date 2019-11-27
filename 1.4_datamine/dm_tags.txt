@@ -1,0 +1,415 @@
+Found 138 tags
+-------------------------------
+TAG: alcohol_item
+MATCHES: Beer, Mead, Pale Ale, Wine
+-------------------------------
+TAG: algae_item
+MATCHES: Green Algae, White Algae
+-------------------------------
+TAG: ancient_item
+MATCHES: Ancient Drum, Ancient Sword, Chewing Stick, Chipped Amphora
+-------------------------------
+TAG: beach_item
+MATCHES: Clam
+-------------------------------
+TAG: bomb_item
+MATCHES: Bomb, Cherry Bomb, Mega Bomb
+-------------------------------
+TAG: bone_item
+MATCHES: Amphibian Fossil, Bone Flute, Nautilus Fossil, Palm Fossil, Prehistoric Rib, Prehistoric Scapula, Prehistoric Skull, Prehistoric Tibia, Prehistoric Vertebra, Skeletal Hand, Skeletal Tail, Trilobite
+-------------------------------
+TAG: book_item
+MATCHES: Lost Book
+-------------------------------
+TAG: ceramic_item
+MATCHES: Chipped Amphora
+-------------------------------
+TAG: chicken_item
+MATCHES: Chicken Statue
+-------------------------------
+TAG: color_aquamarine
+MATCHES: Aquamarine
+-------------------------------
+TAG: color_black
+MATCHES: Bat Wing, Bixite, Bomb, Caviar, Coal, Maki Roll, Neptunite, Obsidian, Squid Ink, Trash, Void Egg
+-------------------------------
+TAG: color_blue
+MATCHES: Albacore, Anchovy, Ancient Doll, Blue Jazz, Blue Slime Egg, Blueberry, Blueberry Tart, Bream, Crystal Fruit, Dwarf Scroll III, Glacierfish, Herring, Ice Pip, Joja Cola, Midnight Squid, Sardine, Seafoam Pudding, Spook Fish, Tuna
+-------------------------------
+TAG: color_brown
+MATCHES: Acorn, Autumn's Bounty, Basic Fertilizer, Basic Retaining Soil, Bread, Bullhead, Carp Surprise, Cave Carrot, Chanterelle, Chewing Stick, Chipped Amphora, Chocolate Cake, Clay, Coffee Bean, Cookie, Crab Cakes, Crab Pot, Crispy Bass, Deluxe Speed-Gro, Driftwood, Dwarvish Helm, Farmer's Lunch, Field Snack, Flounder, Fried Mushroom, Geode, Glazed Yams, Hardwood, Hashbrowns, Hazelnut, Lingcod, Lumber, Maple Bar, Maple Seed, Maple Syrup, Morel, Mudstone, Pancakes, Pepper Poppers, Pine Cone, Pine Tar, Plum Pudding, Potato, Quality Fertilizer, Quality Retaining Soil, Rain Totem, Roots Platter, Rusty Cog, Rusty Spur, Scorpion Carp, Smallmouth Bass, Speed-Gro, Stir Fry, Stonefish, Stuffing, Survival Burger, Tiger Trout, Tortilla, Tree Fertilizer, Trout Soup, Truffle, Unmilled Rice, Warp Totem: Beach, Warp Totem: Desert, Warp Totem: Farm, Warp Totem: Mountains, Wild Horseradish, Wood, Yam
+-------------------------------
+TAG: color_copper
+MATCHES: Copper Bar, Copper Ore, Earth Crystal, Eel, Hematite, Rotten Plant
+-------------------------------
+TAG: color_cyan
+MATCHES: Aerinite, Ancient Fruit, Battery Pack, Broken CD, Broken Glasses, Frozen Geode, Frozen Tear, Glass Shards, Periwinkle, Sturgeon
+-------------------------------
+TAG: color_dark_blue
+MATCHES: Blackberry, Blackberry Cobbler, Kyanite
+-------------------------------
+TAG: color_dark_brown
+MATCHES: Coconut, Coffee, Common Mushroom, Roasted Hazelnuts, Triple Shot Espresso
+-------------------------------
+TAG: color_dark_gray
+MATCHES: Cockle, Crayfish, Halibut, Rare Disc
+-------------------------------
+TAG: color_dark_green
+MATCHES: Algae Soup, Green Algae
+-------------------------------
+TAG: color_dark_pink
+MATCHES: Bug Meat, Life Elixir, Pomegranate
+-------------------------------
+TAG: color_dark_purple
+MATCHES: Beet, Fire Opal, Thunder Egg, Void Salmon, Wild Plum, Wine
+-------------------------------
+TAG: color_dark_red
+MATCHES: Jelly
+-------------------------------
+TAG: color_dark_yellow
+MATCHES: Muscle Remedy
+-------------------------------
+TAG: color_gold
+MATCHES: Gold Bar, Gold Ore, Golden Mask, Golden Pumpkin, Golden Relic, Jagoite, Mead, Pale Ale, Pyrite, Topaz
+-------------------------------
+TAG: color_gray
+MATCHES: Alamite, Anchor, Ancient Sword, Arrowhead, Basalt, Catfish, Chub, Dwarf Gadget, Escargot, Fish Stew, Geminite, Ghost Crystal, Granite, Limestone, Marble, Mussel, Omni Geode, Oyster, Prehistoric Handaxe, Prehistoric Tool, Rusty Spoon, Slate, Slime, Soggy Newspaper, Stone, Tilapia
+-------------------------------
+TAG: color_green
+MATCHES: Artichoke, Bean Hotpot, Bok Choy, Cactus Fruit, Coleslaw, Dinosaur Egg, Duck Feather, Dwarf Scroll II, Emerald, Esperite, Fiber, Fiddlehead Fern, Fiddlehead Risotto, Green Bean, Green Slime Egg, Green Tea, Hops, Juice, Kale, Largemouth Bass, Legend, Malachite, Mutant Carp, Oak Resin, Ocean Stone, Petrified Slime, Pickles, Salad, Seaweed, Shad, Slimejack, Strange Doll (green), Super Meal, Tea Leaves, Vegetable Medley
+-------------------------------
+TAG: color_iridium
+MATCHES: Iridium Bar, Iridium Milk, Iridium Ore, Midnight Carp, Refined Quartz
+-------------------------------
+TAG: color_iron
+MATCHES: Celestine, Iron Bar, Iron Ore
+-------------------------------
+TAG: color_jade
+MATCHES: Jade
+-------------------------------
+TAG: color_light_cyan
+MATCHES: Clam, Opal, Spirit Torch
+-------------------------------
+TAG: color_lime
+MATCHES: Jamborite
+-------------------------------
+TAG: color_orange
+MATCHES: Aged Roe, Apricot, Dorado, Jack-O-Lantern, Lemon Stone, Nautilus Shell, Octopus, Orange, Orpiment, Poppy, Pumpkin, Pumpkin Pie, Pumpkin Soup, Rainbow Trout, Roe, Spice Berry, Sunfish, Tigerseye, Winter Root, Woodskip
+-------------------------------
+TAG: color_pale_violet_red
+MATCHES: Amaranth, Coral
+-------------------------------
+TAG: color_pink
+MATCHES: Bait, Bouquet, Dolomite, Fairy Rose, Melon, Nekoite, Peach, Pink Cake, Salmon Dinner, Sashimi, Shrimp, Shrimp Cocktail, Star Shards, Strange Bun
+-------------------------------
+TAG: color_poppyseed
+MATCHES: Poppyseed Muffin
+-------------------------------
+TAG: color_prismatic
+MATCHES: Prismatic Shard, Rainbow Shell
+-------------------------------
+TAG: color_purple
+MATCHES: Amethyst, Ancient Drum, Crocus, Eggplant, Fairy Stone, Fluorapatite, Grape, Purple Mushroom, Purple Slime Egg, Red Cabbage, Sea Urchin, Super Cucumber, Sweet Pea, Void Essence
+-------------------------------
+TAG: color_red
+MATCHES: Apple, Baryte, Bruschetta, Cherry, Cherry Bomb, Crab, Cranberries, Cranberry Candy, Cranberry Sauce, Crimsonfish, Dwarf Scroll I, Eggplant Parmesan, Energy Tonic, Explosive Ammo, Fire Quartz, Helvite, Holly, Hot Pepper, Jasper, Lava Eel, Lobster, Magma Geode, Mega Bomb, Miner's Treat, Pizza, Radish, Radish Salad, Red Mullet, Red Mushroom, Red Plate, Red Slime Egg, Red Snapper, Rhubarb, Rhubarb Pie, Ruby, Salmonberry, Spaghetti, Spicy Eel, Strawberry, Sweet Gem Berry, Tomato, Tulip, Void Mayonnaise
+-------------------------------
+TAG: color_salmon
+MATCHES: Salmon
+-------------------------------
+TAG: color_sand
+MATCHES: Blobfish, Bone Flute, Chicken Statue, Sandstone
+-------------------------------
+TAG: color_white
+MATCHES: Amphibian Fossil, Artichoke Dip, Cauliflower, Cheese Cauliflower, Chowder, Cloth, Diamond, Dinosaur Mayonnaise, Duck Egg, Duck Mayonnaise, Egg, Fried Egg, Garlic, Ghostfish, Goat Milk, Ice Cream, L. Goat Milk, Large Egg, Large Milk, Leek, Lobster Bisque, Lunarite, Mayonnaise, Milk, Nautilus Fossil, Omelet, Ornamental Fan, Pale Broth, Palm Fossil, Pearl, Prehistoric Rib, Prehistoric Scapula, Prehistoric Skull, Prehistoric Tibia, Prehistoric Vertebra, Quartz, Rice, Rice Pudding, Skeletal Hand, Skeletal Tail, Snow Yam, Soapstone, Spring Onion, Squid, Sugar, Tom Kha Soup, Trilobite, Vinegar, Wheat Flour, White Algae, Wool
+-------------------------------
+TAG: color_yellow
+MATCHES: Angler, Baked Fish, Beer, Calcite, Carp, Cheese, Complete Breakfast, Corn, Daffodil, Dandelion, Dish O' The Sea, Dried Starfish, Dwarf Scroll IV, Elvish Jewelry, Fish Taco, Fried Calamari, Fried Eel, Fruit Salad, Goat Cheese, Hay, Honey, Lucky Lunch, Oil, Parsnip, Parsnip Soup, Perch, Pike, Pufferfish, Rabbit's Foot, Sandfish, Sap, Sea Cucumber, Snail, Solar Essence, Starfruit, Strange Doll (yellow), Summer Spangle, Sunflower, Torch, Treasure Chest, Truffle Oil, Walleye, Wheat
+-------------------------------
+TAG: color_yellow_green
+MATCHES: Oil of Garlic
+-------------------------------
+TAG: cooking_item
+MATCHES: Rusty Spoon
+-------------------------------
+TAG: cow_milk_item
+MATCHES: Large Milk, Milk
+-------------------------------
+TAG: cowboy_item
+MATCHES: Rusty Spur
+-------------------------------
+TAG: crop_year_2
+MATCHES: Artichoke, Garlic, Red Cabbage, Unmilled Rice
+-------------------------------
+TAG: dinosaur_item
+MATCHES: Dinosaur Egg, Dinosaur Mayonnaise
+-------------------------------
+TAG: doll_item
+MATCHES: Strange Doll (green), Strange Doll (yellow)
+-------------------------------
+TAG: drink_item
+MATCHES: Joja Cola, Juice, Large Milk, Milk, Wine
+-------------------------------
+TAG: dwarvish_item
+MATCHES: Dwarf Gadget, Dwarvish Helm
+-------------------------------
+TAG: dye_medium
+MATCHES: Amaranth, Artichoke, Blue Jazz, Bok Choy, Cauliflower, Corn, Crocus, Eggplant, Eggplant Parmesan, Fairy Rose, Garlic, Green Bean, Hot Pepper, Melon, Parsnip, Poppy, Potato, Pumpkin, Radish, Red Cabbage, Rhubarb, Spaghetti, Strawberry, Summer Spangle, Sunflower, Sweet Pea, Tomato, Tulip, Yam
+-------------------------------
+TAG: dye_strong
+MATCHES: Anchor, Ancient Doll, Ancient Drum, Ancient Sword, Arrowhead, Beet, Blueberry, Bone Flute, Chewing Stick, Chicken Statue, Chipped Amphora, Cranberries, Cranberry Candy, Cranberry Sauce, Dinosaur Egg, Dried Starfish, Dwarf Gadget, Dwarf Scroll I, Dwarf Scroll II, Dwarf Scroll III, Dwarf Scroll IV, Dwarvish Helm, Elvish Jewelry, Fiddlehead Fern, Glass Shards, Golden Mask, Golden Relic, Kale, Lunarite, Ornamental Fan, Prehistoric Handaxe, Prehistoric Tool, Rare Disc, Rusty Cog, Rusty Spoon, Rusty Spur, Strange Doll (green), Strange Doll (yellow), Triple Shot Espresso
+-------------------------------
+TAG: egg_item
+MATCHES: Dinosaur Egg, Duck Egg, Egg, Large Egg, Void Egg
+-------------------------------
+TAG: elvish_item
+MATCHES: Elvish Jewelry
+-------------------------------
+TAG: fertilizer_item
+MATCHES: Basic Fertilizer, Basic Retaining Soil, Speed-Gro, Tree Fertilizer
+-------------------------------
+TAG: fish_bug_lair
+MATCHES: Slimejack
+-------------------------------
+TAG: fish_carnivorous
+MATCHES: Dorado, Lingcod, Pike
+-------------------------------
+TAG: fish_crab_pot
+MATCHES: Clam, Cockle, Crab, Crayfish, Lobster, Mussel, Oyster, Periwinkle, Shrimp, Snail
+-------------------------------
+TAG: fish_desert
+MATCHES: Sandfish, Scorpion Carp
+-------------------------------
+TAG: fish_freshwater
+MATCHES: Crayfish, Periwinkle, Snail
+-------------------------------
+TAG: fish_lake
+MATCHES: Bullhead, Carp, Chub, Largemouth Bass, Lingcod, Midnight Carp, Perch, Sturgeon, Walleye
+-------------------------------
+TAG: fish_legendary
+MATCHES: Angler, Crimsonfish, Glacierfish, Legend, Mutant Carp
+-------------------------------
+TAG: fish_mines
+MATCHES: Ghostfish, Ice Pip, Lava Eel, Stonefish
+-------------------------------
+TAG: fish_night_market
+MATCHES: Blobfish, Midnight Squid, Spook Fish
+-------------------------------
+TAG: fish_nonfish
+MATCHES: Green Algae, Seaweed, White Algae
+-------------------------------
+TAG: fish_ocean
+MATCHES: Albacore, Anchovy, Clam, Cockle, Crab, Eel, Flounder, Halibut, Herring, Lobster, Mussel, Octopus, Oyster, Pufferfish, Red Mullet, Red Snapper, Sardine, Sea Cucumber, Shrimp, Squid, Super Cucumber, Tilapia, Tuna
+-------------------------------
+TAG: fish_pond
+MATCHES: Perch, Pike, Smallmouth Bass, Walleye, Woodskip
+-------------------------------
+TAG: fish_river
+MATCHES: Bream, Catfish, Chub, Dorado, Lingcod, Perch, Pike, Rainbow Trout, Salmon, Shad, Smallmouth Bass, Sunfish, Tiger Trout, Walleye
+-------------------------------
+TAG: fish_secret_pond
+MATCHES: Carp, Catfish, Woodskip
+-------------------------------
+TAG: fish_semi_rare
+MATCHES: Ice Pip, Lava Eel, Midnight Squid, Scorpion Carp, Slimejack, Spook Fish, Stonefish, Void Salmon
+-------------------------------
+TAG: fish_sewers
+MATCHES: Carp
+-------------------------------
+TAG: fish_swamp
+MATCHES: Catfish, Void Salmon
+-------------------------------
+TAG: fish_talk_demanding
+MATCHES: Anchovy, Herring, Ice Pip, Sardine
+-------------------------------
+TAG: fish_talk_rude
+MATCHES: Eel
+-------------------------------
+TAG: fish_talk_stiff
+MATCHES: Midnight Squid, Void Salmon
+-------------------------------
+TAG: fish_upright
+MATCHES: Angler, Blobfish, Clam, Crab, Eel, Glacierfish, Lava Eel, Midnight Squid, Octopus, Oyster, Periwinkle, Pufferfish, Sea Cucumber, Shrimp, Snail, Squid, Stonefish, Super Cucumber
+-------------------------------
+TAG: flower_item
+MATCHES: Blue Jazz, Crocus, Fairy Rose, Poppy, Summer Spangle, Sunflower, Sweet Pea, Tulip
+-------------------------------
+TAG: food_bakery
+MATCHES: Blackberry Cobbler, Blueberry Tart, Bread, Chocolate Cake, Cookie, Maple Bar, Pink Cake, Poppyseed Muffin, Pumpkin Pie, Rhubarb Pie
+-------------------------------
+TAG: food_breakfast
+MATCHES: Complete Breakfast, Fried Egg, Hashbrowns, Omelet, Pancakes
+-------------------------------
+TAG: food_cake
+MATCHES: Chocolate Cake
+-------------------------------
+TAG: food_party
+MATCHES: Fish Taco, Pizza, Survival Burger
+-------------------------------
+TAG: food_pasta
+MATCHES: Bruschetta, Eggplant Parmesan, Fiddlehead Risotto, Spaghetti
+-------------------------------
+TAG: food_salad
+MATCHES: Fruit Salad, Radish Salad, Salad
+-------------------------------
+TAG: food_sauce
+MATCHES: Cranberry Sauce, Stuffing
+-------------------------------
+TAG: food_seafood
+MATCHES: Carp Surprise, Crab Cakes, Crispy Bass, Dish O' The Sea, Fish Stew, Fish Taco, Fried Eel, Lobster Bisque, Maki Roll, Salmon Dinner, Sashimi, Seafoam Pudding, Shrimp Cocktail, Spicy Eel, Trout Soup
+-------------------------------
+TAG: food_soup
+MATCHES: Chowder, Fish Stew, Lobster Bisque, Pumpkin Soup, Tom Kha Soup, Trout Soup
+-------------------------------
+TAG: food_spicy
+MATCHES: Pepper Poppers, Spicy Eel
+-------------------------------
+TAG: food_sushi
+MATCHES: Maki Roll, Sashimi
+-------------------------------
+TAG: food_sweet
+MATCHES: Blackberry Cobbler, Blueberry Tart, Chocolate Cake, Cookie, Cranberry Candy, Ice Cream, Maple Bar, Miner's Treat, Pink Cake, Plum Pudding, Poppyseed Muffin, Pumpkin Pie, Rhubarb Pie, Rice Pudding, Sugar
+-------------------------------
+TAG: forage_item
+MATCHES: Blackberry, Cactus Fruit, Cave Carrot, Chanterelle, Clam, Cockle, Coconut, Common Mushroom, Coral, Crocus, Crystal Fruit, Daffodil, Dandelion, Fiddlehead Fern, Grape, Hazelnut, Holly, Leek, Morel, Mussel, Nautilus Shell, Oyster, Purple Mushroom, Rainbow Shell, Red Mushroom, Sea Urchin, Spice Berry, Spring Onion, Sweet Pea, Wild Horseradish, Wild Plum, Winter Root
+-------------------------------
+TAG: forage_item_beach
+MATCHES: Clam, Cockle, Coral, Mussel, Nautilus Shell, Oyster, Rainbow Shell, Sea Urchin
+-------------------------------
+TAG: forage_item_cave
+MATCHES: Chanterelle, Morel
+-------------------------------
+TAG: forage_item_desert
+MATCHES: Cactus Fruit, Coconut
+-------------------------------
+TAG: forage_item_mines
+MATCHES: Cave Carrot, Purple Mushroom, Red Mushroom, Winter Root
+-------------------------------
+TAG: forage_item_secret
+MATCHES: Chanterelle, Fiddlehead Fern, Morel, Red Mushroom
+-------------------------------
+TAG: fossil_item
+MATCHES: Amphibian Fossil, Nautilus Fossil, Palm Fossil, Trilobite
+-------------------------------
+TAG: fruit_item
+MATCHES: Apple, Apricot, Cherry, Orange, Peach, Pomegranate
+-------------------------------
+TAG: fruit_tree_item
+MATCHES: Apple, Apricot, Cherry, Orange, Peach, Pomegranate
+-------------------------------
+TAG: furnace_item
+MATCHES: Copper Bar, Gold Bar, Iridium Bar, Iron Bar, Refined Quartz
+-------------------------------
+TAG: goat_milk_item
+MATCHES: Goat Milk, L. Goat Milk
+-------------------------------
+TAG: golden_relic_item
+MATCHES: Golden Mask, Golden Relic
+-------------------------------
+TAG: honey_item
+MATCHES: Honey
+-------------------------------
+TAG: hunting_item
+MATCHES: Arrowhead
+-------------------------------
+TAG: instrument_item
+MATCHES: Ancient Drum, Bone Flute
+-------------------------------
+TAG: jelly_item
+MATCHES: Jelly
+-------------------------------
+TAG: juice_item
+MATCHES: Juice
+-------------------------------
+TAG: large_egg_item
+MATCHES: Large Egg
+-------------------------------
+TAG: large_milk_item
+MATCHES: L. Goat Milk, Large Milk
+-------------------------------
+TAG: light_source
+MATCHES: Spirit Torch, Torch
+-------------------------------
+TAG: machine_item
+MATCHES: Dwarf Gadget, Rusty Cog
+-------------------------------
+TAG: marine_item
+MATCHES: Amphibian Fossil, Anchor, Dried Starfish, Nautilus Fossil, Nautilus Shell
+-------------------------------
+TAG: mayo_item
+MATCHES: Dinosaur Mayonnaise, Duck Mayonnaise, Void Mayonnaise
+-------------------------------
+TAG: medicine_item
+MATCHES: Energy Tonic, Muscle Remedy
+-------------------------------
+TAG: milk_item
+MATCHES: Goat Milk, L. Goat Milk, Large Milk, Milk
+-------------------------------
+TAG: noble_item
+MATCHES: Ornamental Fan
+-------------------------------
+TAG: ore_item
+MATCHES: Copper Ore, Gold Ore, Iridium Ore, Iron Ore
+-------------------------------
+TAG: pickle_item
+MATCHES: Pickles
+-------------------------------
+TAG: potion_item
+MATCHES: Life Elixir, Oil of Garlic
+-------------------------------
+TAG: prehistoric_item
+MATCHES: Amphibian Fossil, Bone Flute, Nautilus Fossil, Prehistoric Handaxe, Prehistoric Rib, Prehistoric Scapula, Prehistoric Skull, Prehistoric Tibia, Prehistoric Tool, Prehistoric Vertebra, Skeletal Hand, Skeletal Tail
+-------------------------------
+TAG: quality_fertilizer_item
+MATCHES: Deluxe Speed-Gro, Quality Fertilizer, Quality Retaining Soil
+-------------------------------
+TAG: scroll_item
+MATCHES: Dwarf Scroll I, Dwarf Scroll II, Dwarf Scroll III, Dwarf Scroll IV
+-------------------------------
+TAG: season_all
+MATCHES: Bream, Bullhead, Cave Carrot, Chub, Coconut, Ghostfish, Ice Pip, Largemouth Bass, Lava Eel, Sandfish, Scorpion Carp, Slimejack, Stonefish, Void Salmon, Woodskip
+-------------------------------
+TAG: season_fall
+MATCHES: Albacore, Amaranth, Anchovy, Artichoke, Beet, Blackberry, Bok Choy, Carp, Catfish, Chanterelle, Common Mushroom, Corn, Cranberries, Eel, Eggplant, Fairy Rose, Hazelnut, Midnight Carp, Pomegranate, Pumpkin, Red Mushroom, Red Snapper, Salmon, Sardine, Sea Cucumber, Shad, Smallmouth Bass, Sunflower, Super Cucumber, Tiger Trout, Tilapia, Walleye, Wild Plum, Yam
+-------------------------------
+TAG: season_spring
+MATCHES: Anchovy, Apricot, Blue Jazz, Carp, Catfish, Cauliflower, Cherry, Common Mushroom, Daffodil, Dandelion, Eel, Flounder, Garlic, Green Bean, Halibut, Herring, Kale, Leek, Morel, Parsnip, Potato, Rhubarb, Sardine, Shad, Smallmouth Bass, Spring Onion, Strawberry, Sunfish, Tulip, Unmilled Rice, Wild Horseradish
+-------------------------------
+TAG: season_summer
+MATCHES: Blueberry, Catfish, Corn, Dorado, Fiddlehead Fern, Flounder, Grape, Halibut, Hot Pepper, Melon, Octopus, Orange, Peach, Pike, Poppy, Pufferfish, Radish, Rainbow Shell, Rainbow Trout, Red Cabbage, Red Mullet, Red Mushroom, Red Snapper, Shad, Spice Berry, Sturgeon, Summer Spangle, Sunfish, Sunflower, Super Cucumber, Sweet Pea, Tilapia, Tomato, Tuna
+-------------------------------
+TAG: season_winter
+MATCHES: Albacore, Carp, Carp, Crocus, Crystal Fruit, Halibut, Herring, Holly, Lingcod, Midnight Carp, Nautilus Shell, Perch, Pike, Red Mullet, Red Snapper, Sardine, Sea Cucumber, Squid, Sturgeon, Tiger Trout, Tuna, Walleye, Winter Root
+-------------------------------
+TAG: slime_egg_item
+MATCHES: Blue Slime Egg, Green Slime Egg, Purple Slime Egg, Red Slime Egg
+-------------------------------
+TAG: slime_item
+MATCHES: Blue Slime Egg, Green Slime Egg, Petrified Slime, Purple Slime Egg, Red Slime Egg, Slime
+-------------------------------
+TAG: statue_item
+MATCHES: Chicken Statue
+-------------------------------
+TAG: strange_doll_1
+MATCHES: Strange Doll (green)
+-------------------------------
+TAG: strange_doll_2
+MATCHES: Strange Doll (yellow)
+-------------------------------
+TAG: syrup_item
+MATCHES: Maple Syrup, Oak Resin, Pine Tar
+-------------------------------
+TAG: totem_item
+MATCHES: Rain Totem, Warp Totem: Beach, Warp Totem: Desert, Warp Totem: Farm, Warp Totem: Mountains
+-------------------------------
+TAG: toy_item
+MATCHES: Ancient Doll
+-------------------------------
+TAG: trash_item
+MATCHES: Broken CD, Broken Glasses, Driftwood, Soggy Newspaper, Trash
+-------------------------------
+TAG: tree_seed_item
+MATCHES: Acorn, Maple Seed, Pine Cone
+-------------------------------
+TAG: wood_item
+MATCHES: Driftwood, Hardwood, Lumber, Wood

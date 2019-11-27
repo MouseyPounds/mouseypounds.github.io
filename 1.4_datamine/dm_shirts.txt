@@ -1,0 +1,1127 @@
+Experiments in data-mining (Stardew 1.4)
+========================================
+
+Shirts (294 total)
+----------------------------
+1000 Classic Overalls (Sprite 0)
+* Tailoring -- Cloth + Complete Breakfast
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1001 Shirt (Sprite 1)
+* Tailoring -- Cloth + Clay
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1002 Mint Blouse (Sprite 2)
+* Tailoring -- Cloth + Dandelion
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1003 Dark Shirt (Sprite 3)
+* Tailoring -- Cloth + Bat Wing
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1004 Skull Shirt (Sprite 4)
+* Tailoring -- Cloth + Prehistoric Skull
+* Character creation
+* Randomly available for purchase from Sandy
+* Random drop from Haunted Skull (ref StardewValley.Monsters.Bat.getExtraDropItems())
+----------------------------
+1005 Light Blue Shirt (Sprite 5)
+* Tailoring -- Cloth + Mayonnaise
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1006 Tan Striped Shirt (Sprite 6)
+* Tailoring -- Cloth + Sap
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1007 Green Overalls (Sprite 7)
+* Tailoring -- Cloth + Fiddlehead Fern
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1008 Good Grief Shirt (Sprite 8)
+* Tailoring -- Cloth + Wild Horseradish
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1009 Aquamarine Shirt (Sprite 9)
+* Tailoring -- Cloth + Duck Mayonnaise
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1010 Suit Top (Sprite 10)
+* Tailoring -- Cloth + Bouquet
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1011 Green Belted Shirt (Sprite 11)
+* Tailoring -- Cloth + Cave Carrot
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1012 Lime Green Striped Shirt (Sprite 12)
+* Tailoring -- Cloth + Duck Feather
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1013 Red Striped Shirt (Sprite 13)
+* Tailoring -- Cloth + Cranberry Candy
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1014 Skeleton Shirt (Sprite 14)
+* Tailoring -- Cloth + (Any of Prehistoric Rib, Prehistoric Scapula, Prehistoric Vertebra, Skeletal Hand, Skeletal Tail)
+* Character creation
+* Randomly available for purchase from Sandy
+* Random drop from Haunted Skull (ref StardewValley.Monsters.Bat.getExtraDropItems())
+----------------------------
+1015 Orange Shirt (Sprite 15)
+* Tailoring -- Cloth + Chanterelle
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1016 Night Sky Shirt (Sprite 16)
+* Tailoring -- Cloth + Blueberry Tart
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1017 Mayoral Suspenders (Sprite 17)
+* Tailoring -- Cloth + Vegetable Medley
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1018 Brown Jacket (Sprite 18)
+* Tailoring -- Cloth + Mudstone
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1019 Sailor Shirt (Sprite 19)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1020 Green Vest (Sprite 20)
+* Tailoring -- Cloth + Bean Hotpot
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1021 Yellow and Green Shirt (Sprite 21)
+* Tailoring -- Cloth + Omelet
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1022 Shirt (Sprite 22)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1023 Shirt (Sprite 23)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1024 Shirt (Sprite 24)
+* Tailoring -- Cloth + Goat Milk
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1025 Shirt (Sprite 25)
+* Tailoring -- Cloth + L. Goat Milk
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1026 Light Blue Striped Shirt (Sprite 26)
+* Tailoring -- Cloth + Rice Pudding
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1027 Pink Striped Shirt (Sprite 27)
+* Tailoring -- Cloth + Bug Meat
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1028 Heart Shirt (Sprite 28)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1029 Work Shirt (Sprite 29)
+* Tailoring -- Cloth + Stone
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1030 Store Owner's Jacket (Sprite 30)
+* Tailoring -- Cloth + Fried Calamari
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1031 Shirt (Sprite 31)
+* Tailoring -- Cloth + Baked Fish
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1032 Shirt (Sprite 32)
+* Tailoring -- Cloth + Salmonberry
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1033 Shirt (Sprite 33)
+* Tailoring -- Cloth + Salad
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1034 Green Tunic (Sprite 34)
+* Tailoring -- Cloth + Ancient Sword
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1035 Fancy Red Blouse (Sprite 35)
+* Tailoring -- Cloth + Holly
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1036 Shirt (Sprite 36)
+* Tailoring -- Cloth + Sashimi
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1037 Shirt (Sprite 37)
+* Tailoring -- Cloth + Maki Roll
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1038 Plain Shirt (Sprite 38 male / 41 female)
+* Tailoring -- Cloth + Wool
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1039 Retro Rainbow Shirt (Sprite 39)
+* Tailoring -- Cloth + Ice Cream
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1040 Shirt (Sprite 40)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1041 Shirt (Sprite 41)
+* Female variant for shirt 1038 (Plain Shirt)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1042 Lime Green Tunic (Sprite 42)
+* Tailoring -- Cloth + Leek
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1043 Shirt (Sprite 43)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1044 Shirt (Sprite 44)
+* Tailoring -- Cloth + Snow Yam
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1045 Shirt (Sprite 45)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1046 Shirt (Sprite 46)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1047 Shirt (Sprite 47)
+* Tailoring -- Cloth + Hardwood
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1048 Shirt (Sprite 48)
+* Tailoring -- Cloth + Coal
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1049 Shirt (Sprite 49)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1050 Shirt (Sprite 50)
+* Tailoring -- Cloth + Sweet Pea
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1051 Shirt (Sprite 51)
+* Tailoring -- Cloth + Pink Cake
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1052 Shirt (Sprite 52)
+* Tailoring -- Cloth + Lucky Lunch
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1053 Shirt (Sprite 53)
+* Tailoring -- Cloth + Roasted Hazelnuts
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1054 Shirt (Sprite 54)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1055 Shirt (Sprite 55)
+* Tailoring -- Cloth + Fried Eel
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1056 Shirt (Sprite 56)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1057 Shirt (Sprite 57)
+* Tailoring -- Cloth + Fire Quartz
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1058 Shirt (Sprite 58)
+* Tailoring -- Cloth + Blackberry Cobbler
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1059 Shirt (Sprite 59)
+* Tailoring -- Cloth + Pumpkin Soup
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1060 Shirt (Sprite 60)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1061 Shirt (Sprite 61)
+* Tailoring -- Cloth + Bread
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1062 Shirt (Sprite 62)
+* Tailoring -- Cloth + Opal
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1063 Shirt (Sprite 63)
+* Tailoring -- Cloth + Rhubarb Pie
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1064 Shirt (Sprite 64)
+* Tailoring -- Cloth + Crystal Fruit
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1065 Shirt (Sprite 65)
+* Tailoring -- Cloth + Artichoke Dip
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1066 Shirt (Sprite 66)
+* Tailoring -- Cloth + Cheese
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1067 Shirt (Sprite 67)
+* Tailoring -- Cloth + Daffodil
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1068 Shirt (Sprite 68)
+* Tailoring -- Cloth + Farmers Lunch
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1069 Shirt (Sprite 69)
+* Tailoring -- Cloth + Algae Soup
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1070 Shirt (Sprite 70)
+* Tailoring -- Cloth + Fairy Stone
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1071 White Overalls Shirt (Sprite 71)
+* Tailoring -- Cloth + Milk
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1072 Shirt (Sprite 72)
+* Tailoring -- Cloth + Fruit Salad
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1073 Shirt (Sprite 73)
+* Tailoring -- Cloth + Thunder Egg
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1074 Shirt (Sprite 74)
+* Tailoring -- Cloth + Common Mushroom
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1075 Shirt (Sprite 75)
+* Tailoring -- Cloth + Wild Bait
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1076 Shirt (Sprite 76)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1077 Shirt (Sprite 77)
+* Tailoring -- Cloth + Cookie
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1078 Shirt (Sprite 78)
+* Tailoring -- Cloth + Crocus
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1079 Shirt (Sprite 79)
+* Tailoring -- Cloth + Blackberry
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1080 Shirt (Sprite 80)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1081 Shirt (Sprite 81)
+* Tailoring -- Cloth + Alamite
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1082 Shirt (Sprite 82)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1083 Shirt (Sprite 83)
+* Tailoring -- Cloth + Void Egg
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1084 Shirt (Sprite 84)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1085 Shirt (Sprite 85)
+* Tailoring -- Cloth + Ruby
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1086 Shirt (Sprite 86)
+* Tailoring -- Cloth + Slate
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1087 Neat Bow Shirt (Sprite 87)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1088 Shirt (Sprite 88)
+* Tailoring -- Cloth + Parsnip Soup
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1089 Shirt (Sprite 89)
+* Tailoring -- Cloth + Amethyst
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1090 Shirt (Sprite 90)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1091 Shirt (Sprite 91)
+* Tailoring -- Cloth + Pickles
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1092 Shirt (Sprite 92)
+* Tailoring -- Cloth + Jelly
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1093 Shirt (Sprite 93)
+* Tailoring -- Cloth + Goat Cheese
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1094 Shirt (Sprite 94)
+* Tailoring -- Cloth + Earth Crystal
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1095 Shirt (Sprite 95)
+* Tailoring -- Cloth + Rabbits Foot
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1096 Shirt (Sprite 96)
+* Tailoring -- Cloth + Slime
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1097 Shirt (Sprite 97)
+* Tailoring -- Cloth + Basalt
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1098 Shirt (Sprite 98)
+* Tailoring -- Cloth + Neptunite
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1099 Shirt (Sprite 99)
+* Tailoring -- Cloth + Purple Mushroom
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1100 Shirt (Sprite 100)
+* Tailoring -- Cloth + Celestine
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1101 Shirt (Sprite 101)
+* Tailoring -- Cloth + Bixite
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1102 Shirt (Sprite 102)
+* Tailoring -- Cloth + Limestone
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1103 Shirt (Sprite 103)
+* Tailoring -- Cloth + Ghost Crystal
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1104 Shirt (Sprite 104)
+* Tailoring -- Cloth + Geminite
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1105 Shirt (Sprite 105)
+* Tailoring -- Cloth + Joja Cola
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1106 Shirt (Sprite 106)
+* Tailoring -- Cloth + Battery Pack
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1107 Shirt (Sprite 107)
+* Tailoring -- Cloth + Nekoite
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1108 Shirt (Sprite 108)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1109 Shirt (Sprite 109)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1110 Shirt (Sprite 110)
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1111 Shirt (Sprite 111)
+* Tailoring -- Cloth + Crispy Bass
+* Character creation
+* Randomly available for purchase from Sandy
+----------------------------
+1112 Shirt (Sprite 112)
+* Tailoring -- Cloth + Fried Mushroom
+* Randomly available for purchase from Sandy
+----------------------------
+1113 Shirt (Sprite 113)
+* Tailoring -- Cloth + Dolomite
+* Randomly available for purchase from Sandy
+----------------------------
+1114 Shirt (Sprite 114)
+* Tailoring -- Cloth + Eggplant Parmesan
+* Randomly available for purchase from Sandy
+----------------------------
+1115 Shirt (Sprite 115)
+* Tailoring -- Cloth + Aerinite
+* Randomly available for purchase from Sandy
+----------------------------
+1116 Shirt (Sprite 116)
+* Tailoring -- Cloth + Salmon Dinner
+* Randomly available for purchase from Sandy
+----------------------------
+1117 Shirt (Sprite 117)
+* Tailoring -- Cloth + Roots Platter
+* Randomly available for purchase from Sandy
+----------------------------
+1118 Shirt (Sprite 118)
+* Randomly available for purchase from Sandy
+----------------------------
+1119 Shirt (Sprite 119)
+* Randomly available for purchase from Sandy
+----------------------------
+1120 Shirt (Sprite 120)
+* Randomly available for purchase from Sandy
+----------------------------
+1121 Shirt (Sprite 121)
+* Randomly available for purchase from Sandy
+----------------------------
+1122 Shirt (Sprite 122)
+* Tailoring -- Cloth + Granite
+* Randomly available for purchase from Sandy
+----------------------------
+1123 Shirt And Tie (Sprite 123)
+* Tailoring -- Cloth + Bruschetta
+* Randomly available for purchase from Sandy
+----------------------------
+1124 Shirt (Sprite 124)
+* Tailoring -- Cloth + Fish Stew
+* Randomly available for purchase from Sandy
+----------------------------
+1125 Shirt (Sprite 125)
+* Tailoring -- Cloth + Lobster Bisque
+* Randomly available for purchase from Sandy
+----------------------------
+1126 Shirt (Sprite 126)
+* Tailoring -- Cloth + Coleslaw
+* Randomly available for purchase from Sandy
+----------------------------
+1127 Emily's Magic Shirt (Sprite 127)
+* Given in Emily's 14-Heart event (ref StardewValley.Event.command_awardFestivalPrize())
+----------------------------
+1128 Striped Shirt (Sprite 128)
+* Tailoring -- Cloth + Corn
+----------------------------
+1129 Tank Top (Sprite 129 male / 130 female)
+* Tailoring -- Cloth + (Any of Radish, Red Cabbage)
+----------------------------
+1130 Shirt (Sprite 130)
+* Female variant for shirt 1129 (Tank Top)
+----------------------------
+1131 Cowboy Poncho (Sprite 131)
+* Tailoring -- Cloth + Rusty Spur
+----------------------------
+1132 Crop Tank Top (Sprite 132 male / 133 female)
+* Tailoring -- Cloth + Wheat
+----------------------------
+1133 Shirt (Sprite 133)
+* Female variant for shirt 1132 (Crop Tank Top)
+----------------------------
+1134 Bikini Top (Sprite 134)
+* Tailoring -- Cloth + Rainbow Shell
+----------------------------
+1135 Wumbus Shirt (Sprite 135)
+* Tailoring -- Cloth + Strange Doll (green)
+----------------------------
+1136 80's Shirt (Sprite 152 male / 136 female)
+* Tailoring -- Cloth + Cactus Fruit
+----------------------------
+1137 Letterman Jacket (Sprite 137)
+* Tailoring -- Cloth + Energy Tonic
+----------------------------
+1138 Black Leather Jacket (Sprite 138)
+* Tailoring -- Cloth + (Any of Beer, Mead, Pale Ale, Wine)
+----------------------------
+1139 Strapped Top (Sprite 139)
+* Tailoring -- Cloth + (Any of Coral, Nautilus Shell, Sea Urchin)
+----------------------------
+1140 Button Down Shirt (Sprite 140)
+* Tailoring -- Cloth + (Any of Artichoke, Beet, Bok Choy, Eggplant, Pumpkin, Yam)
+----------------------------
+1141 Crop Top Shirt (Sprite 141)
+* Tailoring -- Cloth + Amaranth
+----------------------------
+1142 Tube Top (Sprite 142)
+* Tailoring -- Cloth + Sea Cucumber
+* Tailoring -- Cloth + Super Cucumber
+----------------------------
+1143 Tye Die Shirt (Sprite 143)
+! UNKNOWN SOURCE
+----------------------------
+1144 Shirt (Sprite 144)
+* Tailoring -- Cloth + Emerald
+----------------------------
+1145 Shirt (Sprite 145)
+* Tailoring -- Cloth + Aquamarine
+----------------------------
+1146 Shirt (Sprite 146)
+* Tailoring -- Cloth + Topaz
+----------------------------
+1147 Shirt (Sprite 147)
+* Tailoring -- Cloth + Jade
+----------------------------
+1148 Steel Breastplate (Sprite 148)
+* Tailoring -- Cloth + Iron Bar
+----------------------------
+1149 Copper Breastplate (Sprite 149)
+* Tailoring -- Cloth + Copper Bar
+----------------------------
+1150 Gold Breastplate (Sprite 150)
+* Tailoring -- Cloth + Gold Bar
+----------------------------
+1151 Iridium Breastplate (Sprite 151)
+* Tailoring -- Cloth + Iridium Bar
+----------------------------
+1152 Shirt (Sprite 152)
+* Male variant for shirt 1136 (80's Shirt)
+----------------------------
+1153 Fake Muscles Shirt (Sprite 153)
+* Tailoring -- Cloth + Muscle Remedy
+----------------------------
+1154 Flannel Shirt (Sprite 154)
+* Tailoring -- Cloth + Coffee Bean
+----------------------------
+1155 Bomber Jacket (Sprite 155)
+* Tailoring -- Cloth + (Any of Bomb, Cherry Bomb, Mega Bomb)
+----------------------------
+1156 Caveman Shirt (Sprite 156)
+* Tailoring -- Cloth + Prehistoric Tool
+* Tailoring -- Cloth + Prehistoric Handaxe
+----------------------------
+1157 Fishing Vest (Sprite 157)
+* Tailoring -- Cloth + (Any of Bullhead, Carp, Chub, Largemouth Bass, Lingcod, Midnight Carp, Perch, Sturgeon, Walleye)
+* Tailoring -- Cloth + (Any of Pike, Smallmouth Bass, Woodskip)
+----------------------------
+1158 Fish Shirt (Sprite 158)
+* Tailoring -- Cloth + Ghostfish
+* Tailoring -- Cloth + Sandfish
+* Tailoring -- Cloth + (Any of Bream, Catfish, Dorado, Rainbow Trout, Shad, Sunfish, Tiger Trout)
+----------------------------
+1159 Shirt And Belt (Sprite 159)
+* Tailoring -- Cloth + (Any of Cauliflower, Garlic, Green Bean, Hops, Kale, Parsnip, Potato, Tea Leaves, Unmilled Rice)
+----------------------------
+1160 Gray Hoodie (Sprite 160)
+* Tailoring -- Cloth + Geode
+----------------------------
+1161 Blue Hoodie (Sprite 161)
+* Tailoring -- Cloth + Frozen Geode
+----------------------------
+1162 Red Hoodie (Sprite 162)
+* Tailoring -- Cloth + Magma Geode
+----------------------------
+1163 Denim Jacket (Sprite 163)
+* Tailoring -- Cloth + Field Snack
+----------------------------
+1164 Track Jacket (Sprite 164)
+* Tailoring -- Cloth + Pancakes
+----------------------------
+1165 White Gi (Sprite 165)
+* Tailoring -- Cloth + Pale Broth
+----------------------------
+1166 Orange Gi (Sprite 166)
+* Tailoring -- Cloth + Vinegar
+----------------------------
+1167 Gray Vest (Sprite 167)
+* Tailoring -- Cloth + Quartz
+----------------------------
+1168 Kelp Shirt (Sprite 168)
+* Tailoring -- Cloth + Seaweed
+----------------------------
+1169 Studded Vest (Sprite 169)
+* Tailoring -- Cloth + Obsidian
+----------------------------
+1170 Gaudy Shirt (Sprite 170)
+* Tailoring -- Cloth + Soapstone
+----------------------------
+1171 Oasis Gown (Sprite 171)
+* Tailoring -- Cloth + Tom Kha Soup
+----------------------------
+1172 Blacksmith Apron (Sprite 172)
+* Tailoring -- Cloth + Fiddlehead Risotto
+----------------------------
+1173 Neat Bow Shirt (Sprite 173)
+! UNKNOWN SOURCE
+----------------------------
+1174 High-Waisted Shirt (Sprite 174)
+* Tailoring -- Cloth + (Any of Basic Fertilizer, Basic Retaining Soil, Speed-Gro, Tree Fertilizer)
+----------------------------
+1175 High-Waisted Shirt (Sprite 175)
+* Tailoring -- Cloth + (Any of Deluxe Speed-Gro, Quality Fertilizer, Quality Retaining Soil)
+----------------------------
+1176 Basic Pullover (Sprite 176 male / 177 female)
+* Tailoring -- Cloth + Fiber
+* Tailoring -- Cloth + Wood
+----------------------------
+1177 Shirt (Sprite 177)
+* Female variant for shirt 1176 (Basic Pullover)
+----------------------------
+1178 Turtleneck Sweater (Sprite 178)
+* Tailoring -- Cloth + (Any of Copper Ore, Gold Ore, Iron Ore)
+----------------------------
+1179 Iridium Energy Shirt (Sprite 179)
+* Tailoring -- Cloth + Iridium Ore
+----------------------------
+1180 Tunnelers Jersey (Sprite 180)
+* Tailoring -- Cloth + Pepper Poppers
+----------------------------
+1181 Shirt (Sprite 181)
+* Tailoring -- Cloth + Baryte
+----------------------------
+1182 Shirt (Sprite 182)
+* Tailoring -- Cloth + Calcite
+----------------------------
+1183 Gray Suit (Sprite 183)
+* Tailoring -- Cloth + Esperite
+----------------------------
+1184 Red Tuxedo (Sprite 184)
+* Tailoring -- Cloth + Red Plate
+----------------------------
+1185 Navy Tuxedo (Sprite 185)
+* Tailoring -- Cloth + Rare Disc
+----------------------------
+1186 Holiday Shirt (Sprite 186)
+* Tailoring -- Cloth + Pumpkin Pie
+----------------------------
+1187 Leafy Top (Sprite 187)
+* Tailoring -- Cloth + Jagoite
+----------------------------
+1188 Goodnight Shirt (Sprite 188)
+* Tailoring -- Cloth + Lunarite
+----------------------------
+1189 Green Belted Shirt (Sprite 189)
+* Tailoring -- Cloth + Malachite
+----------------------------
+1190 Happy Shirt (Sprite 190)
+* Tailoring -- Cloth + Lemon Stone
+----------------------------
+1191 Shirt with Bow (Sprite 191)
+* Tailoring -- Cloth + Orpiment
+----------------------------
+1192 Jester Shirt (Sprite 192)
+* Tailoring -- Cloth + Pyrite
+----------------------------
+1193 Ocean Shirt (Sprite 193)
+* Tailoring -- Cloth + Ocean Stone
+----------------------------
+1194 Dark Striped Shirt (Sprite 194)
+* Tailoring -- Cloth + Tigerseye
+----------------------------
+1195 Bandana Shirt (Sprite 195)
+* Tailoring -- Cloth + Jasper
+----------------------------
+1196 Backpack Shirt (Sprite 196)
+* Tailoring -- Cloth + Sandstone
+----------------------------
+1197 Purple Blouse (Sprite 197)
+* Tailoring -- Cloth + Fire Opal
+----------------------------
+1198 Vintage Polo (Sprite 198)
+* Tailoring -- Cloth + Hematite
+----------------------------
+1199 Toga Shirt (Sprite 199)
+* Tailoring -- Cloth + Marble
+----------------------------
+1200 Star Shirt (Sprite 200)
+* Tailoring -- Cloth + Star Shards
+----------------------------
+1201 Classy Top (Sprite 201 male / 202 female)
+* Tailoring -- Cloth + Helvite
+----------------------------
+1202 Shirt (Sprite 202)
+* Female variant for shirt 1201 (Classy Top)
+----------------------------
+1203 Bandana Shirt (Sprite 203)
+* Tailoring -- Cloth + Kyanite
+----------------------------
+1204 Vacation Shirt (Sprite 204)
+* Tailoring -- Cloth + Coconut
+----------------------------
+1205 Green Thumb Shirt (Sprite 205)
+* Tailoring -- Cloth + Jamborite
+----------------------------
+1206 Bandana Shirt (Sprite 206)
+* Tailoring -- Cloth + Fluorapatite
+----------------------------
+1207 Slime Shirt (Sprite 207)
+* Tailoring -- Cloth + Petrified Slime
+----------------------------
+1208 Excavator Shirt (Sprite 208)
+* Tailoring -- Cloth + (Any of Amphibian Fossil, Nautilus Fossil, Palm Fossil, Trilobite)
+----------------------------
+1209 Sports Shirt (Sprite 209)
+* Tailoring -- Cloth + Juice
+----------------------------
+1210 Heart Shirt (Sprite 210)
+* Tailoring -- Cloth + Strange Bun
+----------------------------
+1211 Dark Jacket (Sprite 211)
+* Tailoring -- Cloth + Frozen Tear
+----------------------------
+1212 Sunset Shirt (Sprite 212)
+* Tailoring -- Cloth + Glazed Yams
+----------------------------
+1213 Chef Coat (Sprite 213)
+* Tailoring -- Cloth + Escargot
+----------------------------
+1214 Shirt O' The Sea (Sprite 214)
+* Tailoring -- Cloth + Dish O The Sea
+----------------------------
+1215 Arcane Shirt (Sprite 215)
+* Tailoring -- Cloth + Void Essence
+----------------------------
+1216 Plain Overalls (Sprite 216)
+* Tailoring -- Cloth + Egg
+----------------------------
+1217 Sleeveless Overalls (Sprite 217)
+* Tailoring -- Cloth + Large Milk
+----------------------------
+1218 Cardigan (Sprite 218)
+* Tailoring -- Cloth + Large Egg
+----------------------------
+1219 Yoba Shirt (Sprite 219)
+* Tailoring -- Cloth + Solar Essence
+----------------------------
+1220 Necklace Shirt (Sprite 220)
+* Tailoring -- Cloth + Refined Quartz
+----------------------------
+1221 Belted Coat (Sprite 221)
+* Tailoring -- Cloth + Autumns Bounty
+----------------------------
+1222 Gold Trimmed Shirt (Sprite 222)
+* Tailoring -- Cloth + (Any of Dwarf Scroll I, Dwarf Scroll II, Dwarf Scroll III, Dwarf Scroll IV)
+----------------------------
+1223 Prismatic Shirt (Sprite 223)
+* Tailoring -- Cloth + Prismatic Shard (One of 5 possible random outcomes)
+----------------------------
+1224 Pendant Shirt (Sprite 224)
+* Tailoring -- Cloth + Diamond
+----------------------------
+1225 High Heat Shirt (Sprite 225)
+* Tailoring -- Cloth + Torch
+----------------------------
+1226 Flames Shirt (Sprite 226)
+* Tailoring -- Cloth + Spicy Eel
+----------------------------
+1227 Antiquity Shirt (Sprite 227)
+* Tailoring -- Cloth + Chipped Amphora
+----------------------------
+1228 Soft Arrow Shirt (Sprite 228)
+* Tailoring -- Cloth + Arrowhead
+----------------------------
+1229 Doll Shirt (Sprite 229)
+* Tailoring -- Cloth + Ancient Doll
+----------------------------
+1230 Jewelry Shirt (Sprite 230)
+* Tailoring -- Cloth + Elvish Jewelry
+----------------------------
+1231 Canvas Jacket (Sprite 231)
+* Tailoring -- Cloth + Chewing Stick
+----------------------------
+1232 Trash Can Shirt (Sprite 232)
+* Tailoring -- Cloth + (Any of Broken CD, Broken Glasses, Driftwood, Soggy Newspaper, Trash)
+----------------------------
+1233 Rusty Shirt (Sprite 233)
+* Tailoring -- Cloth + Rusty Spoon
+----------------------------
+1234 Circuitboard Shirt (Sprite 234)
+* Tailoring -- Cloth + Rusty Cog
+----------------------------
+1235 Fluffy Shirt (Sprite 235)
+* Tailoring -- Cloth + Chicken Statue
+----------------------------
+1236 Sauce-Stained Shirt (Sprite 236)
+* Tailoring -- Cloth + Spaghetti
+----------------------------
+1237 Brown Suit (Sprite 237)
+* Tailoring -- Cloth + Ancient Seed
+----------------------------
+1238 Golden Shirt (Sprite 238)
+* Tailoring -- Cloth + Dried Starfish
+----------------------------
+1239 Captain's Uniform (Sprite 239)
+* Tailoring -- Cloth + Anchor
+----------------------------
+1240 Officer Uniform (Sprite 240)
+* Tailoring -- Cloth + Glass Shards
+----------------------------
+1241 Ranger Uniform (Sprite 241)
+* Tailoring -- Cloth + Trout Soup
+----------------------------
+1242 Blue Long Vest (Sprite 242)
+* Tailoring -- Cloth + Bone Flute
+----------------------------
+1243 Regal Mantle (Sprite 243)
+* Tailoring -- Cloth + Ancient Drum
+----------------------------
+1244 Relic Shirt (Sprite 244)
+* Tailoring -- Cloth + Golden Relic
+----------------------------
+1245 Bobo Shirt (Sprite 245)
+* Tailoring -- Cloth + Strange Doll (yellow)
+----------------------------
+1246 Fried Egg Shirt (Sprite 246)
+* Tailoring -- Cloth + Fried Egg
+----------------------------
+1247 Burger Shirt (Sprite 247)
+* Tailoring -- Cloth + Survival Burger
+----------------------------
+1248 Collared Shirt (Sprite 248)
+* Tailoring -- Cloth + (Any of Green Algae, White Algae)
+----------------------------
+1249 Toasted Shirt (Sprite 249)
+* Tailoring -- Cloth + Cheese Cauliflower
+----------------------------
+1250 Carp Shirt (Sprite 250)
+* Tailoring -- Cloth + Carp Surprise
+----------------------------
+1251 Red Flannel Shirt (Sprite 251)
+* Tailoring -- Cloth + Hashbrowns
+----------------------------
+1252 Tortilla Shirt (Sprite 252)
+* Tailoring -- Cloth + Tortilla
+----------------------------
+1253 Warm Flannel Shirt (Sprite 253)
+* Tailoring -- Cloth + Wheat Flour
+----------------------------
+1254 Sugar Shirt (Sprite 254)
+* Tailoring -- Cloth + Sugar
+----------------------------
+1255 Green Flannel Shirt (Sprite 255)
+* Tailoring -- Cloth + Super Meal
+----------------------------
+1256 Oil Stained Shirt (Sprite 256)
+* Tailoring -- Cloth + Oil
+----------------------------
+1257 Morel Shirt (Sprite 257)
+* Tailoring -- Cloth + Morel
+----------------------------
+1258 Spring Shirt (Sprite 258)
+* Tailoring -- Cloth + Spring Onion
+----------------------------
+1259 Sailor Shirt (Sprite 259)
+* Tailoring -- Cloth + (Any of Albacore, Anchovy, Eel, Flounder, Halibut, Herring, Pufferfish, Red Mullet, Red Snapper, Sardine, Squid, Tilapia, Tuna)
+----------------------------
+1260 Rain Coat (Sprite 260)
+* Tailoring -- Cloth + (Any of Crayfish, Periwinkle, Snail)
+----------------------------
+1261 Sailor Shirt (Sprite 261)
+* Tailoring -- Cloth + (Any of Clam, Cockle, Crab, Lobster, Mussel, Oyster, Shrimp)
+----------------------------
+1262 Dark Bandana Shirt (Sprite 262)
+* Tailoring -- Cloth + Truffle
+* Tailoring -- Cloth + Truffle Oil
+* Random drop from Haunted Skull (ref StardewValley.Monsters.Bat.getExtraDropItems())
+----------------------------
+1263 Dark Highlight Shirt (Sprite 263)
+* Tailoring -- Cloth + (Any of Life Elixir, Oil of Garlic)
+* Random drop from Haunted Skull (ref StardewValley.Monsters.Bat.getExtraDropItems())
+----------------------------
+1264 Omni Shirt (Sprite 264)
+* Tailoring -- Cloth + Omni Geode
+----------------------------
+1265 Bridal Shirt (Sprite 265)
+* Tailoring -- Cloth + Ornamental Fan
+----------------------------
+1266 Brown Overalls (Sprite 266)
+* Tailoring -- Cloth + Hazelnut
+----------------------------
+1267 Orange Bow Shirt (Sprite 267)
+* Tailoring -- Cloth + Winter Root
+----------------------------
+1268 White Overalls (Sprite 268)
+* Tailoring -- Cloth + Rice
+----------------------------
+1269 Pour-Over Shirt (Sprite 269)
+* Tailoring -- Cloth + Triple Shot Espresso
+* Tailoring -- Cloth + Coffee
+----------------------------
+1270 Green Jacket Shirt (Sprite 270)
+* Tailoring -- Cloth + Duck Egg
+----------------------------
+1271 Short Jacket (Sprite 271)
+* Tailoring -- Cloth + Plum Pudding
+----------------------------
+1272 Polka Dot Shirt (Sprite 272)
+* Tailoring -- Cloth + Roe
+* Tailoring -- Cloth + Void Mayonnaise
+----------------------------
+1273 White Dot Shirt (Sprite 273)
+* Tailoring -- Cloth + Poppyseed Muffin
+----------------------------
+1274 Camo Shirt (Sprite 274)
+* Tailoring -- Cloth + Stir Fry
+----------------------------
+1275 Dirt Shirt (Sprite 275)
+* Tailoring -- Cloth + Maple Bar
+----------------------------
+1276 Crab Cake Shirt (Sprite 276)
+* Tailoring -- Cloth + Crab Cakes
+----------------------------
+1277 Silky Shirt (Sprite 277)
+* Tailoring -- Cloth + Radish Salad
+----------------------------
+1278 Blue Buttoned Vest (Sprite 278)
+* Tailoring -- Cloth + Octopus
+----------------------------
+1279 Faded Denim Shirt (Sprite 279)
+* Tailoring -- Cloth + Salmon
+----------------------------
+1280 Red Buttoned Vest (Sprite 280)
+! UNKNOWN SOURCE
+----------------------------
+1281 Green Buttoned Vest (Sprite 281)
+* Tailoring -- Cloth + Rhubarb
+* Tailoring -- Cloth + Spice Berry
+----------------------------
+1282 Tomato Shirt (Sprite 282)
+* Tailoring -- Cloth + Tomato
+----------------------------
+1283 Fringed Vest (Sprite 283)
+* Tailoring -- Cloth + Chowder
+----------------------------
+1284 Globby Shirt (Sprite 284)
+* Tailoring -- Cloth + Aged Roe
+----------------------------
+1285 Midnight Dog Jacket (Sprite 285)
+* Tailoring -- Cloth + Squid Ink
+----------------------------
+1286 Shrimp Enthusiast Shirt (Sprite 288)
+* Tailoring -- Cloth + Shrimp Cocktail
+----------------------------
+1287 Tea Shirt (Sprite 287)
+* Tailoring -- Cloth + Green Tea
+----------------------------
+1288 Trinket Shirt (Sprite 290)
+* Tailoring -- Cloth + Artifact Trove
+----------------------------
+1289 Darkness Suit (Sprite 291)
+* Tailoring -- Cloth + Wilted Bouquet
+----------------------------
+1290 Mineral Dog Jacket (Sprite 292)
+* Tailoring -- Cloth + Seafoam Pudding
+----------------------------
+1997 Magic Sprinkle Shirt (Sprite 272)
+* Tailoring -- Cloth + Magic Rock Candy
+----------------------------
+1998 Prismatic Shirt (Sprite 289)
+* Tailoring -- Cloth + Prismatic Shard (One of 5 possible random outcomes)
+----------------------------
+1999 Prismatic Shirt (Sprite 288)
+* Tailoring -- Cloth + Prismatic Shard (One of 5 possible random outcomes)
+
+Shirts with different male/female variants (6 total)
+- 1038 Plain Shirt (Sprite 38 male / 41 female)
+- 1129 Tank Top (Sprite 129 male / 130 female)
+- 1132 Crop Tank Top (Sprite 132 male / 133 female)
+- 1136 80's Shirt (Sprite 152 male / 136 female)
+- 1176 Basic Pullover (Sprite 176 male / 177 female)
+- 1201 Classy Top (Sprite 201 male / 202 female)
+
+Shirts with unknown sources (3 total)
+- 1143 Tye Die Shirt (Sprite 143)
+- 1173 Neat Bow Shirt (Sprite 173)
+- 1280 Red Buttoned Vest (Sprite 280)

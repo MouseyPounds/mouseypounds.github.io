@@ -1,0 +1,225 @@
+Experiments in data-mining (Stardew 1.4)
+========================================
+
+Hats (73 total)
+----------------------------
+Arcane Hat (ID 60)
+* Adventure Guild -- 100 Mummies (ref StardewValley.Locations.AdventureGuild.gil())
+----------------------------
+Archer's Cap (ID 35)
+* Purchaseable from Hat Mouse -- 1000g after getting "Gourmet Chef" achievement (Cook every recipe.)
+----------------------------
+Beanie (ID 53)
+* Tailoring -- Cloth + (Any of Acorn, Maple Seed, Pine Cone)
+----------------------------
+Blobfish Mask (ID 56)
+* Tailoring -- Cloth + Blobfish
+----------------------------
+Blue Bonnet (ID 6)
+* Purchaseable from Hat Mouse -- 1000g after getting "Treasure Trove" achievement (Donate 40 different items to the museum.)
+----------------------------
+Blue Cowboy Hat (ID 37)
+* Random from Skull Cavern chest (ref StardewValley.Locations.MineShaft.getTreasureRoomItem())
+----------------------------
+Bowler Hat (ID 1)
+* Purchaseable from Hat Mouse -- 1000g after getting "Millionaire (1mil)" achievement (Earn 1,000,000g)
+----------------------------
+Bridal Veil (ID 69)
+* Tailoring -- Cloth + Pearl
+----------------------------
+Butterfly Bow (ID 14)
+* Purchaseable from Hat Mouse -- 1000g after getting "A New Friend" achievement (Reach a 5-heart friend level with someone.)
+----------------------------
+Cat Ears (ID 32)
+* Purchaseable from Hat Mouse -- 1000g after getting "The Beloved Farmer" achievement (Reach a 10-heart friend level with 8 people.)
+----------------------------
+Chef Hat (ID 61)
+* Purchaseable from Hat Mouse -- 1000g after getting "Gourmet Chef" achievement (Cook every recipe.) (ref StardewValley.Utility.getHatStock())
+----------------------------
+Chicken Mask (ID 10)
+* Purchaseable from Hat Mouse -- 1000g after getting "A Big Help" achievement (Complete 40 'Help Wanted' requests.)
+----------------------------
+Cone Hat (ID 39)
+* Purchaseable from Night Market Magic Shop (ref StardewValley.Locations.BeachNightMarket.getMagicShopStock())
+----------------------------
+Cool Cap (ID 20)
+* Purchaseable from Hat Mouse -- 1000g after getting "Homesteader (250k)" achievement (Earn 250,000g)
+----------------------------
+Copper Pan (ID 71)
+* Temporarily created when player equips Copper Pan in hat slot
+----------------------------
+Cowboy Hat (ID 0)
+* Purchaseable from Hat Mouse -- 1000g after getting "A Complete Collection" achievement (Complete the museum collection.)
+----------------------------
+Cowgal Hat (ID 33)
+* Purchaseable from Hat Mouse -- 1000g after getting "Monoculture" achievement (Ship 300 of one crop.)
+----------------------------
+Cowpoke Hat (ID 34)
+* Purchaseable from Hat Mouse -- 1000g after getting "Polyculture" achievement (Ship 15 of each crop.)
+----------------------------
+Daisy (ID 29)
+* Purchaseable from Hat Mouse -- 1000g after getting "D.I.Y." achievement (Craft 15 different items.)
+----------------------------
+Delicate Bow (ID 12)
+* Purchaseable from Hat Mouse -- 1000g after getting "Cook" achievement (Cook 10 different recipes.)
+----------------------------
+Dinosaur Hat (ID 43)
+* Tailoring -- Cloth + Dinosaur Egg
+----------------------------
+Earmuffs (ID 11)
+* Purchaseable from Hat Mouse -- 1000g after getting "Popular" achievement (Reach a 5-heart friend level with 20 people.)
+----------------------------
+Elegant Turban (ID 64)
+* Purchaseable from Hat Mouse -- 1000g after getting all in-game achievements
+----------------------------
+Emily's Magic Hat (ID 41)
+* Given in Emily's 14-Heart event (ref StardewValley.Event.command_awardFestivalPrize())
+----------------------------
+Eye Patch (ID 24)
+* Purchaseable from Hat Mouse -- 1000g after getting "Master Angler" achievement (Catch every fish.)
+----------------------------
+Fashion Hat (ID 47)
+* Tailoring -- Cloth + Caviar
+----------------------------
+Fedora (ID 19)
+* Purchaseable from Fall Fair -- 50 Star Tokens (ref StardewValley.Event.checkAction())
+----------------------------
+Fishing Hat (ID 55)
+* Tailoring -- Cloth + (Any of Ice Pip, Midnight Squid, Scorpion Carp, Slimejack, Spook Fish, Stonefish, Void Salmon)
+----------------------------
+Flat Topped Hat (ID 63)
+* Tailoring -- Cloth + (Any of Cranberry Sauce, Stuffing)
+----------------------------
+Floppy Beanie (ID 54)
+* Tailoring -- Cloth + (Any of Maple Syrup, Oak Resin, Pine Tar)
+----------------------------
+Garbage Hat (ID 66)
+* Random from Trash Can digging -- 1/500 chance if at least 20 cans searched (ref StardewValley.Locations.Town.checkAction())
+----------------------------
+Gnome's Cap (ID 23)
+* Purchaseable from Hat Mouse -- 1000g after getting "Craft Master" achievement (Craft every item.)
+----------------------------
+Goblin Mask (ID 9)
+* Purchaseable from Hat Mouse -- 1000g after getting "Full Shipment" achievement (Ship every item.)
+----------------------------
+Golden Mask (ID 67)
+* Tailoring -- Cloth + Golden Mask
+----------------------------
+Good Ol' Cap (ID 18)
+* Purchaseable from Hat Mouse -- 1000g after getting "Greenhorn (15k)" achievement (Earn 15,000g)
+----------------------------
+Green Turban (ID 72)
+* Purchaseable from Desert Trader -- 50 Omni Geodes, any day (ref StardewValley.Locations.Desert.getDesertMerchantTradeStock())
+----------------------------
+Hair Bone (ID 49)
+* Tailoring -- Cloth + Prehistoric Tibia
+----------------------------
+Hard Hat (ID 27)
+* Adventure Guild -- 30 Duggies (ref StardewValley.Locations.AdventureGuild.gil())
+----------------------------
+Hunter's Cap (ID 15)
+* Purchaseable from Hat Mouse -- 1000g after getting "Living Large" achievement (Upgrade your house to the maximum size.)
+----------------------------
+Knight's Helmet (ID 50)
+* Adventure Guild -- 50 Pepper Rex (ref StardewValley.Locations.AdventureGuild.gil())
+----------------------------
+Living Hat (ID 40)
+* Random from cutting weeds -- 1/100000 chance (ref StardewValley.Object.cutWeed())
+* Random drop from Wilderness Golems -- 1/10000 chance (ref StardewValley.Monsters.RockGolem.getExtraDropItems())
+----------------------------
+Logo Cap (ID 45)
+* Tailoring -- Cloth + Lava Eel
+----------------------------
+Lucky Bow (ID 21)
+* Purchaseable from Hat Mouse -- 1000g after getting "Cowpoke (50k)" achievement (Earn 50,000g)
+----------------------------
+Magic Cowboy Hat (ID 73)
+* Purchaseable from Desert Trader -- 333 Omni Geodes, odd days (ref StardewValley.Locations.Desert.getDesertMerchantTradeStock())
+----------------------------
+Magic Turban (ID 74)
+* Purchaseable from Desert Trader -- 333 Omni Geodes, even days (ref StardewValley.Locations.Desert.getDesertMerchantTradeStock())
+----------------------------
+Mouse Ears (ID 31)
+* Purchaseable from Hat Mouse -- 1000g after getting "Best Friends" achievement (Reach a 10-heart friend level with someone.)
+----------------------------
+Mushroom Cap (ID 42)
+* Random from chopping mushroom trees -- 1/100 chance (ref StardewValley.TerrainFeatures.Tree.tickUpdate())
+----------------------------
+Official Cap (ID 5)
+* Purchaseable from Hat Mouse -- 1000g after getting "Ol' Mariner" achievement (Catch 24 different fish.)
+----------------------------
+Panda Hat (ID 36)
+* Only available in the TGP (Tencent Gaming Platform) version of the game (from wiki)
+----------------------------
+Party Hat (ID 58)
+* Tailoring -- Cloth + Chocolate Cake
+----------------------------
+Pirate Hat (ID 62)
+* Tailoring -- Cloth + Treasure Chest
+----------------------------
+Plum Chapeau (ID 7)
+* Purchaseable from Hat Mouse -- 1000g after getting "Sous Chef" achievement (Cook 25 different recipes.)
+----------------------------
+Polka Bow (ID 22)
+* Purchaseable from Hat Mouse -- 1000g after getting "Gofer" achievement (Complete 10 'Help Wanted' requests.)
+----------------------------
+Propeller Hat (ID 68)
+* Tailoring -- Cloth + Miners Treat
+----------------------------
+Pumpkin Mask (ID 48)
+* Tailoring -- Cloth + Jack-o-lantern
+----------------------------
+Red Cowboy Hat (ID 38)
+* Random from Skull Cavern chest (ref StardewValley.Locations.MineShaft.getTreasureRoomItem())
+----------------------------
+Sailor's Cap (ID 17)
+* Reward for winning Ice Fishing Contest (ref StardewValley.Event.command_awardFestivalPrize())
+----------------------------
+Santa Hat (ID 25)
+* Purchaseable from Hat Mouse -- 1000g after getting "Networking" achievement (Reach a 5-heart friend level with 10 people.)
+----------------------------
+Skeleton Mask (ID 8)
+* Adventure Guild -- 50 Skeletons (ref StardewValley.Locations.AdventureGuild.gil())
+----------------------------
+Sombrero (ID 3)
+* Purchaseable from Hat Mouse -- 1000g after getting "Legend (10mil)" achievement (Earn 10,000,000g)
+----------------------------
+Sou'wester (ID 28)
+* Purchaseable from Hat Mouse -- 1000g after getting "Fisherman" achievement (Catch 10 different fish.)
+----------------------------
+Spotted Headscarf (ID 52)
+* Tailoring -- Cloth + Red Mushroom
+----------------------------
+Squire's Helmet (ID 51)
+* Random drop from Metal Heads -- at most 100 kills (exact amount predicatable based on save ID) (ref StardewValley.Monsters.MetalHead.getExtraDropItems())
+----------------------------
+Straw Hat (ID 4)
+* Reward for winning Egg Hunt (ref StardewValley.Event.command_awardFestivalPrize())
+----------------------------
+Tiara (ID 26)
+* Purchaseable from Hat Mouse -- 1000g after getting "Cliques" achievement (Reach a 5-heart friend level with 4 people.)
+----------------------------
+Top Hat (ID 2)
+* Purchaseable from Qi's Casino -- 8000 Qi Coins (ref StardewValley.Utility.getQiShopStock())
+----------------------------
+Totem Mask (ID 44)
+* Tailoring -- Cloth + (Any of Rain Totem, Warp Totem: Beach, Warp Totem: Desert, Warp Totem: Farm, Warp Totem: Mountains)
+----------------------------
+Tropiclip (ID 13)
+* Purchaseable from Hat Mouse -- 1000g after getting "Moving Up" achievement (Upgrade your house.)
+----------------------------
+Trucker Hat (ID 16)
+* Purchaseable from Hat Mouse -- 1000g after getting "Artisan" achievement (Craft 30 different items.)
+----------------------------
+Watermelon Band (ID 30)
+* Purchaseable from Hat Mouse -- 1000g after getting "Mother Catch" achievement (Catch 100 fish.)
+----------------------------
+Wearable Dwarf Helm (ID 46)
+* Tailoring -- Cloth + (Any of Dwarf Gadget, Dwarvish Helm)
+----------------------------
+White Turban (ID 65)
+* Tailoring -- Cloth + Sweet Gem Berry
+* Random from Skull Cavern chest (ref StardewValley.Locations.MineShaft.getTreasureRoomItem())
+----------------------------
+Witch Hat (ID 70)
+* Tailoring -- Cloth + Golden Pumpkin
