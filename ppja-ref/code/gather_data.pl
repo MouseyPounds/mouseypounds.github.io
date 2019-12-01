@@ -25,10 +25,11 @@ my $LogLevel = 2;
 # Important directories. These would probably be better off as optional command-line arguments with reasonable
 # defaults, but for now they are just hardcoded here.
 #   $GameDir is assumed to be the base (extracted) Content\Data directory.
-#   $ModDir is assumed to be a directory containing all PPJA mods.
-#     It could contain other mods too, but only those which are JA or CFR content packs are currently supported
-my $GameDir = 'C:/Program Files/Steam/steamapps\common/Stardew Valley/Content (unpacked)/Data';
-my $ModDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Mods/[DIR] Crops, Trees, Grass/PPJA';
+#   $ModDir is assumed to be a directory containing all the mods we need to process
+#     It could contain other mods too, but only those which are JA, CFR or MFM content packs are currently supported
+#     We don't currently recurse into this directory and the mods are all expected to be just 1 level deep
+my $GameDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Content (unpacked)/Data';
+my $ModDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Mods/PPJA';
 
 # Game data stored in %GameData dictionary
 #   Top level entries correspond to particular files but do not exactly mirror game file & directory organization 
@@ -514,6 +515,28 @@ sub ParseModData {
 									}
 								}
 							}
+						}
+					} elsif ($packID eq "DIGUS.MailFrameworkMod") {
+						LogMessage("    This is an MFM pack. Looking for mail.json file.", 1);
+						if (-e "$BaseDir/$m/mail.json") {
+							LogMessage("      Found mail.json; attempting to parse", 1);
+							my $file_contents = read_file("$BaseDir/$m/mail.json", {binmode => ':encoding(UTF-8)'});
+							LogMessage("      Dumping file contents", 3);
+							LogMessage(Dumper($file_contents), 3);
+							# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
+							$file_contents =~ s/^\x{feff}//;
+							my $json = from_rjson($file_contents);
+							# Since MFM packs are a list at top level, we want to make a new container object for them
+							my $container = { 'name' => $name, '__MOD_ID' => $id, '__PATH' => "$BaseDir/$m", 'letters' => $json };
+							LogMessage("      Dumping json object", 3);
+							LogMessage(Dumper($json), 3);
+							# Mail Framework jsons are a big list; we'll merge them into a bigger list
+							if (not exists $DataRef->{'Mail'}) {
+								$DataRef->{'Mail'} = [];
+							}
+							push @{$DataRef->{'Mail'}}, $container;
+						} else {
+							LogMessage("      WARNING: No mail.json found", 1);
 						}
 					} else {
 						LogMessage("    This is an unknown pack type ($packID)", 1);

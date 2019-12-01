@@ -18,7 +18,7 @@ my $ModData = retrieve("../local/cache_ModData");
 my $ModInfo = retrieve("../local/cache_ModInfo");
 
 my $DocBase = "..";
-my $StardewVersion = "1.3.36";
+my $StardewVersion = "1.4";
 
 my $SpriteInfo = {};
 GatherSpriteInfo($SpriteInfo);
@@ -73,6 +73,10 @@ sub WikiShop {
 	if (not defined $NPC) {
 		$NPC = "Pierre";
 	}
+	# Handling weird placeholder disabler from Ancient Crops
+	if ($NPC =~ /DONTSELLTHISATNPC/i) {
+		return '<span class="note">None</span>';
+	}	
 	if ($NPC =~ /Pierre/i) { $shop = "Pierre%27s_General_Store"; } 
 	elsif ($NPC =~ /Clint/i) { $shop = "Blacksmith"; } 
 	elsif ($NPC =~ /Dwarf/i) { $shop = "Dwarf"; } 
@@ -300,6 +304,11 @@ sub GetImgTag {
 		$img_class = "$extraClasses ";
 	}
 
+	# One situation where we don't have an image.
+	if ($input eq 'Same as Input') {
+		return "";
+	}
+	
 	# Handle some special cases
 	if ($input =~ /^Any (\w+)/) {
 		if ($1 =~ /^milk/i) {
@@ -534,7 +543,7 @@ END_PRINT
 }
 
 # GetHealthAndEnergy - returns health and energy from edibility and optional quality
-#   Uses formula from wiki template; should look up actual code ref to verify
+#   Uses formula from wiki template; code ref is StardewValley.Farmer.doneEating()
 sub GetHealthAndEnergy {
 	my $edibility = shift;
 	my $quality = shift;
@@ -601,6 +610,7 @@ sub CalcGrowth {
 		}
 		$tries++;
 	}
+	
 	return $days;
 }
 
@@ -623,7 +633,8 @@ sub TranslatePreconditions {
 			$num_hearts /= 250 if ($num_hearts > 10);
 			push @results, "$num_hearts&#x2665; with " . Wikify($1);
 		} elsif ($arg =~ /^z /) {
-			# This can look like either 'z summer, z fall, z winter' or 'z spring summer winter'
+			# This can look like 'z summer' or 'z spring summer' or 'z summer, z fall' (last may not actually work)
+			#if ($arg =~ /,/) { print STDERR "possible bugged season condition: {$arg}\n"; }
 			$arg =~ s/[z, ]+/|/g;
 			my @removal = split(/\|/, $arg);
 			foreach my $r (@removal) {
@@ -632,7 +643,7 @@ sub TranslatePreconditions {
 				$changed_seasons = 1;
 			}
 		} elsif ($arg =~ /^d /) {
-			# This can look like either 'd mon, d tue' or 'd mon tue'
+			# This can look like 'd mon' or 'd mon tue' or 'd mon, d tue' (last may not actually work)
 			$arg =~ s/[d, ]+/|/g;
 			my @removal = split(/\|/, $arg);
 			foreach my $r (@removal) {
@@ -670,7 +681,8 @@ sub TranslatePreconditions {
 	if ($changed_seasons) {
 		my $r = join(', ', (sort {$seasons{$a} <=> $seasons{$b}} (keys %seasons)));
 		push @results, $r;
-	} elsif ($changed_days) {
+	}
+	if ($changed_days) {
 		my $r = join(', ', (sort {$days{$a} <=> $days{$b}} (keys %days)));
 		push @results, $r;
 	}
@@ -943,6 +955,61 @@ sub SearchIngredients {
 	return @ingr_to_return;
 }
 
+# FindMailRecipe - searches MFM pack data for the given recipe
+#
+#   item - the name of the item being searched for
+sub FindMailRecipe {
+	my $item = shift;
+	my $result = "";
+	
+	if (defined $item) {
+		foreach my $mcp (@{$ModData->{'Mail'}}) {
+			foreach my $letter (@{$mcp->{'letters'}}) {
+				if (exists $letter->{'Recipe'} and $letter->{'Recipe'} eq $item) {
+					my @con = TranslateMFMConditions($letter);
+					return "Sent in Mail<br />" . join("<br />", @con);
+				}
+			}
+		}
+	}
+	return $result;
+}
+
+# TranslateMFMConditions - tries to determine conditions for an MFM letter object
+#   As with the event precondition function, this does not check every possible option
+#   and instead is limited to those which I have had to support so far
+#
+#   letter - the letter object
+sub TranslateMFMConditions {
+	my $letter = shift;
+	my @results = ();
+	
+	if (exists $letter->{'Date'} and $letter->{'Date'} ne '') {
+		$letter->{'Date'} =~ /(\d+)\s+(\w+)\s+Y(\d+)/;
+		my $day = $1;
+		my $mon = ucfirst $2;
+		my $yr = $3;
+		push @results, "$mon $day, Year $yr (or later)";
+	}
+	if (exists $letter->{'Seasons'} and $letter->{'Seasons'} ne '') {
+		push @results, join(', ', map {ucfirst $_} @{$letter->{'Seasons'}});
+	}
+	if (exists $letter->{'Weather'} and $letter->{'Weather'} ne '') {
+		push @results, ucfirst($letter->{'Weather'}) . " weather";
+	}
+	if (exists $letter->{'FriendshipConditions'}) {
+		foreach my $c (@{$letter->{'FriendshipConditions'}}) {
+			push @results, "$c->{'FriendshipLevel'}&#x2665; with " . Wikify($c->{'NpcName'});
+		}
+	}	
+	if (exists $letter->{'SkillConditions'}) {
+		foreach my $c (@{$letter->{'SkillConditions'}}) {
+			push @results, Wikify($c->{'SkillName'}) . " level $c->{'SkillLevel'}" ;
+		}
+	}
+	return @results;
+}
+
 # GetNexusKey - returns Nexus ID number for a given mod uniqueID
 #  Mainly used as a helper for GetModInfo. Returns "" if something went wrong.
 #
@@ -999,6 +1066,9 @@ sub GetModInfo {
 				$lookupID = 'kildarien.farmertoflorist';
 			}
 			my $NexusKey = GetNexusKey($lookupID);
+			if ($NexusKey eq "") {
+				$includeLink = 0;
+			}
 			$url = "https://www.nexusmods.com/stardewvalley/mods/$NexusKey";
 		} else {
 			warn "** GetModInfo received unknown modID ($modID)";
@@ -1112,6 +1182,7 @@ sub WriteCookingSummary {
 		'Tortilla' => 500,
 		'Pizza' => 750,
 		'Maki Roll' => 1500,
+		'Triple Shot Espresso' => 2500,
 		);
 	# And then there are some others that are just completely special
 	my %Special = (
@@ -1194,7 +1265,7 @@ sub WriteCookingSummary {
 			$source .= "Given automatically";
 		} elsif ($condition =~ /^f/) {
 			my @temp = TranslatePreconditions($condition);
-			$source .= "Mail ($temp[0])<br />";
+			$source .= "Sent in Mail<br />$temp[0]<br />";
 		} elsif ($condition =~ /^s/) {
 			my @temp = TranslatePreconditions($condition);
 			$source .= "$temp[0]<br />";
@@ -1296,9 +1367,13 @@ END_PRINT
 		my $source = "Given automatically";
 		my $recipe_cost = "--";
 		if (not $ModData->{'Objects'}{$key}{'Recipe'}{'IsDefault'}) {
-			$source = qq(Buy for $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'}g from ) .
-				WikiShop($ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseFrom'}) . qq(<br />);
-			$recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
+			if ($ModData->{'Objects'}{$key}{'Recipe'}{'CanPurchase'}) {
+				$source = qq(Buy for $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'}g from ) .
+					WikiShop($ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseFrom'}) . qq(<br />);
+				$recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
+			} else {
+				$source = FindMailRecipe($key);
+			}
 		}
 		my @conditions = ();
 		if (defined $ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseRequirements'}) {
@@ -1382,7 +1457,9 @@ END_PRINT
 
 	# Print the rest of the TOC
 	foreach my $p (@Panel) {
-		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'name'}</a></li>);
+		my $text = $p->{'name'};
+		$text =~ s/ /&nbsp;/g;
+		print qq(<li><a href="#TOC_$p->{'key'}">$text</a></li>);
 	}
 	print qq(<li><a href="#TOC_Ingredient_List">Ingredient List</a></li>);
 	print GetTOCEnd();
@@ -1592,7 +1669,9 @@ END_PRINT
 
 	# Print the rest of the TOC
 	foreach my $p (@Panel) {
-		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'key'} Trees</a></li>);
+		my $text = "$p->{'key'} Trees";
+		$text =~ s/ /&nbsp;/g;
+		print qq(<li><a href="#TOC_$p->{'key'}">$text</a></li>);
 	}
 	print GetTOCEnd();
 	
@@ -1661,6 +1740,7 @@ sub WriteMachineSummary {
 		foreach my $m (@{$j->{'machines'}}) {
 			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
 			my $key = $m->{'name'};
+			#print STDOUT "Machine: $key\n";
 			my $tries = 0;
 			my $max_tries = 10;
 			while (exists $Panel{$key} and $tries < $max_tries) {
@@ -1688,10 +1768,14 @@ $extra_info
 <tbody><tr><th>Crafting Recipe</th><td class="name">
 END_PRINT
 
-			my @recipe = split(' ', $m->{'crafting'});
-			for (my $i = 0; $i < scalar(@recipe); $i += 2) {
-				my $num = $recipe[$i+1];
-				$output .= GetImgTag($recipe[$i]) . " " . GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
+			if (defined $m->{'crafting'}) {
+				my @recipe = split(' ', $m->{'crafting'});
+				for (my $i = 0; $i < scalar(@recipe); $i += 2) {
+					my $num = $recipe[$i+1];
+					$output .= GetImgTag($recipe[$i]) . " " . GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
+				}
+			} else {
+				$output .= qq(<span class="note">Can't be crafted</span>);
 			}
 			
 			$output .= <<"END_PRINT";
@@ -1723,7 +1807,14 @@ END_PRINT
 			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
 			my @rows = ();
 			foreach my $p (@{$m->{'production'}}, @add) {
-				# 
+				# Note, some of Trent's mods use initially capitalized keys, so we need to handle that.
+				# Currently we only add those extra checks for known changed keys. Both here and in materials.
+				if (!exists $p->{'item'} and exists $p->{'Item'}) {
+					$p->{'item'} = $p->{'Item'};
+				}
+				if (!exists $p->{'name'} and exists $p->{'Name'}) {
+					$p->{'name'} = $p->{'Name'};
+				}
 				my $pname = "";
 				if (exists $p->{'item'}) {
 					$pname = $p->{'item'};
@@ -1742,7 +1833,15 @@ END_PRINT
 				my $i_count = 0;
 				my $cost = 0;
 				foreach my $i (@{$p->{'materials'}}) {
-					$name = GetItem($i->{'name'}, $i->{'index'});
+					# Once again, handling some case problems
+					if (!exists $i->{'name'} and exists $i->{'Name'}) {
+						$i->{'name'} = $i->{'Name'}
+					}
+					$name = "";
+					if (exists $i->{'name'}) {
+						$name = $i->{'name'};
+					}	
+					$name = GetItem($name, $i->{'index'});
 					$img = GetImgTag(StripHTML($name));
 					if ($i_count > 0) {
 						#$name = "+ $name";
@@ -1803,9 +1902,9 @@ END_PRINT
 				$entry{'out'} .= "<td>$time</td>";
 				my $value = $p->{'price'};
 				if (not defined $value or $value eq "") {
-					$value = GetValue($p->{'item'}, $p->{'index'});
+					$value = GetValue($pname, $p->{'index'});
 				} elsif ($value =~ /original/) {
-					my $temp = GetValue($p->{'item'}, $p->{'index'});
+					my $temp = GetValue($pname, $p->{'index'});
 					if (looks_like_number($temp) and $temp > 0) {
 						$value =~ s/original/$temp/g;
 					}
@@ -1896,7 +1995,9 @@ END_PRINT
 
 
 	foreach my $p (sort keys %TOC) {
-		print qq(<li class="$TOC{$p}{'filter'}"><a href="#$TOC{$p}{'anchor'}">$p</a></li>);
+		my $text = $p;
+		$text =~ s/ /&nbsp;/g;
+		print qq(<li class="$TOC{$p}{'filter'}"><a href="#$TOC{$p}{'anchor'}">$text</a></li>);
 	}
 	print GetTOCEnd();
 
@@ -1944,6 +2045,7 @@ sub WriteCropSummary {
 		my $regrowth = $GameData->{'Crops'}{$sid}{'split'}[4];
 		$regrowth = (($regrowth > 0) ? $regrowth : "--");
 		my $need_scythe = ($GameData->{'Crops'}{$sid}{'split'}[5] ? "Yes" : "--");
+		my $is_paddy = 0;
 		my @multi_data = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[6]));
 		my $num_harvest = $multi_data[0];
 		if ($num_harvest eq 'true') {
@@ -1977,8 +2079,12 @@ sub WriteCropSummary {
 			$seed_vendor = qq(<span class="note">None</span>);
 			$scost = 0;
 		}
-		if ($crop eq 'Garlic' or $crop eq 'Red Cabbage' or $crop eq 'Artichoke') {
+		if ($crop eq 'Garlic' or $crop eq 'Red Cabbage' or $crop eq 'Artichoke' or $crop eq 'Unmilled Rice') {
 			$seed_vendor .= "<br />(Year 2+)";
+			# This is also hardcoded. Might as well do it here
+			if ($crop eq 'Unmilled Rice') {
+				$is_paddy = 1;
+			} 
 		}
 		my $imgTag = GetImgTag($sid, "crop");
 		my $prodImg = GetImgTag($cid, "object");
@@ -2034,6 +2140,23 @@ END_PRINT
 			}
 			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
 			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
+			# Paddy bonus. Yes, we pretty much copy & paste everything
+			if ($is_paddy) {
+				my $pgrowth = CalcGrowth((.25+$opt)/100, \@phases);
+				my $p_harvests = floor(27/$pgrowth);
+				if (looks_like_number($regrowth) and $regrowth > -1) {
+					if ($pgrowth > 27) {
+						$p_harvests = 0;
+					} else {
+						$p_harvests = 1 + max(0, floor((27-$pgrowth)/$regrowth));
+					}
+				}
+				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
+				my $pprofit = nearest(1, $cprice * $num_harvest * $p_harvests - $pcost);
+				$growth = "$pgrowth ($growth)";
+				$max_harvests = "$p_harvests ($max_harvests)";
+				$profit = "$pprofit ($profit)";
+			}
 			$output .= <<"END_PRINT";
 <td class="col_$opt value">$growth</td>
 <td class="col_$opt value">$regrowth</td>
@@ -2059,6 +2182,16 @@ END_PRINT
 		my $scost = $ModData->{'Crops'}{$key}{'SeedPurchasePrice'};
 		my @phases = @{$ModData->{'Crops'}{$key}{'Phases'}};
 		my $season_str = join(" ", @{$ModData->{'Crops'}{$key}{'Seasons'}});
+		my $is_paddy = 0;
+		my $crop_type = "Normal";
+		if (exists $ModData->{'Crops'}{$key}{'CropType'}) {
+			$crop_type = $ModData->{'Crops'}{$key}{'CropType'};
+		}
+		if ($crop_type eq 'IndoorsOnly') {
+			$season_str = 'indoor-only';
+		} elsif  ($crop_type eq 'Paddy') {
+			$is_paddy = 1;
+		} 
 		#my @seasons = $ModData->{'Crops'}{$key}{'Seasons'};
 		#Sprites are the __SS keys
 		my $cname = GetItem($ModData->{'Crops'}{$key}{'Product'});
@@ -2074,7 +2207,13 @@ END_PRINT
 		if (scalar @colors > 1) {
 			# If we ever deal with the colors, it'd happen here.
 		}
-		my $num_harvest = $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'} + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
+		# 1.4 fixed the rounding bug with MaximumPerHarvest so we now include it in the calculation
+		my $avg_harvest = ($ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'} + $ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'}) / 2.0;
+		my $num_harvest = $avg_harvest + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
+		# This is for detecting crops which might produce more in SDV 1.4
+		#if ($ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'} > $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'}) {
+		#	print STDOUT "Crop $key will produce more now (Min: $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'}) (Max: $ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'})\n";
+		#}
 		my $seed_vendor = WikiShop("Pierre");
 		if (exists $ModData->{'Crops'}{$key}{'SeedPurchaseFrom'}) {
 			$seed_vendor = WikiShop($ModData->{'Crops'}{$key}{'SeedPurchaseFrom'});
@@ -2118,6 +2257,23 @@ END_PRINT
 			}
 			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
 			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
+			# Paddy bonus. Yes, we pretty much copy & paste everything.
+			if ($is_paddy) {
+				my $pgrowth = CalcGrowth((.25+$opt)/100, \@phases);
+				my $p_harvests = floor(27/$pgrowth);
+				if (looks_like_number($regrowth) and $regrowth > -1) {
+					if ($pgrowth > 27) {
+						$p_harvests = 0;
+					} else {
+						$p_harvests = 1 + max(0, floor((27-$pgrowth)/$regrowth));
+					}
+				}
+				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
+				my $pprofit = nearest(1, $cprice * $num_harvest * $p_harvests - $pcost);
+				$growth = "$pgrowth ($growth)";
+				$max_harvests = "$p_harvests ($max_harvests)";
+				$profit = "$pprofit ($profit)";
+			}
 			$output .= <<"END_PRINT";
 <td class="col_$opt value">$growth</td>
 <td class="col_$opt value">$regrowth</td>
@@ -2162,7 +2318,8 @@ The <span class="note">Seasonal Profit</span> column is an average full-season e
 month with the product sold raw at base (no-star) quality without any value-increasing professions (like Tiller.)
 It also assumes all seeds are bought at the shown price and does not account for any other costs (such as purchasing fertilizer).
 The growth times, maximum number of harvests, and profit all depend on growth speed modifiers which can be set in the form
-below and apply to all the tables on this page.</p>
+below and apply to all the tables on this page. Paddy crops will show two numbers for growth time and some other fields; the first number is
+with the close-water bonus, and the number in parentheses is without. Unfortunately, these entries will not sort properly.</p>
 <fieldset id="growth_speed_options" class="radio_set">
 <label><input type="radio" name="speed" value="0" checked="checked"> No speed modifiers</label><br />
 <label><input type="radio" name="speed" value="10"> 10% (Only one of <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession or <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
@@ -2179,7 +2336,9 @@ END_PRINT
 
 	# Print the rest of the TOC
 	foreach my $p (@Panel) {
-		print qq(<li><a href="#TOC_$p->{'key'}">$p->{'key'} Crops</a></li>);
+		my $text = "$p->{'key'} Crops";
+		$text =~ s/ /&nbsp;/g;
+		print qq(<li><a href="#TOC_$p->{'key'}">$text</a></li>);
 	}
 	print GetTOCEnd();
 	
