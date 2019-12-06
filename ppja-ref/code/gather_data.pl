@@ -29,7 +29,7 @@ my $LogLevel = 2;
 #     It could contain other mods too, but only those which are JA, CFR or MFM content packs are currently supported
 #     We don't currently recurse into this directory and the mods are all expected to be just 1 level deep
 my $GameDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Content (unpacked)/Data';
-my $ModDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Mods/PPJA';
+my $ModDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Mods';
 
 # Game data stored in %GameData dictionary
 #   Top level entries correspond to particular files but do not exactly mirror game file & directory organization 
@@ -101,6 +101,8 @@ foreach my $c (keys %{$ModData->{'Crops'}}) {
 			'Category' => 'Seeds',
 			'Edibility' => -300,
 			'Recipe' => undef,
+			'__MOD_ID' => $ModData->{'Crops'}{$c}{'__MOD_ID'},
+			'__PATH' => $ModData->{'Crops'}{$c}{'__PATH'},
 			'__SS_X' => $ModData->{'Crops'}{$c}{'__SS_OTHER_X'},
 			'__SS_Y' => $ModData->{'Crops'}{$c}{'__SS_OTHER_Y'},
 			};
@@ -120,6 +122,8 @@ foreach my $t (keys %{$ModData->{'FruitTrees'}}) {
 			'Category' => 'Seeds',
 			'Edibility' => -300,
 			'Recipe' => undef,
+			'__MOD_ID' => $ModData->{'FruitTrees'}{$t}{'__MOD_ID'},
+			'__PATH' => $ModData->{'FruitTrees'}{$t}{'__PATH'},
 			'__SS_X' => $ModData->{'FruitTrees'}{$t}{'__SS_OTHER_X'},
 			'__SS_Y' => $ModData->{'FruitTrees'}{$t}{'__SS_OTHER_Y'},
 			};
@@ -335,7 +339,16 @@ sub ParseModData {
 	my $DataRef = shift;
 	my $MetaRef = shift;
 
-	LogMessage("Parsing Mod Data in $BaseDir", 1);
+	LogMessage("Parsing Mod Data in Mods folder $BaseDir", 1);
+	if (-d "$BaseDir/PPJA") {
+		$BaseDir = "$BaseDir/PPJA";
+		LogMessage("Found PPJA in $BaseDir", 1);
+	} elsif (-d "$BaseDir/..PPJA") {
+		$BaseDir = "$BaseDir/..PPJA";
+		LogMessage("Found PPJA in $BaseDir", 1);
+	} else {
+		LogMessage("No PPJA subdirectory, so scanning $BaseDir", 1);
+	}
 	my $DH;
 	opendir($DH, "$BaseDir");
 	my @mods = readdir($DH);

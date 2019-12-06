@@ -149,8 +149,14 @@ sub GetItem {
 		# Custom, probably JA, but maybe not. JA takes priority
 		if (exists $ModData->{'Objects'}{$input}) {
 			# This is a JA item, but we have nothing to add yet.
+			my $mod = "a mod";
+			if (exists $ModData->{'Objects'}{$input}{'__MOD_ID'} and exists $ModInfo->{$ModData->{'Objects'}{$input}{'__MOD_ID'}}{'Name'}) {
+				$mod = $ModInfo->{$ModData->{'Objects'}{$input}{'__MOD_ID'}}{'Name'};
+			} else {
+				warn "Couldn't determine parent mod for $input";
+			}
 			$outputSimple = $input;
-			$output = $input;
+			$output = qq(<span tooltip="from $mod">$input</span>);
 		} else {
 			foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
 				if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
@@ -1596,7 +1602,7 @@ END_PRINT
 	print STDOUT "  Processing Mod Fruit Trees\n";
 	foreach my $key (keys %{$ModData->{'FruitTrees'}}) {
 		# The keys for the Mod Trees hash should be the names of the trees but don't have to be
-		my $sname = $ModData->{'FruitTrees'}{$key}{'SaplingName'};
+		my $sname = GetItem($ModData->{'FruitTrees'}{$key}{'SaplingName'});
 		my $scost = $ModData->{'FruitTrees'}{$key}{'SaplingPurchasePrice'};
 		my $season = $ModData->{'FruitTrees'}{$key}{'Season'};
 		my $cname = GetItem($ModData->{'FruitTrees'}{$key}{'Product'});
@@ -1612,7 +1618,7 @@ END_PRINT
 		}
 		my $imgTag = GetImgTag($key, 'tree');
 		my $prodImg = GetImgTag($ModData->{'FruitTrees'}{$key}{'Product'}, "object");
-		my $seedImg = GetImgTag($sname, "object");
+		my $seedImg = GetImgTag($ModData->{'FruitTrees'}{$key}{'SaplingName'}, "object");
 		my $amt = ceil($scost/$cprice);
 		if (not exists $ModList{$ModData->{'FruitTrees'}{$key}{'__MOD_ID'}}) {
 			$ModList{$ModData->{'FruitTrees'}{$key}{'__MOD_ID'}} = 1;
@@ -2177,7 +2183,7 @@ END_PRINT
 	# Mod crop data; uses similar variable names to the vanilla logic
 	foreach my $key (keys %{$ModData->{'Crops'}}) {
 		# The keys for the Mod Crops hash should be the names of the crops but don't have to be
-		my $sname = $ModData->{'Crops'}{$key}{'SeedName'};
+		my $sname = GetItem($ModData->{'Crops'}{$key}{'SeedName'});
 		my $scost = $ModData->{'Crops'}{$key}{'SeedPurchasePrice'};
 		my @phases = @{$ModData->{'Crops'}{$key}{'Phases'}};
 		my $season_str = join(" ", @{$ModData->{'Crops'}{$key}{'Seasons'}});
@@ -2224,7 +2230,7 @@ END_PRINT
 		}
 		my $imgTag = GetImgTag($key, 'crop');
 		my $prodImg = GetImgTag($ModData->{'Crops'}{$key}{'Product'}, "object");
-		my $seedImg = GetImgTag($sname, "object");
+		my $seedImg = GetImgTag($ModData->{'Crops'}{$key}{'SeedName'}, "object");
 		my $xp = GetXP($cprice);
 		if (not exists $ModList{$ModData->{'Crops'}{$key}{'__MOD_ID'}}) {
 			$ModList{$ModData->{'Crops'}{$key}{'__MOD_ID'}} = 1;

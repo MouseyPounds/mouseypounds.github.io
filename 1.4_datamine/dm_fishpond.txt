@@ -399,3 +399,4 @@ Total different fish: 58
 All legendary fish are exluded by tag `fish_legendary`, so the final pond type is just a safety net default.
 And Clams are excluded because their category is 'Basic -23' instead of 'Fish'.
 Production chances are for choosing a product and are rolled after a separate 23-95% chance based on population (.15 + .08*pop)
+If you are interested in maxing profits, see https://gist.github.com/captncraig/e691aceb05e426c8aaa6c2af0c48a64f
