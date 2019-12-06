@@ -1,5 +1,5 @@
-Experiments in data-mining (Stardew 1.4)
-========================================
+Experiments in data-mining (Stardew 1.4.2)
+==========================================
 
 Shirts (294 total)
 ----------------------------

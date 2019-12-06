@@ -1,5 +1,5 @@
-Experiments in data-mining (Stardew 1.4)
-========================================
+Experiments in data-mining (Stardew 1.4.2)
+==========================================
 
 Hats (73 total)
 ----------------------------
@@ -151,8 +151,8 @@ Official Cap (ID 5)
 Panda Hat (ID 36)
 * Only available in the TGP (Tencent Gaming Platform) version of the game (from wiki)
 ----------------------------
-Party Hat (ID 58)
-* Tailoring -- Cloth + Chocolate Cake
+Party Hat (ID 59)
+* Tailoring -- Cloth + Fish Taco
 ----------------------------
 Pirate Hat (ID 62)
 * Tailoring -- Cloth + Treasure Chest
