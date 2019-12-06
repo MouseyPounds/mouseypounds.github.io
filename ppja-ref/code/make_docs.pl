@@ -462,7 +462,7 @@ sub GetHeader {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mousey's PPJA Reference: $subtitle</title>
+<title>Mousey's PPJA (and Friends) Reference: $subtitle</title>
 
 <meta charset="UTF-8" />
 <meta property="og:title" content="PPJA $subtitle" />
@@ -483,7 +483,7 @@ sub GetHeader {
 
 </head>
 <body>
-<div class="panel" id="header"><h1>Mousey's PPJA Reference: $subtitle</h1>
+<div class="panel" id="header"><h1>Mousey's PPJA (and Friends) Reference: $subtitle</h1>
 $longdesc
 </div>
 END_PRINT
@@ -1276,7 +1276,7 @@ sub WriteCookingSummary {
 			$source .= "$temp[0]<br />";
 		} 
 		my $recipe_cost = "--";
-		my $value = GetValue($key);
+		my $value = GetValue($cid);
 		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
 		my $filter = "filter_base_game";
 		my $output = <<"END_PRINT";
@@ -1389,7 +1389,7 @@ END_PRINT
 			$source .= "$temp[0]<br />";
 		}
 
-		my $value = GetValue($cname);
+		my $value = GetValue($key);
 		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
 		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
 		my $output = <<"END_PRINT";
@@ -1992,7 +1992,8 @@ the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is us
 </p>
 <p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
 and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
-machine takes. The latter is rounded to two decimal places.
+machine takes. The latter is rounded to two decimal places. Machines which only change the quality but return the same base item (similar to Casks) are
+not currently documented correctly and will list zero profit.
 </p>
 END_PRINT
 	print GetHeader("Machines", qq(Summary of products and timings for machines from PPJA mods), $longdesc);
