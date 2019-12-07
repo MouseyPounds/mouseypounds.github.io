@@ -252,6 +252,7 @@ sub GetCategory {
 		-16 => 'Building Resource',
 		# -17 is marked as `Object.sellAtPierres` but contains only Sweet Gem Berry and Truffle
 		#-17 => 'Item Sold by Pierre',
+		-17 => '(Special)',
 		-18 => 'Animal Product', #vanilla: wool, duck feather, and rabbit foot
 		-19 => 'Fertilizer',
 		-20 => 'Trash',
@@ -1571,6 +1572,8 @@ sub WriteFruitTreeSummary {
 		my $cid = $GameData->{'FruitTrees'}{$sid}{'split'}[2];
 		my $scost = $GameData->{'FruitTrees'}{$sid}{'split'}[3];
 		my $cname = GetItem($cid);
+		$GameData->{'ObjectInformation'}{$cid}{'split'}[3] =~ /(\-?\d*)$/;
+		my $category = GetCategory($1);
 		my $cprice = $GameData->{'ObjectInformation'}{$cid}{'split'}[1];
 		my $seed_vendor = WikiShop("Pierre");
 		my $imgTag = GetImgTag($sid, "tree");
@@ -1583,6 +1586,7 @@ sub WriteFruitTreeSummary {
 <tr class="$filter">
 <td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
+<td class="name">$category</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
 <td class="value">$scost</td>
@@ -1606,6 +1610,13 @@ END_PRINT
 		my $scost = $ModData->{'FruitTrees'}{$key}{'SaplingPurchasePrice'};
 		my $season = $ModData->{'FruitTrees'}{$key}{'Season'};
 		my $cname = GetItem($ModData->{'FruitTrees'}{$key}{'Product'});
+		my $category = "";
+		if (looks_like_number($ModData->{'FruitTrees'}{$key}{'Product'})) {
+			$GameData->{'ObjectInformation'}{$ModData->{'FruitTrees'}{$key}{'Product'}}{'split'}[3] =~ /(\-?\d*)$/;
+			$category = GetCategory($1);
+		} else {
+			$category = $ModData->{'Objects'}{$ModData->{'FruitTrees'}{$key}{'Product'}}{'Category'};
+		}
 		my $cprice = GetValue($ModData->{'FruitTrees'}{$key}{'Product'});
 		my $seed_vendor = WikiShop("Pierre");
 		if (exists $ModData->{'FruitTrees'}{$key}{'SaplingPurchaseFrom'}) {
@@ -1629,6 +1640,7 @@ END_PRINT
 <tr class="$filter">
 <td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
+<td class="name">$category</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
 <td class="value">$scost</td>
@@ -1691,6 +1703,7 @@ END_PRINT
 <tr>
 <th>Image</th>
 <th>Product Name</th>
+<th>Product Type</th>
 <th>Sapling Name</th>
 <th>Sapling Vendor<br />(&amp; Requirements)</th>
 <th>Sapling<br />Price</th>
@@ -2047,21 +2060,28 @@ sub WriteCropSummary {
 		my $sprite_index = $GameData->{'Crops'}{$sid}{'split'}[2];
 		my $cid = $GameData->{'Crops'}{$sid}{'split'}[3];
 		my $cname = GetItem($cid);
+		$GameData->{'ObjectInformation'}{$cid}{'split'}[3] =~ /(\-?\d*)$/;
+		my $category = GetCategory($1);
 		my $cprice = $GameData->{'ObjectInformation'}{$cid}{'split'}[1];
 		my $regrowth = $GameData->{'Crops'}{$sid}{'split'}[4];
 		$regrowth = (($regrowth > 0) ? $regrowth : "--");
 		my $need_scythe = ($GameData->{'Crops'}{$sid}{'split'}[5] ? "Yes" : "--");
 		my $is_paddy = 0;
 		my @multi_data = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[6]));
-		my $num_harvest = $multi_data[0];
-		if ($num_harvest eq 'true') {
+		my $num_per_harvest = $multi_data[0];
+		if ($num_per_harvest eq 'true') {
 			my ($ignored, $min, $max, $inc_per_level, $extra_chance) = @multi_data;
-			$num_harvest = $min + $extra_chance;
+			$num_per_harvest = $min + $extra_chance;
 		} else {
-			$num_harvest = 1;
+			$num_per_harvest = 1;
 		}
 		my $is_trellis = (($GameData->{'Crops'}{$sid}{'split'}[7] eq 'true') ? "Yes" : "--");
 		my @color_data = (split(' ', $GameData->{'Crops'}{$sid}{'split'}[8]));
+		my $num_colors = 0;
+		if ($color_data[0] eq 'true') {
+			$num_colors = (scalar @color_data - 1)/3;
+			$category .= "<br />($num_colors colors)";
+		}
 		# This is all hard-coded since it is handled in the exe
 		# To make it easier to read we check the name rather than id, so we have to strip it
 		my $crop = StripHTML($cname);
@@ -2124,12 +2144,13 @@ sub WriteCropSummary {
 <tr class="filter_base_game">
 <td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
+<td class="name">$category</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
 <td class="value">$scost</td>
 <td>$need_scythe</td>
 <td>$is_trellis</td>
-<td class="value">$num_harvest</td>
+<td class="value">$num_per_harvest</td>
 <td class="value">$cprice</td>
 <td class="value">$xp</td>
 END_PRINT
@@ -2137,15 +2158,18 @@ END_PRINT
 		foreach my $opt (qw(0 10 20 25 35)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
 			my $max_harvests = floor(27/$growth);
+			my $wasted_days = 27 - $growth * $max_harvests;
+			if ($growth > 27) {
+				$wasted_days = "--";
+			}
 			if (looks_like_number($regrowth) and $regrowth > -1) {
-				if ($growth > 27) {
-					$max_harvests = 0;
-				} else {
+				if ($growth < 28) {
 					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
+					$wasted_days = 27 - $growth - $regrowth * ($max_harvests - 1);
 				}
 			}
-			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
-			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
+			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $max_harvests*$scost;
+			my $profit = nearest(1, $cprice * $num_per_harvest * $max_harvests - $cost);
 			# Paddy bonus. Yes, we pretty much copy & paste everything
 			if ($is_paddy) {
 				my $pgrowth = CalcGrowth((.25+$opt)/100, \@phases);
@@ -2157,8 +2181,8 @@ END_PRINT
 						$p_harvests = 1 + max(0, floor((27-$pgrowth)/$regrowth));
 					}
 				}
-				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
-				my $pprofit = nearest(1, $cprice * $num_harvest * $p_harvests - $pcost);
+				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $max_harvests*$scost;
+				my $pprofit = nearest(1, $cprice * $num_per_harvest * $p_harvests - $pcost);
 				$growth = "$pgrowth ($growth)";
 				$max_harvests = "$p_harvests ($max_harvests)";
 				$profit = "$pprofit ($profit)";
@@ -2167,6 +2191,7 @@ END_PRINT
 <td class="col_$opt value">$growth</td>
 <td class="col_$opt value">$regrowth</td>
 <td class="col_$opt value">$max_harvests</td>
+<td class="col_$opt value">$wasted_days</td>
 <td class="col_$opt value">$profit</td>
 END_PRINT
 
@@ -2201,6 +2226,13 @@ END_PRINT
 		#my @seasons = $ModData->{'Crops'}{$key}{'Seasons'};
 		#Sprites are the __SS keys
 		my $cname = GetItem($ModData->{'Crops'}{$key}{'Product'});
+		my $category = "";
+		if (looks_like_number($ModData->{'Crops'}{$key}{'Product'})) {
+			$GameData->{'ObjectInformation'}{$ModData->{'Crops'}{$key}{'Product'}}{'split'}[3] =~ /(\-?\d*)$/;
+			$category = GetCategory($1);
+		} else {
+			$category = $ModData->{'Objects'}{$ModData->{'Crops'}{$key}{'Product'}}{'Category'};
+		}
 		my $cprice = GetValue($ModData->{'Crops'}{$key}{'Product'});
 		my $regrowth = $ModData->{'Crops'}{$key}{'RegrowthPhase'};
 		$regrowth = (($regrowth > 0) ? $regrowth : "--");
@@ -2212,10 +2244,11 @@ END_PRINT
 		}
 		if (scalar @colors > 1) {
 			# If we ever deal with the colors, it'd happen here.
+			$category .= "<br />(" . (scalar @colors) . " colors)";
 		}
 		# 1.4 fixed the rounding bug with MaximumPerHarvest so we now include it in the calculation
 		my $avg_harvest = ($ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'} + $ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'}) / 2.0;
-		my $num_harvest = $avg_harvest + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
+		my $num_per_harvest = $avg_harvest + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
 		# This is for detecting crops which might produce more in SDV 1.4
 		#if ($ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'} > $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'}) {
 		#	print STDOUT "Crop $key will produce more now (Min: $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'}) (Max: $ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'})\n";
@@ -2241,12 +2274,13 @@ END_PRINT
 <tr class="$ModInfo->{$ModData->{'Crops'}{$key}{'__MOD_ID'}}{'__FILTER'}">
 <td class="icon">$imgTag</td>
 <td class="name">$prodImg $cname</td>
+<td class="name">$category</td>
 <td class="name">$seedImg $sname</td>
 <td>$seed_vendor</td>
 <td class="value">$scost</td>
 <td>$need_scythe</td>
 <td>$is_trellis</td>
-<td class="value">$num_harvest</td>
+<td class="value">$num_per_harvest</td>
 <td class="value">$cprice</td>
 <td class="value">$xp</td>
 END_PRINT
@@ -2254,15 +2288,18 @@ END_PRINT
 		foreach my $opt (qw(0 10 20 25 35)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
 			my $max_harvests = floor(27/$growth);
+			my $wasted_days = 27 - $growth * $max_harvests;
+			if ($growth > 27) {
+				$wasted_days = "--";
+			}
 			if (looks_like_number($regrowth) and $regrowth > -1) {
-				if ($growth > 27) {
-					$max_harvests = 0;
-				} else {
+				if ($growth < 28) {
 					$max_harvests = 1 + max(0, floor((27-$growth)/$regrowth));
+					$wasted_days = 27 - $growth - $regrowth * ($max_harvests - 1);
 				}
 			}
-			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
-			my $profit = nearest(1, $cprice * $num_harvest * $max_harvests - $cost);
+			my $cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $max_harvests*$scost;
+			my $profit = nearest(1, $cprice * $num_per_harvest * $max_harvests - $cost);
 			# Paddy bonus. Yes, we pretty much copy & paste everything.
 			if ($is_paddy) {
 				my $pgrowth = CalcGrowth((.25+$opt)/100, \@phases);
@@ -2274,8 +2311,8 @@ END_PRINT
 						$p_harvests = 1 + max(0, floor((27-$pgrowth)/$regrowth));
 					}
 				}
-				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $num_harvest*$scost;
-				my $pprofit = nearest(1, $cprice * $num_harvest * $p_harvests - $pcost);
+				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $max_harvests*$scost;
+				my $pprofit = nearest(1, $cprice * $num_per_harvest * $p_harvests - $pcost);
 				$growth = "$pgrowth ($growth)";
 				$max_harvests = "$p_harvests ($max_harvests)";
 				$profit = "$pprofit ($profit)";
@@ -2284,6 +2321,7 @@ END_PRINT
 <td class="col_$opt value">$growth</td>
 <td class="col_$opt value">$regrowth</td>
 <td class="col_$opt value">$max_harvests</td>
+<td class="col_$opt value">$wasted_days</td>
 <td class="col_$opt value">$profit</td>
 END_PRINT
 
@@ -2319,12 +2357,14 @@ END_PRINT
 <p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
 the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
 whether the crop has a trellis (or similar structure that blocks walking on it). The <span class="note">XP</span> column is the amount of
-experience gained on a single harvest. Normally this is Farming experience, but for the seasonal forage crops it is Foraging experience.
-The <span class="note">Seasonal Profit</span> column is an average full-season estimate that assumes the maximum number of harvests in the
+experience gained on a single harvest. Normally this is Farming experience, but for the seasonal forage crops it is Foraging experience.</p>
+<p>The <span class="note">Seasonal Profit</span> column is an average full-season estimate that assumes the maximum number of harvests in the
 month with the product sold raw at base (no-star) quality without any value-increasing professions (like Tiller.)
 It also assumes all seeds are bought at the shown price and does not account for any other costs (such as purchasing fertilizer).
 The growth times, maximum number of harvests, and profit all depend on growth speed modifiers which can be set in the form
-below and apply to all the tables on this page. Paddy crops will show two numbers for growth time and some other fields; the first number is
+below and apply to all the tables on this page. <span class="note">Wasted Days</span> would be how many leftover days there are after reaching the
+maxiumum number of harvests. This can be useful for planning a second crop to fill the gap or delaying the initial planting.</p>
+<p>Paddy crops will show two numbers for growth time and some other fields; the first number is
 with the close-water bonus, and the number in parentheses is without. Unfortunately, these entries will not sort properly.</p>
 <fieldset id="growth_speed_options" class="radio_set">
 <label><input type="radio" name="speed" value="0" checked="checked"> No speed modifiers</label><br />
@@ -2359,33 +2399,39 @@ END_PRINT
 <tr>
 <th>Img</th>
 <th>Crop Name</th>
+<th>Crop Type</th>
 <th>Seed Name</th>
-<th>Seed Vendor<br />(&amp; Requirements)</th>
+<th>Seed Vendor<br />(&amp; Conditions)</th>
 <th>Seed<br />Price</th>
 <th><img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"></th>
 <th><img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"></th>
 <th>Avg<br />Yield</th>
 <th>Crop<br />Value</th>
 <th>XP</th>
-<th class="col_0">Initial<br />Growth</th>
-<th class="col_0">Regrowth</th>
-<th class="col_0">Maximum<br />Harvests</th>
+<th class="col_0">Grow<br />Days</th>
+<th class="col_0">Regrow<br />Days</th>
+<th class="col_0">Max<br />Harvests</th>
+<th class="col_0">Wasted<br />Days</th>
 <th class="col_0">Seasonal<br />Profit</th>
 <th class="col_10">Initial<br />Growth</th>
-<th class="col_10">Regrowth</th>
-<th class="col_10">Maximum<br />Harvests</th>
+<th class="col_10">Regrow<br />Days</th>
+<th class="col_10">Max<br />Harvests</th>
+<th class="col_10">Wasted<br />Days</th>
 <th class="col_10">Seasonal<br />Profit</th>
 <th class="col_20">Initial<br />Growth</th>
-<th class="col_20">Regrowth</th>
-<th class="col_20">Maximum<br />Harvests</th>
+<th class="col_20">Regrow<br />Days</th>
+<th class="col_20">Max<br />Harvests</th>
+<th class="col_20">Wasted<br />Days</th>
 <th class="col_20">Seasonal<br />Profit</th>
 <th class="col_25">Initial<br />Growth</th>
-<th class="col_25">Regrowth</th>
-<th class="col_25">Maximum<br />Harvests</th>
+<th class="col_25">Regrow<br />Days</th>
+<th class="col_25">Max<br />Harvests</th>
+<th class="col_25">Wasted<br />Days</th>
 <th class="col_25">Seasonal<br />Profit</th>
 <th class="col_35">Initial<br />Growth</th>
-<th class="col_35">Regrowth</th>
-<th class="col_35">Maximum<br />Harvests</th>
+<th class="col_35">Regrow<br />Days</th>
+<th class="col_35">Max<br />Harvests</th>
+<th class="col_35">Wasted<br />Days</th>
 <th class="col_35">Seasonal<br />Profit</th>
 </tr>
 </thead>
