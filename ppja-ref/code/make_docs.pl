@@ -18,7 +18,7 @@ my $ModData = retrieve("../local/cache_ModData");
 my $ModInfo = retrieve("../local/cache_ModInfo");
 
 my $DocBase = "..";
-my $StardewVersion = "1.4";
+my $StardewVersion = "1.4.2";
 
 my $SpriteInfo = {};
 GatherSpriteInfo($SpriteInfo);
@@ -452,7 +452,7 @@ sub GetHeader {
 	my $subtitle = shift;
 	my $shortdesc = shift;
 	if (not defined $shortdesc or $shortdesc eq '') {
-		$shortdesc = "Personal reference for the PPJA family of Stardew Valley mods.";
+		$shortdesc = "Personal reference for PPJA (and other) Stardew Valley mods.";
 	}
 	my $longdesc = shift;
 	if (not defined $longdesc) {
@@ -466,7 +466,7 @@ sub GetHeader {
 <title>Mousey's PPJA (and Friends) Reference: $subtitle</title>
 
 <meta charset="UTF-8" />
-<meta property="og:title" content="PPJA $subtitle" />
+<meta property="og:title" content="PPJA (and Friends) $subtitle" />
 <meta property="og:description" content="$shortdesc" />
 <!-- meta property="og:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
 <!-- meta property="twitter:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
@@ -476,7 +476,7 @@ sub GetHeader {
 
 <link rel="stylesheet" type="text/css" href="./ppja-ref.css" />
 <link rel="stylesheet" type="text/css" href="./ppja-ref-img.css" />
-<!-- link rel="icon" type="image/png" href="./favicon_c.png" / -->
+<link rel="icon" type="image/png" href="./book.png" />
 
 <!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
 <script type="text/javascript" src="./sorttable.js"></script>
@@ -1137,7 +1137,7 @@ together by a different PPJA user.</p>
 on <a href="https://discordapp.com">Discord</a> or through 
 <a href="https://community.playstarbound.com/threads/personal-ppja-reference-project.156334/">the topic for this project on Chucklefish forums.</a></p>
 END_PRINT
-	print GetHeader("Main Index", qq(Reference docs for PPJA mods for Stardew Valley.), $longdesc);
+	print GetHeader("Main Index", qq(Reference docs for PPJA (and other) mods for Stardew Valley.), $longdesc);
 	print GetFooter();
 	close $FH or die "Error closing file";
 }
@@ -1457,7 +1457,7 @@ every item from all sources.
 </p>
 
 END_PRINT
-	print GetHeader("Cooking", qq(Cooking recipes from the PPJA mods for Stardew Valley.), $longdesc);
+	print GetHeader("Cooking", qq(Cooking recipes from PPJA (and other) mods for Stardew Valley.), $longdesc);
 	print GetTOCStart();
 
 
@@ -1681,7 +1681,7 @@ to recoup the cost of the initial sapling. Smaller numbers are better, although 
 be processing the items in machines where possible rather than selling them raw.</p>
 END_PRINT
 
-	print GetHeader("Fruit Trees", qq(Sumary of fruit tree information from PPJA mods and base game.), $longdesc);
+	print GetHeader("Fruit Trees", qq(Sumary of fruit tree info from PPJA (and other) mods for Stardew Valley.), $longdesc);
 	print GetTOCStart();
 
 	# Print the rest of the TOC
@@ -2009,7 +2009,7 @@ machine takes. The latter is rounded to two decimal places. Machines which only 
 not currently documented correctly and will list zero profit.
 </p>
 END_PRINT
-	print GetHeader("Machines", qq(Summary of products and timings for machines from PPJA mods), $longdesc);
+	print GetHeader("Machines", qq(Summary of products and timings for machines from PPJA (and other) mods), $longdesc);
 	print GetTOCStart();
 
 
@@ -2376,7 +2376,7 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <input type="hidden" id="last_speed" value="0" />
 END_PRINT
 
-	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA and base game), $longdesc);
+	print GetHeader("Crop Summary", qq(Growth and other crop information for PPJA (and other) mods for Stardew Valley), $longdesc);
 	print GetTOCStart();
 
 
