@@ -630,6 +630,10 @@ sub TranslatePreconditions {
 	my @results = ();
 	
 	foreach my $arg (@_) {
+		if ($arg =~ /^(\s+)(\S.*)/) {
+			warn "TranslatePreconditions detected leading whitespace in a condition: {$arg}";
+			$arg = $2;
+		}
 		if ($arg =~ /^y (\d+)/) {
 			push @results, "Year $1+";
 		} elsif ($arg =~ /^f (\w+) (\d+)/) {
@@ -2172,20 +2176,24 @@ END_PRINT
 			my $profit = nearest(1, $cprice * $num_per_harvest * $max_harvests - $cost);
 			# Paddy bonus. Yes, we pretty much copy & paste everything
 			if ($is_paddy) {
-				my $pgrowth = CalcGrowth((.25+$opt)/100, \@phases);
-				my $p_harvests = floor(27/$pgrowth);
+				my $p_growth = CalcGrowth((25+$opt)/100, \@phases);
+				my $p_harvests = floor(27/$p_growth);
+				my $p_wasted_days = 27 - $p_growth * $p_harvests;
+				if ($p_growth > 27) {
+					$p_wasted_days = "--";
+				}
 				if (looks_like_number($regrowth) and $regrowth > -1) {
-					if ($pgrowth > 27) {
-						$p_harvests = 0;
-					} else {
-						$p_harvests = 1 + max(0, floor((27-$pgrowth)/$regrowth));
+					if ($p_growth < 28) {
+						$p_harvests = 1 + max(0, floor((27-$p_growth)/$regrowth));
+						$p_wasted_days = 27 - $p_growth - $regrowth * ($p_harvests - 1);
 					}
 				}
-				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $max_harvests*$scost;
-				my $pprofit = nearest(1, $cprice * $num_per_harvest * $p_harvests - $pcost);
-				$growth = "$pgrowth ($growth)";
-				$max_harvests = "$p_harvests ($max_harvests)";
-				$profit = "$pprofit ($profit)";
+				my $p_cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $p_harvests*$scost;
+				my $p_profit = nearest(1, $cprice * $num_per_harvest * $p_harvests - $p_cost);
+				$growth = "$p_growth<br />($growth)";
+				$max_harvests = "$p_harvests<br />($max_harvests)";
+				$profit = "$p_profit<br />($profit)";
+				$wasted_days = "$p_wasted_days<br />($wasted_days)";
 			}
 			$output .= <<"END_PRINT";
 <td class="col_$opt value">$growth</td>
@@ -2302,20 +2310,24 @@ END_PRINT
 			my $profit = nearest(1, $cprice * $num_per_harvest * $max_harvests - $cost);
 			# Paddy bonus. Yes, we pretty much copy & paste everything.
 			if ($is_paddy) {
-				my $pgrowth = CalcGrowth((.25+$opt)/100, \@phases);
-				my $p_harvests = floor(27/$pgrowth);
+				my $p_growth = CalcGrowth((25+$opt)/100, \@phases);
+				my $p_harvests = floor(27/$p_growth);
+				my $p_wasted_days = 27 - $p_growth * $p_harvests;
+				if ($p_growth > 27) {
+					$p_wasted_days = "--";
+				}
 				if (looks_like_number($regrowth) and $regrowth > -1) {
-					if ($pgrowth > 27) {
-						$p_harvests = 0;
-					} else {
-						$p_harvests = 1 + max(0, floor((27-$pgrowth)/$regrowth));
+					if ($p_growth < 28) {
+						$p_harvests = 1 + max(0, floor((27-$p_growth)/$regrowth));
+						$p_wasted_days = 27 - $p_growth - $regrowth * ($p_harvests - 1);
 					}
 				}
-				my $pcost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $max_harvests*$scost;
-				my $pprofit = nearest(1, $cprice * $num_per_harvest * $p_harvests - $pcost);
-				$growth = "$pgrowth ($growth)";
-				$max_harvests = "$p_harvests ($max_harvests)";
-				$profit = "$pprofit ($profit)";
+				my $p_cost = (looks_like_number($regrowth) and $regrowth > 0) ? $scost : $p_harvests*$scost;
+				my $p_profit = nearest(1, $cprice * $num_per_harvest * $p_harvests - $p_cost);
+				$growth = "$p_growth<br />($growth)";
+				$max_harvests = "$p_harvests<br />($max_harvests)";
+				$profit = "$p_profit<br />($profit)";
+				$wasted_days = "$p_wasted_days<br />($p_profit)";
 			}
 			$output .= <<"END_PRINT";
 <td class="col_$opt value">$growth</td>
