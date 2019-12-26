@@ -39,14 +39,14 @@ h2 {
 	margin-bottom: 1em;
 	font-weight: bold;
 }
-.note,.group {
+.note,.group ,.none {
 	font-style: italic;
 }
 .duration {
 	font-style: italic;
 	padding-left: 1.5em;
 }
-.username {
+.username, .strong {
 	font-weight: bold;
 }
 /* Sortable Table indicators from https://www.kryogenix.org/code/browser/sorttable/#symbolsbeforesorting */

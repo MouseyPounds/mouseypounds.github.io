@@ -226,6 +226,20 @@ $game_crops->write(file=>"../img/game_crops.png") or LogMessage("DIE: Error writ
 $game_crops->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_crops_x2.png") or
 	LogMessage("DIE: Error writing x2 game crop sprites: " . $game_crops->errstr, 1);
 
+# We also want the quality stars for overlaying.
+my $game_cursors = Imager->new();
+$game_cursors->read(file=>"$GameDir/../LooseSprites/Cursors.png") or LogMessage("DIE: Error reading game cursors: $!", 1);
+my $quality_stars = Imager->new(xsize=>8*4, ysize=>8, channels=>4);
+$quality_stars->paste(src=>$game_cursors, src_minx =>338, src_miny =>400, left=>0, top=>0, width=>8, height=>8) or
+	LogMessage("DIE: Failed to copy silver quality star " . $quality_stars->errstr, 1);
+$quality_stars->paste(src=>$game_cursors, src_minx =>346, src_miny =>400, left=>8, top=>0, width=>8, height=>8) or
+	LogMessage("DIE: Failed to copy gold quality star " . $quality_stars->errstr, 1);
+$quality_stars->paste(src=>$game_cursors, src_minx =>346, src_miny =>392, left=>24, top=>0, width=>8, height=>8) or
+	LogMessage("DIE: Failed to copy iridium quality star " . $quality_stars->errstr, 1);
+$quality_stars->write(file=>"../img/game_quality.png") or LogMessage("DIE: Error writing game quality sprites: " . $quality_stars->errstr, 1);
+$quality_stars->scale(scalefactor=>2.0, qtype=>'preview')->write(file=>"../img/game_quality_x2.png") or
+	LogMessage("DIE: Error writing x2 game quality sprites: " . $quality_stars->errstr, 1);
+	
 LogMessage("Changing mod fruit tree sprites", 1);
 foreach my $t (keys %{$ModData->{'FruitTrees'}}) {
 	# Now we can make the same change we made for vanilla trees. Since fruit trees already use their _OTHER_ coordinates
@@ -303,25 +317,23 @@ sub ParseGameData {
 
 	# There are only certain folders we explicitly want to open; these are hardcoded
 	# Files are assumed to be JSON format without headers, like those from StardewXNBHack
-	my @Filenames = qw(ObjectInformation Crops BigCraftablesInformation CookingRecipes CraftingRecipes FruitTrees TV/CookingChannel);
+	my @Filenames = qw(ObjectInformation Crops BigCraftablesInformation CookingRecipes CraftingRecipes 
+						FruitTrees TV/CookingChannel ObjectContextTags NPCDispositions);
 	LogMessage("Parsing Game Data in $BaseDir", 1);
 	foreach my $f (@Filenames) {
 		LogMessage("  Checking for $f", 1);
 		my $this_file = "$BaseDir/$f.json";
 		if (-e $this_file) {
-			my $file_contents = read_file("$this_file", {binmode => ':encoding(UTF-8)'});
-			LogMessage("    Dumping object returned by read_file", 3);
-			LogMessage(Dumper($file_contents), 3);
-			# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
-			$file_contents =~ s/^\x{feff}//;
-			my $json = from_rjson($file_contents);
+			my $json = ParseJsonFile($this_file);
 			LogMessage("    Dumping object returned by from_rjson", 3);
 			LogMessage(Dumper($json), 3);
 			$DataRef->{$f} = {};
+			my $delimiter = '/';
+			$delimiter = ', ' if ($f eq 'ObjectContextTags');
 			foreach my $key (keys %$json) {
 				$DataRef->{$f}{$key} = {};
 				$DataRef->{$f}{$key}{'raw'} = $json->{$key};
-				my @Fields = split('/', $json->{$key});
+				my @Fields = split($delimiter, $json->{$key});
 				$DataRef->{$f}{$key}{'split'} = \@Fields;
 			}
 		} else {
@@ -363,12 +375,7 @@ sub ParseModData {
 
 			if (-e $manifest) {
 				LogMessage("    Manifest found. Parsing", 1);
-				my $file_contents = read_file("$BaseDir/$m/manifest.json", {binmode => ':encoding(UTF-8)'});
-				LogMessage("    Dumping file contents", 3);
-				LogMessage(Dumper($file_contents), 3);
-				# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
-				$file_contents =~ s/^\x{feff}//;
-				my $json = from_rjson($file_contents);
+				my $json = ParseJsonFile($manifest);
 				my $id = $json->{'UniqueID'};
 				my $name = $json->{'Name'};
 				if (defined $id and defined $name) {
@@ -398,13 +405,7 @@ sub ParseModData {
 							next if ($f =~ /^manifest\.json$/i);
 							next unless ($f =~ /\.json$/i);
 							LogMessage("    Found another json: $f.", 1);
-							my $this_file = "$BaseDir/$m/$f";
-							my $file_contents = read_file("$BaseDir/$m/$f", {binmode => ':encoding(UTF-8)'});
-							LogMessage("      Dumping file contents", 3);
-							LogMessage(Dumper($file_contents), 3);
-							# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
-							$file_contents =~ s/^\x{feff}//;
-							my $json = from_rjson($file_contents);
+							my $json = ParseJsonFile("$BaseDir/$m/$f");
 							# Saving directory just in case. Also want the ModID in the main json too
 							$json->{'__MOD_ID'} = $id;
 							$json->{'__PATH'} = "$BaseDir/$m";
@@ -455,12 +456,7 @@ sub ParseModData {
 									next if ($i eq '.' or $i eq '..');
 									if (-e "$BaseDir/$m/$t/$i/$types{$t}") {
 										LogMessage("      Found and parsed item folder $i.", 1);
-										my $file_contents = read_file("$BaseDir/$m/$t/$i/$types{$t}", {binmode => ':encoding(UTF-8)'});
-										LogMessage("        Dumping file contents", 3);
-										LogMessage(Dumper($file_contents), 3);
-										# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
-										$file_contents =~ s/^\x{feff}//;
-										my $json = from_rjson($file_contents);
+										my $json = ParseJsonFile("$BaseDir/$m/$t/$i/$types{$t}");
 										my $key = $i;
 										if ($json->{'Name'} ne $key) {
 											LogMessage("WARNING: Item in folder {$i} is actually named {$json->{'Name'}}. Will use that for key instead", 1);
@@ -496,8 +492,9 @@ sub ParseModData {
 											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/seeds.png", 'objects');
 										} elsif ($t eq 'Objects') {
 											($x, $y) = StoreNextImageFile("$BaseDir/$m/$t/$i/object.png", 'objects');
-											($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/color.png", 'objects')
-												if (-e "$BaseDir/$m/$t/$i/color.png");
+											if (-e "$BaseDir/$m/$t/$i/color.png") {
+												($other_x, $other_y) = StoreNextImageFile("$BaseDir/$m/$t/$i/color.png", 'objects')
+											}
 										} elsif ($t eq 'FruitTrees') {
 											# We want to make the same change we made for the base game Fruit Trees, but there is
 											#  no guarantee the object sprites are available yet. So we'll put this off until later.
@@ -533,23 +530,53 @@ sub ParseModData {
 						LogMessage("    This is an MFM pack. Looking for mail.json file.", 1);
 						if (-e "$BaseDir/$m/mail.json") {
 							LogMessage("      Found mail.json; attempting to parse", 1);
-							my $file_contents = read_file("$BaseDir/$m/mail.json", {binmode => ':encoding(UTF-8)'});
-							LogMessage("      Dumping file contents", 3);
-							LogMessage(Dumper($file_contents), 3);
-							# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
-							$file_contents =~ s/^\x{feff}//;
-							my $json = from_rjson($file_contents);
+							my $json = ParseJsonFile("$BaseDir/$m/mail.json");
 							# Since MFM packs are a list at top level, we want to make a new container object for them
 							my $container = { 'name' => $name, '__MOD_ID' => $id, '__PATH' => "$BaseDir/$m", 'letters' => $json };
 							LogMessage("      Dumping json object", 3);
 							LogMessage(Dumper($json), 3);
-							# Mail Framework jsons are a big list; we'll merge them into a bigger list
+							# Merge them into a bigger list
 							if (not exists $DataRef->{'Mail'}) {
 								$DataRef->{'Mail'} = [];
 							}
 							push @{$DataRef->{'Mail'}}, $container;
 						} else {
 							LogMessage("      WARNING: No mail.json found", 1);
+						}
+					# The example pack has different capitalization than the actual mod :(
+					} elsif ($packID eq "DIGUS.ProducerFrameworkMod" or $packID eq "Digus.ProducerFrameworkMod") {
+						LogMessage("    This is a PFM pack. Looking for producerRules.json file.", 1);
+						if (-e "$BaseDir/$m/producerRules.json") {
+							LogMessage("      Found producerRules.json; attempting to parse", 1);
+							my $json = ParseJsonFile("$BaseDir/$m/producerRules.json");
+							# PFM packs are also just a big list, so we need a container
+							my $container = { 'name' => $name, '__MOD_ID' => $id, '__PATH' => "$BaseDir/$m", 'producers' => $json };
+							LogMessage("      Dumping json object", 3);
+							LogMessage(Dumper($json), 3);
+							# Merge them into a bigger list
+							if (not exists $DataRef->{'Producers'}) {
+								$DataRef->{'Producers'} = [];
+							}
+							push @{$DataRef->{'Producers'}}, $container;
+						} else {
+							LogMessage("      WARNING: No producerRules.json found", 1);
+						}
+					} elsif ($packID eq "Pathoschild.ContentPatcher") {
+						LogMessage("    This is a CP pack. Looking for content.json file.", 1);
+						if (-e "$BaseDir/$m/content.json") {
+							LogMessage("      Found content.json; attempting to parse", 1);
+							my $json = ParseJsonFile("$BaseDir/$m/content.json");
+							$json->{'__MOD_ID'} = $id;
+							$json->{'__PATH'} = "$BaseDir/$m";
+							LogMessage("      Dumping json object", 3);
+							LogMessage(Dumper($json), 3);
+							# CP packs will be dumped into a list since keying on mod ID doesn't do anything for us
+							if (not exists $DataRef->{'ContentPatches'}) {
+								$DataRef->{'ContentPatches'} = [];
+							}
+							push @{$DataRef->{'ContentPatches'}}, $json;
+						} else {
+							LogMessage("      WARNING: No content.json found", 1);
 						}
 					} else {
 						LogMessage("    This is an unknown pack type ($packID)", 1);
@@ -684,6 +711,31 @@ sub LogMessage {
 	print STDOUT $message, "\n" if ($LogLevel >= $level);
 	print STDERR $message, "\n" if ($message =~ /^(\w)*WARNING/);
 	die $message if ($message =~ /^(\w)*DIE/);
+}
+
+# ParseJsonFile - Reads file, parses JSON, handles errors. 
+#    filename
+sub ParseJsonFile {
+	my $filename = shift;
+	my $file_contents = read_file($filename, {binmode => ':encoding(UTF-8)'});
+	LogMessage("      Dumping file contents", 3);
+	LogMessage(Dumper($file_contents), 3);
+	# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
+	$file_contents =~ s/^\x{feff}//;
+	# The JSON parser cannot handle situations like the following
+	# "key": //comment
+	# { ...
+	# So we are going to try to prevent that. This might backfire spectacularly.
+	my $comment_removed = ($file_contents =~ s|(?<=:)\s*//[^*\r\n]*(?=[\r\n])||g);
+	if ($comment_removed) { LogMessage("      $comment_removed potentially problematic comment(s) removed", 2); }
+	# And trailing spaces sometimes screw us too.
+	$comment_removed = ($file_contents =~ s|(?<=\S)[^\S\r\n]+(?=[\r\n])||g);
+	if ($comment_removed) { LogMessage("      $comment_removed trailing space(s) removed", 2); }
+	my $json = from_rjson($file_contents);
+	if (not defined $json) {
+		LogMessage("WARNING JSON parsing failed on $filename\n  Error $JSON::Relaxed::err_id: $JSON::Relaxed::err_msg");
+	}
+	return $json;
 }
 
 __END__
