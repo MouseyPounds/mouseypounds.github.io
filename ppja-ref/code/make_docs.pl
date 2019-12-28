@@ -160,7 +160,7 @@ sub GetItem {
 			} else {
 				warn "Couldn't determine parent mod for $input";
 			}
-			$outputSimple = $input;
+			$outputSimple = encode_entities($input);
 			my $encoded = encode_entities($input);
 			$output = qq(<span tooltip="from $mod">$encoded</span>);
 		} else {
@@ -249,6 +249,9 @@ sub GetXP {
 	return nearest(1, 16*log(0.018*$value + 1.0));
 }
 
+# GetCategory tries to return a human-readable name for a given numberic category
+#
+#   input - the category number
 sub GetCategory {
 	my $input = shift;
 	my $output = "";
@@ -300,6 +303,41 @@ sub GetCategory {
 	}
 	return $output;
 }
+
+# GetCategoryNum tries to return a numeric category for a given name (i.e. the reverse of GetCategory()
+#
+#   input - the category name
+sub GetCategoryNum {
+	my $input = shift;
+	my $output = 0;
+	# Since the primary purpose of this is to translate JA items, we currently only support the
+	#   named categories which JA allows:
+	#   Flower, Fruit, Vegetable, Gem, Fish, Egg, Milk, Cooking, Crafting, Mineral, Meat, Metal, Junk, Syrup, MonsterLoot, ArtisanGoods, and Seeds.
+	my %c = (
+		'Flower' => -80,
+		'Vegetable' => -75,
+		'Fruit' => -79,
+		'Gem' => -2,
+		'Fish' => -4,
+		'Egg' => -5,
+		'Milk' => -6,
+		'Cooking' => -7,
+		'Crafting' => -8,
+		'Mineral' => -12,
+		'Meat' => -14,
+		'Metal' => -15,
+		'Junk' => -20,
+		'Syrup' => -27,
+		'MonsterLoot' => -28,
+		'ArtisanGoods' => -26,
+		'Seeds' => -74,
+	);	
+	
+	if (exists $c{$input}) {
+		$output = $c{$input};
+	}
+	return $output;
+}	
 
 # GetImgTag returns the appropriate image tag for an item.
 #   input - either ID num (vanilla) or name (mod)
@@ -611,6 +649,7 @@ PPJA Reference:
 <a href="./cooking.html">Cooking</a> || 
 <a href="./crops.html">Crops</a> || 
 <a href="./trees.html">Fruit Trees</a> ||
+<a href="./gifts.html">Gift Tastes</a> ||
 <a href="./machines.html">Machines</a>
 <br />
 Stardew Apps by MouseyPounds: <a href="https://mouseypounds.github.io/stardew-checkup/">Stardew Checkup</a> ||
@@ -3162,74 +3201,326 @@ sub WriteGiftSummary {
 	select $FH;
 
 	print STDOUT "Generating Gift Summary\n";
+	my %ModList = ();
+	# by_item will be ItemName => NPCName => Taste so that it is easier to put into a table.
+	# by_npc will be NPCName => Taste => [ItemName] and we might not even use it.
 	my %by_item = ();
 	my %by_npc = ();
-	my @tastes = qw(Love Like Neutral Dislike Hate);
+	my @npcs = qw(Abigail Alex Caroline Clint Demetrius Dwarf Elliott Emily Evelyn George Gus Haley Harvey Jas Jodi Kent Krobus Leah Lewis Linus Marnie Maru Pam Penny Pierre Robin Sam Sandy Sebastian Shane Vincent Willy Wizard);
+	# These are the values used by tasteForItem in the game code. We'll make hashes that go both ways
+	my %tasteFromIndex = ( 0 => "Love", 2 => "Like", 4 => "Dislike", 6 => "Hate", 8 => "Neutral" );
+	my %tasteToIndex = ( "Love" => 0, "Like" => 2, "Dislike" => 4, "Hate" => 6, "Neutral" => 8 );
+	my %tasteSort = ( "Love" => 0, "Like" => 1, "Neutral" => 2, "Dislike" => 3, "Hate" => 4 );
+	my %tasteSymbols = ( "Love" => "Lv", "Like" => "L", "Neutral" => "&ndash;", "Dislike" => "D", "Hate" => "H" );
+	my %universal = ();
+	my %specific = ();
 	
-	foreach my $i (keys %{$ModData->{'Objects'}}) {
-		foreach my $taste (@tastes) {
-			if (not exists $by_item{$i}{$taste}) {
-				$by_item{$i}{$taste} = [];
+	# Setup the %by_npc structure early so we are guaranteed to have all the arrays ready.
+	foreach my $n (@npcs) {
+		if (not exists $by_npc{$n}) {
+			$by_npc{$n} = {};
+			foreach my $t (keys %tasteToIndex) {
+				$by_npc{$n}{$t} = [];
 			}
-			if (defined $ModData->{'Objects'}{$i}{'GiftTastes'}{$taste}) {
-				#print STDOUT "Trying to update gift tastes for  {$i} {$taste}\n";
-				push @{$by_item{$i}{$taste}}, @{$ModData->{'Objects'}{$i}{'GiftTastes'}{$taste}};
-				foreach my $npc (@{$ModData->{'Objects'}{$i}{'GiftTastes'}{$taste}}) {
-					if (not exists $by_npc{$npc}) {
-						$by_npc{$npc} = {};
-					}
-					if (not exists $by_npc{$npc}{$taste}) {
-						$by_npc{$npc}{$taste} = [];
-					}
-					push @{$by_npc{$npc}{$taste}}, $i;
+		}
+	}
+	
+	# Gather universal info from Game data. Need categories regardless of whether we include vanilla items.
+	foreach my $t (keys %tasteToIndex) {
+		$universal{$t} = {};
+		if (defined $GameData->{'NPCGiftTastes'}{"Universal_$t"}) {
+			my @temp = split(' ', $GameData->{'NPCGiftTastes'}{"Universal_$t"}{'raw'});
+			foreach my $i (@temp) {
+				$universal{$t}{$i} = 1;
+			}
+		}
+	}
+	# Gather specific NPC info from Game data too. Again, the categories are mandatory.
+	foreach my $n (@npcs) {
+		$specific{$n} = {};
+		if (defined $GameData->{'NPCGiftTastes'}{$n}) {
+			foreach my $t (keys %tasteToIndex) {
+				my @temp = split(' ', $GameData->{'NPCGiftTastes'}{$n}{'split'}[$tasteToIndex{$t}+1]);
+				foreach my $i (@temp) {
+					$specific{$n}{$i} = $tasteToIndex{$t};
 				}
 			}
 		}
 	}
+
+	print STDOUT "  Processing tastes for game items\n";
+	# The biggest problem here is excluding items which aren't normally available such as the different types of
+	#   mine stones. We are going to have to hardcode exclusions.
+	foreach my $id (keys %{$GameData->{'ObjectInformation'}}) {
+		my $name = $GameData->{'ObjectInformation'}{$id}{'split'}[0];
+		next if ($name eq 'Stone' and $id ne 390);
+		next if ($name eq 'Weeds');
+		next if ($name eq 'Twig');
+		next if ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /asdf/);
+		next if ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /Ring/);
+		next if ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /Quest/);
+		next if ($id == 458); #Bouquet
+		next if ($id == 461); #Decorative Pot
+		next if ($id == 326); #Dwarvish Translation Guide
+		next if ($id == 803); #Iridium Milk
+		next if ($id == 30); #Lumber
+		next if ($id == 460); #Mermaid's Pendant
+		next if ($id == 809); #Movie Ticket
+		next if ($id == 434); #Stardrop
+		next if ($id == 808); #Void Ghost Pendant
+		next if ($id == 277); #Wilted Bouquet
+		
+		my @temp = split(' ', $GameData->{'ObjectInformation'}{$id}{'split'}[3]);
+		my $category = 0;
+		if (scalar (@temp) > 1) {
+			$category = $temp[1];
+		}
+		my $edibility = $GameData->{'ObjectInformation'}{$id}{'split'}[2];
+		my $price = $GameData->{'ObjectInformation'}{$id}{'split'}[1];
+		
+		# Actual taste processing begins here, with universal categories
+		my $tasteForItem = 8;
+		if (exists $universal{'Love'}{$category}) {
+			$tasteForItem = 0;
+		} elsif (exists $universal{'Hate'}{$category}) {
+			$tasteForItem = 6;
+		} elsif (exists $universal{'Like'}{$category}) {
+			$tasteForItem = 2;
+		} elsif (exists $universal{'Dislike'}{$category}) {
+			$tasteForItem = 4;
+		}
+		my $wasIndividualUniversal = 0;
+		my $skipDefaultValueRules = 0;
+		# Next the code checks the Universals for the exact item ID.
+		if (exists $universal{'Love'}{$id}) {
+			$tasteForItem = 0;
+			$wasIndividualUniversal = 1;
+		} elsif (exists $universal{'Hate'}{$id}) {
+			$tasteForItem = 6;
+			$wasIndividualUniversal = 1;
+		} elsif (exists $universal{'Like'}{$id}) {
+			$tasteForItem = 2;
+			$wasIndividualUniversal = 1;
+		} elsif (exists $universal{'Dislike'}{$id}) {
+			$tasteForItem = 4;
+			$wasIndividualUniversal = 1;
+		} elsif (exists $universal{'Neutral'}{$id}) {
+			$tasteForItem = 8;
+			$wasIndividualUniversal = 1;
+			$skipDefaultValueRules = 1;
+		}
+		# After that, it sets some defaults based on edibility & price for neutral items
+		my $pennyOverride = -1;
+		if ($tasteForItem == 8 and not $skipDefaultValueRules) {
+			if ($edibility != -300 and $edibility < 0) {
+				$tasteForItem = 6;
+			} elsif ($price < 20) {
+				$tasteForItem = 4;
+			} elsif ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /Arch/) {
+				$tasteForItem = 4;
+				$pennyOverride = 2;
+			} 
+		}
+		# Now we go into NPC specifics
+		foreach my $n (@npcs) {
+			my $thisTasteForItem = $tasteForItem; # resetting for each NPC
+			if ($n eq 'Penny' and $pennyOverride >= 0) {
+				$thisTasteForItem = $pennyOverride;
+			}
+			if (exists $specific{$n}{$id}) {
+				$thisTasteForItem = $specific{$n}{$id};
+			} else {
+				if (not $wasIndividualUniversal) {
+					# Now we need to check for an individual NPC category match.
+					if (exists $specific{$n}{$category}) {
+						$thisTasteForItem = $specific{$n}{$category};
+					}
+				}
+			}
+			# We're done. Store the tastes
+			$by_item{$id}{$n} = $tasteFromIndex{$thisTasteForItem};
+			push @{$by_npc{$n}{$tasteFromIndex{$thisTasteForItem}}}, $id;
+		}
+	}
+	
+	print STDOUT "  Processing tastes for mod items\n";
+	# Iterate all mod objects to get the taste; uses some logic from StardewValley.NPC.getGiftTasteForThisItem()
+	foreach my $i (keys %{$ModData->{'Objects'}}) {
+		# Grab some info from the object data with reasonable defaults.
+		my $category = 0;
+		if (defined $ModData->{'Objects'}{$i}{'Category'}) {
+			$category = GetCategoryNum($ModData->{'Objects'}{$i}{'Category'});
+		}
+		my $edibility = -300;
+		if (defined $ModData->{'Objects'}{$i}{'Edibility'}) {
+			$edibility = $ModData->{'Objects'}{$i}{'Edibility'};
+		}
+		my $price = 0;
+		if (defined $ModData->{'Objects'}{$i}{'Price'}) {
+			$price = $ModData->{'Objects'}{$i}{'Price'};
+		}		
+		
+		# Actual taste processing begins here
+		my $tasteForItem = 8;
+		if (exists $universal{'Love'}{$category}) {
+			$tasteForItem = 0;
+		} elsif (exists $universal{'Hate'}{$category}) {
+			$tasteForItem = 6;
+		} elsif (exists $universal{'Like'}{$category}) {
+			$tasteForItem = 2;
+		} elsif (exists $universal{'Dislike'}{$category}) {
+			$tasteForItem = 4;
+		}
+		my $wasIndividualUniversal = 0;
+		my $skipDefaultValueRules = 0;
+		# Next the code checks the Universals for the exact item ID. This shouldn't ever be a thing with JA items.
+		# After that, it sets some defaults based on edibility & price for neutral items
+		if ($tasteForItem == 8 and not $skipDefaultValueRules) {
+			if ($edibility != -300 and $edibility < 0) {
+				$tasteForItem = 6;
+			} elsif ($price < 20) {
+				$tasteForItem = 4;
+			} # Next it sets "Arch" items to liked for Penny but custom items should never be "Arch"
+		}
+		# Okay, preliminaries are out of the way, so now it checks for the actual item defined in the gift tastes
+		# This next bit is tricky. We need to know if there is a specific gift taste for this item for each NPC,
+		#  but if there isn't we still need to check for possible category matches. So we will build a temporary
+		#  lookup of whatever the mod defined first. We are using the numerical taste here for consistency
+		my %modDefinedTaste = ();
+		if (defined $ModData->{'Objects'}{$i}{'GiftTastes'}) {
+			foreach my $t (keys %tasteToIndex) {
+				if (defined $ModData->{'Objects'}{$i}{'GiftTastes'}{$t}) {
+					foreach my $n (@{$ModData->{'Objects'}{$i}{'GiftTastes'}{$t}}) {
+						$modDefinedTaste{$n} = $tasteToIndex{$t};
+					}
+				}
+			}
+		}
+		# Now we can go back to the game logic to finish the checks.
+		foreach my $n (@npcs) {
+			my $thisTasteForItem = $tasteForItem; # resetting for each NPC
+			if (exists $modDefinedTaste{$n}) {
+				$thisTasteForItem = $modDefinedTaste{$n};
+			} else {
+				if (not $wasIndividualUniversal) {
+					# Now we need to check for an individual NPC category match.
+					if (exists $specific{$n}{$category}) {
+						$thisTasteForItem = $specific{$n}{$category};
+					}
+				}
+			}
+			# We're done. Store the taste s
+			$by_item{$i}{$n} = $tasteFromIndex{$thisTasteForItem};
+			push @{$by_npc{$n}{$tasteFromIndex{$thisTasteForItem}}}, $i;
+		}
+		if (not exists $ModList{$ModData->{'Objects'}{$i}{'__MOD_ID'}}) {
+			$ModList{$ModData->{'Objects'}{$i}{'__MOD_ID'}} = 1;
+		}
+
+	}
 	
 	my $longdesc = <<"END_PRINT";
-<p>A summary of gift tastes. Currently very basic. Notes:</p>
-<ul><li>This only lists what is actually defined in the JSON files and does not include
-categories or universals (e.g. Acorn Squash is a vegetable which makes it liked by Emily and disliked by Sam).</li>
-<li>As an addendum to the above, NPCs which are not explicitly mentioned default to Neutral and this does
-not currently take that into account</li>
-<li>There are several
-typos in NPC names which these docs simply reproduce; these errors will be forwarded to the PPJA team later.</li>
+<p>A summary of gift tastes for items from various sources. In the list below, the checkboxes can be used to show or hide
+information specific to that particular source; the symbol &#x24c5 indicates an official PPJA mod. Additionally there
+are some buttons which will show or hide multiple sources at once.</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+END_PRINT
+
+	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
+		my $filter = $ModInfo->{$k}{'__FILTER'};
+		my $info = GetExtendedModInfo($k, 1, 2);
+		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $class = "filter_check";
+		if ($info->{'ppja'}) {
+			$class .= " filter_ppja";
+		}
+		$longdesc .= <<"END_PRINT";
+<label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$prefix$info->{'info'}</label><br />
+END_PRINT
+	}
+
+	$longdesc .= <<"END_PRINT";
+</fieldset>
+<fieldset id="filter_control" class="filter_set">
+<button type="button" id="filter_check_all_off">All Sources Off</button>
+<button type="button" id="filter_check_all_on">All Sources On</button>
+<button type="button" id="filter_check_ppja">PPJA Mods Only</button>
+<button type="button" id="filter_check_nonppja">Non-PPJA Mods Only</button>
+</fieldset>
+<p>This summary only lists vanilla NPCs but includes a large number of items; thus the table is very big and somewhat hard to read.
+Each cell has a tooltip listing the NPC, item, and preference to make it a bit easier. Additionally, the columns are sortable
+in order to focus on a specific NPC and the standard mod filters are in place. Both sorting and filtering may be slow
+depending on the capabilities of your browser and device.
+For brevity, the entries use symbols to indicate the preferences. The key to the symbols is as follows:</p>
+<table class="output"><tr><th>Taste</th><th>Symbol</th></tr>
+<tr><td class="name">Love</td><td class="gift_0">$tasteSymbols{'Love'}</td></tr>
+<tr><td class="name">Like</td><td class="gift_1">$tasteSymbols{'Like'}</td></tr>
+<tr><td class="name">Neutral</td><td class="gift_2">$tasteSymbols{'Neutral'}</td></tr>
+<tr><td class="name">Dislike</td><td class="gift_3">$tasteSymbols{'Dislike'}</td></tr>
+<tr><td class="name">Hate</td><td class="gift_4">$tasteSymbols{'Hate'}</td></tr>
+</table>
 END_PRINT
 	print GetHeader("Gift Tastes", qq(Summary of gift tastes for items from PPJA (and other) mods), $longdesc);
 
-	print qq(<div class="panel"><h2>Tastes by Item</h2>);
-	foreach my $i (sort keys %by_item) {
-		print "<h3>$i</h3><ul>";
-		foreach my $taste (@tastes) {
-			if (exists $by_item{$i}{$taste} and (scalar @{$by_item{$i}{$taste}})) {
-				print qq(<li><span class="strong">$taste:</span> ) . join(", ", sort @{$by_item{$i}{$taste}});
-			} else {
-				print qq(<li><span class="strong">$taste:</span> <span class="none">(None)</span>);
-			}			
-		}
-		print "</ul>";
-	}
-	print "</div>";
-	
-	print qq(<div class="panel">Tastes by NPC</h2>);
-	foreach my $npc (sort keys %by_npc) {
-		print "<h3>$npc</h3><ul>";
-		foreach my $taste (@tastes) {
-			if (exists $by_npc{$npc}{$taste} and (scalar @{$by_npc{$npc}{$taste}})) {
-				print qq(<li><span class="strong">$taste:</span> ) . join(", ", sort @{$by_npc{$npc}{$taste}});
-			} else {
-				print qq(<li><span class="strong">$taste:</span> <span class="none">(None)</span>);
-			}
-		}
-		print "</ul>";
-	}
-	print "</div>";
+	#print GetTOCStart();
+	# Print the rest of the TOC
+	#print GetTOCEnd();
 
+	print qq(<div class="panel"><h2>Gift Tastes by Item</h2>);
+	print <<"END_PRINT";
+<table class="sortable output">
+<thead>
+<tr>
+<th>Item</th>
+END_PRINT
+
+	foreach my $n (@npcs) {
+		my $id = "character_" . lc $n;
+		print qq(<th><img class="characters" id="$id" src="img/blank.png" alt="$n"></th>);
+	}
+	
+	print <<"END_PRINT";
+</tr>
+</thead>
+<tbody>
+END_PRINT
+	my $count = 0;
+	# This sort is so hacky now that vanilla IDs are possible keys
+	foreach my $i (sort {StripHTML(GetItem($a, "", 0)) cmp StripHTML(GetItem($b, "", 0))} keys %by_item) {
+		my $name = GetItem($i);
+		my $img = GetImgTag($i);
+		my $filter = "filter_base_game";
+		my $tip_name = StripHTML(GetItem($i, "", 0));
+		if (not looks_like_number($i)) {
+			$filter = "$ModInfo->{$ModData->{'Objects'}{$i}{'__MOD_ID'}}{'__FILTER'}";
+			$tip_name = encode_entities($i);
+		}
+		
+		print qq(<tr class="$filter">);
+		print qq(<td class="name">$img $name</td>);
+		foreach my $n (@npcs) {
+			my $t = $tasteSymbols{$by_item{$i}{$n}};
+			my $tt = "$n: $by_item{$i}{$n} for $tip_name";
+			my $sort = qq(sorttable_customkey="$tasteSort{$by_item{$i}{$n}}");
+			print qq(<td tooltip="$tt" $sort class="gift_$tasteSort{$by_item{$i}{$n}}">$t</td>);
+		}
+		print "</td>";
+		$count++;
+	}
+	
+	print <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
+
+	print STDOUT "  Table contains $count rows and " . (1 + scalar(@npcs)) . " columns.\n";
 	print GetFooter();
 
 	close $FH or die "Error closing file";
-	
 }
 
 ###################################################################################################
@@ -3239,6 +3530,7 @@ sub WriteCSS {
 	open $FH, ">$DocBase/ppja-ref-img.css" or die "Can't open ppja-ref-img.css for writing: $!";
 	select $FH;
 
+	print STDOUT "Generating CSS for image sprites\n";
 	# First, the basic classes for each spritesheet
 	print <<"END_PRINT";
 /* ppja-ref-img.css
@@ -3408,6 +3700,18 @@ img.quality_x2 {
 	left: 8px;
 	z-index: 2;
 }
+img.characters {
+	vertical-align: -2px;
+	width: 16px;
+	height: 16px;
+	background-image:url("./img/characters.png")
+}
+img.characters_x2 {
+	vertical-align: -2px;
+	width: 32px;
+	height: 32px;
+	background-image:url("./img/characters_x2.png")
+}
 END_PRINT
 
 	# Now a few hardcoded extras
@@ -3428,7 +3732,7 @@ img#Weapon_Scythe_x2 {
 }
 END_PRINT
 	
-	# Finally, everything that was gathered in SpriteInfo
+	# Everything that was gathered in SpriteInfo
 	foreach my $id (sort keys %$SpriteInfo) {
 		my $x = $SpriteInfo->{$id}{'x'};
 		my $y = $SpriteInfo->{$id}{'y'};
@@ -3437,6 +3741,29 @@ img#$id {
 	background-position: ${x}px ${y}px;
 }
 END_PRINT
+	}
+	
+	# Characters are also somewhat hardcoded as they are processed by a different image script
+	# To have just headshots, we need to adjust the y based upon the following values and keep the img.character definition 16x16.
+	# For full-body sprites, we'd ignore the offsets (keeping y=0 for everyone) and make the img.characters definition 16x32.
+	#my @npcs = qw(Abigail Alex Bouncer Caroline Clint Demetrius Dwarf Elliott Emily Evelyn George Governor Gunther Gus Haley Harvey Henchman Jas Jodi Kent Krobus Leah Lewis Linus Marcello Mariner Marlon Marnie Maru Morris MrQi Pam Penny Pierre Robin Sam Sandy Sebastian Shane Vincent Willy Wizard);
+	my %npcs = ('Abigail' => 5,'Alex' => 3,'Bouncer' => 4,'Caroline' => 7,'Clint' => 3,'Demetrius' => 1,'Dwarf' => 12,'Elliott' => 3,'Emily' => 4,'Evelyn' => 8,'George' => 7,'Governor' => 4,'Gunther' => 3,'Gus' => 2,'Haley' => 6,'Harvey' => 2,'Henchman' => 3,'Jas' => 7,'Jodi' => 6,'Kent' => 1,'Krobus' => 8,'Leah' => 6,'Lewis' => 3,'Linus' => 7,'Marcello' => 2,'Mariner' => 1,'Marlon' => 3,'Marnie' => 6,'Maru' => 6,'Morris' => 2,'MrQi' => 1,'Pam' => 7,'Penny' => 7,'Pierre' => 3,'Robin' => 4,'Sam' => 0,'Sandy' => 3,'Sebastian' => 4,'Shane' => 4,'Vincent' => 9,'Willy' => 2,'Wizard' => 1,);
+
+	my $x = 0;
+	foreach my $n (sort keys %npcs) {
+		my $xx = $x*2;
+		my $y = 0 - $npcs{$n};
+		my $yy = $y*2;
+		my $id = "character_" . lc($n);
+		print <<"END_PRINT";
+img#$id {
+	background-position: ${x}px ${y}px;
+}
+img#${id}_x2 {
+	background-position: ${xx}px ${yy}px;
+}
+END_PRINT
+		$x -= 16;
 	}
 	
 	close $FH;

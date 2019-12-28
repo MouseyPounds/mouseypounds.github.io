@@ -100,6 +100,21 @@ td.value {
 td.foot_total {
 	text-align: right;
 }
+.gift_0 {
+	background-color: #ddf;
+}
+.gift_1 {
+	background-color: #bbe;
+}
+.gift_2 {
+	background-color: #99d;
+}
+.gift_3 {
+	background-color: #77c;
+}
+.gift_4 {
+	background-color: #55b;
+}
 table.output th, table.output td, table.recipe th, table.recipe td {
 	padding: 3px 8px;
 }

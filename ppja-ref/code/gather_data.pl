@@ -318,7 +318,7 @@ sub ParseGameData {
 	# There are only certain folders we explicitly want to open; these are hardcoded
 	# Files are assumed to be JSON format without headers, like those from StardewXNBHack
 	my @Filenames = qw(ObjectInformation Crops BigCraftablesInformation CookingRecipes CraftingRecipes 
-						FruitTrees TV/CookingChannel ObjectContextTags NPCDispositions);
+						FruitTrees TV/CookingChannel ObjectContextTags NPCDispositions NPCGiftTastes);
 	LogMessage("Parsing Game Data in $BaseDir", 1);
 	foreach my $f (@Filenames) {
 		LogMessage("  Checking for $f", 1);
