@@ -23,29 +23,38 @@
 </head>
 <body>
 <div class="panel" id="header"><h1>Mousey's PPJA (and Friends) Reference: Crop Summary</h1>
-<p>A summary of growth and other basic information for crops from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
+<p>A summary of growth and other basic information for crops from various sources. In the list below, the checkboxes can be used to show or hide
+information specific to that particular source; the symbol &#x24c5 indicates an official PPJA mod. Additionally there
+are some buttons which will show or hide multiple sources at once.</p>
 <fieldset id="filter_options" class="filter_set">
 <label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
 Stardew Valley base game version 1.4.3</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_ppja_ancientcrops" id="filter_ppja_ancientcrops" value="show" checked="checked">
-Ancient Crops version 2.0.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/4472">Nexus page</a>)</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_PPJA_cannabiskit" id="filter_PPJA_cannabiskit" value="show" checked="checked">
-Cannabis Kit for JsonAssets version 2.0.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/1741">Nexus page</a>)</label><br />
+<label><input class="filter_check filter_ppja" type="checkbox" name="filter_ppja_ancientcrops" id="filter_ppja_ancientcrops" value="show" checked="checked">
+&#x24c5; Ancient Crops version 2.0.3 (<a href="https://www.nexusmods.com/stardewvalley/mods/4472">Nexus page</a>)</label><br />
+<label><input class="filter_check" type="checkbox" name="filter_BFV_FruitVeggie" id="filter_BFV_FruitVeggie" value="show" checked="checked">
+Bonster's Fruits and Veggies version 2.0.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/3438">Nexus page</a>)</label><br />
+<label><input class="filter_check filter_ppja" type="checkbox" name="filter_PPJA_cannabiskit" id="filter_PPJA_cannabiskit" value="show" checked="checked">
+&#x24c5; Cannabis Kit for JsonAssets version 2.0.0 (<a href="https://www.nexusmods.com/stardewvalley/mods/1741">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_minervamaga_JA_EemieCrops" id="filter_minervamaga_JA_EemieCrops" value="show" checked="checked">
-Eemie's Crops version 1.3.1 (<a href="https://www.nexusmods.com/stardewvalley/mods/3523">Nexus page</a>)</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_ParadigmNomad_FantasyCrops" id="filter_ParadigmNomad_FantasyCrops" value="show" checked="checked">
-Fantasy Crops version 1.4.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/1610">Nexus page</a>)</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked">
-Farmer to Florist version 3.0.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked">
-Fresh Meat version 2.1.1 (<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_ppja_fruitsandveggies" id="filter_ppja_fruitsandveggies" value="show" checked="checked">
-Fruits and Veggies for JsonAssets version 2.0.7 (<a href="https://www.nexusmods.com/stardewvalley/mods/1598">Nexus page</a>)</label><br />
-<label><input class="filter_check" type="checkbox" name="filter_mizu_flowers" id="filter_mizu_flowers" value="show" checked="checked">
-Mizu's Flowers for JsonAssets version 1.6.3 (<a href="https://www.nexusmods.com/stardewvalley/mods/2028">Nexus page</a>)</label><br />
+Eemie's Crops version 1.3.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/3523">Nexus page</a>)</label><br />
+<label><input class="filter_check filter_ppja" type="checkbox" name="filter_ParadigmNomad_FantasyCrops" id="filter_ParadigmNomad_FantasyCrops" value="show" checked="checked">
+&#x24c5; Fantasy Crops version 1.4.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/1610">Nexus page</a>)</label><br />
+<label><input class="filter_check filter_ppja" type="checkbox" name="filter_kildarien_farmertoflorist" id="filter_kildarien_farmertoflorist" value="show" checked="checked">
+&#x24c5; Farmer to Florist version 3.0.3 (<a href="https://www.nexusmods.com/stardewvalley/mods/2075">Nexus page</a>)</label><br />
+<label><input class="filter_check filter_ppja" type="checkbox" name="filter_paradigmnomad_freshmeat" id="filter_paradigmnomad_freshmeat" value="show" checked="checked">
+&#x24c5; Fresh Meat version 2.1.2 (<a href="https://www.nexusmods.com/stardewvalley/mods/1721">Nexus page</a>)</label><br />
+<label><input class="filter_check filter_ppja" type="checkbox" name="filter_ppja_fruitsandveggies" id="filter_ppja_fruitsandveggies" value="show" checked="checked">
+&#x24c5; Fruits and Veggies for JsonAssets version 2.0.7 (<a href="https://www.nexusmods.com/stardewvalley/mods/1598">Nexus page</a>)</label><br />
+<label><input class="filter_check filter_ppja" type="checkbox" name="filter_mizu_flowers" id="filter_mizu_flowers" value="show" checked="checked">
+&#x24c5; Mizu's Flowers for JsonAssets version 1.6.3 (<a href="https://www.nexusmods.com/stardewvalley/mods/2028">Nexus page</a>)</label><br />
 <label><input class="filter_check" type="checkbox" name="filter_BlatantDecoy_SodaVine" id="filter_BlatantDecoy_SodaVine" value="show" checked="checked">
 Soda Vine version 1.0.1 (<a href="https://www.nexusmods.com/stardewvalley/mods/4482">Nexus page</a>)</label><br />
+</fieldset>
+<fieldset id="filter_control" class="filter_set">
+<button type="button" id="filter_check_all_off">All Sources Off</button>
+<button type="button" id="filter_check_all_on">All Sources On</button>
+<button type="button" id="filter_check_ppja">PPJA Mods Only</button>
+<button type="button" id="filter_check_nonppja">Non-PPJA Mods Only</button>
 </fieldset>
 <p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
 the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
@@ -788,6 +797,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">9</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">135</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Chayote" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Chayote" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Chayote</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Chayote_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Chayote Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">150</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.6</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">450</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">570</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">570</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">690</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">690</td>
 </tr><tr class="filter_paradigmnomad_freshmeat">
 <td class="icon"><img class="crops" id="Crop_Chicken" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chicken" src="img/blank.png" alt=""> <span tooltip="from Fresh Meat">Chicken</span></td>
@@ -825,6 +871,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">100</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Cloudberry" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Cloudberry" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cloudberry</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Cloudberry_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cloudberry Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">4.2</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">1915</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">2314</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">2314</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">2713</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">2713</td>
 </tr><tr class="filter_ParadigmNomad_FantasyCrops">
 <td class="icon"><img class="crops" id="Crop_Coal_Root" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_382" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Coal">Coal</a></td>
@@ -936,6 +1019,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">4</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">-100</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Cranberry_Beans" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Cranberry_Beans" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cranberry Beans</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Cranberry_Bean_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cranberry Bean Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">80</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">3.1</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">0</td>
+<td class="col_0 value">1548</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">1548</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">1548</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1780</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1780</td>
 </tr><tr class="filter_kildarien_farmertoflorist">
 <td class="icon"><img class="crops" id="Crop_Delphinium" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Delphinium" src="img/blank.png" alt=""> <span tooltip="from Farmer to Florist">Delphinium</span></td>
@@ -1343,6 +1463,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">420</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Lingonberry" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Lingonberry" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Lingonberry</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Lingonberry_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Lingonberry Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.6</td>
+<td class="value">60</td>
+<td class="value">12</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">10</td>
+<td class="col_0 value">0</td>
+<td class="col_0 value">1510</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">10</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">1510</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">11</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1666</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">2</td>
+<td class="col_25 value">11</td>
+<td class="col_25 value">1</td>
+<td class="col_25 value">1666</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">12</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">1822</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Maguey" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Maguey" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Maguey</span></td>
@@ -1861,6 +2018,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">0</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Red_Currant" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Red_Currant" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Red Currant</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Red_Currant_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Red Currant Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">4.2</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">1495</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">1810</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">1810</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">2125</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">2125</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Red_Onion" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Red_Onion" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Red Onion</span></td>
@@ -1972,6 +2166,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">4</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">199</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Rose_Hips" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Rose_Hips" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Rose Hips</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Rose_Hip_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Rose Hip Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">80</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">2.1</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">708</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">865</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">865</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1023</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">1023</td>
 </tr><tr class="filter_mizu_flowers">
 <td class="icon"><img class="crops" id="Crop_Shaded_Violet" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Shaded_Violet" src="img/blank.png" alt=""> <span tooltip="from Mizu's Flowers for JsonAssets">Shaded Violet</span></td>
@@ -2453,6 +2684,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">9</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">630</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_White_Alpine_Strawberry" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_White_Alpine_Strawberry" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">White Alpine Strawberry</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_White_Alpine_Strawberry_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">White Alpine Strawberry Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.6</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">10</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">2143</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">10</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">2390</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">11</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">2637</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">2</td>
+<td class="col_25 value">11</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">2637</td>
+<td class="col_35 value">6</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">11</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">2637</td>
 </tr><tr class="filter_kildarien_farmertoflorist">
 <td class="icon"><img class="crops" id="Crop_Wisteria" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Wisteria" src="img/blank.png" alt=""> <span tooltip="from Farmer to Florist">Wisteria</span></td>
@@ -3019,6 +3287,80 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">250</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Benne_Sesame" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Benne_Sesame" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Benne Sesame</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Benne_Sesame_Seed" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Benne Sesame Seed</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>Yes</td>
+<td>--</td>
+<td class="value">2.2</td>
+<td class="value">80</td>
+<td class="value">14</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">0</td>
+<td class="col_0 value">378</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">378</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">378</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">4</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">504</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">630</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Blackcurrant" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Blackcurrant" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Blackcurrant</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Blackcurrant_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Blackcurrant Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">4.2</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">1495</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">1810</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">1810</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">2125</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">2125</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Blue_Agave" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Blue_Agave" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Blue Agave</span></td>
@@ -3056,6 +3398,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">3</td>
 <td class="col_35 value">3</td>
 <td class="col_35 value">300</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Blue_Corn" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Blue_Corn" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Blue Corn</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Blue_Corn_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Blue Corn Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">65</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.6</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">11</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">6</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">655</td>
+<td class="col_10 value">9</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">0</td>
+<td class="col_10 value">775</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">1</td>
+<td class="col_20 value">775</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">1</td>
+<td class="col_25 value">775</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">775</td>
 </tr><tr class="filter_PPJA_cannabiskit">
 <td class="icon"><img class="crops" id="Crop_Blue_Dream" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Blue_Dream" src="img/blank.png" alt=""> <span tooltip="from Cannabis Kit for JsonAssets">Blue Dream</span></td>
@@ -3315,6 +3694,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">3</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">60</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Cardamom" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Cardamom" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cardamom</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Cardamom_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cardamom Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.1</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">11</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">6</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">895</td>
+<td class="col_10 value">9</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">0</td>
+<td class="col_10 value">1053</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">1</td>
+<td class="col_20 value">1053</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">1</td>
+<td class="col_25 value">1053</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">1053</td>
 </tr><tr class="filter_kildarien_farmertoflorist">
 <td class="icon"><img class="crops" id="Crop_Carnation" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Carnation" src="img/blank.png" alt=""> <span tooltip="from Farmer to Florist">Carnation</span></td>
@@ -3426,6 +3842,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">3</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">75</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Chayote" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Chayote" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Chayote</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Chayote_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Chayote Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">150</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.6</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">450</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">570</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">570</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">690</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">690</td>
 </tr><tr class="filter_paradigmnomad_freshmeat">
 <td class="icon"><img class="crops" id="Crop_Chevon" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Chevon" src="img/blank.png" alt=""> <span tooltip="from Fresh Meat">Chevon</span></td>
@@ -3759,6 +4212,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">8</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">960</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Cowpeas" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Cowpeas" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cowpeas</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Cowpea_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cowpea Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.7</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1051</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">1051</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1212</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1212</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1212</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Cucumber" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cucumber" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Cucumber</span></td>
@@ -4684,6 +5174,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">350</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Maypop" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Maypop_Passion_Fruit" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Maypop Passion Fruit</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Maypop_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Maypop Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">80</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.6</td>
+<td class="value">175</td>
+<td class="value">23</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">1320</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">1600</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">1600</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1880</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">1880</td>
 </tr><tr class="filter_base_game">
 <td class="icon"><img class="game_crops" id="Crop_479" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_254" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Melon">Melon</a></td>
@@ -4758,6 +5285,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">500</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Nasturtium" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Nasturtium" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Nasturtium</span></td>
+<td class="name">Flower</td>
+<td class="name"><img class="objects" id="Object_Nasturtium_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Nasturtium Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.7</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">245</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">245</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">4</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">326</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">4</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">326</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">408</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Navy_Bean" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Navy_Bean" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Navy Bean</span></td>
@@ -4980,6 +5544,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">350</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Peppercorn" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Peppercorn" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Peppercorn</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Peppercorn_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Peppercorn Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">150</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.6</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">450</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">570</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">570</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">690</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">690</td>
 </tr><tr class="filter_kildarien_farmertoflorist">
 <td class="icon"><img class="crops" id="Crop_Petunia" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Petunia" src="img/blank.png" alt=""> <span tooltip="from Farmer to Florist">Petunia</span></td>
@@ -5091,6 +5692,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">300</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Prickly_Pear" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Prickly_Pear" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Prickly Pear</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Prickly_Pear_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Prickly Pear Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.7</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1051</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">1051</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1212</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1212</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1212</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Quinoa" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Quinoa" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Quinoa</span></td>
@@ -5461,6 +6099,117 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">4</td>
 <td class="col_35 value">4</td>
 <td class="col_35 value">199</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Rose_Hips" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Rose_Hips" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Rose Hips</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Rose_Hip_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Rose Hip Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">80</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">2.1</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">708</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">865</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">865</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1023</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">1023</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Roselle_Hibiscus" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Roselle_Hibiscus" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Roselle Hibiscus</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Roselle_Hibiscus_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Roselle Hibiscus Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">100</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.1</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">0</td>
+<td class="col_0 value">1297</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">1297</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">1297</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1496</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1496</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Scotch_Bonnet_Pepper" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Scotch_Bonnet_Pepper" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Scotch Bonnet Pepper</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Scotch_Bonnet_Pepper_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Scotch Bonnet Pepper Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.1</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1317</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">1317</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1516</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1516</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1516</td>
 </tr><tr class="filter_base_game">
 <td class="icon"><img class="game_crops" id="Crop_486" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_268" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Starfruit">Starfruit</a></td>
@@ -5720,6 +6469,80 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">200</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Summer_Squash" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Summer_Squash" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Summer Squash</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Summer_Squash_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Summer Squash Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.1</td>
+<td class="value">150</td>
+<td class="value">21</td>
+<td class="col_0 value">11</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">6</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1840</td>
+<td class="col_10 value">9</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">0</td>
+<td class="col_10 value">2155</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">1</td>
+<td class="col_20 value">2155</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">1</td>
+<td class="col_25 value">2155</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">2155</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Sunchoke" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Sunchoke" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Sunchoke</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Sunchoke_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Sunchoke Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.1</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">11</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">215</td>
+<td class="col_10 value">9</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">0</td>
+<td class="col_10 value">323</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">323</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">323</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">6</td>
+<td class="col_35 value">323</td>
 </tr><tr class="filter_base_game">
 <td class="icon"><img class="game_crops" id="Crop_431" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_421" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sunflower">Sunflower</a></td>
@@ -5757,6 +6580,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">5</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">200</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Taro" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Taro" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Taro</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Taro_Root" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Taro Root</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.6</td>
+<td class="value">175</td>
+<td class="value">23</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">0</td>
+<td class="col_0 value">690</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">690</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">690</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">4</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">920</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">1150</td>
 </tr><tr class="filter_PPJA_cannabiskit">
 <td class="icon"><img class="crops" id="Crop_Tobacco" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Tobacco" src="img/blank.png" alt=""> <span tooltip="from Cannabis Kit for JsonAssets">Tobacco</span></td>
@@ -6545,6 +7405,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">6</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">794</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Black_Beans" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Black_Beans" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Black Beans</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Black_Bean_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Black Bean Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.7</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1051</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">1051</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1212</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1212</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1212</td>
 </tr><tr class="filter_minervamaga_JA_EemieCrops">
 <td class="icon"><img class="crops" id="Crop_Black_Forest_Squash" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Black_Forest_Squash" src="img/blank.png" alt=""> <span tooltip="from Eemie's Crops">Black Forest Squash</span></td>
@@ -6619,6 +7516,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">6</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">204</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Blue_Corn" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Blue_Corn" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Blue Corn</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Blue_Corn_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Blue Corn Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">65</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.6</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">11</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">6</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">655</td>
+<td class="col_10 value">9</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">0</td>
+<td class="col_10 value">775</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">1</td>
+<td class="col_20 value">775</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">1</td>
+<td class="col_25 value">775</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">775</td>
 </tr><tr class="filter_PPJA_cannabiskit">
 <td class="icon"><img class="crops" id="Crop_Blue_Dream" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Blue_Dream" src="img/blank.png" alt=""> <span tooltip="from Cannabis Kit for JsonAssets">Blue Dream</span></td>
@@ -6841,6 +7775,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">7</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">822</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Candy_Roaster_Squash" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Candy_Roaster_Squash" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Candy Roaster Squash</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Candy_Roaster_Squash_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Candy Roaster Squash Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.7</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1051</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">1051</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1212</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1212</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1212</td>
 </tr><tr class="filter_PPJA_cannabiskit">
 <td class="icon"><img class="crops" id="Crop_Cannabis" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Cannabis" src="img/blank.png" alt=""> <span tooltip="from Cannabis Kit for JsonAssets">Cannabis</span></td>
@@ -7137,6 +8108,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">8</td>
 <td class="col_35 value">2</td>
 <td class="col_35 value">960</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Cowpeas" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Cowpeas" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cowpeas</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Cowpea_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Cowpea Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.7</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1051</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">1051</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1212</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1212</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1212</td>
 </tr><tr class="filter_base_game">
 <td class="icon"><img class="game_crops" id="Crop_493" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_282" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Cranberries">Cranberries</a></td>
@@ -7877,6 +8885,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">8</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">580</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Green_Chile" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Green_Chile" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Green Chile</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_Green_Chile_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Green Chile Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.1</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">7</td>
+<td class="col_0 value">1</td>
+<td class="col_0 value">1317</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">2</td>
+<td class="col_10 value">1317</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">0</td>
+<td class="col_20 value">1516</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">1516</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">8</td>
+<td class="col_35 value">1</td>
+<td class="col_35 value">1516</td>
 </tr><tr class="filter_PPJA_cannabiskit">
 <td class="icon"><img class="crops" id="Crop_Green_Crack" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Green_Crack" src="img/blank.png" alt=""> <span tooltip="from Cannabis Kit for JsonAssets">Green Crack</span></td>
@@ -8284,6 +9329,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">13</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">195</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Oats" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Oats" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Oats</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Oats_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Oats Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>Yes</td>
+<td>--</td>
+<td class="value">1.7</td>
+<td class="value">80</td>
+<td class="value">14</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">0</td>
+<td class="col_0 value">258</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">258</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">258</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">4</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">344</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">430</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Okra" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Okra" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Okra</span></td>
@@ -8395,6 +9477,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">9</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">1013</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Peppercorn" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Peppercorn" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Peppercorn</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Peppercorn_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Peppercorn Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">150</td>
+<td>--</td>
+<td>Yes</td>
+<td class="value">1.6</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">450</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">570</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">570</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">690</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">690</td>
 </tr><tr class="filter_paradigmnomad_freshmeat">
 <td class="icon"><img class="crops" id="Crop_Pork" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Pork" src="img/blank.png" alt=""> <span tooltip="from Fresh Meat">Pork</span></td>
@@ -8654,6 +9773,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">9</td>
 <td class="col_35 value">0</td>
 <td class="col_35 value">270</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Salsify" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Salsify" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Salsify</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Salsify_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Salsify Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.6</td>
+<td class="value">95</td>
+<td class="value">16</td>
+<td class="col_0 value">8</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">216</td>
+<td class="col_10 value">7</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">216</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">4</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">288</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">4</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">288</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">360</td>
 </tr><tr class="filter_PPJA_cannabiskit">
 <td class="icon"><img class="crops" id="Crop_Sativa" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Sativa" src="img/blank.png" alt=""> <span tooltip="from Cannabis Kit for JsonAssets">Sativa</span></td>
@@ -8913,6 +10069,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">3</td>
 <td class="col_35 value">6</td>
 <td class="col_35 value">-96</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Sunchoke" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Sunchoke" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Sunchoke</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Sunchoke_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Sunchoke Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>--</td>
+<td>--</td>
+<td class="value">2.1</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">11</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">215</td>
+<td class="col_10 value">9</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">0</td>
+<td class="col_10 value">323</td>
+<td class="col_20 value">8</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">323</td>
+<td class="col_25 value">8</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">323</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">6</td>
+<td class="col_35 value">323</td>
 </tr><tr class="filter_base_game">
 <td class="icon"><img class="game_crops" id="Crop_431" src="img/blank.png" alt=""></td>
 <td class="name"><img class="game_objects" id="Object_421" src="img/blank.png" alt=""> <a href="http://stardewvalleywiki.com/Sunflower">Sunflower</a></td>
@@ -9135,6 +10328,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">6</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">926</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_Taro" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_Taro" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Taro</span></td>
+<td class="name">Vegetable</td>
+<td class="name"><img class="objects" id="Object_Taro_Root" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">Taro Root</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a></td>
+<td class="value">50</td>
+<td>--</td>
+<td>--</td>
+<td class="value">1.6</td>
+<td class="value">175</td>
+<td class="value">23</td>
+<td class="col_0 value">9</td>
+<td class="col_0 value">--</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">0</td>
+<td class="col_0 value">690</td>
+<td class="col_10 value">8</td>
+<td class="col_10 value">--</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">690</td>
+<td class="col_20 value">7</td>
+<td class="col_20 value">--</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">690</td>
+<td class="col_25 value">6</td>
+<td class="col_25 value">--</td>
+<td class="col_25 value">4</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">920</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">--</td>
+<td class="col_35 value">5</td>
+<td class="col_35 value">2</td>
+<td class="col_35 value">1150</td>
 </tr><tr class="filter_ppja_fruitsandveggies">
 <td class="icon"><img class="crops" id="Crop_Thyme" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_Thyme" src="img/blank.png" alt=""> <span tooltip="from Fruits and Veggies for JsonAssets">Thyme</span></td>
@@ -9246,6 +10476,43 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <td class="col_35 value">13</td>
 <td class="col_35 value">1</td>
 <td class="col_35 value">195</td>
+</tr><tr class="filter_BFV_FruitVeggie">
+<td class="icon"><img class="crops" id="Crop_White_Currant" src="img/blank.png" alt=""></td>
+<td class="name"><img class="objects" id="Object_White_Currant" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">White Currant</span></td>
+<td class="name">Fruit</td>
+<td class="name"><img class="objects" id="Object_White_Currant_Seeds" src="img/blank.png" alt=""> <span tooltip="from Bonster's Fruits and Veggies">White Currant Seeds</span></td>
+<td><a href="http://stardewvalleywiki.com/Pierre%27s_General_Store">Pierre</a><br />(Year 2+)</td>
+<td class="value">80</td>
+<td>--</td>
+<td>--</td>
+<td class="value">4.2</td>
+<td class="value">75</td>
+<td class="value">14</td>
+<td class="col_0 value">13</td>
+<td class="col_0 value">3</td>
+<td class="col_0 value">5</td>
+<td class="col_0 value">2</td>
+<td class="col_0 value">1495</td>
+<td class="col_10 value">11</td>
+<td class="col_10 value">3</td>
+<td class="col_10 value">6</td>
+<td class="col_10 value">1</td>
+<td class="col_10 value">1810</td>
+<td class="col_20 value">10</td>
+<td class="col_20 value">3</td>
+<td class="col_20 value">6</td>
+<td class="col_20 value">2</td>
+<td class="col_20 value">1810</td>
+<td class="col_25 value">9</td>
+<td class="col_25 value">3</td>
+<td class="col_25 value">7</td>
+<td class="col_25 value">0</td>
+<td class="col_25 value">2125</td>
+<td class="col_35 value">9</td>
+<td class="col_35 value">3</td>
+<td class="col_35 value">7</td>
+<td class="col_35 value">0</td>
+<td class="col_35 value">2125</td>
 </tr><tr class="filter_PPJA_cannabiskit">
 <td class="icon"><img class="crops" id="Crop_White_Widow" src="img/blank.png" alt=""></td>
 <td class="name"><img class="objects" id="Object_White_Widow" src="img/blank.png" alt=""> <span tooltip="from Cannabis Kit for JsonAssets">White Widow</span></td>

@@ -12,6 +12,7 @@ use Storable;
 use Math::Round;
 use Data::Dumper;
 use Imager;
+use HTML::Entities;
 
 my $GameData = retrieve("../local/cache_GameData");
 my $ModData = retrieve("../local/cache_ModData");
@@ -160,7 +161,8 @@ sub GetItem {
 				warn "Couldn't determine parent mod for $input";
 			}
 			$outputSimple = $input;
-			$output = qq(<span tooltip="from $mod">$input</span>);
+			my $encoded = encode_entities($input);
+			$output = qq(<span tooltip="from $mod">$encoded</span>);
 		} else {
 			foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
 				if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
@@ -305,7 +307,7 @@ sub GetCategory {
 #   isBig - [optional] true value to use x2 sprites, false (default) otherwise
 #   extraClasses - [optional] for additional class tags that need to be added
 sub GetImgTag {
-	my $input = shift;
+	my $input = decode_entities(shift);
 	if (not defined $input or $input eq "") {
 		warn "GetImgTag can't understand the input";
 		return "";
@@ -1152,7 +1154,16 @@ sub GetNexusKey {
 			}
 		}
 	}
-	print STDOUT "** GetNexusKey did not find a key for ($modID) and is returning an empty string\n";
+	# Hardcoded substitutions for known mods which don't supply an update key in their manifest.
+	if ($modID eq 'Stupiddullhans.BFAVquails') {
+		return "4847";
+	} elsif ($modID eq 'TrentNewRaccoons') {
+		return "4132";
+	} elsif ($modID eq 'MythicPhoenix.BFAVGoldenGoose') {
+		return "4432";
+	} 
+	# Currently suppressing this because so many of the "sub-mods" don't have this that it dominates the output
+	#print STDOUT "** GetNexusKey did not find a key for ($modID) and is returning an empty string\n";
 	return "";
 }
 
@@ -1183,17 +1194,9 @@ sub GetModInfo {
 		if (exists $ModInfo->{$modID}) {
 			$name =$ModInfo->{$modID}{'Name'};
 			$version = $ModInfo->{$modID}{'Version'};
-			# Some known mod components don't contain an update key but are companions to other
-			#  known components which do. This section hardcodes that substitution.
-			my $lookupID = $modID;
-			if ($modID eq 'ppja.avcfr') {
-				$lookupID = 'ppja.artisanvalleymachinegoods';
-			} elsif ($modID eq 'ppja.MoreRecipesMeat') {
-				$lookupID = 'ppja.evenmorerecipes';
-			} elsif ($modID eq 'kildarien.farmertofloristcfr') {
-				$lookupID = 'kildarien.farmertoflorist';
-			}
-			my $NexusKey = GetNexusKey($lookupID);
+			# We no longer handle missing update keys for "sub-mods"; GetExtendedModInfo can instead
+			#  be used to get the parent ID and the parent can be looked up to get the key.
+			my $NexusKey = GetNexusKey($modID);
 			if ($NexusKey eq "") {
 				$includeLink = 0;
 			}
@@ -1215,6 +1218,163 @@ sub GetModInfo {
 	} else {
 		return qq($name version $version);
 	}
+}
+
+# GetExtendedModInfo - wrapper for GetModInfo to include not only the basic info string, but any
+#   parent mod indicator and a flag if this is part of the PPJA family. This info is hardcoded.
+#
+#   modID - the uniqueID to lookup; will return base game info string if this is missing/blank
+#   includeLink - [optional] link the name to Nexus page (default is true)
+#   formatType - [optional] see below, 1 is default
+#                 1 is like <a href="url">Mod Name</a> Version
+#                 2 is like Mod Name Version (<a href="url">Nexus link</a>)
+sub GetExtendedModInfo {
+	my $modID = shift;
+	my $includeLink = shift;
+	my $formatType = shift;
+
+	my $basicInfo = GetModInfo($modID, $includeLink, $formatType);
+	my $parentID = undef;
+	my $isPPJA = 0;
+
+	# PPJA-stuff first; all of these will use the JA pack as the primary/parent
+	# From Ancient Crops
+	if ($modID eq 'ppja.ancientcrops') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'PPJAAncientCropsCP') {
+		$parentID = 'ppja.ancientcrops';
+		$isPPJA = 1;
+	} elsif ($modID eq 'PPJA.AncientCropsAddOn') { #PFM
+		$parentID = 'ppja.ancientcrops';
+		$isPPJA = 1;
+	# From Artisan Valley
+	} elsif ($modID eq 'ppja.artisanvalleymachinegoods') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.avcfr') { #CFR, legacy
+		$parentID = 'ppja.artisanvalleymachinegoods';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.artisanvalleyPFM') {
+		$parentID = 'ppja.artisanvalleymachinegoods';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.artisanvalleyCP') {
+		$parentID = 'ppja.artisanvalleymachinegoods';
+		$isPPJA = 1;
+	} elsif ($modID eq 'PPJA.BFAVQuailsAddOn') { #Supplied by Artisan Valley so AV is parent, but no ppja flag.
+		$parentID = 'ppja.artisanvalleymachinegoods';
+	} elsif ($modID eq 'PPJA.SweetToothAddOn') { #Supplied by Artisan Valley so AV is parent, but no ppja flag.
+		$parentID = 'ppja.artisanvalleymachinegoods';
+	# From Cannabis Kit
+	} elsif ($modID eq 'PPJA.cannabiskit') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'PPJA.CannabisKitAddOn') {
+		$parentID = 'PPJA.cannabiskit';
+		$isPPJA = 1;
+	# From Even More Recipes
+	} elsif ($modID eq 'ppja.evenmorerecipes') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.MoreRecipesMeat') {
+		$parentID = 'ppja.evenmorerecipes';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.EvenMoreRecipesforMFM') {
+		$parentID = 'ppja.evenmorerecipes';
+		$isPPJA = 1;
+	# Fantasy crops; ppja flag only
+	} elsif ($modID eq 'ParadigmNomad.FantasyCrops') {
+		$isPPJA = 1;
+	# From Farmer to Florist; ignoring BAGI component: kildarien.farmertofloristbagi
+	} elsif ($modID eq 'kildarien.farmertoflorist') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'kildarien.farmertofloristcfr') { #CFR, legacy
+		$parentID = 'kildarien.farmertoflorist';
+		$isPPJA = 1;
+	} elsif ($modID eq 'Kildarien.CP.FarmerToFlorist') {
+		$parentID = 'kildarien.farmertoflorist';
+		$isPPJA = 1;
+	} elsif ($modID eq 'PPJA.FarmerToFloristForMailFrameworkMod') {
+		$parentID = 'kildarien.farmertoflorist';
+		$isPPJA = 1;
+	} elsif ($modID eq 'kildarien.PFM.FarmerToFlorist') {
+		$parentID = 'kildarien.farmertoflorist';
+		$isPPJA = 1;
+	# From Fresh Meat
+	} elsif ($modID eq 'paradigmnomad.freshmeat') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.FreshMeatforMFM') {
+		$parentID = 'paradigmnomad.freshmeat';
+		$isPPJA = 1;
+	# From Fruits and Veggies
+	} elsif ($modID eq 'ppja.fruitsandveggies') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.legacyfruitsveggies') { # CP sprites; need for main index
+		$parentID = 'ppja.fruitsandveggies';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.FruitsandVeggiesforMFM') {
+		$parentID = 'ppja.fruitsandveggies';
+		$isPPJA = 1;
+	# From Mizu's Flowers
+	} elsif ($modID eq 'mizu.flowers') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.MizusFlowersforMFM') {
+		$parentID = 'mizu.flowers';
+		$isPPJA = 1;
+	# From More Recipes
+	} elsif ($modID eq 'paradigmnomad.morefood') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.MoreRecipesforMFM') {
+		$parentID = 'paradigmnomad.morefood';
+		$isPPJA = 1;
+	# From More Trees
+	} elsif ($modID eq 'ppja.moretrees') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.MoreTreesforMFM') {
+		$parentID = 'ppja.moretrees';
+		$isPPJA = 1;
+	# From Starbrew Valley
+	} elsif ($modID eq 'ppja.starbrewvalley') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.StarbrewValleyforMFM') {
+		$parentID = 'ppja.starbrewvalley';
+		$isPPJA = 1;
+	# Now non-PPJA Stuff. 
+	# From Bonster's Crops; F&V will be parent
+	} elsif ($modID eq 'BonsterTrees') {
+		$parentID = 'BFV.FruitVeggie';
+	# From Bonster's Recipes
+	} elsif ($modID eq 'Bonster.Adv.Recipes') {
+		$parentID = 'Bonster.Recipes';
+	# BFAV packs will use the BFAV component as parent
+	# From BFAV Quails
+	} elsif ($modID eq 'Lavapulse.QuailProducts') {
+		$parentID = 'Stupiddullhans.BFAVquails';
+	# From Golden Goose
+	} elsif ($modID eq 'MythicPhoenix.JA.GoldenGoose') {
+		$parentID = 'MythicPhoenix.BFAVGoldenGoose';
+	} elsif ($modID eq 'MythicPhoenix.PFM.GoldenGoose') {
+		$parentID = 'MythicPhoenix.BFAVGoldenGoose';
+	# From Phoenixes/Firebirds
+	} elsif ($modID eq 'MythicPhoenix.JA.PhoenixItems') {
+		$parentID = 'MythicPhoenix.BFAV.Firebirds';
+	} elsif ($modID eq 'MythicPhoenix.PFM.Firebirds') {
+		$parentID = 'MythicPhoenix.BFAV.Firebirds';
+	# From Trent's Bulls
+	} elsif ($modID eq 'ManurePack') {
+		$parentID = 'BFAVBulls';
+	} elsif ($modID eq 'PFManureMachines') {
+		$parentID = 'BFAVBulls';
+	# From Trent's New Animals; ignoring CCM component: ppja.TrentsNewAnimalsCCM
+	} elsif ($modID eq 'TrentNewAnimalPack') {
+		$parentID = 'Trent.NewAnimals';
+	} elsif ($modID eq 'PPJA.TrentNewAnimalsAddOn') {
+		$parentID = 'Trent.NewAnimals';
+	# From Trent's Raccoons
+	} elsif ($modID eq 'MultiRaccoonPack') {
+		$parentID = 'TrentNewRaccoons';
+	} elsif ($modID eq 'Raccoons.MachineSetting') {
+		$parentID = 'TrentNewRaccoons';
+	}
+	
+	my $parentInfo = GetModInfo($parentID, $includeLink, $formatType) if (defined $parentID);
+	return {'info' => $basicInfo, 'ppja' => $isPPJA, 'parentID' => $parentID, 'parentInfo' => $parentInfo};
 }
 
 # UpdateTags - checks Content Patcher packs for changes to ObjectContextTags and merges into game data
@@ -1262,13 +1422,41 @@ The official documentation has always been
 used by the PPJA team for organization, but I found it a bit difficult to use as a player. So this set of webpages was created by a set of
 custom perl scripts to automatically extract information from the various mods (as well as the base game) and put it all together into a
 (hopefully) more accessible format.</p>
-<p>This reference covers information from the following mods, although each page only includes those mods relevant to a specific topic:</p>
+<p>Mods covered by this reference are listed below; note that each individual summary page will only include those relevant to that
+specific topic. On this list, mods which are officially part of PPJA are prefaced with the symbol &#x24c5; and are listed first in the list.
+Mods with multiple components are listed with the primary component (JA for most mods; BFAV for animal packs) first and the other components
+grouped together under that.</p>
 <ul>
 END_PRINT
 
-	foreach my $mod (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %$ModInfo) {
-		my $info_string = GetModInfo($mod, 1, 1);
-		$longdesc .= qq(<li>$info_string</li>);
+	# First divide ModInfo into parents and children
+	my %Children = ();
+	my %Parents = ();
+	foreach my $mod (keys %$ModInfo) {
+		my $info = GetExtendedModInfo($mod, 1, 1);
+		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		if (not defined $info->{'parentID'}) {
+			$Parents{$mod} = "${prefix}$info->{'info'}" ;
+		} else {
+			if (not exists $Children{$info->{'parentID'}}) {
+				$Children{$info->{'parentID'}} = {};
+			}
+			$Children{$info->{'parentID'}}{$mod} = $info->{'info'};
+		}
+	}
+
+	# Top option will sort PPJA first; bottom option will mix them together
+	foreach my $mod (sort {StripHTML($Parents{$a}) cmp StripHTML($Parents{$b})} keys %Parents) {
+	#foreach my $mod (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %Parents) {
+		$longdesc .= qq(<li>$Parents{$mod});
+		if (exists $Children{$mod}) {
+			$longdesc .= "<ul>";
+			foreach my $child (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %{$Children{$mod}}) {
+				$longdesc .= qq(<li>$Children{$mod}{$child}</li>);
+			}
+			$longdesc .= "</ul>";
+		}
+		$longdesc .= "</li>";
 	}
 
 	$longdesc .= <<"END_PRINT";
@@ -1571,8 +1759,9 @@ END_PRINT
 	}
 
 	my $longdesc = <<"END_PRINT";
-<p>A summary of cooking recipes from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
+<p>A summary of cooking recipes from various sources. In the list below, the checkboxes can be used to show or hide
+information specific to that particular source; the symbol &#x24c5 indicates an official PPJA mod. Additionally there
+are some buttons which will show or hide multiple sources at once.</p>
 <fieldset id="filter_options" class="filter_set">
 <label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
 Stardew Valley base game version $StardewVersion</label><br />
@@ -1580,14 +1769,25 @@ END_PRINT
 
 	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
-		my $info = GetModInfo($k, 1, 2);
+		my $info = GetExtendedModInfo($k, 1, 2);
+		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $class = "filter_check";
+		if ($info->{'ppja'}) {
+			$class .= " filter_ppja";
+		}
 		$longdesc .= <<"END_PRINT";
-<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$info</label><br />
+<label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$prefix$info->{'info'}</label><br />
 END_PRINT
 	}
 
 	$longdesc .= <<"END_PRINT";
+</fieldset>
+<fieldset id="filter_control" class="filter_set">
+<button type="button" id="filter_check_all_off">All Sources Off</button>
+<button type="button" id="filter_check_all_on">All Sources On</button>
+<button type="button" id="filter_check_ppja">PPJA Mods Only</button>
+<button type="button" id="filter_check_nonppja">Non-PPJA Mods Only</button>
 </fieldset>
 <p>The following tables only contain information about cooked items made in the kitchen. The <span class="note">H</span>
 and <span class="note">E</span> columns represent Health and Energy/Stamina restored respectively. The 
@@ -1809,8 +2009,9 @@ END_PRINT
 	}
 	
 	my $longdesc = <<"END_PRINT";
-<p>A summary of fruit trees from the following from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
+<p>A summary of fruit trees from various sources. In the list below, the checkboxes can be used to show or hide
+information specific to that particular source; the symbol &#x24c5 indicates an official PPJA mod. Additionally there
+are some buttons which will show or hide multiple sources at once.</p>
 <fieldset id="filter_options" class="filter_set">
 <label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
 Stardew Valley base game version $StardewVersion</label><br />
@@ -1818,14 +2019,25 @@ END_PRINT
 	
 	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
-		my $info = GetModInfo($k, 1, 2);
+		my $info = GetExtendedModInfo($k, 1, 2);
+		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $class = "filter_check";
+		if ($info->{'ppja'}) {
+			$class .= " filter_ppja";
+		}
 		$longdesc .= <<"END_PRINT";
-<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$info</label><br />
+<label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$prefix$info->{'info'}</label><br />
 END_PRINT
 	}
 
 	$longdesc .= <<"END_PRINT";
+</fieldset>
+<fieldset id="filter_control" class="filter_set">
+<button type="button" id="filter_check_all_off">All Sources Off</button>
+<button type="button" id="filter_check_all_on">All Sources On</button>
+<button type="button" id="filter_check_ppja">PPJA Mods Only</button>
+<button type="button" id="filter_check_nonppja">Non-PPJA Mods Only</button>
 </fieldset>
 <p>The <span class="note">Break Even Amount</span> column is a simplistic measure of how many base (no-star) quality products need to be sold
 to recoup the cost of the initial sapling. Smaller numbers are better, although those who care about these kind of measurements will probably
@@ -2418,8 +2630,9 @@ END_PRINT
 	} # end of "json" loop
 
 	my $longdesc = <<"END_PRINT";
-<p>A summary of machines with production rules from the following from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
+<p>A summary of machines with production rules from various sources. In the list below, the checkboxes can be used to show or hide
+information specific to that particular source; the symbol &#x24c5 indicates an official PPJA mod. Additionally there
+are some buttons which will show or hide multiple sources at once.</p>
 <fieldset id="filter_options" class="filter_set">
 <label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
 Stardew Valley base game version $StardewVersion</label><br />
@@ -2427,14 +2640,25 @@ END_PRINT
 	
 	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
-		my $info = GetModInfo($k, 1, 2);
+		my $info = GetExtendedModInfo($k, 1, 2);
+		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $class = "filter_check";
+		if ($info->{'ppja'}) {
+			$class .= " filter_ppja";
+		}
 		$longdesc .= <<"END_PRINT";
-<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$info</label><br />
+<label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$prefix$info->{'info'}</label><br />
 END_PRINT
 	}
 
 	$longdesc .= <<"END_PRINT";
+</fieldset>
+<fieldset id="filter_control" class="filter_set">
+<button type="button" id="filter_check_all_off">All Sources Off</button>
+<button type="button" id="filter_check_all_on">All Sources On</button>
+<button type="button" id="filter_check_ppja">PPJA Mods Only</button>
+<button type="button" id="filter_check_nonppja">Non-PPJA Mods Only</button>
 </fieldset>
 <p>Note that filtering is per production rule; the individual machines will always display even if all of their rules are hidden. The base game
 Seedmaker recipe uses Poppy as an example but actually applies to a large variety of crops & seeds.
@@ -2712,8 +2936,7 @@ END_PRINT
 		my $num_per_harvest = $avg_harvest + $ModData->{'Crops'}{$key}{'Bonus'}{'ExtraChance'};
 		# This is for detecting crops which might produce more in SDV 1.4
 		#if ($ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'} > $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'}) {
-		#	print STDOUT "Crop $key will produce more now (Min: $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'}) (Max: $ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'})\n";
-		#}
+		#	print STDOUT "Crop $key will produce more now (Min: $ModData->{'Crops'}{$key}{'Bonus'}{'MinimumPerHarvest'}) (Max: $ModData->{'Crops'}{$key}{'Bonus'}{'MaximumPerHarvest'})\n"; }
 		my $seed_vendor = WikiShop("Pierre");
 		if (exists $ModData->{'Crops'}{$key}{'SeedPurchaseFrom'}) {
 			$seed_vendor = WikiShop($ModData->{'Crops'}{$key}{'SeedPurchaseFrom'});
@@ -2801,8 +3024,9 @@ END_PRINT
 	}
 	
 	my $longdesc = <<"END_PRINT";
-<p>A summary of growth and other basic information for crops from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
+<p>A summary of growth and other basic information for crops from various sources. In the list below, the checkboxes can be used to show or hide
+information specific to that particular source; the symbol &#x24c5 indicates an official PPJA mod. Additionally there
+are some buttons which will show or hide multiple sources at once.</p>
 <fieldset id="filter_options" class="filter_set">
 <label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
 Stardew Valley base game version $StardewVersion</label><br />
@@ -2810,14 +3034,25 @@ END_PRINT
 
 	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
 		my $filter = $ModInfo->{$k}{'__FILTER'};
-		my $info = GetModInfo($k, 1, 2);
+		my $info = GetExtendedModInfo($k, 1, 2);
+		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $class = "filter_check";
+		if ($info->{'ppja'}) {
+			$class .= " filter_ppja";
+		}
 		$longdesc .= <<"END_PRINT";
-<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$info</label><br />
+<label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$prefix$info->{'info'}</label><br />
 END_PRINT
 	}
 
 	$longdesc .= <<"END_PRINT";
+</fieldset>
+<fieldset id="filter_control" class="filter_set">
+<button type="button" id="filter_check_all_off">All Sources Off</button>
+<button type="button" id="filter_check_all_on">All Sources On</button>
+<button type="button" id="filter_check_ppja">PPJA Mods Only</button>
+<button type="button" id="filter_check_nonppja">Non-PPJA Mods Only</button>
 </fieldset>
 <p>In the following tables, the <img class="game_weapons" id="Weapon_Scythe" src="img/blank.png" alt="Needs Scythe"> column is for whether or not
 the crop requires a scythe to harvest, and the <img class="game_crops" id="Special_Trellis" src="img/blank.png" alt="Has Trellis"> column is for
@@ -2936,7 +3171,8 @@ sub WriteGiftSummary {
 			if (not exists $by_item{$i}{$taste}) {
 				$by_item{$i}{$taste} = [];
 			}
-			if (exists $ModData->{'Objects'}{$i}{'GiftTastes'}{$taste}) {
+			if (defined $ModData->{'Objects'}{$i}{'GiftTastes'}{$taste}) {
+				#print STDOUT "Trying to update gift tastes for  {$i} {$taste}\n";
 				push @{$by_item{$i}{$taste}}, @{$ModData->{'Objects'}{$i}{'GiftTastes'}{$taste}};
 				foreach my $npc (@{$ModData->{'Objects'}{$i}{'GiftTastes'}{$taste}}) {
 					if (not exists $by_npc{$npc}) {
@@ -3207,309 +3443,3 @@ END_PRINT
 }
 
 __END__ 
-# The old CFR-only version. Preserving here in case until I am sure I didn't screw up the new one.
-###################################################################################################
-# WriteMachineSummary - main page generation for Machines
-sub WriteMachineSummary {
-	my $FH;
-	open $FH, ">$DocBase/machines.html" or die "Can't open machines.html for writing: $!";
-	select $FH;
-
-	# This is a difficult one to filter because the Artisan Valley machines have extra recipes that
-	#  can be enabled. For now, we are only going to filter out entire machines and if some extra
-	#  recipes are shown that involve items people don't have, they must deal with it.
-	
-	print STDOUT "Generating Machine Summary\n";
-	my %ModList = ();
-	my %TOC = ();
-
-	print STDOUT "  Processing Mod Machines\n";
-	# To most easily sort the machines alphabetically, I will save all output in this Panel hash, keyed on machine name
-	my %Panel = ();
-	foreach my $j (@{$ModData->{'Machines'}}) {
-		my $extra_info = "";
-		my $filter = "";
-		if (exists $ModInfo->{$j->{'__MOD_ID'}}) {
-			$extra_info = qq(<p><span class="note">From ) . GetModInfo($j->{'__MOD_ID'},0) . qq(</span></p>);
-			if (not exists $ModList{$j->{'__MOD_ID'}}) {
-				$ModList{$j->{'__MOD_ID'}} = 1;
-			}
-			$filter = $ModInfo->{$j->{'__MOD_ID'}}{'__FILTER'};
-		}
-		foreach my $m (@{$j->{'machines'}}) {
-			# Try to get a unique key for the Panel hash and give up on failure since it really shouldn't happen.
-			my $key = $m->{'name'};
-			#print STDOUT "Machine: $key\n";
-			my $tries = 0;
-			my $max_tries = 10;
-			while (exists $Panel{$key} and $tries < $max_tries) {
-				$key = $m->{'name'} . "_$tries";
-				$tries++;
-			}
-			if (exists $Panel{$key}) {
-				die "I tried $max_tries iterations of $key and all of them existed. This job sucks. I quit.";
-			}
-			my $anchor = "TOC_$m->{'name'}";
-			$anchor =~ s/ /_/g;
-			$TOC{$m->{'name'}} = {'anchor' => $anchor, 'filter' => $filter};
-			my $imgTag = GetImgTag($m->{'name'}, 'machine', 1, "container__image");
-			my $output = <<"END_PRINT";
-<div class="panel $filter" id="$anchor">
-<div class="container">
-$imgTag
-<div class="container__text">
-<h2>$m->{'name'}</h2>
-<span class="mach_desc">$m->{'description'}</span><br />
-</div>
-$extra_info
-</div>
-<table class="recipe">
-<tbody><tr><th>Crafting Recipe</th><td class="name">
-END_PRINT
-
-			if (defined $m->{'crafting'}) {
-				my @recipe = split(' ', $m->{'crafting'});
-				for (my $i = 0; $i < scalar(@recipe); $i += 2) {
-					my $num = $recipe[$i+1];
-					$output .= GetImgTag($recipe[$i]) . " " . GetItem($recipe[$i]) . ($num > 1 ? " ($num)" : "" ) . "<br />";
-				}
-			} else {
-				$output .= qq(<span class="note">Can't be crafted</span>);
-			}
-			
-			$output .= <<"END_PRINT";
-</td></tbody></table>
-<table class="sortable output">
-<thead>
-<tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th><th>Profit<br />(Item)</th><th>Profit<br />(Hr)</th></tr>
-</thead>
-<tbody>
-END_PRINT
-			my $starter = "NO_STARTER";
-			if (exists $m->{'starter'}) {
-				$starter = GetItem($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
-			}
-			# Pre-scan production to handle "includes" by duplicating the production object for each additional item.
-			my @add = ();
-			foreach my $p (@{$m->{'production'}}) {
-				# We will assume that the materials array only contains one thing and that there are no other nested
-				#  objects which we care about. Thus, a shallow copy of the production object is acceptable.
-				if (exists $p->{'include'}) {
-					foreach my $p_inc (@{$p->{'include'}}) {
-						my %temp = %$p;
-						$temp{'materials'} = [];
-						$temp{'materials'}[0] = { 'index' => $p_inc };
-						push @add, \%temp;
-					}
-				}
-			}
-			# We want to sort this thing too, by output first, then by input. This time it's a temp array.
-			my @rows = ();
-			foreach my $p (@{$m->{'production'}}, @add) {
-				# Note, some of Trent's mods use initially capitalized keys, so we need to handle that.
-				# Currently we only add those extra checks for known changed keys. Both here and in materials.
-				if (!exists $p->{'item'} and exists $p->{'Item'}) {
-					$p->{'item'} = $p->{'Item'};
-				}
-				if (!exists $p->{'name'} and exists $p->{'Name'}) {
-					$p->{'name'} = $p->{'Name'};
-				}
-				my $pname = "";
-				if (exists $p->{'item'}) {
-					$pname = $p->{'item'};
-				} elsif (!exists $p->{'index'} and exists $p->{'name'}) {
-					$pname = $p->{'name'};
-				}
-				my $name = GetItem($pname, $p->{'index'});
-				my $starter_included = 0;
-				my %entry = ( 'key1' => '', 'key2' => '', 'out' => '' );
-				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
-				# that a simple regex can do the job rather than needing a more robust general approach.
-				$entry{'key1'} = StripHTML($name);
-				my $img = GetImgTag($entry{'key1'});
-				$entry{'out'} = qq(<tr><td class="name">$img $name</td>);
-				$entry{'out'} .= qq(<td class="name">);
-				my $i_count = 0;
-				my $cost = 0;
-				foreach my $i (@{$p->{'materials'}}) {
-					# Once again, handling some case problems
-					if (!exists $i->{'name'} and exists $i->{'Name'}) {
-						$i->{'name'} = $i->{'Name'}
-					}
-					$name = "";
-					if (exists $i->{'name'}) {
-						$name = $i->{'name'};
-					}	
-					$name = GetItem($name, $i->{'index'});
-					$img = GetImgTag(StripHTML($name));
-					if ($i_count > 0) {
-						#$name = "+ $name";
-					}
-					$i_count++;
-					my $stack_size = 1;
-					if (exists $i->{'stack'} and $i->{'stack'} > 1) {
-						$stack_size = $i->{'stack'};
-					}
-					if (not $starter_included and $starter eq $name) {
-						$stack_size++;
-						$starter_included = 1;
-					}
-					if ($stack_size > 1) {
-						$name .= " ($stack_size)";
-					}
-					$entry{'out'} .= "$img $name<br />";
-					if ($entry{'key2'} eq '') {
-						$entry{'key2'} = StripHTML($name);
-					}
-					my $this_value = GetValue($i->{'name'}, $i->{'index'});
-					if (looks_like_number($cost) and looks_like_number($this_value)) {
-						$cost += $stack_size * $this_value;
-					} else {
-						$cost = "Varies";
-					}
-				}
-				if (not $starter_included and $starter ne "NO_STARTER") {
-					$img = GetImgTag(StripHTML($starter));
-					$entry{'out'} .= "$img $starter<br />";
-					my $this_value = GetValue($m->{'starter'}{'name'}, $m->{'starter'}{'index'});
-					if (looks_like_number($cost) and looks_like_number($this_value)) {
-						$cost += $this_value;
-					} else {
-						$cost = "Varies";
-					}
-				}
-				if (exists $p->{'exclude'}) {
-					$entry{'out'} .= '<span class="group">Except ' . join(', ', (map {GetItem($_)} @{$p->{'exclude'}})) . "</span><br />";
-				}
-				$entry{'out'} .= "</td>";
-				my $time = $p->{'time'};
-				# 1.4 standardized machine time to be 60 min per hour from 6a-2a and then 100min per hour after. This gives
-				#  a total of 1600 min rather than the 1440 we used to use. This does cause complications estimating time.
-				my $min_per_day = 1600;
-				if ($time > $min_per_day) { 
-					$time = "$time min (~" . nearest(.1, $time/$min_per_day) . " days)";
-				} elsif ($time >= 1440) {
-					# anything from 1440 to 1600 will be estimated as a day.
-					$time = "$time min (~1 day)";
-				} elsif ($time >= 60) {
-					my $rem = $time%60;
-					my $hr = "hr" . ($time > 119 ? "s" : "");
-					if ($rem > 0) {
-						$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
-					} else {
-						$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
-					}
-				} else {
-					$time = "$time min";
-				}
-				$entry{'out'} .= "<td>$time</td>";
-				my $value = $p->{'price'};
-				if (not defined $value or $value eq "") {
-					$value = GetValue($pname, $p->{'index'});
-				} elsif ($value =~ /original/) {
-					my $temp = GetValue($pname, $p->{'index'});
-					if (looks_like_number($temp) and $temp > 0) {
-						$value =~ s/original/$temp/g;
-					}
-				}
-				if ($value =~ /input/) {
-					# We are trying to determine the main ingredient in order to better determine value & profit
-					# Since that ingredient was used for the second sort key, we try to look it up.
-					my $ingr_value = GetValue($entry{'key2'});
-					if (looks_like_number($ingr_value) and $ingr_value >= 0) {
-						$value =~ s/input/$ingr_value/g;
-					}
-				}
-				# Now let's do something a wee bit dangerous and try to evaluate the value equation.
-				# We aren't doing any sanity-checking on this, and there is the theoretical possibility somebody stuck
-				# some malicious perl code in their machine's output equation. But since this script is only being run
-				# on specific Stardew Valley mods from people we trust, we will take that risk.
-				my $eq_eval = eval $value;
-				$eq_eval = '' if (not defined $eq_eval);
-				if ($eq_eval ne '' and looks_like_number($eq_eval)) {
-					$value = floor($eq_eval);
-				}
-				$entry{'out'} .= qq(<td class="value">$value</td>);
-				my $profit = "";
-				if ($value =~ /original/ or $value =~ /input/) {
-					# This still looks like an equation
-					$profit = qq(<span class="note">Varies</span>);
-				} elsif (looks_like_number($value) and looks_like_number($cost)) {
-					$profit = $value - $cost;
-				} else {
-					$profit = qq(<span class="note">--</span>);
-				}
-				$entry{'out'} .= qq(<td class="value">$profit</td>);
-				# reuse profit variable for per-hour version.
-				if (looks_like_number($profit)) {
-					$profit = nearest(.01,60*$profit/$p->{'time'});
-				}
-				$entry{'out'} .= qq(<td class="value">$profit</td>);
-				$entry{'out'} .= "</tr>";
-				push @rows, \%entry;
-			}
-			foreach my $e (sort {$a->{'key1'} cmp $b->{'key1'} or $a->{'key2'} cmp $b->{'key2'}} @rows) {
-				$output .= $e->{'out'};
-			}
-
-			$output .= <<"END_PRINT";
-</tbody>
-</table>
-</div>
-END_PRINT
-			$Panel{$key} = $output;
-		} # end of machine loop
-	} # end of "json" loop
-
-	my $longdesc = <<"END_PRINT";
-<p>A summary of machines from the following from the following sources. The checkboxes next to them can be used to
-show or hide content specific to that source:</p>
-<fieldset id="filter_options" class="filter_set">
-<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
-Stardew Valley base game version $StardewVersion</label><br />
-END_PRINT
-	
-	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
-		my $filter = $ModInfo->{$k}{'__FILTER'};
-		my $info = GetModInfo($k, 1, 2);
-		$longdesc .= <<"END_PRINT";
-<label><input class="filter_check" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$info</label><br />
-END_PRINT
-	}
-
-	$longdesc .= <<"END_PRINT";
-</fieldset>
-<p>Note that only the machines themselves can be currently filtered, so some of the recipes shown here may not be available if the mod their
-products or ingredients are from is not installed. Eventually this will have some base game machines too (which is why the base game is
-listed in the filters), but probably only those which process similar types of items to the mod machines.</p>
-<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
-the wiki which only shows base game items. All value and profit calculations assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>. Additonally, if a recipe calls for <span class="group">Any Milk</span>, the
-value of the small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> is used, and if a recipe calls for <span class="group">Any Egg</span>,
-the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is used.
-</p>
-<p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
-and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
-machine takes. The latter is rounded to two decimal places. Machines which only change the quality but return the same base item (similar to Casks) are
-not currently documented correctly and will list zero profit.
-</p>
-END_PRINT
-	print GetHeader("Machines", qq(Summary of products and timings for machines from PPJA (and other) mods), $longdesc);
-	print GetTOCStart();
-
-
-	foreach my $p (sort keys %TOC) {
-		my $text = $p;
-		$text =~ s/ /&nbsp;/g;
-		print qq(<li class="$TOC{$p}{'filter'}"><a href="#$TOC{$p}{'anchor'}">$text</a></li>);
-	}
-	print GetTOCEnd();
-
-	foreach my $p (sort keys %Panel) {
-		print $Panel{$p};
-	}
-
-	print GetFooter();
-
-	close $FH or die "Error closing file";
-}

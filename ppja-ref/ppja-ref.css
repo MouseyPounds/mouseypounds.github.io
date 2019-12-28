@@ -171,6 +171,9 @@ fieldset {
 .col_10, .col_20, .col_25, .col_35 {
 	display:none;
 }
+#filter_control button {
+	margin: 0 1em;
+}
 /* tooltip implementation based on code from Andrea Ligios
    https://stackoverflow.com/questions/7117073/how-to-add-a-tooltip-to-a-div
    http://jsfiddle.net/AndreaLigios/jtLbpy62/

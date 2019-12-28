@@ -26,7 +26,7 @@ my $LogLevel = 2;
 # defaults, but for now they are just hardcoded here.
 #   $GameDir is assumed to be the base (extracted) Content\Data directory.
 #   $ModDir is assumed to be a directory containing all the mods we need to process
-#     It could contain other mods too, but only those which are JA, CFR or MFM content packs are currently supported
+#     It could contain other mods too, but only certain mods are supported.
 #     We don't currently recurse into this directory and the mods are all expected to be just 1 level deep
 my $GameDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Content (unpacked)/Data';
 my $ModDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Mods';
@@ -392,7 +392,8 @@ sub ParseModData {
 				# Note, the json is only dumped if it had passed the name & ID check
 				LogMessage("    Dumping json object", 3);
 				LogMessage(Dumper($json), 3);
-				$MetaRef->{$id} = $json;
+				# Note, we are not storing the meta-info until we process the pack.
+				my $storeMeta = 1;
 				
 				if (exists $json->{'ContentPackFor'}{'UniqueID'}) {
 					my $packID = $json->{'ContentPackFor'}{'UniqueID'};
@@ -459,7 +460,11 @@ sub ParseModData {
 										my $json = ParseJsonFile("$BaseDir/$m/$t/$i/$types{$t}");
 										my $key = $i;
 										if ($json->{'Name'} ne $key) {
-											LogMessage("WARNING: Item in folder {$i} is actually named {$json->{'Name'}}. Will use that for key instead", 1);
+											if (not defined $json->{'Name'} or $json->{'Name'} eq "") {
+												LogMessage("WARNING: Item in folder {$i} has no name. Will be skipped", 1);
+												next;
+											}
+											LogMessage("        Item in folder {$i} is actually named {$json->{'Name'}}. Will use that for key instead", 1);
 											$key = $json->{'Name'};
 										}
 										# Saving directory and storing images
@@ -541,7 +546,8 @@ sub ParseModData {
 							}
 							push @{$DataRef->{'Mail'}}, $container;
 						} else {
-							LogMessage("      WARNING: No mail.json found", 1);
+							LogMessage("      WARNING: No mail.json found, skipping mod", 1);
+							$storeMeta = 0;
 						}
 					# The example pack has different capitalization than the actual mod :(
 					} elsif ($packID eq "DIGUS.ProducerFrameworkMod" or $packID eq "Digus.ProducerFrameworkMod") {
@@ -559,7 +565,8 @@ sub ParseModData {
 							}
 							push @{$DataRef->{'Producers'}}, $container;
 						} else {
-							LogMessage("      WARNING: No producerRules.json found", 1);
+							LogMessage("      WARNING: No producerRules.json found, skipping mod", 1);
+							$storeMeta = 0;
 						}
 					} elsif ($packID eq "Pathoschild.ContentPatcher") {
 						LogMessage("    This is a CP pack. Looking for content.json file.", 1);
@@ -576,14 +583,23 @@ sub ParseModData {
 							}
 							push @{$DataRef->{'ContentPatches'}}, $json;
 						} else {
-							LogMessage("      WARNING: No content.json found", 1);
+							LogMessage("      WARNING: No content.json found, skipping mod", 1);
+							$storeMeta = 0;
 						}
+					} elsif ($packID eq "Paritee.BetterFarmAnimalVariety") {
+						LogMessage("    This is a BFAV pack; storing meta information only.", 1);
 					} else {
 						LogMessage("    This is an unknown pack type ($packID)", 1);
+						$storeMeta = 0;
 					}
 				} else {
 					LogMessage("    This is not a content pack and will be skipped.", 1);
+					$storeMeta = 0;
 				}
+				$MetaRef->{$id} = $json if ($storeMeta);
+			} else {
+				LogMessage("    No manifest found, time to recurse!", 1);
+				ParseModData("$BaseDir/$m", $DataRef, $MetaRef);
 			}
 		}
 	}

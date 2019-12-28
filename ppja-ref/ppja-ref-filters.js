@@ -65,6 +65,37 @@ window.onload = function () {
 		};
 	}
 
+	// Handling special buttons to bulk show/hide mod filters
+	// baseGameCheckState will be used if it is supplied and the base_game filter is part of whichClass
+	function checkAll(whichClass, checkState, baseGameCheckState) {
+		var e = document.getElementsByClassName(whichClass);
+		for(var j = 0; j < e.length; j++){
+			if (e[j].type == 'checkbox') {
+				if (e[j].id === 'filter_base_game' && (typeof baseGameCheckState !== 'undefined')) {
+					e[j].checked = baseGameCheckState;
+				} else {
+					e[j].checked = checkState;
+				}
+				e[j].onclick();
+			}
+		}
+	}		
+	if (document.getElementById("filter_check_all_on") !== null) {
+		document.getElementById("filter_check_all_on").onclick = function() {checkAll("filter_check", true);};
+	}
+	if (document.getElementById("filter_check_all_off") !== null) {
+		document.getElementById("filter_check_all_off").onclick = function() {checkAll("filter_check", false);};
+	}
+	if (document.getElementById("filter_check_ppja") !== null) {
+		document.getElementById("filter_check_ppja").onclick = function() {
+			checkAll("filter_check", false); checkAll("filter_ppja", true); };
+	}
+	if (document.getElementById("filter_check_nonppja") !== null) {
+		document.getElementById("filter_check_nonppja").onclick = function() {
+			checkAll("filter_check", true, false); checkAll("filter_ppja", false);};
+	}
+
+	// The speed filters for crop summary
 	if (document.getElementById("growth_speed_options") !== null) {
 		document.getElementById("growth_speed_options").onclick = function() {
 			// Find out which option is now selected
