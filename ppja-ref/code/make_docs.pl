@@ -1071,7 +1071,7 @@ sub AddAllIngredients {
 	return $ingr_value;
 }
 
-# SearchIngredients - the recursive portion of AddToIngredientList that actually finds the ingredients
+# SearchIngredients - the recursive portion of AddAllIngredients that actually finds the ingredients
 #
 #   item - this item (ID or Name; Name should only be given for mod items)
 #   count - how many of this item
@@ -1307,6 +1307,12 @@ sub GetExtendedModInfo {
 		$isPPJA = 1;
 	} elsif ($modID eq 'PPJA.CannabisKitAddOn') {
 		$parentID = 'PPJA.cannabiskit';
+		$isPPJA = 1;
+	# From Christmas Sweets
+	} elsif ($modID eq 'ppja.christmassweets') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.christmassweetsforMFM') {
+		$parentID = 'ppja.christmassweets';
 		$isPPJA = 1;
 	# From Even More Recipes
 	} elsif ($modID eq 'ppja.evenmorerecipes') {
