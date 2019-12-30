@@ -13,6 +13,7 @@ use Math::Round;
 use Data::Dumper;
 use Imager;
 use HTML::Entities;
+use Text::Autoformat;
 
 my $GameData = retrieve("../local/cache_GameData");
 my $ModData = retrieve("../local/cache_ModData");
@@ -26,6 +27,8 @@ GatherSpriteInfo($SpriteInfo);
 
 my $Tagged = {};
 UpdateTags();
+my $Categorized = {};
+UpdateCategories();
 
 WriteMainIndex();
 WriteCookingSummary();
@@ -139,9 +142,11 @@ sub GetItem {
 				$outputSimple = "Same as Input";
 				$output = qq(<span class="group">$outputSimple</span>);
 			} else {
-				# We want to say "Any ___" but the wiki link should be on just the "___"
+				# These used to be "Any ___" with a wiki link on the "___", but to support mod
+				#  items better we are moving to a tooltip list.
+				my $list = join(', ', @{$Categorized->{$input}});
 				$outputSimple = GetCategory($input);
-				$output = '<span class="group">Any ' . Wikify($outputSimple) . '</span>';
+				$output = qq(<span class="group" tooltip="Includes $list">Any $outputSimple</span>);
 				$outputSimple = "Any $outputSimple";
 			}
 		}
@@ -152,6 +157,7 @@ sub GetItem {
 		}
 	} else {
 		# Custom, probably JA, but maybe not. JA takes priority
+		my $found = 0;
 		if (exists $ModData->{'Objects'}{$input}) {
 			# This is a JA item, but we have nothing to add yet.
 			my $mod = "a mod";
@@ -163,31 +169,58 @@ sub GetItem {
 			$outputSimple = encode_entities($input);
 			my $encoded = encode_entities($input);
 			$output = qq(<span tooltip="from $mod">$encoded</span>);
+			$found = 1;
 		} else {
 			foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
 				if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
 					$outputSimple = $input;
 					$output = Wikify($input);
+					$found = 1;
+					last;
 				}
 			}
 		}
+		# If no match on name itself, we next try tags
+		if (not $found) {
+			if (exists $Tagged->{$input}) {
+				# Let's make the tooltip for these actually list appropriate items
+				my $list = join(', ', @{$Tagged->{$input}});
+				# A bit of hardcoding here. Most tags look like blah_item or fish_blah
+				# We use Text:Autoformat for capitalization, but then have to undo the 2 newlines it adds;
+				if ($input =~ /_item$/) {
+					$input =~ s/_/ /g;
+					$input = autoformat $input, { case => 'highlight', left=>0 };
+					$input =~ s/\n\n$//;
+					$outputSimple =  $input;
+					$output = qq(<span class="group" tooltip="Includes $list">$outputSimple</span>);
+				} elsif ($input =~ /^fish_/ or $input =~ /^flower_/) {
+					$input =~ s/_/ /g;
+					$input =~ s/(\S+) (.*)/$2 $1/;
+					$input = autoformat $input, { case => 'highlight', left=>0 };
+					$input =~ s/\n\n$//;
+					$outputSimple = $input;
+					$output = qq(<span class="group" tooltip="Includes $list">$outputSimple</span>);
+				} else {
+					$input =~ s/_/ /g;
+					$input = "$input (Tag)";
+					$input = autoformat $input, { case => 'highlight', left=>0 };
+					$input =~ s/\n\n$//;
+					$outputSimple = $input;
+					$output = qq(<span class="group" tooltip="Includes $list">$outputSimple</span>);
+				}
+				$found = 1;
+			}
+		}
+		
 	}
 	if ($doFormat) {
 		if ($output eq '') {
-			if (exists $Tagged->{$input}) {
-				$output = qq(<span class="note">Tag: $input</span>);
-			} else {
-				$output = qq(<span class="note">Unknown Item: $input</span>);
-			}
+			$output = qq(<span class="note">Unknown Item: $input</span>);
 		}
 		return $output;
 	} else {
 		if ($outputSimple eq '') {
-			if (exists $Tagged->{$input}) {
-				$outputSimple = "Tag: $input";
-			} else {
-				$outputSimple = "Unknown Item: $input";
-			}
+			$outputSimple = qq(Unknown Item: $input);
 		}
 		return $outputSimple;
 	}
@@ -330,11 +363,16 @@ sub GetCategoryNum {
 		'Syrup' => -27,
 		'MonsterLoot' => -28,
 		'ArtisanGoods' => -26,
+		'AnimalGoods' => -18,
 		'Seeds' => -74,
 	);	
 	
-	if (exists $c{$input}) {
-		$output = $c{$input};
+	if (defined $input) {
+		if (exists $c{$input}) {
+			$output = $c{$input};
+		} else {
+			print STDOUT "GetCategoryNum doesn't understand $input\n";
+		}
 	}
 	return $output;
 }	
@@ -456,34 +494,6 @@ sub GetImgTag {
 			}
 		}
 	} else {
-		# If it starts with 'Tag:" we are going to try to extract a name that works
-		if ($input =~ 'Tag:') {
-			$input =~ s/^Tag: //;
-			$input =~ s/_item$//;
-			$input =~ s/_/ /g;
-			$input =~ s/(\S+)/ucfirst $1/eg;
-			
-			# And some hard-coding
-			if ($input eq 'Mushroom') {
-				$input = 'Common Mushroom';
-			} elsif ($input eq 'Cow Milk') {
-				$input = 'Milk';
-			} elsif ($input eq 'Herb') {
-				$input = 'Basil';
-			} elsif ($input eq 'Flower Poisonous') {
-				$input = 'Sweet Pea';
-			} elsif ($input eq 'Nut') {
-				$input = 'Hazelnut';
-			} elsif ($input eq 'Fish Desert') {
-				$input = 'Sandfish';
-			} elsif ($input eq 'Fish Lake') {
-				$input = 'Largemouth Bass';
-			} elsif ($input eq 'Fish Ocean') {
-				$input = 'Tuna';
-			} elsif ($input eq 'Fish River') {
-				$input = 'Salmon';
-			}
-		}
 		# Custom, probably JA, but maybe not. JA takes priority
 		my $found= 0;
 		if ($type =~ /^objects?/i) {
@@ -503,6 +513,38 @@ sub GetImgTag {
 					}
 				}
 			}
+			# If no match on name itself, we next try tags; we have to repeat some of the
+			#  previous code to correctly identify class, id, etc.
+			if (not $found) {
+				if (exists $Tagged->{$input}) {
+					# We can automatically grab whatever is first on the list of tags for our
+					#  image, which works pretty well as a default. There are a few cases where
+					#  I'd like to pick something different though, so we do that as necessary.
+					if ($input eq 'herb_item' and exists $ModData->{'Objects'}{'Basil'}) {
+						$input = "Basil";
+					} elsif ($input eq 'milk_item') {
+						$input = "Milk";
+					} else {
+						$input = $Tagged->{$input}[0];
+					}
+					if (exists $ModData->{'Objects'}{$input}) {
+						$img_class .= 'objects';
+						$img_id = "Object_$input";
+						$img_alt = "$input";
+					} else {
+						foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
+							if ($GameData->{'ObjectInformation'}{$k}{'split'}[0] eq $input) {
+								$img_class .= "game_objects";
+								$img_id = "Object_$k";
+								$img_alt = $input;
+								last;
+							}
+						}
+					}
+					$found = 1;
+				}
+			}
+			# If still no match, give up and throw a warning.
 			if (not $found) {
 				warn "GetImgTag failed on unknown named object: $input";
 				return "";
@@ -1425,6 +1467,7 @@ sub GetExtendedModInfo {
 # UpdateTags - checks Content Patcher packs for changes to ObjectContextTags and merges into game data
 #   Content Patcher packs can be ridiculously complex; we are only looking for a specific type of patch;
 #   that is one which edits object context tags, so we are greatly limiting our search.
+#   Also checks JA packs for defined Tags so that tags are all in one place.
 sub UpdateTags {
 	foreach my $cp (@{$ModData->{'ContentPatches'}}) {
 		if (exists $cp->{'Changes'}) {
@@ -1448,6 +1491,49 @@ sub UpdateTags {
 			}
 			push @{$Tagged->{$t}}, $k;
 		}
+	}
+	foreach my $k (keys %{$ModData->{'Objects'}}) {
+		foreach my $t (@{$ModData->{'Objects'}{$k}{'ContextTags'}}) {
+			if (not exists $Tagged->{$t}) {
+				$Tagged->{$t} = [];
+			}
+			push @{$Tagged->{$t}}, $k;
+		}
+	}
+	# Because these are used for icons and I don't want the images changing that often, I am going to
+	#  pre-sort all the arrays now. This might make temporary copies but it shouldn't matter much.
+	foreach my $t (keys %$Tagged) {
+		@{$Tagged->{$t}} = sort @{$Tagged->{$t}};
+	}
+}
+
+# UpdateCategories - goes through ObjectInformation and JA items to construct a dictionary of
+#   items for each category. Basically just makes it easier to build some tooltips later.
+sub UpdateCategories {
+	foreach my $k (keys %{$GameData->{'ObjectInformation'}}) {
+		my $temp = $GameData->{'ObjectInformation'}{$k}{'split'}[3];
+		$temp =~ /([-\d]*)$/;
+		my $cat = $1;
+		if ($cat ne '') {
+			if (not exists $Categorized->{$cat}) {
+				$Categorized->{$cat} = [];
+			}
+			push @{$Categorized->{$cat}}, $GameData->{'ObjectInformation'}{$k}{'split'}[0];
+		}
+	}
+	foreach my $k (keys %{$ModData->{'Objects'}}) {
+		my $cat = GetCategoryNum($ModData->{'Objects'}{$k}{'Category'});
+		if (looks_like_number $cat and $cat < 0) {
+			if (not exists $Categorized->{$cat}) {
+				$Categorized->{$cat} = [];
+			}
+			push @{$Categorized->{$cat}}, encode_entities($k);
+		}
+	}
+	# Because these are used for icons and I don't want the images changing that often, I am going to
+	#  pre-sort all the arrays now. This might make temporary copies but it shouldn't matter much.
+	foreach my $t (keys %$Categorized) {
+		@{$Categorized->{$t}} = sort @{$Categorized->{$t}};
 	}
 }
 
@@ -1514,6 +1600,7 @@ together by a different PPJA user.</p>
 <ul>
 <li><a href="./cooking.html">Cooking</a> - Recipe ingredients and acquisition methods</li>
 <li><a href="./crops.html">Crops</a> - Growth timing and other basic information sorted by season; includes base game crops</li>
+<li><a href="./gifts.html">Gift Tastes</a> - A large table summarizing NPC gift tastes for items from all supported mods</li>
 <li><a href="./trees.html">Fruit Trees</a> - Basic information sorted by season; includes base game trees</li>
 <li><a href="./machines.html">Machines</a> - Products, production timings, and crafting recipes</li>
 </ul>
@@ -2208,6 +2295,7 @@ sub WriteMachineSummary {
 				# This duplicates code used in GetImgTag which makes me sad
 				my $desc = "";
 				my $recipe = "";
+				my $source = "";
 				if (exists $ModData->{'BigCraftables'}{$key}) {
 					$desc = $ModData->{'BigCraftables'}{$key}{'Description'};
 					$extra_info = qq(<p><span class="note">From ) . GetModInfo($ModData->{'BigCraftables'}{$key}{"__MOD_ID"},0) . qq(</span></p>);
@@ -2217,6 +2305,26 @@ sub WriteMachineSummary {
 						my $img = GetImgTag($i->{'Object'});
 						my $qty = ($i->{'Count'} > 1 ? " ($i->{'Count'})" : "");
 						$recipe .= "$img $item$qty<br />";
+					}
+					if (not $ModData->{'BigCraftables'}{$key}{'Recipe'}{'IsDefault'}) {
+						if ($ModData->{'BigCraftables'}{$key}{'Recipe'}{'CanPurchase'}) {
+							$source = qq(Buy for $ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchasePrice'}g from ) .
+								WikiShop($ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchaseFrom'}) . qq(<br />);
+						} elsif (defined $ModData->{'BigCraftables'}{$key}{'Recipe'}{'SkillUnlockName'}) {
+							my $lvl = $ModData->{'BigCraftables'}{$key}{'Recipe'}{'SkillUnlockLevel'};
+							my $skill = Wikify($ModData->{'BigCraftables'}{$key}{'Recipe'}{'SkillUnlockName'});
+							$source = qq(Level $lvl in $skill<br />);
+						} else {
+							$source = FindMailRecipe($key);
+						}
+					}
+					my @conditions = ();
+					if (defined $ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchaseRequirements'}) {
+						@conditions = @{$ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchaseRequirements'}};
+					}
+					foreach my $condition (@conditions) {
+						my @temp = TranslatePreconditions($condition);
+						$source .= "$temp[0]<br />";
 					}
 				} else {
 					foreach my $k (keys %{$GameData->{'BigCraftablesInformation'}}) {
@@ -2231,12 +2339,28 @@ sub WriteMachineSummary {
 									my $qty = ($temp[$i+1] > 1 ? " ($temp[$i+1])" : "");
 									$recipe .= "$img $item$qty<br />";
 								}
+								my $condition = $GameData->{'CraftingRecipes'}{$key}{'split'}[4];
+								# Vanilla conditions here are not the same as they are for cooking recipes.
+								# We hardcode the furnace recipe and do silly things with skill levels.
+								if ($key eq 'Furnace') {
+									$source .= "Given by " . Wikify("Clint") . " after finding ore.<br />";
+								} elsif ($condition eq 'default') {
+									$source .= "Given automatically";
+								} elsif ($condition =~ /^\w+ \d+$/) {
+									my @temp = TranslatePreconditions("s $condition");
+									$source .= "$temp[0]<br />";
+								} else {
+									print STDERR "Can't understand conditions {$condition} for vanilla machine $key\n";
+								}
 							} else {
 								warn "Can't find crafting recipe for vanilla machine $k ($key)\n";
 							}
 							last;
 						}
 					}
+				}
+				if ($source eq "") {
+					$source = qq(<span class="note">Unknown source</span>);
 				}
 				if ($recipe eq "") {
 					$recipe = qq(<span class="note">Can't be crafted</span>);
@@ -2252,7 +2376,8 @@ $imgTag
 $extra_info
 </div>
 <table class="recipe">
-<tbody><tr><th>Crafting Recipe</th><td class="name">$recipe</td></tbody></table>
+<tbody><tr><th>Crafting Recipe</th><td class="name">$recipe</td></tr>
+<tr><th>Recipe Source</th><td class="name">$source</td></tr></tbody></table>
 <table class="sortable output">
 <thead>
 <tr><th>Product</th><th>Ingredients</th><th>Time</th><th>Value</th><th>Profit<br />(Item)</th><th>Profit<br />(Hr)</th></tr>
@@ -2262,93 +2387,113 @@ END_PRINT
 				$Panel{$key}{'out'} = $output;
 			}
 			# Now it is time to parse a product and add it to the panel
-			my %entry = ( 'key1' => '', 'key2' => '', 'out' => '' );
-			#$entry{'out'} = qq(<tr class="$filter"><td colspan="6">This will be a production description ($filter)</td></tr>);
-			my $name = GetItem($m->{'OutputIdentifier'});
-			# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
-			# that a simple regex can do the job rather than needing a more robust general approach.
-			$entry{'key1'} = StripHTML($name);
-			my $img = GetImgTag($entry{'key1'});
-			if (defined $m->{'OutputQuality'} and $m->{'OutputQuality'} > 0) {
-				my $q = $m->{'OutputQuality'};
-				my $alt = $quality_desc[$q];
-				my $tag = GetImgTag($entry{'key1'}, 'object', 0, "quality-item");
-				$img = qq(<div class="quality-container">$tag<img class="quality quality-star" id="Quality_$q" alt="$alt" src="img/blank.png"></div>);
-			};
-			# Quality should probably apply to these as well
-			my $prob = 1;
-			my $left = 1;
-			my %outs = ();
-			if (defined $m->{'AdditionalOutputs'}) {
-				foreach my $a (@{$m->{'AdditionalOutputs'}}) {
-					my $this_name = GetItem($a->{'OutputIdentifier'});
-					my $key = StripHTML($this_name);
-					my $this_img = GetImgTag($a->{'OutputIdentifier'});
-					my $this_prob = (defined $a->{'OutputProbability'}) ? $a->{'OutputProbability'} : 0;
-					if ($this_prob == 0) {
-						$left++;
-						$this_prob = "LEFT";
-					} else {
-						$prob -= $this_prob;
-						$this_prob = sprintf("%0.1f", $this_prob*100);
+			# The whole quality input thing makes this really tricky. We are going to create an array that tells us which
+			#  inputs are defined so we know what to process.
+			my @iterations = (1, 0, 0, 0);
+			$iterations[1] = 1 if (defined $m->{"SilverQualityInput"});
+			$iterations[2] = 1 if (defined $m->{"GoldQualityInput"});
+			$iterations[3] = 1 if (defined $m->{"IridiumQualityInput"});
+			for (my $i = 0; $i < scalar(@iterations); $i++) {
+				next unless ($iterations[$i] == 1);
+				my $input_quality = 0;
+				my $input_prob = 1;
+				my $amt_min = (defined $m->{'OutputStack'} and $m->{'OutputStack'} > 1) ? $m->{'OutputStack'} : 1;
+				my $amt_max = (defined $m->{'OutputMaxStack'} and $m->{'OutputMaxStack'} > 1) ? $m->{'OutputMaxStack'} : 1;
+				if ($i > 0) {
+					my $override_tag = "";
+					if ($i == 1) {
+						$input_quality = 1;
+						$override_tag = "SilverQualityInput";
+					} elsif ($i == 2) {
+						$input_quality = 2;
+						$override_tag = "GoldQualityInput";
+					} elsif ($i == 3) {
+						$input_quality = 4;
+						$override_tag = "IridiumQualityInput";
 					}
-					$this_name .= " [$this_prob%]";
-					$outs{$key} = "$this_img $this_name";
+					$input_prob = $m->{$override_tag}{'Probability'};
+					$amt_min = (defined $m->{$override_tag}{'OutputStack'}) ? $m->{$override_tag}{'OutputStack'} : 1;
+					$amt_max = (defined $m->{$override_tag}{'OutputMaxStack'}) ? $m->{$override_tag}{'OutputMaxStack'} : $amt_min;
 				}
-				$prob = sprintf("%0.1f", $prob*100/$left);
-				foreach my $k (keys %outs) {
-					$outs{$k} =~ s/LEFT/$prob/;
+				next if ($input_prob == 0);
+				my %entry = ( 'key1' => '', 'key2' => '', 'out' => '' );
+				my $name = GetItem($m->{'OutputIdentifier'});
+				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
+				# that a simple regex can do the job rather than needing a more robust general approach.
+				$entry{'key1'} = StripHTML($name);
+				my $img = GetImgTag($entry{'key1'});
+				my $val_mult = 1;
+				if (defined $m->{'OutputQuality'} and $m->{'OutputQuality'} > 0) {
+					my $q = $m->{'OutputQuality'};
+					$val_mult *= (1 + .25*$q);
+					my $alt = $quality_desc[$q];
+					my $tag = GetImgTag($entry{'key1'}, 'object', 0, "quality-item");
+					$img = qq(<div class="quality-container">$tag<img class="quality quality-star" id="Quality_$q" alt="$alt" src="img/blank.png"></div>);
+				};
+				# Quality should probably apply to these as well
+				my $prob = 1;
+				my $left = 1;
+				my %outs = ();
+				if (defined $m->{'AdditionalOutputs'}) {
+					foreach my $a (@{$m->{'AdditionalOutputs'}}) {
+						my $this_name = GetItem($a->{'OutputIdentifier'});
+						my $key = StripHTML($this_name);
+						my $this_img = GetImgTag($a->{'OutputIdentifier'});
+						my $this_prob = (defined $a->{'OutputProbability'}) ? $a->{'OutputProbability'} : 0;
+						if ($this_prob == 0) {
+							$left++;
+							$this_prob = "LEFT";
+						} else {
+							$prob -= $this_prob;
+							$this_prob = sprintf("%0.1f", $this_prob*100);
+						}
+						$this_name .= " [$this_prob%]";
+						$outs{$key} = "$this_img $this_name";
+					}
+					$prob = sprintf("%0.1f", $prob*100/$left);
+					foreach my $k (keys %outs) {
+						$outs{$k} =~ s/LEFT/$prob/;
+					}
 				}
-			}
-			my $amt_min = (defined $m->{'OutputStack'} and $m->{'OutputStack'} > 1) ? $m->{'OutputStack'} : 1;
-			my $amt_max = (defined $m->{'OutputMaxStack'} and $m->{'OutputMaxStack'} > 1) ? $m->{'OutputMaxStack'} : 1;
-			if ($amt_max < $amt_min) {
-				$amt_max = $amt_min;
-			}
-			my $val_mult = 1;
-			if ($amt_max > 1) {
-				if ($amt_min < $amt_max) {
-					$name .= " ($amt_min-$amt_max)";
-					$val_mult = ($amt_min+$amt_max)/2;
-				} else {
-					$name .= " ($amt_max)";
-					$val_mult = $amt_max;
+				if ($amt_max < $amt_min) {
+					$amt_max = $amt_min;
 				}
-			}
-			if ($prob ne "1") {
-				$name .= " [$prob%]";
-			}
-			my $adds = "";
-			foreach my $k (sort keys %outs) {
-				$adds .= "<br/>$outs{$k}";
-			}
-			$entry{'out'} = qq(<tr class="$filter"><td class="name">$img $name$adds</td>);
-			my $cost = 0;
-			$name = GetItem($m->{'InputIdentifier'});
-			$entry{'key2'} = StripHTML($name);
-			$img = GetImgTag(StripHTML($name));
-			my $val = GetValue($m->{'InputIdentifier'});
-			my $input_val = $val;
-			my $amt = 1;
-			if (defined $m->{'InputStack'} and $m->{'InputStack'} > 1) {
-				$amt = $m->{'InputStack'};
-				$name .= " ($amt)";
-				if (looks_like_number($val)) {
-					$val *= $amt;
+				if ($amt_max > 1) {
+					if ($amt_min < $amt_max) {
+						$name .= " ($amt_min-$amt_max)";
+						$val_mult = ($amt_min+$amt_max)/2;
+					} else {
+						$name .= " ($amt_max)";
+						$val_mult = $amt_max;
+					}
 				}
-			}
-			if (looks_like_number($cost) and looks_like_number($val)) {
-				$cost += $val;
-			} else {
-				$cost = "Varies";
-			}
-			my @inputs = ("$img $name");
-			if (defined $m->{'FuelIdentifier'}) {
-				$name = GetItem($m->{'FuelIdentifier'});
-				$img = GetImgTag(StripHTML($name));
-				$val = GetValue($m->{'FuelIdentifier'});
-				if (defined $m->{'FuelStack'} and $m->{'FuelStack'} > 1) {
-					$amt = $m->{'FuelStack'};
+				if ($prob ne "1") {
+					$name .= " [$prob%]";
+				}
+				my $adds = "";
+				foreach my $k (sort keys %outs) {
+					$adds .= "<br/>$outs{$k}";
+				}
+				$entry{'out'} = qq(<tr class="$filter"><td class="name">$img $name$adds</td>);
+				my $cost = 0;
+				$name = GetItem($m->{'InputIdentifier'});
+				$entry{'key2'} = StripHTML($name);
+				if ($input_prob != 1) {
+					$name .= sprintf(" [%0.1f%%]", $input_prob*100);
+				}
+				$img = GetImgTag($m->{'InputIdentifier'});
+				my $val = GetValue($m->{'InputIdentifier'});
+				if ($input_quality > 0) {
+					my $q = $input_quality;
+					my $alt = $quality_desc[$q];
+					my $tag = GetImgTag($m->{'InputIdentifier'}, 'object', 0, "quality-item");
+					$img = qq(<div class="quality-container">$tag<img class="quality quality-star" id="Quality_$q" alt="$alt" src="img/blank.png"></div>);
+					$val *= (1 + .25*$q);
+				}
+				my $input_val = $val;
+				my $amt = 1;
+				if (defined $m->{'InputStack'} and $m->{'InputStack'} > 1) {
+					$amt = $m->{'InputStack'};
 					$name .= " ($amt)";
 					if (looks_like_number($val)) {
 						$val *= $amt;
@@ -2359,15 +2504,13 @@ END_PRINT
 				} else {
 					$cost = "Varies";
 				}
-				push @inputs, "$img $name";
-			}
-			if (defined $m->{'AdditionalFuel'}) {
-				foreach my $f (keys %{$m->{'AdditionalFuel'}}) {
-					$name = GetItem($f);
-					$img = GetImgTag($f);
-					my $amt = $m->{'AdditionalFuel'}{$f};
-					$val = GetValue($f);
-					if ($amt > 1) {
+				my @inputs = ("$img $name");
+				if (defined $m->{'FuelIdentifier'}) {
+					$name = GetItem($m->{'FuelIdentifier'});
+					$img = GetImgTag($m->{'FuelIdentifier'});
+					$val = GetValue($m->{'FuelIdentifier'});
+					if (defined $m->{'FuelStack'} and $m->{'FuelStack'} > 1) {
+						$amt = $m->{'FuelStack'};
 						$name .= " ($amt)";
 						if (looks_like_number($val)) {
 							$val *= $amt;
@@ -2380,77 +2523,97 @@ END_PRINT
 					}
 					push @inputs, "$img $name";
 				}
-			}
-			$entry{'out'} .= qq(<td class="name">) . join("<br/>", @inputs);
-			if (defined $m->{'ExcludeIdentifiers'}) {
-				$entry{'out'} .= '<br /><span class="group">Except ' . join(', ', (map {GetItem($_)} @{$m->{'ExcludeIdentifiers'}})) . "</span><br />";
-			}
-			$entry{'out'} .= "</td>";
-			my $time = $m->{'MinutesUntilReady'};
-			# 1.4 standardized machine time to be 60 min per hour from 6a-2a and then 100min per hour after. This gives
-			#  a total of 1600 min rather than the 1440 we used to use. This does cause complications estimating time.
-			my $min_per_day = 1600;
-			if ($time > $min_per_day) { 
-				$time = "$time min (~" . nearest(.1, $time/$min_per_day) . " days)";
-			} elsif ($time >= 1440) {
-				# anything from 1440 to 1600 will be estimated as a day.
-				$time = "$time min (~1 day)";
-			} elsif ($time >= 60) {
-				my $rem = $time%60;
-				my $hr = "hr" . ($time > 119 ? "s" : "");
-				if ($rem > 0) {
-					$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
-				} else {
-					$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
-				}
-			} else {
-				$time = "$time min";
-			}
-			$entry{'out'} .= "<td>$time</td>";
-			my $value = GetValue($m->{'OutputIdentifier'});
-			my $equation = "";
-			if (defined $m->{'InputPriceBased'}) {
-				$equation = "Input";
-				if (defined $m->{'OutputPriceMultiplier'} and $m->{'OutputPriceMultiplier'} != 1) {
-					$equation .= " * $m->{'OutputPriceMultiplier'}";
-				}
-				if (defined $m->{'OutputPriceIncrement'} and $m->{'OutputPriceIncrement'} != 0) {
-					$equation .= " + $m->{'OutputPriceIncrement'}";
-				}
-			}
-			if ($equation ne "") {
-				if (looks_like_number($input_val)) {
-					$equation =~ s/Input/$input_val/;
-					my $eq_eval = eval $equation;
-					$eq_eval = '' if (not defined $eq_eval);
-					if ($eq_eval ne '' and looks_like_number($eq_eval)) {
-						$value = floor($eq_eval);
+				if (defined $m->{'AdditionalFuel'}) {
+					foreach my $f (keys %{$m->{'AdditionalFuel'}}) {
+						$name = GetItem($f);
+						$img = GetImgTag($f);
+						my $amt = $m->{'AdditionalFuel'}{$f};
+						$val = GetValue($f);
+						if ($amt > 1) {
+							$name .= " ($amt)";
+							if (looks_like_number($val)) {
+								$val *= $amt;
+							}
+						}
+						if (looks_like_number($cost) and looks_like_number($val)) {
+							$cost += $val;
+						} else {
+							$cost = "Varies";
+						}
+						push @inputs, "$img $name";
 					}
 				}
-			} else {	
-				if (not looks_like_number($value)) {
-					$value = qq(<span class="note">Varies</span>);
+				$entry{'out'} .= qq(<td class="name">) . join("<br/>", @inputs);
+				if (defined $m->{'ExcludeIdentifiers'}) {
+					$entry{'out'} .= '<br /><span class="group">Except ' . join(', ', (map {GetItem($_)} @{$m->{'ExcludeIdentifiers'}})) . "</span><br />";
 				}
+				$entry{'out'} .= "</td>";
+				my $time = $m->{'MinutesUntilReady'};
+				# 1.4 standardized machine time to be 60 min per hour from 6a-2a and then 100min per hour after. This gives
+				#  a total of 1600 min rather than the 1440 we used to use. This does cause complications estimating time.
+				my $min_per_day = 1600;
+				if ($time > $min_per_day) { 
+					$time = "$time min (~" . nearest(.1, $time/$min_per_day) . " days)";
+				} elsif ($time >= 1440) {
+					# anything from 1440 to 1600 will be estimated as a day.
+					$time = "$time min (~1 day)";
+				} elsif ($time >= 60) {
+					my $rem = $time%60;
+					my $hr = "hr" . ($time > 119 ? "s" : "");
+					if ($rem > 0) {
+						$time = sprintf("%d min (%d %s, %d min)", $time, $time/60, $hr, $rem);
+					} else {
+						$time = sprintf("%d min (%d %s)", $time, $time/60, $hr);
+					}
+				} else {
+					$time = "$time min";
+				}
+				$entry{'out'} .= "<td>$time</td>";
+				my $value = GetValue($m->{'OutputIdentifier'});
+				my $equation = "";
+				if (defined $m->{'InputPriceBased'} and $m->{'InputPriceBased'}) {
+					$equation = "Input";
+					if (defined $m->{'OutputPriceMultiplier'} and $m->{'OutputPriceMultiplier'} != 1) {
+						$equation .= " * $m->{'OutputPriceMultiplier'}";
+					}
+					if (defined $m->{'OutputPriceIncrement'} and $m->{'OutputPriceIncrement'} != 0) {
+						$equation .= " + $m->{'OutputPriceIncrement'}";
+					}
+				}
+				if ($equation ne "") {
+					if (looks_like_number($input_val)) {
+						$equation =~ s/Input/$input_val/;
+						my $eq_eval = eval $equation;
+						$eq_eval = '' if (not defined $eq_eval);
+						if ($eq_eval ne '' and looks_like_number($eq_eval)) {
+							$value = floor($eq_eval);
+						}
+					}
+				} else {	
+					if (not looks_like_number($value)) {
+						$value = qq(<span class="note">Varies</span>);
+					}
+				}
+				my $profit = "";
+				if ($equation =~ /Input/) {
+					$profit = qq(<span class="note">Varies</span>);
+					$value = $equation;
+				} elsif (looks_like_number($cost) and looks_like_number($value)) {
+					$value *= $val_mult;
+					$profit = $value - $cost;
+				} else {
+					$profit = qq(<span class="note">--</span>);
+				}
+				$entry{'out'} .= qq(<td class="value">$value</td>);
+				$entry{'out'} .= qq(<td class="value">$profit</td>);
+				# reuse profit variable for per-hour version.
+				if (looks_like_number($profit)) {
+					$profit = nearest(.01,60*$profit/$m->{'MinutesUntilReady'});
+				}
+				$entry{'out'} .= qq(<td class="value">$profit</td>);
+				$entry{'out'} .= qq(</tr>);
+				push @{$Panel{$key}{'rules'}}, \%entry;
 			}
-			my $profit = "";
-			if ($equation =~ /Input/) {
-				$profit = qq(<span class="note">Varies</span>);
-				$value = $equation;
-			} elsif (looks_like_number($cost) and looks_like_number($value)) {
-				$value *= $val_mult;
-				$profit = $value - $cost;
-			} else {
-				$profit = qq(<span class="note">--</span>);
-			}
-			$entry{'out'} .= qq(<td class="value">$value</td>);
-			$entry{'out'} .= qq(<td class="value">$profit</td>);
-			# reuse profit variable for per-hour version.
-			if (looks_like_number($profit)) {
-				$profit = nearest(.01,60*$profit/$m->{'MinutesUntilReady'});
-			}
-			$entry{'out'} .= qq(<td class="value">$profit</td>);
-			$entry{'out'} .= qq(</tr>);
-			push @{$Panel{$key}{'rules'}}, \%entry;
 		}
 	}
 	
@@ -2708,11 +2871,13 @@ END_PRINT
 <p>Note that filtering is per production rule; the individual machines will always display even if all of their rules are hidden. The base game
 Seedmaker recipe uses Poppy as an example but actually applies to a large variety of crops & seeds.
 </p>
-<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) accept appropriate mod items too even though this summary links them to
-the wiki which only shows base game items. All value and profit calculations assume basic (no-star) <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a>. Additonally, if a recipe calls for <span class="group">Any Milk</span>, the
-value of the small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> is used, and if a recipe calls for <span class="group">Any Egg</span>,
-the value of the small <a href="https://stardewvalleywiki.com/Egg">Egg</a> is used.
-</p>
+<p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) or tag (e.g. <span class="group">Lake Fish</span>) will accept both
+mod and base game items; this summary will have a tooltip listing relevant items from all sources, and these tooltips will not change based on the mod filtering used.
+In general, value and profit calculations are not attempted for these recipes, with the exceptions of 
+the value of small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> used for <span class="group">Any Milk</span> and
+the value of small <a href="https://stardewvalleywiki.com/Egg">Egg</a> used for <span class="group">Any Egg</span>.Similarly, most recipes can accept ingredients of
+any <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a> and in these cases
+the value of the basic (no-star) version is used.</p>
 <p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients
 and products while <span class="note">Profit (Hr)</span> takes the production time into account and divides the per-item profit by the number of hours the
 machine takes. The latter is rounded to two decimal places. Machines which only change the quality but return the same base item (similar to Casks) are
