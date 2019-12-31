@@ -1076,11 +1076,13 @@ sub GetIngredients {
 #   HashRef - the data structure keeping track of the counts
 #   item - this item (ID or Name; Name should only be given for mod items)
 #   count - how many of this item
+#   ArrayRef - keeps track of how many of each basic ingredient are actually added
 #   type - [optional] 'cooking' (default) or 'crafting'
 sub AddAllIngredients {
 	my $HashRef = shift;
 	my $item = shift;
 	my $count = shift;
+	my $ArrayRef = shift;
 	my $type = shift;
 	my $ingr_value = 0;
 	
@@ -1098,17 +1100,28 @@ sub AddAllIngredients {
 	
 	# enter the recursion.
 	my @items_to_add = SearchIngredients($item, $count, $type);
+	my %temp = ();
 	foreach my $i (@items_to_add) {
 		if (not exists $HashRef->{$i->{'item'}}) {
 			$HashRef->{$i->{'item'}} = 0;
 		}
 		$HashRef->{$i->{'item'}} += $i->{'count'};
+		# These need to be translated into strings of a special form
+		my $item = lc GetItem($i->{'item'}, "", 0);
+		$item =~ s/ /_/g;
+		if (not exists $temp{$item}) {
+			$temp{$item} = 0;
+		}
+		$temp{$item} += $i->{'count'};
 		my $this_value = GetValue($i->{'item'});
 		if (looks_like_number($ingr_value) and looks_like_number($this_value)) {
 			$ingr_value += $i->{'count'} * $this_value;
 		} else {
 			$ingr_value = "varies";
 		}
+	}
+	foreach my $t (keys %temp) {
+		push @$ArrayRef, "$t/$temp{$t}";
 	}
 	return $ingr_value;
 }
@@ -1136,7 +1149,7 @@ sub SearchIngredients {
 		$type = 'cooking';
 	}
 	if (not defined $max_depth) {
-		$max_depth = 5;
+		$max_depth = 8;
 	}
 
 	my @ingr_to_return = ();
@@ -1687,12 +1700,13 @@ sub WriteCookingSummary {
 		my $ingr = "";
 		my $ingr_value = 0;
 		my @temp = split(/ /,  $GameData->{'CookingRecipes'}{$key}{'split'}[0]);
+		my @ingr_data = ();
 		for (my $i = 0; $i < scalar(@temp); $i += 2) {
 			my $item = GetItem($temp[$i]);
 			my $img = GetImgTag($temp[$i]);
 			my $qty = ($temp[$i+1] > 1 ? " ($temp[$i+1])" : "");
 			$ingr .= "$img $item$qty<br />";
-			my $value_to_add = AddAllIngredients(\%IngredientCount, $temp[$i], $temp[$i+1]);
+			my $value_to_add = AddAllIngredients(\%IngredientCount, $temp[$i], $temp[$i+1], \@ingr_data);
 			if (looks_like_number($ingr_value) and looks_like_number($value_to_add)) {
 				$ingr_value += $value_to_add;
 			} else {
@@ -1748,13 +1762,18 @@ sub WriteCookingSummary {
 			$source .= "$temp[0]<br />";
 		} 
 		my $recipe_cost = "--";
+		# Triple shot espresso does not have a free alternative.
+		if ($key eq "Triple Shot Espresso") {
+			$recipe_cost = $SaloonRecipes{$key};
+		}
 		my $value = GetValue($cid);
 		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
 		my $filter = "filter_base_game";
+		my $data_attr = join('|', @ingr_data);
 		my $output = <<"END_PRINT";
 <tr class="$filter">
 <td class="name">$imgTag $cname</td>
-<td class="name">$ingr</td>
+<td class="name ingr" data-ingr="$data_attr">$ingr</td>
 <td class="value">$health</td>
 <td class="value">$energy</td>
 <td class="name">$buffs</td>
@@ -1778,7 +1797,6 @@ END_PRINT
 			}
 		}
 	}
-
 	#TODO: Figure out what to do with bouquets.
 	print STDOUT "  Processing Mod Cooking Recipes\n";
 	foreach my $key (keys %{$ModData->{'Objects'}}) {
@@ -1790,12 +1808,13 @@ END_PRINT
 		my $ingr = "";
 		my $ingr_value = 0;
 		my @ingr_list = @{$ModData->{'Objects'}{$key}{'Recipe'}{'Ingredients'}};
+		my @ingr_data = ();
 		foreach my $i (@ingr_list) {
 			my $item = GetItem($i->{'Object'});
 			my $img = GetImgTag($i->{'Object'});
 			my $qty = ($i->{'Count'} > 1 ? " ($i->{'Count'})" : "");
 			$ingr .= "$img $item$qty<br />";
-			my $value_to_add = AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'});
+			my $value_to_add = AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'}, \@ingr_data);
 			if (looks_like_number($ingr_value) and looks_like_number($value_to_add)) {
 				$ingr_value += $value_to_add;
 			} else {
@@ -1864,10 +1883,11 @@ END_PRINT
 		my $value = GetValue($key);
 		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
 		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
+		my $data_attr = join('|', @ingr_data);
 		my $output = <<"END_PRINT";
 <tr class="$filter">
 <td class="name">$imgTag $cname</td>
-<td class="name">$ingr</td>
+<td class="name ingr" data-ingr="$data_attr">$ingr</td>
 <td class="value">$health</td>
 <td class="value">$energy</td>
 <td class="name">$buffs</td>
@@ -1929,14 +1949,13 @@ example, when calculating the profit for Complete Breakfast, the value of the Co
 value of 2 eggs, 1 potato, 1 oil, and 1 wheat flour. If a recipe can take <span class="group">any Egg</span> or 
 <span class="group">any Milk</span>, the cheapest possibility is used, but for other categories like
 <span class="group">any Fish</span>, there is too much variation to get a useful answer.</p>
-<p>The recipe tables have a footer that shows the total cost to buy every shown recipe.
-When calculating this total, only mod recipes are included because all buyable base game recipes also 
-have alternative (free) ways to learn them such as from the Queen of Sauce TV channel or NPC friendship.</p>
+<p>The recipe tables have a footer that shows the total cost to buy every shown recipe; this will adjust based on filtering.
+When calculating this total, the only base game recipes included are those which do not have alternative (free)
+ways to learn them such as from the Queen of Sauce TV channel or NPC friendship.</p>
 <p>The Ingredient list summarizes how many of each ingredient would be necessary to make one of every recipe on this page.
 Note that it is not truly minimal because it doesn't consider the possibility of reusing one product as an ingredient for
 a different product (for example, when calculating the ingredients for Complete Breakfast, it assumes a new Hashbrowns
-dish will be made during the process.) The ingredient list does not auto-adjust to the filters and always includes
-every item from all sources.
+dish will be made during the process.) The ingredient will also auto-adjust based on filtering.
 </p>
 
 END_PRINT
@@ -1999,7 +2018,6 @@ END_PRINT
 	print <<"END_PRINT";
 <div class="panel" id="TOC_Ingredient_List">
 <h2>Ingredient List</h2>
-<p class="note">Note: This list is based on all the recipes and does not currently adjust based on the filtering options.</p>
 <table class="sortable output">
 <thead>
 <tr>
@@ -2013,7 +2031,9 @@ END_PRINT
 	foreach my $key (sort {GetItem($a, "", 0) cmp GetItem($b, "", 0)} keys %IngredientCount) {
 		my $imgTag = GetImgTag($key);
 		my $name = GetItem($key);
-		print qq(<tr><td class="name">$imgTag $name</td><td class="value">$IngredientCount{$key}</td></tr>);
+		my $data = lc GetItem($key, '', 0);
+		$data =~ s/ /_/g;
+		print qq(<tr class="ingr_list" data-ingr="$data"><td class="name">$imgTag $name</td><td class="value">$IngredientCount{$key}</td></tr>);
 	}
 
 	print <<"END_PRINT";

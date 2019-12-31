@@ -28,6 +28,8 @@ window.onload = function () {
 			// This is understood to be food total, food count, drink total, drink count
 			var adjustments = [0, 0, 0, 0];
 			var row = document.getElementsByClassName(filterName);
+			// And now we prepare for adjusting the actual ingredient table.
+			var ingr_adjustments = {};
 			for(var j = 0; j < row.length; j++){
 				var old_style = row[j].style.display;
 				// We are filtering multiple types now, so we need to handle that properly
@@ -58,6 +60,19 @@ window.onload = function () {
 							adjustments[2*t+1] += adjust;
 						}
 					}
+					// There should only be 1 of these per row.
+					var ingrs = row[j].getElementsByClassName("ingr");
+					if (ingrs !== null && ingrs.length > 0) {
+						var str = ingrs[0].getAttribute("data-ingr");
+						var c = str.split("|");
+						for(var k=0; k < c.length; k++) {
+							var cc = c[k].split("/");
+							if (!(cc[0] in ingr_adjustments)) {
+								ingr_adjustments[cc[0]] = 0;
+							}
+							ingr_adjustments[cc[0]] += adjust*cc[1];
+						}
+					}
 				}
 			}
 			var elements = ["foot_total_food", "foot_count_food", "foot_total_drink", "foot_count_drink"];
@@ -67,7 +82,22 @@ window.onload = function () {
 					var old = removeCommas(ele.innerHTML);
 					ele.innerHTML = addCommas(old + adjustments[n]);
 				}
-			}			
+			}
+			// Adjusting the ingredient list
+			elements = document.getElementsByClassName("ingr_list");
+			for(var n = 0; n < elements.length; n++) {
+				var ingr_id = elements[n].getAttribute("data-ingr");
+				if (ingr_id in ingr_adjustments) {
+					var count = parseInt(elements[n].getElementsByClassName("value")[0].innerHTML);
+					count += ingr_adjustments[ingr_id];
+					elements[n].getElementsByClassName("value")[0].innerHTML = count;
+					if (count === 0) {
+						elements[n].style.display = "none";
+					} else {
+						elements[n].style.display = "table-row";
+					}
+				}
+			}
 		};
 	}
 
