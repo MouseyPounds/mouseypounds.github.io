@@ -2317,6 +2317,8 @@ sub WriteMachineSummary {
 						} else {
 							$source = FindMailRecipe($key);
 						}
+					} else {
+						$source = "Given automatically";
 					}
 					my @conditions = ();
 					if (defined $ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchaseRequirements'}) {
@@ -2872,10 +2874,10 @@ END_PRINT
 Seedmaker recipe uses Poppy as an example but actually applies to a large variety of crops & seeds.
 </p>
 <p>Inputs related to an entire category (e.g. <span class="group">Any Fruit</span>) or tag (e.g. <span class="group">Lake Fish</span>) will accept both
-mod and base game items; this summary will have a tooltip listing relevant items from all sources, and these tooltips will not change based on the mod filtering used.
+mod and base game items; this summary will have a tooltip listing relevant items from all sources, but these tooltips will not change based on the mod filtering used.
 In general, value and profit calculations are not attempted for these recipes, with the exceptions of 
 the value of small cow <a href="https://stardewvalleywiki.com/Milk">Milk</a> used for <span class="group">Any Milk</span> and
-the value of small <a href="https://stardewvalleywiki.com/Egg">Egg</a> used for <span class="group">Any Egg</span>.Similarly, most recipes can accept ingredients of
+the value of small <a href="https://stardewvalleywiki.com/Egg">Egg</a> used for <span class="group">Any Egg</span>. Similarly, most recipes can accept ingredients of
 any <a href="https://stardewvalleywiki.com/Crops#Crop_Quality">quality</a> and in these cases
 the value of the basic (no-star) version is used.</p>
 <p>There are two types of profit listed: <span class="note">Profit (Item)</span> is purely based on the difference between the values of the ingredients

@@ -24,6 +24,9 @@ window.onload = function () {
 	for(var i = 0; i < e.length; i++){
 		e[i].onclick = function() {
 			var filterName = (this.id);
+			// Prepare some stuff for the cooking summary adjustments
+			// This is understood to be food total, food count, drink total, drink count
+			var adjustments = [0, 0, 0, 0];
 			var row = document.getElementsByClassName(filterName);
 			for(var j = 0; j < row.length; j++){
 				var old_style = row[j].style.display;
@@ -45,23 +48,26 @@ window.onload = function () {
 				}
 				if (adjust != 0) {
 					// These are hardcoded right now because I am not sure how to use patterns
-					var tables = ['food','drink']
+					var tables = ['food','drink'];
 					for(var t = 0; t < tables.length; t++) {
 						var c = row[j].getElementsByClassName("total_" + tables[t]);
 						for(var k = 0; k < c.length; k++) {
-							
-							var the_total = removeCommas(document.getElementById("foot_total_" + tables[t]).innerHTML);
 							var temp = c[k].innerHTML;
 							var change = (temp === "--" ? 0 : parseInt(temp));
-							the_total += adjust*change;
-							document.getElementById("foot_total_" + tables[t]).innerHTML = addCommas(the_total);
-							var the_count = removeCommas(document.getElementById("foot_count_" + tables[t]).innerHTML);
-							the_count += adjust;
-							document.getElementById("foot_count_" + tables[t]).innerHTML = addCommas(the_count);
+							adjustments[2*t] += adjust*change;
+							adjustments[2*t+1] += adjust;
 						}
 					}
 				}
 			}
+			var elements = ["foot_total_food", "foot_count_food", "foot_total_drink", "foot_count_drink"];
+			for(var n = 0; n < elements.length; n++) {
+				var ele = document.getElementById(elements[n]);
+				if (ele !== null) {
+					var old = removeCommas(ele.innerHTML);
+					ele.innerHTML = addCommas(old + adjustments[n]);
+				}
+			}			
 		};
 	}
 
