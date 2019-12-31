@@ -718,7 +718,7 @@ sub GetFooter {
 PPJA Reference:
 <a href="./index.html">Main Index</a> ||
 <a href="./cooking.html">Cooking</a> || 
-<a href="./cooking.html">Crafting</a> || 
+<a href="./crafting.html">Crafting</a> || 
 <a href="./crops.html">Crops</a> || 
 <a href="./trees.html">Fruit Trees</a> ||
 <a href="./gifts.html">Gift Tastes</a> ||
