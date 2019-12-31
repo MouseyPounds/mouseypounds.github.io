@@ -13,6 +13,12 @@ img.craftables_x2 {
 	height: 64px;
 	background-image:url("./img/ss_craftables_x2.png")
 }
+td img.craftables_x2 {
+	vertical-align: -27px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/ss_craftables_x2.png")
+}
 img.crops {
 	vertical-align: -2px;
 	/* Full sprite is 128px */
@@ -70,6 +76,12 @@ img.game_craftables {
 }
 img.game_craftables_x2 {
 	vertical-align: -5px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/game_craftables_x2.png")
+}
+td img.game_craftables_x2 {
+	vertical-align: -27px;
 	width: 32px;
 	height: 64px;
 	background-image:url("./img/game_craftables_x2.png")

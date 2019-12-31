@@ -30,10 +30,12 @@ UpdateTags();
 my $Categorized = {};
 UpdateCategories();
 
+my %Machines = ();
 WriteMainIndex();
 WriteCookingSummary();
 WriteCropSummary();
 WriteMachineSummary();
+WriteCraftingSummary();
 WriteFruitTreeSummary();
 WriteGiftSummary();
 WriteCSS();
@@ -177,6 +179,30 @@ sub GetItem {
 					$output = Wikify($input);
 					$found = 1;
 					last;
+				}
+			}
+		}
+		if (not $found) {
+			if (exists $ModData->{'BigCraftables'}{$input}) {
+				# This is a JA item, but we have nothing to add yet.
+				my $mod = "a mod";
+				if (exists $ModData->{'BigCraftables'}{$input}{'__MOD_ID'} and exists $ModInfo->{$ModData->{'BigCraftables'}{$input}{'__MOD_ID'}}{'Name'}) {
+					$mod = $ModInfo->{$ModData->{'BigCraftables'}{$input}{'__MOD_ID'}}{'Name'};
+				} else {
+					warn "Couldn't determine parent mod for $input";
+				}
+				$outputSimple = encode_entities($input);
+				my $encoded = encode_entities($input);
+				$output = qq(<span tooltip="from $mod">$encoded</span>);
+				$found = 1;
+			} else {
+				foreach my $k (keys %{$GameData->{'BigCraftablesInformation'}}) {
+					if ($GameData->{'BigCraftablesInformation'}{$k}{'split'}[0] eq $input) {
+						$outputSimple = $input;
+						$output = Wikify($input);
+						$found = 1;
+						last;
+					}
 				}
 			}
 		}
@@ -327,6 +353,7 @@ sub GetCategory {
 		-96 => 'Ring', #unused in vanilla
 		-98 => 'Weapon', #unused in vanilla
 		-99 => 'Tool', #unused in vanilla
+		-777 => 'Wild Seeds', #weird special category used for Tea Sapling crafting recipe
 	);	
 	
 	if (exists $c{$input}) {
@@ -446,6 +473,8 @@ sub GetImgTag {
 				return GetImgTag("Orange", "object", $isBig, $extraClasses);
 			} elsif ($input == -75) {
 				return GetImgTag("Bok Choy", "object", $isBig, $extraClasses);
+			} elsif ($input == -777) {
+				return GetImgTag("Spring Seeds", "object", $isBig, $extraClasses);
 			} 
 		} else {
 			if ($type =~ /^objects?/i) {
@@ -689,6 +718,7 @@ sub GetFooter {
 PPJA Reference:
 <a href="./index.html">Main Index</a> ||
 <a href="./cooking.html">Cooking</a> || 
+<a href="./cooking.html">Crafting</a> || 
 <a href="./crops.html">Crops</a> || 
 <a href="./trees.html">Fruit Trees</a> ||
 <a href="./gifts.html">Gift Tastes</a> ||
@@ -1543,6 +1573,8 @@ sub UpdateCategories {
 			push @{$Categorized->{$cat}}, encode_entities($k);
 		}
 	}
+	# Hardcoding the weird special category used in tea sapling crafting
+	$Categorized->{-777} = ["Spring Seeds", "Summer Seeds", "Fall Seeds", "Winter Seeds"];
 	# Because these are used for icons and I don't want the images changing that often, I am going to
 	#  pre-sort all the arrays now. This might make temporary copies but it shouldn't matter much.
 	foreach my $t (keys %$Categorized) {
@@ -1612,9 +1644,10 @@ any value-adding perks. Those interested in the profit aspect might also want to
 together by a different PPJA user.</p>
 <ul>
 <li><a href="./cooking.html">Cooking</a> - Recipe ingredients and acquisition methods</li>
+<li><a href="./cooking.html">Crafting</a> - Recipe ingredients and acquisition methods</li>
 <li><a href="./crops.html">Crops</a> - Growth timing and other basic information sorted by season; includes base game crops</li>
-<li><a href="./gifts.html">Gift Tastes</a> - A large table summarizing NPC gift tastes for items from all supported mods</li>
 <li><a href="./trees.html">Fruit Trees</a> - Basic information sorted by season; includes base game trees</li>
+<li><a href="./gifts.html">Gift Tastes</a> - A large table summarizing NPC gift tastes for items from all supported mods</li>
 <li><a href="./machines.html">Machines</a> - Products, production timings, and crafting recipes</li>
 </ul>
 <p>If you have any suggestions for improvement or bugs to report, please contact me either at <span class="username">MouseyPounds#0557</span>
@@ -2008,6 +2041,397 @@ END_PRINT
 <td id="foot_total_$p->{'key'}" class="value">$pretty_cost</td>
 <td>--</td>
 <td>--</td>
+</tr>
+</tfoot>
+</table>
+</div>
+END_PRINT
+	}
+	
+	print <<"END_PRINT";
+<div class="panel" id="TOC_Ingredient_List">
+<h2>Ingredient List</h2>
+<table class="sortable output">
+<thead>
+<tr>
+<th>Name</th>
+<th>Amount Needed</th>
+</thead>
+<tbody>
+END_PRINT
+	
+	# loop the ingredients
+	foreach my $key (sort {GetItem($a, "", 0) cmp GetItem($b, "", 0)} keys %IngredientCount) {
+		my $imgTag = GetImgTag($key);
+		my $name = GetItem($key);
+		my $data = lc GetItem($key, '', 0);
+		$data =~ s/ /_/g;
+		print qq(<tr class="ingr_list" data-ingr="$data"><td class="name">$imgTag $name</td><td class="value">$IngredientCount{$key}</td></tr>);
+	}
+
+	print <<"END_PRINT";
+</tbody>
+</table>
+</div>
+END_PRINT
+		
+	print GetFooter();
+	close $FH or die "Error closing file";
+}
+
+###################################################################################################
+# WriteCraftingSummary - crafting recipes; must be run after machine summary
+sub WriteCraftingSummary {
+	my $FH;
+	open $FH, ">$DocBase/crafting.html" or die "Can't open index.html for writing: $!";
+	select $FH;
+
+	print STDOUT "Generating Crafting Summary\n";
+	my @Panel = ( 
+		{ 'key' => 'object', 'name' => "Object Recipes", 'count' => 0, 'total_cost' => 0, 'row' => {}, },
+		{ 'key' => 'craftable', 'name' => "Big Craftable Recipes", 'count' => 0, 'total_cost' => 0, 'row' => {}, },
+		);
+		
+	my %IngredientCount = ();
+	my %ModList = ();
+
+	print STDOUT "  Processing Game Crafting Recipes\n";
+	# We are starting by straight copying a lot of the Cooking recipe code.
+	# There is no TV channel for these, so we can skip that part.
+	# However purchased recipes come from a much wider variety of sources.
+	my %VendorRecipes = ( 
+			'Wood Floor' => { 'Robin' => 500 },
+			'Stone Floor' => { 'Robin' => 500 },
+			'Brick Floor' => { 'Robin' => 500 },
+			'Stepping Stone Path' => { 'Robin' => 500 },
+			'Straw Floor' => { 'Robin' => 1000 },
+			'Crystal Path' => { 'Robin' => 1000 },
+			'Wooden Brazier' => { 'Robin' => 250 },
+			'Stone Brazier' => { 'Robin' => 400 },
+			'Gold Brazier' => { 'Robin' => 1000 },
+			'Carved Brazier' => { 'Robin' => 2000 },
+			'Stump Brazier' => { 'Robin' => 800 },
+			'Barrel Brazier' => { 'Robin' => 800 },
+			'Skull Brazier' => { 'Robin' => 3000 },
+			'Marble Brazier' => { 'Robin' => 5000 },
+			'Wood Lamp-post' => { 'Robin' => 500 },
+			'Iron Lamp-post' => { 'Robin' => 1000 },
+			'Grass Starter' => { 'Pierre' => 1000 },
+			'Weathered Floor' => { 'Dwarf' => 500 },
+			'Crystal Floor' => { 'Krobus' => 500 },
+			'Wicked Statue' => { 'Krobus' => 2000 },
+			'Wedding Ring' => { 'Traveling Merchant' => 500 },
+		);
+	my %FestivalRecipes = (
+			"Jack-O-Lantern" => { "Spirit's Eve" => 2000 },
+			"Tub o' Flowers" => { "Flower Dance" => 2000 },
+		);
+	# More defaults for crafting, and they aren't explicitly identified in the data file,
+	#  so we'll add them along with other specials.
+	my %Special = (
+		'Gate' => "Given automatically",
+		'Wood Fence' => "Given automatically",
+		'Wood Path' => "Given automatically",
+		'Gravel Path' => "Given automatically",
+		'Cobblestone Path' => "Given automatically",
+		'Torch' => "Given automatically",
+		'Campfire' => "Given automatically",
+		'Chest' => "Given automatically",
+		'Wood Sign' => "Given automatically",
+		'Stone Sign' => "Given automatically",
+		'Cask' => "Farmhouse " . Wikify("Cellar") . " upgrade",
+		'Ancient Seeds' => "Museum reward for donating " . Wikify("Ancient Seed"),
+		'Tea Sapling' => "Mail from " . Wikify("Caroline") . " after event",
+		'Deluxe Scarecrow' => "Mail after collecting all " . Wikify("Rarecrows"),
+		'Garden Pot' => Wikify("Evelyn") . " event after fixing " . Wikify("Greenhouse"),
+		'Wild Bait' => Wikify("Linus") . " 4&#x2665; Event",
+		'Mini-Jukebox' => Wikify("Gus") . " 5&#x2665; Event",
+		'Drum Block' => Wikify("Robin") . " 6&#x2665; Event",
+		'Flute Block' => Wikify("Robin") . " 6&#x2665; Event",
+		"Warp Totem: Desert" => "Purchase from " . Wikify("Desert Trader") . " for 10 " . Wikify("Iridium Bar"),
+		);
+	foreach my $key (keys %{$GameData->{'CraftingRecipes'}}) {
+		# Skip anything on machine summary
+		next if (exists $Machines{$key});
+		my @temp = split(/ /, $GameData->{'CraftingRecipes'}{$key}{'split'}[2]);
+		my $cid = $temp[0];
+		my $item_type = ($GameData->{'CraftingRecipes'}{$key}{'split'}[3] eq 'true') ? 'craftable' : 'object';
+		my $cname = $key;
+		my $imgTag = GetImgTag($cid, $item_type, 1);
+		my $ingr = "";
+		@temp = split(/ /, $GameData->{'CraftingRecipes'}{$key}{'split'}[0]);
+		my @ingr_data = ();
+		for (my $i = 0; $i < scalar(@temp); $i += 2) {
+			my $item = GetItem($temp[$i]);
+			my $img = GetImgTag($temp[$i]);
+			my $qty = ($temp[$i+1] > 1 ? " ($temp[$i+1])" : "");
+			$ingr .= "$img $item$qty<br />";
+			AddAllIngredients(\%IngredientCount, $temp[$i], $temp[$i+1], \@ingr_data);
+		}
+		my $source = "";
+		if (exists $Special{$key}) {
+			$source .= $Special{$key};
+		}
+		my $recipe_cost = "--";
+		if (exists $VendorRecipes{$key}) {
+			foreach my $v (keys %{$VendorRecipes{$key}}) {
+				$source .= qq(Buy for $VendorRecipes{$key}{$v}g from ) . WikiShop($v) . qq(<br />);
+				$recipe_cost = $VendorRecipes{$key}{$v};
+			}
+		}
+		if (exists $FestivalRecipes{$key}) {
+			foreach my $v (keys %{$FestivalRecipes{$key}}) {
+				$source .= qq(Buy for $FestivalRecipes{$key}{$v}g at ) . Wikify($v) . qq( <br />);
+				$recipe_cost = $FestivalRecipes{$key}{$v};
+			}
+		}
+		# Some conditions are defined in the last field of the recipe data. Only skills are useful
+		# To make our lives difficult, some of them have the leading s and some of them don't.
+		# Also we start with 2 \w because some of the special/default recipes have conditions like "l 0"
+		my $condition = $GameData->{'CraftingRecipes'}{$key}{'split'}[4];
+		if ($condition =~ /^s \w\w+ \d+$/) {
+			my @temp = TranslatePreconditions("$condition");
+			$source .= "$temp[0]<br />";
+		} elsif ($condition =~ /\w\w+ \d+$/) {
+			my @temp = TranslatePreconditions("s $condition");
+			$source .= "$temp[0]<br />";
+		}
+		my $filter = "filter_base_game";
+		my $data_attr = join('|', @ingr_data);
+		my $output = <<"END_PRINT";
+<tr class="$filter">
+<td class="name">$imgTag $cname</td>
+<td class="name ingr" data-ingr="$data_attr">$ingr</td>
+<td>$source</td>
+<td class="value total_$item_type">$recipe_cost</td>
+</tr>
+END_PRINT
+
+		# It is a little weird to do it this way when there are only 2 options, but it is consistent with
+		#  other pages and makes it easier to adjust if we change the categories later.
+		foreach my $p (@Panel) {
+			if ($p->{'key'} eq $item_type) {
+				$p->{'row'}{StripHTML($cname)} = $output;
+				$p->{'count'}++;
+				if (looks_like_number($recipe_cost)) {
+					$p->{'total_cost'} += $recipe_cost;
+				}
+				last;
+			}
+		}
+	}
+
+	print STDOUT "  Processing Mod Crafting Recipes (Objects)\n";
+	foreach my $key (keys %{$ModData->{'Objects'}}) {
+		next if (not defined $ModData->{'Objects'}{$key}{'Recipe'} or $ModData->{'Objects'}{$key}{'Category'} ne 'Crafting');
+		my $key = $ModData->{'Objects'}{$key}{'Name'};
+		my $cname = GetItem($key);
+		#my $cdesc = $ModData->{'Objects'}{$key}{'Description'};
+		my $imgTag = GetImgTag($key, "object", 1);
+		my $ingr = "";
+		my @ingr_list = @{$ModData->{'Objects'}{$key}{'Recipe'}{'Ingredients'}};
+		my @ingr_data = ();
+		foreach my $i (@ingr_list) {
+			my $item = GetItem($i->{'Object'});
+			my $img = GetImgTag($i->{'Object'});
+			my $qty = ($i->{'Count'} > 1 ? " ($i->{'Count'})" : "");
+			$ingr .= "$img $item$qty<br />";
+			my $value_to_add = AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'}, \@ingr_data);
+		}
+		if (not exists $ModList{$ModData->{'Objects'}{$key}{'__MOD_ID'}}) {
+			$ModList{$ModData->{'Objects'}{$key}{'__MOD_ID'}} = 1;
+		}
+		my $item_type = "object";
+		my $source = "Given automatically";
+		my $recipe_cost = "--";
+		if (not $ModData->{'Objects'}{$key}{'Recipe'}{'IsDefault'}) {
+			if ($ModData->{'Objects'}{$key}{'Recipe'}{'CanPurchase'}) {
+				$source = qq(Buy for $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'}g from ) .
+					WikiShop($ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseFrom'}) . qq(<br />);
+				$recipe_cost = $ModData->{'Objects'}{$key}{'Recipe'}{'PurchasePrice'};
+			} else {
+				$source = FindMailRecipe($key);
+			}
+		}
+		my @conditions = ();
+		if (defined $ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseRequirements'}) {
+			@conditions = @{$ModData->{'Objects'}{$key}{'Recipe'}{'PurchaseRequirements'}};
+		}
+		foreach my $condition (@conditions) {
+			my @temp = TranslatePreconditions($condition);
+			$source .= "$temp[0]<br />";
+		}
+
+		my $value = GetValue($key);
+		my $filter = $ModInfo->{$ModData->{'Objects'}{$key}{'__MOD_ID'}}{'__FILTER'};
+		my $data_attr = join('|', @ingr_data);
+		my $output = <<"END_PRINT";
+<tr class="$filter">
+<td class="name">$imgTag $cname</td>
+<td class="name ingr" data-ingr="$data_attr">$ingr</td>
+<td>$source</td>
+<td class="value total_$item_type">$recipe_cost</td>
+</tr>
+END_PRINT
+
+		foreach my $p (@Panel) {
+			if ($p->{'key'} eq $item_type) {
+				$p->{'row'}{$key} = $output;
+				$p->{'count'}++;
+				if (looks_like_number($recipe_cost)) {
+					$p->{'total_cost'} += $recipe_cost;
+				}
+				last;
+			}
+		}
+	}
+
+	print STDOUT "  Processing Mod Crafting Recipes (Big Craftables)\n";
+	foreach my $key (keys %{$ModData->{'BigCraftables'}}) {
+		# Skip anything on machine summary or anything not actually craftable
+		next if (exists $Machines{$key});
+		next if (not defined $ModData->{'BigCraftables'}{$key}{'Recipe'});
+		my $key = $ModData->{'BigCraftables'}{$key}{'Name'};
+		my $cname = GetItem($key);
+		#my $cdesc = $ModData->{'Objects'}{$key}{'Description'};
+		my $imgTag = GetImgTag($key, "craftable", 1);
+		my $ingr = "";
+		my @ingr_list = @{$ModData->{'BigCraftables'}{$key}{'Recipe'}{'Ingredients'}};
+		my @ingr_data = ();
+		foreach my $i (@ingr_list) {
+			my $item = GetItem($i->{'Object'});
+			my $img = GetImgTag($i->{'Object'});
+			my $qty = ($i->{'Count'} > 1 ? " ($i->{'Count'})" : "");
+			$ingr .= "$img $item$qty<br />";
+			my $value_to_add = AddAllIngredients(\%IngredientCount, $i->{'Object'}, $i->{'Count'}, \@ingr_data);
+		}
+		if (not exists $ModList{$ModData->{'BigCraftables'}{$key}{'__MOD_ID'}}) {
+			$ModList{$ModData->{'BigCraftables'}{$key}{'__MOD_ID'}} = 1;
+		}
+		my $item_type = "craftable";
+		my $source = "Given automatically";
+		my $recipe_cost = "--";
+		if (not $ModData->{'BigCraftables'}{$key}{'Recipe'}{'IsDefault'}) {
+			if ($ModData->{'BigCraftables'}{$key}{'Recipe'}{'CanPurchase'}) {
+				$source = qq(Buy for $ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchasePrice'}g from ) .
+					WikiShop($ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchaseFrom'}) . qq(<br />);
+				$recipe_cost = $ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchasePrice'};
+			} else {
+				$source = FindMailRecipe($key);
+			}
+		}
+		my @conditions = ();
+		if (defined $ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchaseRequirements'}) {
+			@conditions = @{$ModData->{'BigCraftables'}{$key}{'Recipe'}{'PurchaseRequirements'}};
+		}
+		foreach my $condition (@conditions) {
+			my @temp = TranslatePreconditions($condition);
+			$source .= "$temp[0]<br />";
+		}
+
+		my $value = GetValue($key);
+		my $filter = $ModInfo->{$ModData->{'BigCraftables'}{$key}{'__MOD_ID'}}{'__FILTER'};
+		my $data_attr = join('|', @ingr_data);
+		my $output = <<"END_PRINT";
+<tr class="$filter">
+<td class="name">$imgTag $cname</td>
+<td class="name ingr" data-ingr="$data_attr">$ingr</td>
+<td>$source</td>
+<td class="value total_$item_type">$recipe_cost</td>
+</tr>
+END_PRINT
+
+		foreach my $p (@Panel) {
+			if ($p->{'key'} eq $item_type) {
+				$p->{'row'}{$key} = $output;
+				$p->{'count'}++;
+				if (looks_like_number($recipe_cost)) {
+					$p->{'total_cost'} += $recipe_cost;
+				}
+				last;
+			}
+		}
+	}
+
+	my $longdesc = <<"END_PRINT";
+<p>A summary of crafting recipes from various sources. In the list below, the checkboxes can be used to show or hide
+information specific to that particular source; the symbol &#x24c5 indicates an official PPJA mod. Additionally there
+are some buttons which will show or hide multiple sources at once.</p>
+<fieldset id="filter_options" class="filter_set">
+<label><input class="filter_check" type="checkbox" name="filter_base_game" id="filter_base_game" value="show" checked="checked"> 
+Stardew Valley base game version $StardewVersion</label><br />
+END_PRINT
+
+	foreach my $k (sort {$ModInfo->{$a}{'Name'} cmp $ModInfo->{$b}{'Name'}} keys %ModList) {
+		my $filter = $ModInfo->{$k}{'__FILTER'};
+		my $info = GetExtendedModInfo($k, 1, 2);
+		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $class = "filter_check";
+		if ($info->{'ppja'}) {
+			$class .= " filter_ppja";
+		}
+		$longdesc .= <<"END_PRINT";
+<label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
+$prefix$info->{'info'}</label><br />
+END_PRINT
+	}
+
+	$longdesc .= <<"END_PRINT";
+</fieldset>
+<fieldset id="filter_control" class="filter_set">
+<button type="button" id="filter_check_all_off">All Sources Off</button>
+<button type="button" id="filter_check_all_on">All Sources On</button>
+<button type="button" id="filter_check_ppja">PPJA Mods Only</button>
+<button type="button" id="filter_check_nonppja">Non-PPJA Mods Only</button>
+</fieldset>
+<p>The following tables contain information about crafted items. These are separated into small objects and larger 
+placeable items ("Big Craftables"), but items which are listed on the <a href="machines.html">machine summary</a>
+are not included. A total is calculated for recipes which must be purchased and an ingredient list summarizes
+all the items which are necessary to craft one of everything shown. Both the total and the ingredient list
+will auto-adjust based on filtering.</p>
+END_PRINT
+	print GetHeader("Crafting", qq(Crafting recipes from PPJA (and other) mods for Stardew Valley.), $longdesc);
+	print GetTOCStart();
+
+
+	# Print the rest of the TOC
+	foreach my $p (@Panel) {
+		my $text = $p->{'name'};
+		$text =~ s/ /&nbsp;/g;
+		print qq(<li><a href="#TOC_$p->{'key'}">$text</a></li>);
+	}
+	print qq(<li><a href="#TOC_Ingredient_List">Ingredient List</a></li>);
+	print GetTOCEnd();
+	
+	# Print the Panels
+	foreach my $p (@Panel) {
+		print <<"END_PRINT";
+<div class="panel" id="TOC_$p->{'key'}">
+<h2>$p->{'name'}</h2>
+<table class="sortable output">
+<thead>
+<tr>
+<th>Name</th>
+<th>Ingredients</th>
+<th>Source</th>
+<th>Recipe<br />Cost</th>
+</thead>
+<tbody>
+END_PRINT
+
+		foreach my $k (sort keys %{$p->{'row'}}) {
+			print $p->{'row'}{$k};
+		}
+		# Note we take the easy way out on plural vs singular because of the javascript filters changing the counts
+		my $total_desc = qq(Total purchase cost for <span id="foot_count_$p->{'key'}">$p->{'count'}</span> shown recipe(s):);
+		my $pretty_cost = AddCommas($p->{'total_cost'});
+		
+		print <<"END_PRINT";
+</tbody>
+<tfoot>
+<tr>
+<td class="foot_total" colspan="3">$total_desc</td>
+<td id="foot_total_$p->{'key'}" class="value">$pretty_cost</td>
 </tr>
 </tfoot>
 </table>
@@ -2918,6 +3342,8 @@ END_PRINT
 	print GetTOCEnd();
 
 	foreach my $p (sort keys %Panel) {
+		# preserving machine list for exclusion from crafting summary
+		$Machines{$p} = 1;
 		foreach my $e (sort {$a->{'key1'} cmp $b->{'key1'} or $a->{'key2'} cmp $b->{'key2'}} @{$Panel{$p}{'rules'}}) {
 			$Panel{$p}{'out'} .= $e->{'out'};
 		}
@@ -3741,6 +4167,12 @@ img.craftables_x2 {
 	height: 64px;
 	background-image:url("./img/ss_craftables_x2.png")
 }
+td img.craftables_x2 {
+	vertical-align: -27px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/ss_craftables_x2.png")
+}
 img.crops {
 	vertical-align: -2px;
 	/* Full sprite is 128px */
@@ -3798,6 +4230,12 @@ img.game_craftables {
 }
 img.game_craftables_x2 {
 	vertical-align: -5px;
+	width: 32px;
+	height: 64px;
+	background-image:url("./img/game_craftables_x2.png")
+}
+td img.game_craftables_x2 {
+	vertical-align: -27px;
 	width: 32px;
 	height: 64px;
 	background-image:url("./img/game_craftables_x2.png")

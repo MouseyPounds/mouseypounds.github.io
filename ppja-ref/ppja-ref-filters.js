@@ -24,9 +24,10 @@ window.onload = function () {
 	for(var i = 0; i < e.length; i++){
 		e[i].onclick = function() {
 			var filterName = (this.id);
-			// Prepare some stuff for the cooking summary adjustments
-			// This is understood to be food total, food count, drink total, drink count
-			var adjustments = [0, 0, 0, 0];
+			// Prepare some stuff for the cooking & crafting summary adjustments
+			// This is understood to be food total, food count, drink total, drink count,
+			//  object total, object count, craftable total, craftable count
+			var adjustments = [0, 0, 0, 0, 0, 0, 0, 0];
 			var row = document.getElementsByClassName(filterName);
 			// And now we prepare for adjusting the actual ingredient table.
 			var ingr_adjustments = {};
@@ -50,7 +51,7 @@ window.onload = function () {
 				}
 				if (adjust != 0) {
 					// These are hardcoded right now because I am not sure how to use patterns
-					var tables = ['food','drink'];
+					var tables = ['food', 'drink', 'object', 'craftable'];
 					for(var t = 0; t < tables.length; t++) {
 						var c = row[j].getElementsByClassName("total_" + tables[t]);
 						for(var k = 0; k < c.length; k++) {
@@ -75,7 +76,8 @@ window.onload = function () {
 					}
 				}
 			}
-			var elements = ["foot_total_food", "foot_count_food", "foot_total_drink", "foot_count_drink"];
+			var elements = ["foot_total_food", "foot_count_food", "foot_total_drink", "foot_count_drink",
+							"foot_total_object", "foot_count_object", "foot_total_craftable", "foot_count_craftable"];
 			for(var n = 0; n < elements.length; n++) {
 				var ele = document.getElementById(elements[n]);
 				if (ele !== null) {
