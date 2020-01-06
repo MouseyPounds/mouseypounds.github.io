@@ -119,10 +119,13 @@ sub StripHTML {
 # GetItem receives 1 or 2 inputs and will use the first one that is defined & not blank.
 # It then tries to resolve an ID into a name if it looks like a vanilla item
 # Optional 3rd parameter for Formatting (span or wiki link) defaults true.
+# Optional 4th parameter to indicate a base game craftable
 sub GetItem {
 	my $input = shift;
 	my $next = shift;
 	my $doFormat = shift;
+	my $isCraftable = shift;
+	
 	if (not defined $input or $input eq "") {
 		# first one didn't work, now try second
 		$input = $next;
@@ -133,6 +136,9 @@ sub GetItem {
 	}
 	if (not defined $doFormat) {
 		$doFormat = 1;
+	}
+	if (not defined $isCraftable) {
+		$isCraftable = 0;
 	}
 
 	my $output = "";
@@ -151,11 +157,16 @@ sub GetItem {
 				$output = qq(<span class="group" tooltip="Includes $list">Any $outputSimple</span>);
 				$outputSimple = "Any $outputSimple";
 			}
-		}
-		elsif (exists $GameData->{'ObjectInformation'}{$input}) {
-			my $name = $GameData->{'ObjectInformation'}{$input}{'split'}[0];
-			$outputSimple = $name;
-			$output = Wikify($name);
+		} else {
+			if ($isCraftable && exists $GameData->{'BigCraftablesInformation'}{$input}) {
+				my $name = $GameData->{'BigCraftablesInformation'}{$input}{'split'}[0];
+				$outputSimple = $name;
+				$output = Wikify($name);			
+			} elsif (exists $GameData->{'ObjectInformation'}{$input}) {
+				my $name = $GameData->{'ObjectInformation'}{$input}{'split'}[0];
+				$outputSimple = $name;
+				$output = Wikify($name);
+			}
 		}
 	} else {
 		# Custom, probably JA, but maybe not. JA takes priority
@@ -1858,7 +1869,7 @@ END_PRINT
 		if (not exists $ModList{$ModData->{'Objects'}{$key}{'__MOD_ID'}}) {
 			$ModList{$ModData->{'Objects'}{$key}{'__MOD_ID'}} = 1;
 		}
-		my $item_type = (not exists $ModData->{'Objects'}{$key}{'EdibleIsDrink'} or $ModData->{'Objects'}{$key}{'EdibleIsDrink'} == 1) ? "drink" : "food";
+		my $item_type = (defined $ModData->{'Objects'}{$key}{'EdibleIsDrink'} and $ModData->{'Objects'}{$key}{'EdibleIsDrink'} == 1) ? "drink" : "food";
 		my $buffs = "";
 		if (defined $ModData->{'Objects'}{$key}{'EdibleBuffs'}) {
 			# Buffs will be ordered the same way the vanilla array is ordered
@@ -2156,7 +2167,7 @@ sub WriteCraftingSummary {
 		my @temp = split(/ /, $GameData->{'CraftingRecipes'}{$key}{'split'}[2]);
 		my $cid = $temp[0];
 		my $item_type = ($GameData->{'CraftingRecipes'}{$key}{'split'}[3] eq 'true') ? 'craftable' : 'object';
-		my $cname = $key;
+		my $cname = GetItem($cid, "", 1, 1);
 		my $imgTag = GetImgTag($cid, $item_type, 1);
 		my $ingr = "";
 		@temp = split(/ /, $GameData->{'CraftingRecipes'}{$key}{'split'}[0]);
