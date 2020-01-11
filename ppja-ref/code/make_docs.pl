@@ -1296,6 +1296,10 @@ sub GetNexusKey {
 		return "4132";
 	} elsif ($modID eq 'MythicPhoenix.BFAVGoldenGoose') {
 		return "4432";
+	} elsif ($modID eq 'rearda88.GemandMineralCrops') {
+		return "3395";
+	} elsif ($modID eq 'StephansLotsOfWildCrops') {
+		return "3171";
 	} 
 	# Currently suppressing this because so many of the "sub-mods" don't have this that it dominates the output
 	#print STDOUT "** GetNexusKey did not find a key for ($modID) and is returning an empty string\n";
@@ -1392,6 +1396,9 @@ sub GetExtendedModInfo {
 		$parentID = 'ppja.artisanvalleymachinegoods';
 		$isPPJA = 1;
 	} elsif ($modID eq 'ppja.artisanvalleyCP') {
+		$parentID = 'ppja.artisanvalleymachinegoods';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.artisanvalleyforMFM') {
 		$parentID = 'ppja.artisanvalleymachinegoods';
 		$isPPJA = 1;
 	} elsif ($modID eq 'PPJA.BFAVQuailsAddOn') { #Supplied by Artisan Valley so AV is parent, but no ppja flag.
@@ -1692,8 +1699,7 @@ sub WriteCookingSummary {
 	print STDOUT "  Processing Game Cooking Recipes\n";
 	# Recipe source information for game data is in a variety of locations. We'll start by scanning
 	#  the TV data to find out when each Queen of Sauce recipe airs.
-	# In that file, the keys are basically the week numbers from 1 to 31 (there is a 32, but it is
-	#  unused as that recipe does not exist in the base game.) We will translate these week numbers
+	# In that file, the keys are basically the week numbers from 1 to 32. We will translate these week numbers
 	#  into a nicer game date and save them into a hash keyed on recipe name.
 	my %TVDates = ();
 	foreach my $key (keys %{$GameData->{'TV/CookingChannel'}}) {
@@ -3896,6 +3902,7 @@ sub WriteGiftSummary {
 		next if ($id == 30); #Lumber
 		next if ($id == 460); #Mermaid's Pendant
 		next if ($id == 809); #Movie Ticket
+		next if ($id == 94); #Spirit Torch
 		next if ($id == 434); #Stardrop
 		next if ($id == 808); #Void Ghost Pendant
 		next if ($id == 277); #Wilted Bouquet
@@ -4140,9 +4147,16 @@ END_PRINT
 		print "</td>";
 		$count++;
 	}
+	$count = AddCommas($count);
+	my $total_desc = qq(Gift summary showing <span id="foot_count_object">$count</span> of $count known item(s));
 	
 	print <<"END_PRINT";
 </tbody>
+<tfoot>
+<tr id="gift_footer">
+<td colspan="34">$total_desc</td>
+</tr>
+</tfoot>
 </table>
 </div>
 END_PRINT

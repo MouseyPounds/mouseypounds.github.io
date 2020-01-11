@@ -248,9 +248,9 @@ foreach my $t (keys %{$ModData->{'FruitTrees'}}) {
 	my $product = $ModData->{'FruitTrees'}{$t}{'Product'};
 	my $overlay;
 	if (looks_like_number($product)) {
-		# oh shit, I can't handle this yet
-		LogMessage("WARNING: Mod Tree wants to make a vanilla product.", 1);
-		next;
+		my $base_x = $SS->{'objects'}{'width'} * ($product % $objects_per_row);
+		my $base_y = $SS->{'objects'}{'height'} * floor($product / $objects_per_row);
+		$overlay = $game_objects->crop(left=>$base_x, top=>$base_y, width=>16, height=>16);
 	} else {
 		$overlay = $SS->{'objects'}{'img'}->crop(left=>$ModData->{'Objects'}{$product}{'__SS_X'},
 			top=>$ModData->{'Objects'}{$product}{'__SS_Y'}, width=>16, height=>16);

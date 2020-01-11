@@ -60,6 +60,11 @@ window.onload = function () {
 							adjustments[2*t] += adjust*change;
 							adjustments[2*t+1] += adjust;
 						}
+						// Stupid hack for adjusting count only on gift_tastes page
+						c = document.getElementById("gift_footer");
+						if (c !== null) {
+							adjustments[2*t+1] += adjust;
+						}
 					}
 					// There should only be 1 of these per row.
 					var ingrs = row[j].getElementsByClassName("ingr");
