@@ -1519,6 +1519,11 @@ sub GetExtendedModInfo {
 		$parentID = 'TrentNewRaccoons';
 	} elsif ($modID eq 'Raccoons.MachineSetting') {
 		$parentID = 'TrentNewRaccoons';
+	# From Hot Cocoa Shop; the TMX should probably be the parent mod, but we don't parse those
+	} elsif ($modID eq 'penny3.JA.HCS') {
+		$parentID = 'penny3.CP.HCS';
+	} elsif ($modID eq 'penny3.TMX.HCS') {
+		$parentID = 'penny3.CP.HCS';
 	}
 	
 	my $parentInfo = GetModInfo($parentID, $includeLink, $formatType) if (defined $parentID);
@@ -1973,13 +1978,18 @@ END_PRINT
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetExtendedModInfo($k, 1, 2);
 		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $suffix = "";
+		if ($info->{'info'} !~ /href/ and defined $info->{'parentID'}) {
+			$info->{'parentInfo'} =~ /(\(.*\))/;
+			$suffix = " $1";
+		}	
 		my $class = "filter_check";
 		if ($info->{'ppja'}) {
 			$class .= " filter_ppja";
 		}
 		$longdesc .= <<"END_PRINT";
 <label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$prefix$info->{'info'}</label><br />
+$prefix$info->{'info'}</label>$suffix<br />
 END_PRINT
 	}
 
@@ -2383,13 +2393,18 @@ END_PRINT
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetExtendedModInfo($k, 1, 2);
 		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $suffix = "";
+		if ($info->{'info'} !~ /href/ and defined $info->{'parentID'}) {
+			$info->{'parentInfo'} =~ /(\(.*\))/;
+			$suffix = " $1";
+		}
 		my $class = "filter_check";
 		if ($info->{'ppja'}) {
 			$class .= " filter_ppja";
 		}
 		$longdesc .= <<"END_PRINT";
 <label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$prefix$info->{'info'}</label><br />
+$prefix$info->{'info'}</label>$suffix<br />
 END_PRINT
 	}
 
@@ -2614,13 +2629,18 @@ END_PRINT
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetExtendedModInfo($k, 1, 2);
 		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $suffix = "";
+		if ($info->{'info'} !~ /href/ and defined $info->{'parentID'}) {
+			$info->{'parentInfo'} =~ /(\(.*\))/;
+			$suffix = " $1";
+		}
 		my $class = "filter_check";
 		if ($info->{'ppja'}) {
 			$class .= " filter_ppja";
 		}
 		$longdesc .= <<"END_PRINT";
 <label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$prefix$info->{'info'}</label><br />
+$prefix$info->{'info'}</label>$suffix<br />
 END_PRINT
 	}
 
@@ -3313,13 +3333,18 @@ END_PRINT
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetExtendedModInfo($k, 1, 2);
 		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $suffix = "";
+		if ($info->{'info'} !~ /href/ and defined $info->{'parentID'}) {
+			$info->{'parentInfo'} =~ /(\(.*\))/;
+			$suffix = " $1";
+		}
 		my $class = "filter_check";
 		if ($info->{'ppja'}) {
 			$class .= " filter_ppja";
 		}
 		$longdesc .= <<"END_PRINT";
 <label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$prefix$info->{'info'}</label><br />
+$prefix$info->{'info'}</label>$suffix<br />
 END_PRINT
 	}
 
@@ -3711,13 +3736,18 @@ END_PRINT
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetExtendedModInfo($k, 1, 2);
 		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $suffix = "";
+		if ($info->{'info'} !~ /href/ and defined $info->{'parentID'}) {
+			$info->{'parentInfo'} =~ /(\(.*\))/;
+			$suffix = " $1";
+		}
 		my $class = "filter_check";
 		if ($info->{'ppja'}) {
 			$class .= " filter_ppja";
 		}
 		$longdesc .= <<"END_PRINT";
 <label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$prefix$info->{'info'}</label><br />
+$prefix$info->{'info'}</label>$suffix<br />
 END_PRINT
 	}
 
@@ -4069,13 +4099,18 @@ END_PRINT
 		my $filter = $ModInfo->{$k}{'__FILTER'};
 		my $info = GetExtendedModInfo($k, 1, 2);
 		my $prefix = ($info->{'ppja'}) ? qq(&#x24c5; ) : "";
+		my $suffix = "";
+		if ($info->{'info'} !~ /href/ and defined $info->{'parentID'}) {
+			$info->{'parentInfo'} =~ /(\(.*\))/;
+			$suffix = " $1";
+		}
 		my $class = "filter_check";
 		if ($info->{'ppja'}) {
 			$class .= " filter_ppja";
 		}
 		$longdesc .= <<"END_PRINT";
 <label><input class="$class" type="checkbox" name="$filter" id="$filter" value="show" checked="checked">
-$prefix$info->{'info'}</label><br />
+$prefix$info->{'info'}</label>$suffix<br />
 END_PRINT
 	}
 
@@ -4148,7 +4183,7 @@ END_PRINT
 		$count++;
 	}
 	$count = AddCommas($count);
-	my $total_desc = qq(Gift summary showing <span id="foot_count_object">$count</span> of $count known item(s));
+	my $total_desc = qq(Gift summary showing <span id="foot_count_object">$count</span> of $count known items);
 	
 	print <<"END_PRINT";
 </tbody>

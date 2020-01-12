@@ -551,10 +551,10 @@ sub ParseModData {
 						}
 					# The example pack has different capitalization than the actual mod :(
 					} elsif ($packID eq "DIGUS.ProducerFrameworkMod" or $packID eq "Digus.ProducerFrameworkMod") {
-						LogMessage("    This is a PFM pack. Looking for producerRules.json file.", 1);
-						if (-e "$BaseDir/$m/producerRules.json") {
-							LogMessage("      Found producerRules.json; attempting to parse", 1);
-							my $json = ParseJsonFile("$BaseDir/$m/producerRules.json");
+						LogMessage("    This is a PFM pack. Looking for ProducerRules.json file.", 1);
+						if (-e "$BaseDir/$m/ProducerRules.json") {
+							LogMessage("      Found ProducerRules.json; attempting to parse", 1);
+							my $json = ParseJsonFile("$BaseDir/$m/ProducerRules.json");
 							# PFM packs are also just a big list, so we need a container
 							my $container = { 'name' => $name, '__MOD_ID' => $id, '__PATH' => "$BaseDir/$m", 'producers' => $json };
 							LogMessage("      Dumping json object", 3);
@@ -565,7 +565,7 @@ sub ParseModData {
 							}
 							push @{$DataRef->{'Producers'}}, $container;
 						} else {
-							LogMessage("      WARNING: No producerRules.json found, skipping mod", 1);
+							LogMessage("      WARNING: No ProducerRules.json found, skipping mod", 1);
 							$storeMeta = 0;
 						}
 					} elsif ($packID eq "Pathoschild.ContentPatcher") {
