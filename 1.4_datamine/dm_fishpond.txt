@@ -1,0 +1,402 @@
+Experiments in data-mining (Stardew 1.4.3)
+==========================================
+
+Fish Pond Info
+-------------------------------
+Pond type 1 (Tags: item_squid)
+Fish which use this: Squid
+Spawn frequency: every 3 days
+Item production:
+  100% of 1 Squid Ink at population >= 7
+  60% of 1 Squid Ink at population >= 5
+  45% of 1 Squid Ink at population >= 3
+  25% of 1 Squid Ink at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Coral, 1 Sea Urchin)
+  To go from population 5 to 6, needs 2 Sardine
+-------------------------------
+Pond type 2 (Tags: item_midnight_squid)
+Fish which use this: Midnight Squid
+Spawn frequency: every 3 days
+Item production:
+  25% of 2 Squid Ink at population >= 10
+  80% of 1 Squid Ink at population >= 7
+  60% of 1 Squid Ink at population >= 5
+  45% of 1 Squid Ink at population >= 3
+  20% of 1 Squid Ink at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Coral, 2 Sea Urchin)
+  To go from population 5 to 6, needs 2 Sardine
+  To go from population 8 to 9, needs 1 Ocean Stone
+-------------------------------
+Pond type 3 (Tags: item_carp)
+Fish which use this: Carp
+Spawn frequency: every day
+Item production:
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs 2 Green Algae
+  To go from population 5 to 6, needs 2 Cave Carrot
+-------------------------------
+Pond type 4 (Tags: item_herring)
+Fish which use this: Herring
+Spawn frequency: every day
+Item production:
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs 3 Driftwood
+  To go from population 5 to 6, needs 1 Coral
+-------------------------------
+Pond type 5 (Tags: item_sunfish)
+Fish which use this: Sunfish
+Spawn frequency: every day
+Item production:
+  8% of 1 Solar Essence at population >= 10
+  90% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (2 Acorn, 2 Geode)
+  To go from population 5 to 6, needs random choice of: (1 Amethyst, 3 Mixed Seeds)
+-------------------------------
+Pond type 6 (Tags: item_blobfish)
+Fish which use this: Blobfish
+Spawn frequency: every 4 days
+Item production:
+  2% of 1 Pearl at population >= 9
+  2% of 5 Warp Totem: Farm at population >= 9
+  100% of 1-2 Roe at population >= 6
+  90% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs random choice of: (3 Coral, 2 Frozen Tear, 2 Sea Urchin)
+  To go from population 3 to 4, needs random choice of: (5 Coffee Bean, 1 Mayonnaise, 1 Pizza)
+  To go from population 5 to 6, needs random choice of: (1 Cookie, 1 Green Tea, 1 Wine)
+  To go from population 7 to 8, needs random choice of: (1 Rainbow Shell, 1 Rice Pudding)
+-------------------------------
+Pond type 7 (Tags: item_lava_eel)
+Fish which use this: Lava Eel
+Spawn frequency: every 5 days
+Item production:
+  3.3% of 10 Magma Geode at population >= 10
+  2% of 5 Magma Geode at population >= 9
+  4% of 5 Spicy Eel at population >= 9
+  3.3% of 3 Roe at population >= 9
+  15% of 2 Roe at population >= 9
+  100% of 1 Roe at population >= 6
+  10% of 5 Gold Ore at population >= 3
+  80% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 3 Fire Quartz
+  To go from population 3 to 4, needs random choice of: (1 Basalt, 2 Diamond, 1 Dwarf Scroll III)
+  To go from population 5 to 6, needs 2 Mega Bomb
+  To go from population 7 to 8, needs 1 Iridium Bar
+-------------------------------
+Pond type 8 (Tags: item_woodskip)
+Fish which use this: Woodskip
+Spawn frequency: every 2 days
+Item production:
+  5% of 1-5 Acorn at population >= 9
+  5% of 1-5 Maple Seed at population >= 9
+  5% of 1-5 Pine Cone at population >= 9
+  8% of 5-10 Wood at population >= 8
+  10% of 5 Hardwood at population >= 6
+  66% of 1 Roe at population >= 0
+  66% of 1-5 Wood at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 10 Hardwood
+  To go from population 3 to 4, needs random choice of: (2-3 Common Mushroom, 2-3 Red Mushroom)
+  To go from population 5 to 6, needs random choice of: (1 Oak Resin, 1 Pine Tar)
+  To go from population 7 to 8, needs random choice of: (2 Jade, 1 Tea Leaves)
+-------------------------------
+Pond type 9 (Tags: item_tiger_trout)
+Fish which use this: Tiger Trout
+Spawn frequency: every 999999 days
+Item production:
+  80% of 2 Roe at population >= 10
+  40% of 2 Roe at population >= 5
+  100% of 1 Roe at population >= 0
+Population Gates:
+  None
+-------------------------------
+Pond type 10 (Tags: fish_desert)
+Fish which use this: Sandfish, Scorpion Carp
+Spawn frequency: every 4 days
+Item production:
+  5% of 2-5 Cactus Seeds at population >= 10
+  25% of 3 Roe at population >= 10
+  50% of 2 Roe at population >= 8
+  75% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Cactus Fruit, 3 Coconut)
+  To go from population 5 to 6, needs 1 Golden Relic
+-------------------------------
+Pond type 11 (Tags: item_void_salmon)
+Fish which use this: Void Salmon
+Spawn frequency: every 4 days
+Item production:
+  5% of 1 Void Egg at population >= 9
+  83% of 1-3 Roe at population >= 9
+  8% of 5-10 Void Essence at population >= 8
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 5 Void Essence
+  To go from population 3 to 4, needs 10 Bat Wing
+  To go from population 5 to 6, needs random choice of: (1 Diamond, 1 Void Egg)
+  To go from population 7 to 8, needs 1 Iridium Ore
+-------------------------------
+Pond type 12 (Tags: item_slimejack)
+Fish which use this: Slimejack
+Spawn frequency: every 3 days
+Item production:
+  2% of 1 Green Slime Egg at population >= 9
+  7.5% of 50 Slime at population >= 9
+  12% of 30 Slime at population >= 9
+  20% of 10 Slime at population >= 9
+  10% of 1 Green Algae at population >= 3
+  80% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 20 Slime
+  To go from population 3 to 4, needs 10 Bug Meat
+  To go from population 5 to 6, needs random choice of: (1 Algae Soup, 5 Wild Bait)
+  To go from population 7 to 8, needs 1 Petrified Slime
+-------------------------------
+Pond type 13 (Tags: item_stonefish)
+Fish which use this: Stonefish
+Spawn frequency: every 5 days
+Item production:
+  5% of 5 Geode at population >= 9
+  7.5% of 30 Stone at population >= 9
+  12% of 1 Geode at population >= 9
+  1% of 1 Diamond at population >= 9
+  50% of 1 Roe at population >= 9
+  10% of 5 Copper Ore at population >= 3
+  25% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 10 Copper Ore
+  To go from population 3 to 4, needs 5 Earth Crystal
+  To go from population 5 to 6, needs random choice of: (10 Coal, 5 Geode)
+  To go from population 7 to 8, needs random choice of: (4 Copper Bar, 5 Refined Quartz)
+-------------------------------
+Pond type 14 (Tags: item_ice_pip)
+Fish which use this: Ice Pip
+Spawn frequency: every 5 days
+Item production:
+  5% of 5 Frozen Geode at population >= 9
+  7.5% of 5 Frozen Tear at population >= 9
+  12% of 1 Frozen Geode at population >= 9
+  1% of 1 Diamond at population >= 9
+  50% of 1 Roe at population >= 9
+  10% of 5 Iron Ore at population >= 3
+  25% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 10 Iron Ore
+  To go from population 3 to 4, needs 5 Frozen Tear
+  To go from population 5 to 6, needs random choice of: (10 Coal, 1 Crystal Fruit, 5 Frozen Geode)
+  To go from population 7 to 8, needs random choice of: (4 Iron Bar, 10 Refined Quartz)
+-------------------------------
+Pond type 15 (Tags: item_ghostfish)
+Fish which use this: Ghostfish
+Spawn frequency: every 2 days
+Item production:
+  5% of 5 White Algae at population >= 9
+  2% of 3 Pale Broth at population >= 9
+  12% of 3 Quartz at population >= 9
+  5% of 1 Refined Quartz at population >= 9
+  8% of 1 Quartz at population >= 3
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 5 Quartz
+  To go from population 3 to 4, needs 5 Cave Carrot
+  To go from population 5 to 6, needs 5 White Algae
+  To go from population 7 to 8, needs random choice of: (1 Dwarf Scroll I, 1 Dwarf Scroll II, 2 Refined Quartz)
+-------------------------------
+Pond type 16 (Tags: item_sturgeon)
+Fish which use this: Sturgeon
+Spawn frequency: every 4 days
+Item production:
+  25% of 2 Roe at population >= 10
+  100% of 1 Roe at population >= 10
+  80% of 1 Roe at population >= 9
+  60% of 1 Roe at population >= 6
+  40% of 1 Roe at population >= 3
+  20% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 1 to 2, needs 1 Diamond
+  To go from population 3 to 4, needs random choice of: (1 Jelly, 2 Maple Syrup, 1 Pickles)
+  To go from population 5 to 6, needs 3 Omni Geode
+  To go from population 7 to 8, needs 1 Nautilus Shell
+-------------------------------
+Pond type 17 (Tags: fish_super_cucumber)
+Fish which use this: fish_super_cucumber
+Spawn frequency: every -1 days
+Item production:
+  5% of 1-3 Iridium Ore at population >= 9
+  5% of 1-3 Amethyst at population >= 9
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Coral, 1 Honey, 1 Oyster, 3 Refined Quartz)
+  To go from population 5 to 6, needs random choice of: (1 Dried Starfish, 2 Emerald, 2-3 Omni Geode, 2-3 Purple Mushroom)
+  To go from population 7 to 8, needs random choice of: (1 Diamond, 3 Gold Bar, 1 Iridium Ore, 1 Jelly, 1 Pickles)
+-------------------------------
+Pond type 18 (Tags: fish_octopus)
+Fish which use this: fish_octopus
+Spawn frequency: every -1 days
+Item production:
+  6.6% of 3 Omni Geode at population >= 9
+  1% of 10 Omni Geode at population >= 9
+  10% of 1 Omni Geode at population >= 9
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Coral, 1 Honey, 1 Oyster, 3 Refined Quartz)
+  To go from population 5 to 6, needs random choice of: (1 Dried Starfish, 2 Emerald, 2-3 Omni Geode, 2-3 Purple Mushroom)
+  To go from population 7 to 8, needs 1 Green Tea
+-------------------------------
+Pond type 19 (Tags: fish_rainbow_trout)
+Fish which use this: fish_rainbow_trout
+Spawn frequency: every -1 days
+Item production:
+  2% of 1 Rainbow Shell at population >= 9
+  0.1% of 1 Prismatic Shard at population >= 9
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Coral, 1 Honey, 1 Oyster, 3 Refined Quartz)
+  To go from population 5 to 6, needs random choice of: (1 Dried Starfish, 2 Emerald, 2-3 Omni Geode, 2-3 Purple Mushroom)
+  To go from population 7 to 8, needs random choice of: (1 Diamond, 3 Gold Bar, 1 Iridium Ore, 1 Jelly, 1 Pickles)
+-------------------------------
+Pond type 20 (Tags: fish_semi_rare)
+Fish which use this: Spook Fish
+Spawn frequency: every 4 days
+Item production:
+  0.3% of 1 Treasure Chest at population >= 9
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Amethyst, 3 Coral, 3 Iron Bar, 1 Oyster, 3 Red Mushroom, 3 Refined Quartz)
+  To go from population 5 to 6, needs random choice of: (1 Dried Starfish, 2 Emerald, 1 Granite, 2-3 Omni Geode, 2-3 Purple Mushroom)
+  To go from population 7 to 8, needs random choice of: (1 Diamond, 3 Gold Bar, 1 Iridium Ore, 1 Mayonnaise, 1 Pickles)
+-------------------------------
+Pond type 21 (Tags: fish_catfish)
+Fish which use this: fish_catfish
+Spawn frequency: every -1 days
+Item production:
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (2 Amethyst, 3 Copper Bar, 3 Red Mushroom, 2 Topaz)
+  To go from population 5 to 6, needs random choice of: (10 Bat Wing, 2 Earth Crystal, 5 Mixed Seeds, 2-3 Purple Mushroom)
+  To go from population 7 to 8, needs random choice of: (1 Diamond, 3 Iron Bar, 1 Mayonnaise, 1 Pickles)
+-------------------------------
+Pond type 22 (Tags: fish_carnivorous)
+Fish which use this: Dorado, Lingcod, Pike
+Spawn frequency: varies based on value --  every 3 days (Dorado, Lingcod, Pike)
+Item production:
+  5% of 20 Bug Meat at population >= 9
+  100% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (2 Bream, 2 Carp, 2 Chub)
+  To go from population 5 to 6, needs random choice of: (2 Bullhead, 2 Largemouth Bass)
+  To go from population 7 to 8, needs random choice of: (2 Ghostfish, 2 Sandfish, 2 Woodskip)
+-------------------------------
+Pond type 23 (Tags: item_coral)
+Fish which use this: Coral
+Spawn frequency: every 2 days
+Item production:
+  6% of 1 Dolomite at population >= 9
+  6% of 1 Limestone at population >= 9
+Population Gates:
+  None
+-------------------------------
+Pond type 24 (Tags: item_sea_urchin)
+Fish which use this: Sea Urchin
+Spawn frequency: every 4 days
+Item production:
+  2% of 5 Roe at population >= 9
+  33% of 1 Roe at population >= 9
+  20% of 1 Roe at population >= 5
+  10% of 1 Roe at population >= 0
+Population Gates:
+  None
+-------------------------------
+Pond type 25 (Tags: fish_freshwater, fish_crab_pot)
+Fish which use this: Crayfish, Periwinkle, Snail
+Spawn frequency: varies based on value --  every day (Periwinkle), every 2 days (Crayfish, Snail)
+Item production:
+  7.5% of 1 Warp Totem: Mountains at population >= 9
+  5% of 2-3 Mixed Seeds at population >= 5
+  5% of 1-3 Green Algae at population >= 0
+  5% of 1 Trash at population >= 0
+  5% of 1 Driftwood at population >= 0
+  5% of 1 Broken Glasses at population >= 0
+  5% of 1 Broken CD at population >= 0
+  5% of 1 Soggy Newspaper at population >= 0
+  5% of 1 Trash at population >= 0
+  20% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (5 Clay, 15 Fiber)
+  To go from population 5 to 6, needs random choice of: (10 Bug Meat, 1 Cave Carrot, 5 Hardwood)
+  To go from population 7 to 8, needs random choice of: (1 Field Snack, 5 Solar Essence, 1 Wild Bait)
+-------------------------------
+Pond type 26 (Tags: fish_ocean, fish_crab_pot)
+Fish which use this: *Clam, Cockle, Crab, Lobster, Mussel, Oyster, Shrimp
+Spawn frequency: varies based on value --  every day (Mussel), every 2 days (*Clam, Cockle, Oyster, Shrimp), every 3 days (Crab, Lobster)
+Item production:
+  2% of 1 Nautilus Shell at population >= 9
+  7.5% of 1 Warp Totem: Beach at population >= 9
+  5% of 1 Sea Urchin at population >= 5
+  7.5% of 1 Coral at population >= 5
+  8.8% of 1-3 Seaweed at population >= 0
+  5% of 1 Trash at population >= 0
+  5% of 1 Driftwood at population >= 0
+  5% of 1 Broken Glasses at population >= 0
+  5% of 1 Broken CD at population >= 0
+  5% of 1 Soggy Newspaper at population >= 0
+  5% of 1 Trash at population >= 0
+  20% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs 5 Clay
+  To go from population 5 to 6, needs random choice of: (10 Bug Meat, 5 Quartz)
+  To go from population 7 to 8, needs random choice of: (1 Sea Urchin, 5 Solar Essence, 1 Wild Bait)
+-------------------------------
+Pond type 27 (Tags: fish_ocean)
+Fish which use this: Albacore, Anchovy, Eel, Flounder, Halibut, Octopus, Pufferfish, Red Mullet, Red Snapper, Sardine, Sea Cucumber, Super Cucumber, Tilapia, Tuna
+Spawn frequency: varies based on value --  every day (Anchovy), every 2 days (Albacore, Halibut, Red Mullet, Red Snapper, Sardine, Sea Cucumber, Tilapia), every 3 days (Eel, Flounder, Tuna), every 4 days (Octopus, Pufferfish, Super Cucumber)
+Item production:
+  100% of 1 Roe at population >= 5
+  70% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Driftwood, 1 Frozen Geode, 1-2 Seaweed)
+  To go from population 5 to 6, needs random choice of: (2 Clam, 2 Coral)
+  To go from population 7 to 8, needs random choice of: (2 Aquamarine, 1 Mussel, 2 Sea Urchin)
+-------------------------------
+Pond type 28 (Tags: fish_river)
+Fish which use this: Bream, Catfish, Chub, Perch, Rainbow Trout, Salmon, Shad, Smallmouth Bass, Walleye
+Spawn frequency: varies based on value --  every 2 days (Bream, Chub, Perch, Rainbow Trout, Salmon, Shad, Smallmouth Bass), every 3 days (Walleye), every 4 days (Catfish)
+Item production:
+  90% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (3 Acorn, 10 Bug Meat, 3 Maple Seed, 3 Pine Cone)
+  To go from population 5 to 6, needs random choice of: (3 Gold Ore, 1 Maple Syrup, 5 Mixed Seeds)
+  To go from population 7 to 8, needs random choice of: (1 Crayfish, 1 Honey, 2 Jade, 1 Periwinkle)
+-------------------------------
+Pond type 29 (Tags: fish_lake)
+Fish which use this: Bullhead, Largemouth Bass, Midnight Carp
+Spawn frequency: varies based on value --  every 2 days (Bullhead), every 3 days (Largemouth Bass), every 4 days (Midnight Carp)
+Item production:
+  90% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs random choice of: (10 Bug Meat, 2-3 Clay, 2-3 Green Algae, 5 Slime)
+  To go from population 5 to 6, needs random choice of: (2-3 Common Mushroom, 1-2 Earth Crystal, 1 Limestone)
+  To go from population 7 to 8, needs random choice of: (1 Mudstone, 1 Snail, 5 Wild Bait)
+-------------------------------
+Pond type 30 (Tags: category_fish)
+Fish which use this: *Angler, *Crimsonfish, *Glacierfish, *Legend, *Mutant Carp
+Spawn frequency: varies based on value --  every 5 days (*Angler, *Crimsonfish, *Glacierfish, *Legend, *Mutant Carp)
+Item production:
+  80% of 1 Roe at population >= 5
+  80% of 1 Roe at population >= 0
+Population Gates:
+  To go from population 3 to 4, needs 1 Bait
+  To go from population 5 to 6, needs 1 Wild Bait
+-------------------------------
+Total different fish: 62
+'*' in front of a fish means they would match based on tags but are excluded for another reason.
+All legendary fish are exluded by tag `fish_legendary`, so the final pond type is just a safety net default.
+And Clams are excluded because their category is 'Basic -23' instead of 'Fish'.
+Production chances are for choosing a product and are rolled after a separate 23-95% chance based on population (.15 + .08*pop)
+If you are interested in maxing profits, see https://gist.github.com/captncraig/e691aceb05e426c8aaa6c2af0c48a64f
