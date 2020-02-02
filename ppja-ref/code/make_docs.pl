@@ -1300,6 +1300,8 @@ sub GetNexusKey {
 		return "3395";
 	} elsif ($modID eq 'StephansLotsOfWildCrops') {
 		return "3171";
+	} elsif ($modID eq 'Zosa.eatums') {
+		return "5203";
 	} 
 	# Currently suppressing this because so many of the "sub-mods" don't have this that it dominates the output
 	#print STDOUT "** GetNexusKey did not find a key for ($modID) and is returning an empty string\n";
@@ -1484,12 +1486,20 @@ sub GetExtendedModInfo {
 		$parentID = 'ppja.starbrewvalley';
 		$isPPJA = 1;
 	# Now non-PPJA Stuff. 
+	# From Artisinal Soda Makers; JA will be parent
+	} elsif ($modID eq 'Hadi.SodaMaker') {
+		$parentID = 'Hadi.JASoda';
 	# From Bonster's Crops; F&V will be parent
 	} elsif ($modID eq 'BonsterTrees') {
 		$parentID = 'BFV.FruitVeggie';
 	# From Bonster's Recipes
 	} elsif ($modID eq 'Bonster.Adv.Recipes') {
 		$parentID = 'Bonster.Recipes';
+	# From Hot Cocoa Shop; the TMX should probably be the parent mod, but we don't parse those
+	} elsif ($modID eq 'penny3.JA.HCS') {
+		$parentID = 'penny3.CP.HCS';
+	} elsif ($modID eq 'penny3.TMX.HCS') {
+		$parentID = 'penny3.CP.HCS';
 	# BFAV packs will use the BFAV component as parent
 	# From BFAV Quails
 	} elsif ($modID eq 'Lavapulse.QuailProducts') {
@@ -1519,11 +1529,6 @@ sub GetExtendedModInfo {
 		$parentID = 'TrentNewRaccoons';
 	} elsif ($modID eq 'Raccoons.MachineSetting') {
 		$parentID = 'TrentNewRaccoons';
-	# From Hot Cocoa Shop; the TMX should probably be the parent mod, but we don't parse those
-	} elsif ($modID eq 'penny3.JA.HCS') {
-		$parentID = 'penny3.CP.HCS';
-	} elsif ($modID eq 'penny3.TMX.HCS') {
-		$parentID = 'penny3.CP.HCS';
 	}
 	
 	my $parentInfo = GetModInfo($parentID, $includeLink, $formatType) if (defined $parentID);
@@ -2529,7 +2534,8 @@ sub WriteFruitTreeSummary {
 		my $sprite_index = $GameData->{'FruitTrees'}{$sid}{'split'}[0];
 		my $season = $GameData->{'FruitTrees'}{$sid}{'split'}[1];
 		my $cid = $GameData->{'FruitTrees'}{$sid}{'split'}[2];
-		my $scost = $GameData->{'FruitTrees'}{$sid}{'split'}[3];
+		# Object Info price is sell price, but we want buy price which is x2.
+		my $scost = 2 * $GameData->{'FruitTrees'}{$sid}{'split'}[3];
 		my $cname = GetItem($cid);
 		$GameData->{'ObjectInformation'}{$cid}{'split'}[3] =~ /(\-?\d*)$/;
 		my $category = GetCategory($1);

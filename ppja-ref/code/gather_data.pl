@@ -459,6 +459,10 @@ sub ParseModData {
 										LogMessage("      Found and parsed item folder $i.", 1);
 										my $json = ParseJsonFile("$BaseDir/$m/$t/$i/$types{$t}");
 										my $key = $i;
+										# Fixing capitalization issues. I probably should force lowercase the keys and match those instead,
+										#  but that is a ton of rewriting in the make_docs script so for now we do this stupid thing.
+										if (not defined $json->{'Name'} and defined $json->{'name'}) { $json->{'Name'} = $json->{'name'}; }
+										if (not defined $json->{'Price'} and defined $json->{'price'}) { $json->{'Price'} = $json->{'price'}; }
 										if ($json->{'Name'} ne $key) {
 											if (not defined $json->{'Name'} or $json->{'Name'} eq "") {
 												LogMessage("WARNING: Item in folder {$i} has no name. Will be skipped", 1);
