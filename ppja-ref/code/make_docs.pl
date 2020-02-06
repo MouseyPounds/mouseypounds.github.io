@@ -1489,6 +1489,15 @@ sub GetExtendedModInfo {
 	# From Artisinal Soda Makers; JA will be parent
 	} elsif ($modID eq 'Hadi.SodaMaker') {
 		$parentID = 'Hadi.JASoda';
+	} elsif ($modID eq 'Hadi.JASodaPPJA') {
+		$parentID = 'Hadi.JASoda';
+	} elsif ($modID eq 'Hadi.SodaMakerPPJA') {
+		$parentID = 'Hadi.JASoda';
+	} elsif ($modID eq 'eemiemelons.sodamaker') {
+		$parentID = 'Hadi.JASoda';
+	# From Baker's Life; JA parent
+	} elsif ($modID eq 'Ritsune.BakersLifePFM') {
+		$parentID = 'Ritsune.BakersLifeJA';
 	# From Bonster's Crops; F&V will be parent
 	} elsif ($modID eq 'BonsterTrees') {
 		$parentID = 'BFV.FruitVeggie';
@@ -1500,6 +1509,9 @@ sub GetExtendedModInfo {
 		$parentID = 'penny3.CP.HCS';
 	} elsif ($modID eq 'penny3.TMX.HCS') {
 		$parentID = 'penny3.CP.HCS';
+	# From Soda Maker Floral Pack. JA parent
+	} elsif ($modID eq 'Fwippy.SodaMakerFlowerPackPFM') {
+		$parentID = 'Fwippy.SodaMakerFlowerPackJA';
 	# BFAV packs will use the BFAV component as parent
 	# From BFAV Quails
 	} elsif ($modID eq 'Lavapulse.QuailProducts') {
@@ -1516,6 +1528,8 @@ sub GetExtendedModInfo {
 		$parentID = 'MythicPhoenix.BFAV.Firebirds';
 	# From Trent's Bulls
 	} elsif ($modID eq 'ManurePack') {
+		$parentID = 'BFAVBulls';
+	} elsif ($modID eq 'manuremachines.MFM') {
 		$parentID = 'BFAVBulls';
 	} elsif ($modID eq 'PFManureMachines') {
 		$parentID = 'BFAVBulls';
@@ -2777,7 +2791,8 @@ sub WriteMachineSummary {
 				# Might as well set this stuff up now.
 				my $anchor = "TOC_$key";
 				$anchor =~ s/ /_/g;
-				$TOC{$key} = {'anchor' => $anchor, 'filter' => $filter};
+				# Blanking out filter for now since it is weird to have stuff removed from ToC
+				$TOC{$key} = {'anchor' => $anchor, 'filter' => "NOFILTER"};
 				my $imgTag = GetImgTag($key, 'craftable', 1, "container__image");
 				# This duplicates code used in GetImgTag which makes me sad
 				my $desc = "";
@@ -3709,7 +3724,7 @@ END_PRINT
 				$growth = "$p_growth<br />($growth)";
 				$max_harvests = "$p_harvests<br />($max_harvests)";
 				$profit = "$p_profit<br />($profit)";
-				$wasted_days = "$p_wasted_days<br />($p_profit)";
+				$wasted_days = "$p_wasted_days<br />($wasted_days)";
 			}
 			$output .= <<"END_PRINT";
 <td class="col_$opt value">$growth</td>
