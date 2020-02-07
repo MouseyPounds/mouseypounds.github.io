@@ -1485,6 +1485,18 @@ sub GetExtendedModInfo {
 	} elsif ($modID eq 'ppja.StarbrewValleyforMFM') {
 		$parentID = 'ppja.starbrewvalley';
 		$isPPJA = 1;
+	# From Khadija's Recipe Shop' CP parent
+	} elsif ($modID eq 'ppja.KRSCP') {
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.MFMKRS') {
+		$parentID = 'ppja.KRSCP';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.recipeshop') {
+		$parentID = 'ppja.KRSCP';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.TMX.KRS') {
+		$parentID = 'ppja.KRSCP';
+		$isPPJA = 1;
 	# Now non-PPJA Stuff. 
 	# From Artisinal Soda Makers; JA will be parent
 	} elsif ($modID eq 'Hadi.SodaMaker') {
@@ -2758,13 +2770,27 @@ sub WriteMachineSummary {
 							"OutputIdentifier"=> "447",
 							"PreserveType"=> "AgedRoe",
 							"InputPriceBased"=> 1,
-							"OutputPriceIncrement"=> 60,
-							"OutputPriceMultiplier"=> 1,
+							"OutputPriceIncrement"=> 0,
+							"OutputPriceMultiplier"=> 2,
 							"Sounds"=> ["Ship"],
 							"PlacingAnimation"=> "Bubbles",
 							"PlacingAnimationColorName"=> "LightBlue"
 						};
 			push @{$i->{'producers'}}, $roe;
+			my $cav = 	{
+							"ProducerName" => "Preserves Jar",
+							"InputIdentifier"=> "812",
+							"MinutesUntilReady"=> 6000,
+							"OutputIdentifier"=> "445",
+							"PreserveType"=> "AgedRoe",
+							"InputPriceBased"=> 0,
+							"OutputPriceIncrement"=> 0,
+							"OutputPriceMultiplier"=> 2,
+							"Sounds"=> ["Ship"],
+							"PlacingAnimation"=> "Bubbles",
+							"PlacingAnimationColorName"=> "LightBlue"
+						};
+			push @{$i->{'producers'}}, $cav;
 		}
 	}
 
@@ -2980,12 +3006,24 @@ END_PRINT
 				}
 				$entry{'out'} = qq(<tr class="$filter"><td class="name">$img $name$adds</td>);
 				my $cost = 0;
-				$name = GetItem($m->{'InputIdentifier'});
+				if (defined $m->{'InputIdentifier'}) {
+					$name = GetItem($m->{'InputIdentifier'});
+				} else {
+					$name = qq(<span class="none">(No input)</span>);
+				}
+				# Hardcoded bullshit
+				if ($m->{'OutputIdentifier'} eq "445" and $m->{'InputIdentifier'} eq "812") {
+					$name .= " (Sturgeon)";
+				}
 				$entry{'key2'} = StripHTML($name);
 				if ($input_prob != 1) {
 					$name .= sprintf(" [%0.1f%%]", $input_prob*100);
 				}
-				$img = GetImgTag($m->{'InputIdentifier'});
+				if (defined $m->{'InputIdentifier'}) {
+					$img = GetImgTag($m->{'InputIdentifier'});
+				} else {
+					$img = "";
+				}
 				my $val = GetValue($m->{'InputIdentifier'});
 				if ($input_quality > 0) {
 					my $q = $input_quality;
@@ -3112,7 +3150,11 @@ END_PRINT
 				$entry{'out'} .= qq(<td class="value">$profit</td>);
 				# reuse profit variable for per-hour version.
 				if (looks_like_number($profit)) {
-					$profit = nearest(.01,60*$profit/$m->{'MinutesUntilReady'});
+					if (defined $m->{'MinutesUntilReady'} and $m->{'MinutesUntilReady'} > 0) {
+						$profit = nearest(.01,60*$profit/$m->{'MinutesUntilReady'});
+					} else {
+						$profit = qq(<span class="note">--</span>);
+					}
 				}
 				$entry{'out'} .= qq(<td class="value">$profit</td>);
 				$entry{'out'} .= qq(</tr>);
