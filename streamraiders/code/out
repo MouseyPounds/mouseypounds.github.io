@@ -1,0 +1,2625 @@
+Generating Main Index
+Generating Viewer Unit Summary
+Generating Captain Unit Summary
+Generating Viewer Power Summary
+Generating captain Power Summary
+$VAR1 = 'individual';
+$VAR2 = {
+          'Captain' => {
+                         '243' => [
+                                    '<span class="unit_tank">Tank (Lvl 21)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 21)</span>'
+                                  ],
+                         '350' => [
+                                    '<span class="unit_healer">Healer (Lvl 30)</span>'
+                                  ],
+                         '153' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 29)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 12)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 12)</span>'
+                                  ],
+                         '240' => [
+                                    '<span class="unit_archer">Archer (Lvl 24)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 24)</span>'
+                                  ],
+                         '150' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 10)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 10)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 10)</span>',
+                                    '<span class="unit_warrior">Warrior (Lvl 30)</span>'
+                                  ],
+                         '353' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 25)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 25)</span>'
+                                  ],
+                         '290' => [
+                                    '<span class="unit_buster">Buster (Lvl 15)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 22)</span>'
+                                  ],
+                         '293' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 21)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 21)</span>'
+                                  ],
+                         '54' => [
+                                   '<span class="unit_healer">Healer (Lvl 2)</span>',
+                                   '<span class="unit_flyingarcher">Flying Rogue (Lvl 3)</span>',
+                                   '<span class="unit_barbarian">Barbarian (Lvl 3)</span>',
+                                   '<span class="unit_bomber">Bomber (Lvl 3)</span>',
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 6)</span>'
+                                 ],
+                         '371' => [
+                                    '<span class="unit_buster">Buster (Lvl 20)</span>'
+                                  ],
+                         '199' => [
+                                    '<span class="unit_barbarian">Barbarian (Lvl 16)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 10)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 16)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 16)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 10)</span>'
+                                  ],
+                         '7' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 5)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 6)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 4)</span>'
+                                ],
+                         '154' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 30)</span>'
+                                  ],
+                         '76' => [
+                                   '<span class="unit_tank">Tank (Lvl 7)</span>',
+                                   '<span class="unit_warrior">Warrior (Lvl 12)</span>',
+                                   '<span class="unit_paladin">Paladin (Lvl 7)</span>'
+                                 ],
+                         '91' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 18)</span>'
+                                 ],
+                         '89' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 17)</span>',
+                                   '<span class="unit_barbarian">Barbarian (Lvl 6)</span>',
+                                   '<span class="unit_flyingarcher">Flying Rogue (Lvl 6)</span>',
+                                   '<span class="unit_bomber">Bomber (Lvl 6)</span>'
+                                 ],
+                         '259' => [
+                                    '<span class="unit_tank">Tank (Lvl 23)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 23)</span>'
+                                  ],
+                         '149' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 27)</span>'
+                                  ],
+                         '96' => [
+                                   '<span class="unit_healer">Healer (Lvl 5)</span>'
+                                 ],
+                         '262' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 22)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 22)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 22)</span>'
+                                  ],
+                         '289' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 19)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 20)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 20)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 19)</span>'
+                                  ],
+                         '209' => [
+                                    '<span class="unit_tank">Tank (Lvl 19)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 14)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 19)</span>'
+                                  ],
+                         '304' => [
+                                    '<span class="unit_paladin">Paladin (Lvl 27)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 27)</span>'
+                                  ],
+                         '136' => [
+                                    '<span class="unit_templar">Templar (Lvl 14)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 14)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 14)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 14)</span>'
+                                  ],
+                         '104' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 11)</span>'
+                                  ],
+                         '184' => [
+                                    '<span class="unit_mage">Mage (Lvl 26)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 26)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 26)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 26)</span>'
+                                  ],
+                         '336' => [
+                                    '<span class="unit_healer">Healer (Lvl 26)</span>'
+                                  ],
+                         '9' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 8)</span>'
+                                ],
+                         '180' => [
+                                    '<span class="unit_tank">Tank (Lvl 14)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 14)</span>'
+                                  ],
+                         '331' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 23)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 23)</span>'
+                                  ],
+                         '303' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 24)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 24)</span>'
+                                  ],
+                         '131' => [
+                                    '<span class="unit_healer">Healer (Lvl 8)</span>'
+                                  ],
+                         '103' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 5)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 5)</span>'
+                                  ],
+                         '462' => [
+                                    '<span class="unit_buster">Buster (Lvl 28)</span>'
+                                  ],
+                         '144' => [
+                                    '<span class="unit_healer">Healer (Lvl 9)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 18)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 10)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 18)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 18)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 18)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 10)</span>'
+                                  ],
+                         '254' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 21)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 21)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 21)</span>'
+                                  ],
+                         '453' => [
+                                    '<span class="unit_buster">Buster (Lvl 26)</span>'
+                                  ],
+                         '112' => [
+                                    '<span class="unit_paladin">Paladin (Lvl 9)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 16)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 9)</span>'
+                                  ],
+                         '249' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 14)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 14)</span>'
+                                  ],
+                         '13' => [
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 21)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 23)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 22)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 24)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 20)</span>'
+                                 ],
+                         '299' => [
+                                    '<span class="unit_buster">Buster (Lvl 16)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 25)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 30)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 25)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 23)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 30)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 23)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 25)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 23)</span>'
+                                  ],
+                         '55' => [
+                                   '<span class="unit_tank">Tank (Lvl 6)</span>',
+                                   '<span class="unit_paladin">Paladin (Lvl 6)</span>'
+                                 ],
+                         '85' => [
+                                   '<span class="unit_centurion">Centurion (Lvl 1)</span>',
+                                   '<span class="unit_monk">Warrior Monk (Lvl 1)</span>'
+                                 ],
+                         '194' => [
+                                    '<span class="unit_buster">Buster (Lvl 9)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 15)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 15)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 15)</span>'
+                                  ],
+                         '393' => [
+                                    '<span class="unit_buster">Buster (Lvl 22)</span>'
+                                  ],
+                         '193' => [
+                                    '<span class="unit_warbeast">War Beast (Lvl 30)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 30)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 30)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 30)</span>'
+                                  ],
+                         '72' => [
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 8)</span>'
+                                 ],
+                         '253' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 18)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 18)</span>'
+                                  ],
+                         '449' => [
+                                    '<span class="unit_buster">Buster (Lvl 25)</span>'
+                                  ],
+                         '140' => [
+                                    '<span class="unit_warbeast">War Beast (Lvl 16)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 16)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 16)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 16)</span>'
+                                  ],
+                         '343' => [
+                                    '<span class="unit_healer">Healer (Lvl 28)</span>'
+                                  ],
+                         '92' => [
+                                   '<span class="unit_musketeer">Musketeer (Lvl 4)</span>',
+                                   '<span class="unit_berserker">Berserker (Lvl 4)</span>'
+                                 ],
+                         '231' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 15)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 15)</span>'
+                                  ],
+                         '203' => [
+                                    '<span class="unit_paladin">Paladin (Lvl 18)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 18)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 13)</span>'
+                                  ],
+                         '283' => [
+                                    '<span class="unit_healer">Healer (Lvl 21)</span>'
+                                  ],
+                         '189' => [
+                                    '<span class="unit_mage">Mage (Lvl 28)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 28)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 28)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 28)</span>'
+                                  ],
+                         '109' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 14)</span>'
+                                  ],
+                         '309' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 28)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 24)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 28)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 28)</span>'
+                                  ],
+                         '162' => [
+                                    '<span class="unit_archer">Archer (Lvl 14)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 14)</span>'
+                                  ],
+                         '50' => [
+                                   '<span class="unit_warbeast">War Beast (Lvl 2)</span>',
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 2)</span>',
+                                   '<span class="unit_archer">Archer (Lvl 6)</span>',
+                                   '<span class="unit_warrior">Warrior (Lvl 9)</span>',
+                                   '<span class="unit_rogue">Rogue (Lvl 6)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 2)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 2)</span>'
+                                 ],
+                         '58' => [
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 4)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 4)</span>',
+                                   '<span class="unit_warbeast">War Beast (Lvl 4)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 4)</span>'
+                                 ],
+                         '88' => [
+                                   '<span class="unit_centurion">Centurion (Lvl 2)</span>',
+                                   '<span class="unit_monk">Warrior Monk (Lvl 2)</span>'
+                                 ],
+                         '225' => [
+                                    '<span class="unit_buster">Buster (Lvl 10)</span>'
+                                  ],
+                         '6' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 1)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 2)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 3)</span>'
+                                ],
+                         '317' => [
+                                    '<span class="unit_buster">Buster (Lvl 18)</span>'
+                                  ],
+                         '281' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 18)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 18)</span>'
+                                  ],
+                         '328' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 22)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 22)</span>'
+                                  ],
+                         '117' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 19)</span>',
+                                    '<span class="unit_warrior">Warrior (Lvl 23)</span>'
+                                  ],
+                         '35' => [
+                                   '<span class="unit_rogue">Rogue (Lvl 4)</span>',
+                                   '<span class="unit_archer">Archer (Lvl 4)</span>'
+                                 ],
+                         '339' => [
+                                    '<span class="unit_healer">Healer (Lvl 27)</span>'
+                                  ],
+                         '286' => [
+                                    '<span class="unit_tank">Tank (Lvl 25)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 25)</span>'
+                                  ],
+                         '24' => [
+                                   '<span class="unit_paladin">Paladin (Lvl 1)</span>',
+                                   '<span class="unit_rogue">Rogue (Lvl 2)</span>',
+                                   '<span class="unit_archer">Archer (Lvl 2)</span>',
+                                   '<span class="unit_tank">Tank (Lvl 1)</span>'
+                                 ],
+                         '83' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 15)</span>'
+                                 ],
+                         '165' => [
+                                    '<span class="unit_paladin">Paladin (Lvl 11)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 21)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 11)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 21)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 21)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 21)</span>'
+                                  ],
+                         '10' => [
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 9)</span>'
+                                 ],
+                         '18' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 4)</span>'
+                                 ],
+                         '146' => [
+                                    '<span class="unit_mage">Mage (Lvl 19)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 25)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 19)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 19)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 19)</span>'
+                                  ],
+                         '115' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 18)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 5)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 5)</span>'
+                                  ],
+                         '38' => [
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 1)</span>'
+                                 ],
+                         '346' => [
+                                    '<span class="unit_healer">Healer (Lvl 29)</span>'
+                                  ],
+                         '218' => [
+                                    '<span class="unit_barbarian">Barbarian (Lvl 19)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 19)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 13)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 13)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 19)</span>'
+                                  ],
+                         '270' => [
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 23)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 23)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 23)</span>'
+                                  ],
+                         '367' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 29)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 29)</span>'
+                                  ],
+                         '274' => [
+                                    '<span class="unit_healer">Healer (Lvl 20)</span>',
+                                    '<span class="unit_buster">Buster (Lvl 13)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 27)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 27)</span>'
+                                  ],
+                         '191' => [
+                                    '<span class="unit_tank">Tank (Lvl 16)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 29)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 29)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 16)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 29)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 29)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 11)</span>'
+                                  ],
+                         '167' => [
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 22)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 15)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 22)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 10)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 22)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 22)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 15)</span>'
+                                  ],
+                         '179' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 10)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 10)</span>'
+                                  ],
+                         '141' => [
+                                    '<span class="unit_warrior">Warrior (Lvl 28)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 8)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 8)</span>'
+                                  ],
+                         '251' => [
+                                    '<span class="unit_paladin">Paladin (Lvl 22)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 22)</span>'
+                                  ],
+                         '134' => [
+                                    '<span class="unit_mage">Mage (Lvl 13)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 13)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 13)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 22)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 13)</span>'
+                                  ],
+                         '306' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 27)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 27)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 27)</span>'
+                                  ],
+                         '34' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 7)</span>'
+                                 ],
+                         '334' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 29)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 29)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 24)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 24)</span>'
+                                  ],
+                         '25' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 6)</span>'
+                                 ],
+                         '106' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 6)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 12)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 6)</span>'
+                                  ],
+                         '186' => [
+                                    '<span class="unit_templar">Templar (Lvl 27)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 27)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 27)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 27)</span>'
+                                  ],
+                         '14' => [
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 25)</span>',
+                                   '<span class="unit_warrior">Warrior (Lvl 3)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 30)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 28)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 29)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 27)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 26)</span>'
+                                 ],
+                         '417' => [
+                                    '<span class="unit_buster">Buster (Lvl 24)</span>'
+                                  ],
+                         '133' => [
+                                    '<span class="unit_warrior">Warrior (Lvl 26)</span>',
+                                    '<span class="unit_buster">Buster (Lvl 6)</span>'
+                                  ],
+                         '330' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 28)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 28)</span>'
+                                  ],
+                         '228' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 11)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 11)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 17)</span>'
+                                  ],
+                         '130' => [
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 11)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 11)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 9)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 10)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 11)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 9)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 20)</span>',
+                                    '<span class="unit_buster">Buster (Lvl 5)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 9)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 10)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 11)</span>'
+                                  ],
+                         '325' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 21)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 21)</span>'
+                                  ],
+                         '48' => [
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 1)</span>',
+                                   '<span class="unit_warbeast">War Beast (Lvl 1)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 1)</span>',
+                                   '<span class="unit_barbarian">Barbarian (Lvl 2)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 1)</span>',
+                                   '<span class="unit_tank">Tank (Lvl 5)</span>',
+                                   '<span class="unit_paladin">Paladin (Lvl 5)</span>'
+                                 ],
+                         '40' => [
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 2)</span>',
+                                   '<span class="unit_paladin">Paladin (Lvl 4)</span>',
+                                   '<span class="unit_tank">Tank (Lvl 4)</span>'
+                                 ],
+                         '151' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 28)</span>'
+                                  ],
+                         '291' => [
+                                    '<span class="unit_archer">Archer (Lvl 29)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 29)</span>'
+                                  ],
+                         '118' => [
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 8)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 6)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 8)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 6)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 8)</span>'
+                                  ],
+                         '370' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 30)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 30)</span>'
+                                  ],
+                         '127' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 7)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 7)</span>'
+                                  ],
+                         '296' => [
+                                    '<span class="unit_tank">Tank (Lvl 26)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 22)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 22)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 26)</span>'
+                                  ],
+                         '170' => [
+                                    '<span class="unit_paladin">Paladin (Lvl 12)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 12)</span>'
+                                  ],
+                         '327' => [
+                                    '<span class="unit_buster">Buster (Lvl 19)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 27)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 27)</span>'
+                                  ],
+                         '467' => [
+                                    '<span class="unit_buster">Buster (Lvl 29)</span>'
+                                  ],
+                         '28' => [
+                                   '<span class="unit_tank">Tank (Lvl 2)</span>',
+                                   '<span class="unit_paladin">Paladin (Lvl 2)</span>'
+                                 ],
+                         '246' => [
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 20)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 20)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 20)</span>'
+                                  ],
+                         '215' => [
+                                    '<span class="unit_healer">Healer (Lvl 15)</span>'
+                                  ],
+                         '68' => [
+                                   '<span class="unit_flyingarcher">Flying Rogue (Lvl 4)</span>',
+                                   '<span class="unit_bomber">Bomber (Lvl 4)</span>',
+                                   '<span class="unit_barbarian">Barbarian (Lvl 4)</span>'
+                                 ],
+                         '60' => [
+                                   '<span class="unit_healer">Healer (Lvl 3)</span>'
+                                 ],
+                         '357' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 26)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 26)</span>'
+                                  ],
+                         '157' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 8)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 13)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 8)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 13)</span>'
+                                  ],
+                         '332' => [
+                                    '<span class="unit_tank">Tank (Lvl 30)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 30)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 25)</span>'
+                                  ],
+                         '185' => [
+                                    '<span class="unit_paladin">Paladin (Lvl 15)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 15)</span>'
+                                  ],
+                         '11' => [
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 10)</span>',
+                                   '<span class="unit_warrior">Warrior (Lvl 1)</span>'
+                                 ],
+                         '132' => [
+                                    '<span class="unit_templar">Templar (Lvl 12)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 12)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 12)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 21)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 12)</span>'
+                                  ],
+                         '266' => [
+                                    '<span class="unit_archer">Archer (Lvl 26)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 26)</span>',
+                                    '<span class="unit_buster">Buster (Lvl 12)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 24)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 24)</span>'
+                                  ],
+                         '321' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 20)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 20)</span>'
+                                  ],
+                         '155' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 9)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 9)</span>'
+                                  ],
+                         '245' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 17)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 17)</span>'
+                                  ],
+                         '42' => [
+                                   '<span class="unit_bomber">Bomber (Lvl 1)</span>',
+                                   '<span class="unit_barbarian">Barbarian (Lvl 1)</span>',
+                                   '<span class="unit_flyingarcher">Flying Rogue (Lvl 1)</span>'
+                                 ],
+                         '148' => [
+                                    '<span class="unit_archer">Archer (Lvl 11)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 11)</span>'
+                                  ],
+                         '258' => [
+                                    '<span class="unit_archer">Archer (Lvl 25)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 25)</span>',
+                                    '<span class="unit_buster">Buster (Lvl 11)</span>'
+                                  ],
+                         '22' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 5)</span>',
+                                   '<span class="unit_archer">Archer (Lvl 1)</span>',
+                                   '<span class="unit_rogue">Rogue (Lvl 1)</span>'
+                                 ],
+                         '458' => [
+                                    '<span class="unit_buster">Buster (Lvl 27)</span>'
+                                  ],
+                         '172' => [
+                                    '<span class="unit_templar">Templar (Lvl 24)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 11)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 11)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 24)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 11)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 16)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 16)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 9)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 24)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 24)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 9)</span>'
+                                  ],
+                         '65' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 10)</span>',
+                                   '<span class="unit_warbeast">War Beast (Lvl 5)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 5)</span>',
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 7)</span>',
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 5)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 5)</span>'
+                                 ],
+                         '107' => [
+                                    '<span class="unit_barbarian">Barbarian (Lvl 7)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 7)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 13)</span>',
+                                    '<span class="unit_warrior">Warrior (Lvl 20)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 7)</span>'
+                                  ],
+                         '211' => [
+                                    '<span class="unit_barbarian">Barbarian (Lvl 18)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 18)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 12)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 18)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 12)</span>'
+                                  ],
+                         '221' => [
+                                    '<span class="unit_healer">Healer (Lvl 16)</span>'
+                                  ],
+                         '308' => [
+                                    '<span class="unit_buster">Buster (Lvl 17)</span>'
+                                  ],
+                         '188' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 14)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 14)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 19)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 14)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 19)</span>'
+                                  ],
+                         '205' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 11)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 17)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 17)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 17)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 11)</span>'
+                                  ],
+                         '232' => [
+                                    '<span class="unit_rogue">Rogue (Lvl 23)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 23)</span>'
+                                  ],
+                         '405' => [
+                                    '<span class="unit_buster">Buster (Lvl 23)</span>'
+                                  ],
+                         '77' => [
+                                   '<span class="unit_healer">Healer (Lvl 4)</span>',
+                                   '<span class="unit_berserker">Berserker (Lvl 1)</span>',
+                                   '<span class="unit_musketeer">Musketeer (Lvl 1)</span>'
+                                 ],
+                         '147' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 26)</span>'
+                                  ],
+                         '41' => [
+                                   '<span class="unit_archer">Archer (Lvl 5)</span>',
+                                   '<span class="unit_warrior">Warrior (Lvl 8)</span>',
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 3)</span>',
+                                   '<span class="unit_rogue">Rogue (Lvl 5)</span>'
+                                 ],
+                         '257' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 15)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 15)</span>'
+                                  ],
+                         '197' => [
+                                    '<span class="unit_healer">Healer (Lvl 12)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 17)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 17)</span>'
+                                  ],
+                         '226' => [
+                                    '<span class="unit_archer">Archer (Lvl 22)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 22)</span>'
+                                  ],
+                         '12' => [
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 11)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 15)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 12)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 13)</span>',
+                                   '<span class="unit_warrior">Warrior (Lvl 2)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 17)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 19)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 14)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 18)</span>',
+                                   '<span class="unit_flagbearer">Flag Bearer (Lvl 16)</span>'
+                                 ],
+                         '46' => [
+                                   '<span class="unit_healer">Healer (Lvl 1)</span>',
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 4)</span>'
+                                 ],
+                         '272' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 17)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 17)</span>'
+                                  ],
+                         '32' => [
+                                   '<span class="unit_archer">Archer (Lvl 3)</span>',
+                                   '<span class="unit_rogue">Rogue (Lvl 3)</span>',
+                                   '<span class="unit_tank">Tank (Lvl 3)</span>',
+                                   '<span class="unit_paladin">Paladin (Lvl 3)</span>'
+                                 ],
+                         '73' => [
+                                   '<span class="unit_rogue">Rogue (Lvl 7)</span>',
+                                   '<span class="unit_archer">Archer (Lvl 7)</span>'
+                                 ],
+                         '472' => [
+                                    '<span class="unit_buster">Buster (Lvl 30)</span>'
+                                  ],
+                         '316' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 30)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 30)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 30)</span>'
+                                  ],
+                         '145' => [
+                                    '<span class="unit_warrior">Warrior (Lvl 29)</span>'
+                                  ],
+                         '113' => [
+                                    '<span class="unit_warrior">Warrior (Lvl 22)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 10)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 10)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 10)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 10)</span>'
+                                  ],
+                         '110' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 15)</span>',
+                                    '<span class="unit_warrior">Warrior (Lvl 21)</span>'
+                                  ],
+                         '313' => [
+                                    '<span class="unit_tank">Tank (Lvl 28)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 29)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 29)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 28)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 29)</span>'
+                                  ],
+                         '237' => [
+                                    '<span class="unit_tank">Tank (Lvl 20)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 20)</span>'
+                                  ],
+                         '78' => [
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 9)</span>',
+                                   '<span class="unit_buster">Buster (Lvl 2)</span>'
+                                 ],
+                         '114' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 17)</span>'
+                                  ],
+                         '219' => [
+                                    '<span class="unit_rogue">Rogue (Lvl 21)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 21)</span>'
+                                  ],
+                         '142' => [
+                                    '<span class="unit_warbeast">War Beast (Lvl 17)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 17)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 7)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 17)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 17)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 7)</span>'
+                                  ],
+                         '138' => [
+                                    '<span class="unit_warbeast">War Beast (Lvl 15)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 15)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 15)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 15)</span>',
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 24)</span>'
+                                  ],
+                         '282' => [
+                                    '<span class="unit_archer">Archer (Lvl 28)</span>',
+                                    '<span class="unit_buster">Buster (Lvl 14)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 28)</span>'
+                                  ],
+                         '98' => [
+                                   '<span class="unit_mage">Mage (Lvl 9)</span>',
+                                   '<span class="unit_warbeast">War Beast (Lvl 9)</span>',
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 9)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 9)</span>'
+                                 ],
+                         '90' => [
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 8)</span>',
+                                   '<span class="unit_warbeast">War Beast (Lvl 8)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 8)</span>',
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 10)</span>',
+                                   '<span class="unit_tank">Tank (Lvl 8)</span>',
+                                   '<span class="unit_paladin">Paladin (Lvl 8)</span>',
+                                   '<span class="unit_monk">Warrior Monk (Lvl 3)</span>',
+                                   '<span class="unit_centurion">Centurion (Lvl 3)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 8)</span>'
+                                 ],
+                         '235' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 12)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 18)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 12)</span>'
+                                  ],
+                         '52' => [
+                                   '<span class="unit_balloonbuster">Balloon Buster (Lvl 5)</span>',
+                                   '<span class="unit_flyingarcher">Flying Rogue (Lvl 2)</span>',
+                                   '<span class="unit_bomber">Bomber (Lvl 2)</span>'
+                                 ],
+                         '163' => [
+                                    '<span class="unit_mage">Mage (Lvl 20)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 20)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 20)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 20)</span>'
+                                  ],
+                         '360' => [
+                                    '<span class="unit_centurion">Centurion (Lvl 27)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 27)</span>'
+                                  ],
+                         '129' => [
+                                    '<span class="unit_warrior">Warrior (Lvl 25)</span>'
+                                  ],
+                         '363' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 28)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 28)</span>'
+                                  ],
+                         '160' => [
+                                    '<span class="unit_buster">Buster (Lvl 7)</span>'
+                                  ],
+                         '224' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 14)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 14)</span>'
+                                  ],
+                         '67' => [
+                                   '<span class="unit_warbeast">War Beast (Lvl 6)</span>',
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 6)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 6)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 6)</span>'
+                                 ],
+                         '119' => [
+                                    '<span class="unit_healer">Healer (Lvl 7)</span>'
+                                  ],
+                         '242' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 13)</span>',
+                                    '<span class="unit_healer">Healer (Lvl 19)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 13)</span>'
+                                  ],
+                         '94' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 19)</span>'
+                                 ],
+                         '81' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 14)</span>',
+                                   '<span class="unit_berserker">Berserker (Lvl 3)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 7)</span>',
+                                   '<span class="unit_musketeer">Musketeer (Lvl 3)</span>',
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 7)</span>',
+                                   '<span class="unit_rogue">Rogue (Lvl 8)</span>',
+                                   '<span class="unit_warbeast">War Beast (Lvl 7)</span>',
+                                   '<span class="unit_buster">Buster (Lvl 3)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 7)</span>',
+                                   '<span class="unit_archer">Archer (Lvl 8)</span>'
+                                 ],
+                         '51' => [
+                                   '<span class="unit_orcslayer">Orc Slayer (Lvl 3)</span>',
+                                   '<span class="unit_warbeast">War Beast (Lvl 3)</span>',
+                                   '<span class="unit_templar">Templar (Lvl 3)</span>',
+                                   '<span class="unit_mage">Mage (Lvl 3)</span>'
+                                 ],
+                         '99' => [
+                                   '<span class="unit_archer">Archer (Lvl 9)</span>',
+                                   '<span class="unit_rogue">Rogue (Lvl 9)</span>',
+                                   '<span class="unit_healer">Healer (Lvl 6)</span>'
+                                 ],
+                         '175' => [
+                                    '<span class="unit_tank">Tank (Lvl 13)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 13)</span>'
+                                  ],
+                         '213' => [
+                                    '<span class="unit_rogue">Rogue (Lvl 20)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 20)</span>'
+                                  ],
+                         '278' => [
+                                    '<span class="unit_barbarian">Barbarian (Lvl 24)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 24)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 24)</span>'
+                                  ],
+                         '337' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 30)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 30)</span>'
+                                  ],
+                         '137' => [
+                                    '<span class="unit_warrior">Warrior (Lvl 27)</span>'
+                                  ],
+                         '63' => [
+                                   '<span class="unit_buster">Buster (Lvl 1)</span>'
+                                 ],
+                         '260' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 19)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 19)</span>'
+                                  ],
+                         '182' => [
+                                    '<span class="unit_rogue">Rogue (Lvl 18)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 25)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 25)</span>',
+                                    '<span class="unit_warbeast">War Beast (Lvl 25)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 18)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 13)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 13)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 13)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 25)</span>'
+                                  ],
+                         '86' => [
+                                   '<span class="unit_barbarian">Barbarian (Lvl 5)</span>',
+                                   '<span class="unit_bomber">Bomber (Lvl 5)</span>',
+                                   '<span class="unit_warrior">Warrior (Lvl 16)</span>',
+                                   '<span class="unit_flyingarcher">Flying Rogue (Lvl 5)</span>'
+                                 ],
+                         '102' => [
+                                    '<span class="unit_buster">Buster (Lvl 4)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 4)</span>',
+                                    '<span class="unit_monk">Warrior Monk (Lvl 4)</span>'
+                                  ],
+                         '79' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 13)</span>',
+                                   '<span class="unit_musketeer">Musketeer (Lvl 2)</span>',
+                                   '<span class="unit_berserker">Berserker (Lvl 2)</span>'
+                                 ],
+                         '135' => [
+                                    '<span class="unit_balloonbuster">Balloon Buster (Lvl 23)</span>'
+                                  ],
+                         '302' => [
+                                    '<span class="unit_bomber">Bomber (Lvl 26)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 26)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 26)</span>'
+                                  ],
+                         '382' => [
+                                    '<span class="unit_buster">Buster (Lvl 21)</span>'
+                                  ],
+                         '264' => [
+                                    '<span class="unit_monk">Warrior Monk (Lvl 16)</span>',
+                                    '<span class="unit_centurion">Centurion (Lvl 16)</span>'
+                                  ],
+                         '8' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 7)</span>'
+                                ],
+                         '238' => [
+                                    '<span class="unit_berserker">Berserker (Lvl 16)</span>',
+                                    '<span class="unit_musketeer">Musketeer (Lvl 16)</span>'
+                                  ],
+                         '323' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 26)</span>',
+                                    '<span class="unit_tank">Tank (Lvl 29)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 26)</span>',
+                                    '<span class="unit_paladin">Paladin (Lvl 29)</span>'
+                                  ],
+                         '120' => [
+                                    '<span class="unit_warrior">Warrior (Lvl 24)</span>'
+                                  ],
+                         '177' => [
+                                    '<span class="unit_buster">Buster (Lvl 8)</span>',
+                                    '<span class="unit_flyingarcher">Flying Rogue (Lvl 12)</span>',
+                                    '<span class="unit_rogue">Rogue (Lvl 17)</span>',
+                                    '<span class="unit_barbarian">Barbarian (Lvl 12)</span>',
+                                    '<span class="unit_bomber">Bomber (Lvl 12)</span>',
+                                    '<span class="unit_archer">Archer (Lvl 17)</span>'
+                                  ],
+                         '169' => [
+                                    '<span class="unit_warbeast">War Beast (Lvl 23)</span>',
+                                    '<span class="unit_orcslayer">Orc Slayer (Lvl 23)</span>',
+                                    '<span class="unit_mage">Mage (Lvl 23)</span>',
+                                    '<span class="unit_templar">Templar (Lvl 23)</span>'
+                                  ],
+                         '320' => [
+                                    '<span class="unit_musketeer">Musketeer (Lvl 25)</span>',
+                                    '<span class="unit_berserker">Berserker (Lvl 25)</span>'
+                                  ],
+                         '74' => [
+                                   '<span class="unit_warrior">Warrior (Lvl 11)</span>'
+                                 ]
+                       },
+          'Epic' => {
+                      '191' => [
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 29)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 29)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 29)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 29)</span>'
+                               ],
+                      '65' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 7)</span>',
+                                '<span class="unit_templar">Templar (Lvl 5)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 7)</span>',
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 5)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 5)</span>',
+                                '<span class="unit_mage">Mage (Lvl 5)</span>'
+                              ],
+                      '172' => [
+                                 '<span class="unit_templar">Templar (Lvl 24)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 24)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 24)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 24)</span>'
+                               ],
+                      '52' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 5)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 5)</span>'
+                              ],
+                      '167' => [
+                                 '<span class="unit_templar">Templar (Lvl 22)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 22)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 22)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 22)</span>'
+                               ],
+                      '107' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 13)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 13)</span>'
+                               ],
+                      '163' => [
+                                 '<span class="unit_warbeast">War Beast (Lvl 20)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 20)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 20)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 20)</span>'
+                               ],
+                      '10' => [
+                                '<span class="unit_monk">Warrior Monk (Lvl 9)</span>',
+                                '<span class="unit_buster">Buster (Lvl 9)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 9)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 9)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 9)</span>',
+                                '<span class="unit_archer">Archer (Lvl 9)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 9)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 9)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 9)</span>',
+                                '<span class="unit_healer">Healer (Lvl 9)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 9)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 9)</span>',
+                                '<span class="unit_tank">Tank (Lvl 9)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 9)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 9)</span>'
+                              ],
+                      '138' => [
+                                 '<span class="unit_mage">Mage (Lvl 15)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 24)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 24)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 15)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 15)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 15)</span>'
+                               ],
+                      '146' => [
+                                 '<span class="unit_mage">Mage (Lvl 19)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 25)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 19)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 19)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 25)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 19)</span>'
+                               ],
+                      '38' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 1)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 1)</span>'
+                              ],
+                      '115' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 18)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 18)</span>'
+                               ],
+                      '98' => [
+                                '<span class="unit_templar">Templar (Lvl 9)</span>',
+                                '<span class="unit_mage">Mage (Lvl 9)</span>',
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 9)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 9)</span>'
+                              ],
+                      '90' => [
+                                '<span class="unit_templar">Templar (Lvl 8)</span>',
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 8)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 10)</span>',
+                                '<span class="unit_mage">Mage (Lvl 8)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 8)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 10)</span>'
+                              ],
+                      '136' => [
+                                 '<span class="unit_warbeast">War Beast (Lvl 14)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 14)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 14)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 14)</span>'
+                               ],
+                      '9' => [
+                               '<span class="unit_monk">Warrior Monk (Lvl 8)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 8)</span>',
+                               '<span class="unit_healer">Healer (Lvl 8)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 8)</span>',
+                               '<span class="unit_bomber">Bomber (Lvl 8)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 8)</span>',
+                               '<span class="unit_centurion">Centurion (Lvl 8)</span>',
+                               '<span class="unit_buster">Buster (Lvl 8)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 8)</span>',
+                               '<span class="unit_rogue">Rogue (Lvl 8)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 8)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 8)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 8)</span>',
+                               '<span class="unit_archer">Archer (Lvl 8)</span>',
+                               '<span class="unit_tank">Tank (Lvl 8)</span>'
+                             ],
+                      '104' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 11)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 11)</span>'
+                               ],
+                      '184' => [
+                                 '<span class="unit_warbeast">War Beast (Lvl 26)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 26)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 26)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 26)</span>'
+                               ],
+                      '78' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 9)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 9)</span>'
+                              ],
+                      '54' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 6)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 6)</span>'
+                              ],
+                      '132' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 21)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 12)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 12)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 21)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 12)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 12)</span>'
+                               ],
+                      '7' => [
+                               '<span class="unit_rogue">Rogue (Lvl 6)</span>',
+                               '<span class="unit_archer">Archer (Lvl 6)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 4)</span>',
+                               '<span class="unit_monk">Warrior Monk (Lvl 5)</span>',
+                               '<span class="unit_buster">Buster (Lvl 4)</span>',
+                               '<span class="unit_centurion">Centurion (Lvl 6)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 4)</span>',
+                               '<span class="unit_buster">Buster (Lvl 5)</span>',
+                               '<span class="unit_rogue">Rogue (Lvl 5)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 5)</span>',
+                               '<span class="unit_tank">Tank (Lvl 4)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 5)</span>',
+                               '<span class="unit_archer">Archer (Lvl 5)</span>',
+                               '<span class="unit_rogue">Rogue (Lvl 4)</span>',
+                               '<span class="unit_buster">Buster (Lvl 6)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 4)</span>',
+                               '<span class="unit_tank">Tank (Lvl 6)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 4)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 6)</span>',
+                               '<span class="unit_centurion">Centurion (Lvl 5)</span>',
+                               '<span class="unit_archer">Archer (Lvl 4)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 6)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 4)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 5)</span>',
+                               '<span class="unit_bomber">Bomber (Lvl 6)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 4)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 6)</span>',
+                               '<span class="unit_monk">Warrior Monk (Lvl 6)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 4)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 5)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 5)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 6)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 6)</span>',
+                               '<span class="unit_healer">Healer (Lvl 6)</span>',
+                               '<span class="unit_healer">Healer (Lvl 4)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 5)</span>',
+                               '<span class="unit_bomber">Bomber (Lvl 5)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 6)</span>',
+                               '<span class="unit_centurion">Centurion (Lvl 4)</span>',
+                               '<span class="unit_monk">Warrior Monk (Lvl 4)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 5)</span>',
+                               '<span class="unit_tank">Tank (Lvl 5)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 6)</span>',
+                               '<span class="unit_bomber">Bomber (Lvl 4)</span>',
+                               '<span class="unit_healer">Healer (Lvl 5)</span>'
+                             ],
+                      '11' => [
+                                '<span class="unit_berserker">Berserker (Lvl 10)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 10)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 10)</span>',
+                                '<span class="unit_archer">Archer (Lvl 10)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 10)</span>',
+                                '<span class="unit_buster">Buster (Lvl 10)</span>',
+                                '<span class="unit_tank">Tank (Lvl 10)</span>',
+                                '<span class="unit_healer">Healer (Lvl 10)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 10)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 10)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 10)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 10)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 10)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 10)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 10)</span>'
+                              ],
+                      '114' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 17)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 17)</span>'
+                               ],
+                      '154' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 30)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 30)</span>'
+                               ],
+                      '142' => [
+                                 '<span class="unit_templar">Templar (Lvl 17)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 17)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 17)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 17)</span>'
+                               ],
+                      '149' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 27)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 27)</span>'
+                               ],
+                      '165' => [
+                                 '<span class="unit_warbeast">War Beast (Lvl 21)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 21)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 21)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 21)</span>'
+                               ],
+                      '113' => [
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 10)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 10)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 10)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 10)</span>'
+                               ],
+                      '153' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 29)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 29)</span>'
+                               ],
+                      '6' => [
+                               '<span class="unit_bomber">Bomber (Lvl 3)</span>',
+                               '<span class="unit_rogue">Rogue (Lvl 1)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 2)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 3)</span>',
+                               '<span class="unit_healer">Healer (Lvl 2)</span>',
+                               '<span class="unit_centurion">Centurion (Lvl 3)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 1)</span>',
+                               '<span class="unit_bomber">Bomber (Lvl 2)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 2)</span>',
+                               '<span class="unit_monk">Warrior Monk (Lvl 1)</span>',
+                               '<span class="unit_healer">Healer (Lvl 3)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 1)</span>',
+                               '<span class="unit_buster">Buster (Lvl 1)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 2)</span>',
+                               '<span class="unit_rogue">Rogue (Lvl 3)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 1)</span>',
+                               '<span class="unit_archer">Archer (Lvl 1)</span>',
+                               '<span class="unit_tank">Tank (Lvl 2)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 1)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 2)</span>',
+                               '<span class="unit_tank">Tank (Lvl 3)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 3)</span>',
+                               '<span class="unit_centurion">Centurion (Lvl 1)</span>',
+                               '<span class="unit_rogue">Rogue (Lvl 2)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 3)</span>',
+                               '<span class="unit_archer">Archer (Lvl 3)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 1)</span>',
+                               '<span class="unit_monk">Warrior Monk (Lvl 3)</span>',
+                               '<span class="unit_archer">Archer (Lvl 2)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 3)</span>',
+                               '<span class="unit_monk">Warrior Monk (Lvl 2)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 2)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 2)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 3)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 2)</span>',
+                               '<span class="unit_buster">Buster (Lvl 2)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 3)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 3)</span>',
+                               '<span class="unit_bomber">Bomber (Lvl 1)</span>',
+                               '<span class="unit_tank">Tank (Lvl 1)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 1)</span>',
+                               '<span class="unit_centurion">Centurion (Lvl 2)</span>',
+                               '<span class="unit_healer">Healer (Lvl 1)</span>',
+                               '<span class="unit_buster">Buster (Lvl 3)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 1)</span>'
+                             ],
+                      '110' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 15)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 15)</span>'
+                               ],
+                      '117' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 19)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 19)</span>'
+                               ],
+                      '109' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 14)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 14)</span>'
+                               ],
+                      '182' => [
+                                 '<span class="unit_warbeast">War Beast (Lvl 25)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 25)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 25)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 25)</span>'
+                               ],
+                      '189' => [
+                                 '<span class="unit_mage">Mage (Lvl 28)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 28)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 28)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 28)</span>'
+                               ],
+                      '135' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 23)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 23)</span>'
+                               ],
+                      '8' => [
+                               '<span class="unit_centurion">Centurion (Lvl 7)</span>',
+                               '<span class="unit_buster">Buster (Lvl 7)</span>',
+                               '<span class="unit_berserker">Berserker (Lvl 7)</span>',
+                               '<span class="unit_paladin">Paladin (Lvl 7)</span>',
+                               '<span class="unit_monk">Warrior Monk (Lvl 7)</span>',
+                               '<span class="unit_archer">Archer (Lvl 7)</span>',
+                               '<span class="unit_warrior">Warrior (Lvl 7)</span>',
+                               '<span class="unit_flyingarcher">Flying Rogue (Lvl 7)</span>',
+                               '<span class="unit_musketeer">Musketeer (Lvl 7)</span>',
+                               '<span class="unit_flagbearer">Flag Bearer (Lvl 7)</span>',
+                               '<span class="unit_tank">Tank (Lvl 7)</span>',
+                               '<span class="unit_rogue">Rogue (Lvl 7)</span>',
+                               '<span class="unit_healer">Healer (Lvl 7)</span>',
+                               '<span class="unit_bomber">Bomber (Lvl 7)</span>',
+                               '<span class="unit_barbarian">Barbarian (Lvl 7)</span>'
+                             ],
+                      '169' => [
+                                 '<span class="unit_warbeast">War Beast (Lvl 23)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 23)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 23)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 23)</span>'
+                               ],
+                      '50' => [
+                                '<span class="unit_warbeast">War Beast (Lvl 2)</span>',
+                                '<span class="unit_templar">Templar (Lvl 2)</span>',
+                                '<span class="unit_mage">Mage (Lvl 2)</span>',
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 2)</span>'
+                              ],
+                      '58' => [
+                                '<span class="unit_mage">Mage (Lvl 4)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 4)</span>',
+                                '<span class="unit_templar">Templar (Lvl 4)</span>',
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 4)</span>'
+                              ],
+                      '40' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 2)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 2)</span>'
+                              ],
+                      '48' => [
+                                '<span class="unit_templar">Templar (Lvl 1)</span>',
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 1)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 1)</span>',
+                                '<span class="unit_mage">Mage (Lvl 1)</span>'
+                              ],
+                      '151' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 28)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 28)</span>'
+                               ],
+                      '12' => [
+                                '<span class="unit_paladin">Paladin (Lvl 12)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 11)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 15)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 12)</span>',
+                                '<span class="unit_tank">Tank (Lvl 11)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 17)</span>',
+                                '<span class="unit_archer">Archer (Lvl 15)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 14)</span>',
+                                '<span class="unit_buster">Buster (Lvl 19)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 11)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 15)</span>',
+                                '<span class="unit_archer">Archer (Lvl 12)</span>',
+                                '<span class="unit_archer">Archer (Lvl 13)</span>',
+                                '<span class="unit_archer">Archer (Lvl 16)</span>',
+                                '<span class="unit_tank">Tank (Lvl 16)</span>',
+                                '<span class="unit_archer">Archer (Lvl 18)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 18)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 16)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 18)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 13)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 12)</span>',
+                                '<span class="unit_archer">Archer (Lvl 14)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 15)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 17)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 16)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 19)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 13)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 13)</span>',
+                                '<span class="unit_tank">Tank (Lvl 19)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 12)</span>',
+                                '<span class="unit_tank">Tank (Lvl 15)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 11)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 18)</span>',
+                                '<span class="unit_buster">Buster (Lvl 11)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 17)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 13)</span>',
+                                '<span class="unit_buster">Buster (Lvl 14)</span>',
+                                '<span class="unit_tank">Tank (Lvl 13)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 15)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 18)</span>',
+                                '<span class="unit_tank">Tank (Lvl 14)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 11)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 13)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 14)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 11)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 18)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 18)</span>',
+                                '<span class="unit_archer">Archer (Lvl 11)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 11)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 15)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 17)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 16)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 12)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 13)</span>',
+                                '<span class="unit_buster">Buster (Lvl 15)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 15)</span>',
+                                '<span class="unit_tank">Tank (Lvl 12)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 17)</span>',
+                                '<span class="unit_healer">Healer (Lvl 17)</span>',
+                                '<span class="unit_archer">Archer (Lvl 19)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 19)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 12)</span>',
+                                '<span class="unit_buster">Buster (Lvl 12)</span>',
+                                '<span class="unit_buster">Buster (Lvl 13)</span>',
+                                '<span class="unit_buster">Buster (Lvl 16)</span>',
+                                '<span class="unit_buster">Buster (Lvl 18)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 19)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 16)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 12)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 12)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 19)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 13)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 15)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 16)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 18)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 13)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 13)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 12)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 18)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 17)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 16)</span>',
+                                '<span class="unit_healer">Healer (Lvl 14)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 14)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 16)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 14)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 13)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 15)</span>',
+                                '<span class="unit_healer">Healer (Lvl 13)</span>',
+                                '<span class="unit_healer">Healer (Lvl 12)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 12)</span>',
+                                '<span class="unit_healer">Healer (Lvl 18)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 14)</span>',
+                                '<span class="unit_healer">Healer (Lvl 16)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 11)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 16)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 14)</span>',
+                                '<span class="unit_buster">Buster (Lvl 17)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 19)</span>',
+                                '<span class="unit_healer">Healer (Lvl 15)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 18)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 17)</span>',
+                                '<span class="unit_tank">Tank (Lvl 17)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 17)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 14)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 14)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 13)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 19)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 17)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 16)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 17)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 19)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 11)</span>',
+                                '<span class="unit_healer">Healer (Lvl 19)</span>',
+                                '<span class="unit_tank">Tank (Lvl 18)</span>',
+                                '<span class="unit_archer">Archer (Lvl 17)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 12)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 15)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 16)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 19)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 14)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 19)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 17)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 19)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 15)</span>',
+                                '<span class="unit_healer">Healer (Lvl 11)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 19)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 18)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 11)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 14)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 18)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 11)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 16)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 11)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 15)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 14)</span>'
+                              ],
+                      '46' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 4)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 4)</span>'
+                              ],
+                      '147' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 26)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 26)</span>'
+                               ],
+                      '41' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 3)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 3)</span>'
+                              ],
+                      '193' => [
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 30)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 30)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 30)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 30)</span>'
+                               ],
+                      '130' => [
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 11)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 11)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 11)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 11)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 20)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 20)</span>'
+                               ],
+                      '72' => [
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 8)</span>',
+                                '<span class="unit_balloonbuster">Balloon Buster (Lvl 8)</span>'
+                              ],
+                      '140' => [
+                                 '<span class="unit_mage">Mage (Lvl 16)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 16)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 16)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 16)</span>'
+                               ],
+                      '144' => [
+                                 '<span class="unit_warbeast">War Beast (Lvl 18)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 18)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 18)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 18)</span>'
+                               ],
+                      '13' => [
+                                '<span class="unit_warrior">Warrior (Lvl 21)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 22)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 23)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 23)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 23)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 20)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 23)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 22)</span>',
+                                '<span class="unit_healer">Healer (Lvl 21)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 23)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 24)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 23)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 21)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 21)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 22)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 20)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 24)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 20)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 23)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 22)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 24)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 20)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 24)</span>',
+                                '<span class="unit_healer">Healer (Lvl 22)</span>',
+                                '<span class="unit_healer">Healer (Lvl 23)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 22)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 23)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 21)</span>',
+                                '<span class="unit_healer">Healer (Lvl 24)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 21)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 22)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 23)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 21)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 22)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 20)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 24)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 20)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 21)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 20)</span>',
+                                '<span class="unit_healer">Healer (Lvl 20)</span>',
+                                '<span class="unit_tank">Tank (Lvl 21)</span>',
+                                '<span class="unit_buster">Buster (Lvl 23)</span>',
+                                '<span class="unit_buster">Buster (Lvl 22)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 24)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 21)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 21)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 24)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 20)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 20)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 20)</span>',
+                                '<span class="unit_archer">Archer (Lvl 21)</span>',
+                                '<span class="unit_buster">Buster (Lvl 20)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 23)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 24)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 21)</span>',
+                                '<span class="unit_buster">Buster (Lvl 24)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 22)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 21)</span>',
+                                '<span class="unit_tank">Tank (Lvl 23)</span>',
+                                '<span class="unit_buster">Buster (Lvl 21)</span>',
+                                '<span class="unit_archer">Archer (Lvl 20)</span>',
+                                '<span class="unit_tank">Tank (Lvl 24)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 20)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 24)</span>',
+                                '<span class="unit_archer">Archer (Lvl 24)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 22)</span>',
+                                '<span class="unit_tank">Tank (Lvl 20)</span>',
+                                '<span class="unit_tank">Tank (Lvl 22)</span>',
+                                '<span class="unit_archer">Archer (Lvl 23)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 22)</span>',
+                                '<span class="unit_archer">Archer (Lvl 22)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 22)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 24)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 23)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 24)</span>'
+                              ],
+                      '67' => [
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 6)</span>',
+                                '<span class="unit_mage">Mage (Lvl 6)</span>',
+                                '<span class="unit_templar">Templar (Lvl 6)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 6)</span>'
+                              ],
+                      '112' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 16)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 16)</span>'
+                               ],
+                      '51' => [
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 3)</span>',
+                                '<span class="unit_mage">Mage (Lvl 3)</span>',
+                                '<span class="unit_templar">Templar (Lvl 3)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 3)</span>'
+                              ],
+                      '81' => [
+                                '<span class="unit_orcslayer">Orc Slayer (Lvl 7)</span>',
+                                '<span class="unit_warbeast">War Beast (Lvl 7)</span>',
+                                '<span class="unit_mage">Mage (Lvl 7)</span>',
+                                '<span class="unit_templar">Templar (Lvl 7)</span>'
+                              ],
+                      '134' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 22)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 22)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 13)</span>',
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 13)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 13)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 13)</span>'
+                               ],
+                      '106' => [
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 12)</span>',
+                                 '<span class="unit_balloonbuster">Balloon Buster (Lvl 12)</span>'
+                               ],
+                      '186' => [
+                                 '<span class="unit_orcslayer">Orc Slayer (Lvl 27)</span>',
+                                 '<span class="unit_warbeast">War Beast (Lvl 27)</span>',
+                                 '<span class="unit_templar">Templar (Lvl 27)</span>',
+                                 '<span class="unit_mage">Mage (Lvl 27)</span>'
+                               ],
+                      '14' => [
+                                '<span class="unit_centurion">Centurion (Lvl 27)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 25)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 30)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 26)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 29)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 29)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 28)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 28)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 30)</span>',
+                                '<span class="unit_healer">Healer (Lvl 29)</span>',
+                                '<span class="unit_archer">Archer (Lvl 27)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 28)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 25)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 29)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 29)</span>',
+                                '<span class="unit_healer">Healer (Lvl 25)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 26)</span>',
+                                '<span class="unit_tank">Tank (Lvl 27)</span>',
+                                '<span class="unit_buster">Buster (Lvl 27)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 27)</span>',
+                                '<span class="unit_healer">Healer (Lvl 26)</span>',
+                                '<span class="unit_healer">Healer (Lvl 28)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 27)</span>',
+                                '<span class="unit_healer">Healer (Lvl 30)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 26)</span>',
+                                '<span class="unit_tank">Tank (Lvl 28)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 25)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 29)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 30)</span>',
+                                '<span class="unit_berserker">Berserker (Lvl 30)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 25)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 26)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 28)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 30)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 27)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 29)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 30)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 25)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 25)</span>',
+                                '<span class="unit_centurion">Centurion (Lvl 28)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 26)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 30)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 25)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 30)</span>',
+                                '<span class="unit_warrior">Warrior (Lvl 27)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 26)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 28)</span>',
+                                '<span class="unit_buster">Buster (Lvl 28)</span>',
+                                '<span class="unit_buster">Buster (Lvl 26)</span>',
+                                '<span class="unit_buster">Buster (Lvl 30)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 25)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 25)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 25)</span>',
+                                '<span class="unit_healer">Healer (Lvl 27)</span>',
+                                '<span class="unit_archer">Archer (Lvl 29)</span>',
+                                '<span class="unit_tank">Tank (Lvl 26)</span>',
+                                '<span class="unit_buster">Buster (Lvl 25)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 27)</span>',
+                                '<span class="unit_bomber">Bomber (Lvl 27)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 26)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 27)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 30)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 27)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 28)</span>',
+                                '<span class="unit_tank">Tank (Lvl 29)</span>',
+                                '<span class="unit_tank">Tank (Lvl 25)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 29)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 26)</span>',
+                                '<span class="unit_monk">Warrior Monk (Lvl 28)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 29)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 25)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 28)</span>',
+                                '<span class="unit_tank">Tank (Lvl 30)</span>',
+                                '<span class="unit_rogue">Rogue (Lvl 26)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 28)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 29)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 30)</span>',
+                                '<span class="unit_flyingarcher">Flying Rogue (Lvl 28)</span>',
+                                '<span class="unit_musketeer">Musketeer (Lvl 26)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 29)</span>',
+                                '<span class="unit_archer">Archer (Lvl 28)</span>',
+                                '<span class="unit_archer">Archer (Lvl 26)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 27)</span>',
+                                '<span class="unit_flagbearer">Flag Bearer (Lvl 26)</span>',
+                                '<span class="unit_archer">Archer (Lvl 30)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 27)</span>',
+                                '<span class="unit_buster">Buster (Lvl 29)</span>',
+                                '<span class="unit_paladin">Paladin (Lvl 29)</span>',
+                                '<span class="unit_archer">Archer (Lvl 25)</span>',
+                                '<span class="unit_barbarian">Barbarian (Lvl 30)</span>'
+                              ]
+                    },
+          'Normal' => {
+                        '80' => [
+                                  '<span class="unit_centurion">Centurion (Lvl 20)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 20)</span>'
+                                ],
+                        '58' => [
+                                  '<span class="unit_musketeer">Musketeer (Lvl 15)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 19)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 23)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 18)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 15)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 23)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 23)</span>'
+                                ],
+                        '50' => [
+                                  '<span class="unit_barbarian">Barbarian (Lvl 16)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 10)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 16)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 10)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 16)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 16)</span>'
+                                ],
+                        '73' => [
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 19)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 19)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 19)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 20)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 25)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 22)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 19)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 20)</span>'
+                                ],
+                        '26' => [
+                                  '<span class="unit_templar">Templar (Lvl 3)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 5)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 3)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 6)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 5)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 5)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 6)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 3)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 3)</span>'
+                                ],
+                        '97' => [
+                                  '<span class="unit_warbeast">War Beast (Lvl 30)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 30)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 30)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 30)</span>'
+                                ],
+                        '46' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 15)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 13)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 18)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 15)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 15)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 13)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 13)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 13)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 18)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 18)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 10)</span>'
+                                ],
+                        '32' => [
+                                  '<span class="unit_warbeast">War Beast (Lvl 5)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 7)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 7)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 10)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 10)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 5)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 5)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 5)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 10)</span>'
+                                ],
+                        '64' => [
+                                  '<span class="unit_barbarian">Barbarian (Lvl 21)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 21)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 25)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 15)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 21)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 25)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 25)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 21)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 15)</span>'
+                                ],
+                        '12' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 5)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 1)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 2)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 5)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 5)</span>'
+                                ],
+                        '17' => [
+                                  '<span class="unit_buster">Buster (Lvl 4)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 4)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 7)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 4)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 4)</span>'
+                                ],
+                        '37' => [
+                                  '<span class="unit_rogue">Rogue (Lvl 11)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 11)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 11)</span>'
+                                ],
+                        '69' => [
+                                  '<span class="unit_mage">Mage (Lvl 15)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 27)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 24)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 24)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 15)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 24)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 15)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 24)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 24)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 15)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 27)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 27)</span>'
+                                ],
+                        '92' => [
+                                  '<span class="unit_centurion">Centurion (Lvl 27)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 26)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 26)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 26)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 26)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 27)</span>'
+                                ],
+                        '72' => [
+                                  '<span class="unit_warbeast">War Beast (Lvl 18)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 19)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 29)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 19)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 18)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 18)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 29)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 29)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 18)</span>'
+                                ],
+                        '77' => [
+                                  '<span class="unit_berserker">Berserker (Lvl 24)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 27)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 27)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 24)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 24)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 27)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 27)</span>'
+                                ],
+                        '41' => [
+                                  '<span class="unit_warrior">Warrior (Lvl 14)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 10)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 7)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 11)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 14)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 7)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 11)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 7)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 7)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 11)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 14)</span>'
+                                ],
+                        '93' => [
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 27)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 27)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 27)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 28)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 27)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 28)</span>'
+                                ],
+                        '21' => [
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 3)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 1)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 3)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 3)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 1)</span>'
+                                ],
+                        '85' => [
+                                  '<span class="unit_centurion">Centurion (Lvl 24)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 23)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 23)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 23)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 27)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 28)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 24)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 28)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 23)</span>'
+                                ],
+                        '55' => [
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 15)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 16)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 21)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 21)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 21)</span>'
+                                ],
+                        '13' => [
+                                  '<span class="unit_rogue">Rogue (Lvl 6)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 2)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 6)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 2)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 2)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 6)</span>'
+                                ],
+                        '33' => [
+                                  '<span class="unit_buster">Buster (Lvl 9)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 8)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 7)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 9)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 9)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 9)</span>'
+                                ],
+                        '27' => [
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 7)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 7)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 7)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 6)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 7)</span>'
+                                ],
+                        '65' => [
+                                  '<span class="unit_tank">Tank (Lvl 23)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 19)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 19)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 20)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 11)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 23)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 11)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 11)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 23)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 11)</span>'
+                                ],
+                        '22' => [
+                                  '<span class="unit_bomber">Bomber (Lvl 5)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 6)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 2)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 6)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 6)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 5)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 5)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 6)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 5)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 2)</span>'
+                                ],
+                        '9' => [
+                                 '<span class="unit_rogue">Rogue (Lvl 4)</span>',
+                                 '<span class="unit_warrior">Warrior (Lvl 4)</span>',
+                                 '<span class="unit_archer">Archer (Lvl 4)</span>'
+                               ],
+                        '42' => [
+                                  '<span class="unit_paladin">Paladin (Lvl 12)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 12)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 12)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 15)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 15)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 15)</span>'
+                                ],
+                        '36' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 10)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 7)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 7)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 9)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 10)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 8)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 10)</span>'
+                                ],
+                        '71' => [
+                                  '<span class="unit_mage">Mage (Lvl 17)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 17)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 17)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 17)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 25)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 25)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 25)</span>'
+                                ],
+                        '47' => [
+                                  '<span class="unit_barbarian">Barbarian (Lvl 14)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 14)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 14)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 19)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 19)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 14)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 19)</span>'
+                                ],
+                        '23' => [
+                                  '<span class="unit_monk">Warrior Monk (Lvl 3)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 8)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 4)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 4)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 4)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 3)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 8)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 8)</span>'
+                                ],
+                        '89' => [
+                                  '<span class="unit_healer">Healer (Lvl 30)</span>'
+                                ],
+                        '59' => [
+                                  '<span class="unit_rogue">Rogue (Lvl 24)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 24)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 20)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 20)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 24)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 12)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 12)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 18)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 20)</span>'
+                                ],
+                        '91' => [
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 25)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 26)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 25)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 25)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 26)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 25)</span>'
+                                ],
+                        '76' => [
+                                  '<span class="unit_bomber">Bomber (Lvl 26)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 27)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 26)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 26)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 26)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 27)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 29)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 23)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 23)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 27)</span>'
+                                ],
+                        '11' => [
+                                  '<span class="unit_warrior">Warrior (Lvl 5)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 1)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 1)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 1)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 1)</span>'
+                                ],
+                        '7' => [
+                                 '<span class="unit_warrior">Warrior (Lvl 3)</span>',
+                                 '<span class="unit_paladin">Paladin (Lvl 2)</span>',
+                                 '<span class="unit_flagbearer">Flag Bearer (Lvl 2)</span>',
+                                 '<span class="unit_tank">Tank (Lvl 2)</span>'
+                               ],
+                        '84' => [
+                                  '<span class="unit_warbeast">War Beast (Lvl 22)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 27)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 27)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 22)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 26)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 23)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 22)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 23)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 22)</span>'
+                                ],
+                        '54' => [
+                                  '<span class="unit_buster">Buster (Lvl 19)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 19)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 15)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 19)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 19)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 13)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 13)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 13)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 14)</span>'
+                                ],
+                        '43' => [
+                                  '<span class="unit_buster">Buster (Lvl 11)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 16)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 16)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 11)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 11)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 9)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 16)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 9)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 11)</span>'
+                                ],
+                        '60' => [
+                                  '<span class="unit_berserker">Berserker (Lvl 16)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 16)</span>'
+                                ],
+                        '68' => [
+                                  '<span class="unit_centurion">Centurion (Lvl 17)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 23)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 20)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 14)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 14)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 14)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 14)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 17)</span>'
+                                ],
+                        '74' => [
+                                  '<span class="unit_tank">Tank (Lvl 26)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 21)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 27)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 26)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 21)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 26)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 26)</span>'
+                                ],
+                        '20' => [
+                                  '<span class="unit_archer">Archer (Lvl 8)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 2)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 8)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 2)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 8)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 2)</span>'
+                                ],
+                        '28' => [
+                                  '<span class="unit_paladin">Paladin (Lvl 9)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 9)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 9)</span>'
+                                ],
+                        '8' => [
+                                 '<span class="unit_rogue">Rogue (Lvl 3)</span>',
+                                 '<span class="unit_archer">Archer (Lvl 3)</span>',
+                                 '<span class="unit_flagbearer">Flag Bearer (Lvl 3)</span>',
+                                 '<span class="unit_tank">Tank (Lvl 3)</span>',
+                                 '<span class="unit_paladin">Paladin (Lvl 3)</span>'
+                               ],
+                        '56' => [
+                                  '<span class="unit_rogue">Rogue (Lvl 22)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 22)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 14)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 14)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 22)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 16)</span>'
+                                ],
+                        '79' => [
+                                  '<span class="unit_barbarian">Barbarian (Lvl 29)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 29)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 29)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 29)</span>'
+                                ],
+                        '86' => [
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 24)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 29)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 24)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 24)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 24)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 29)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 28)</span>'
+                                ],
+                        '63' => [
+                                  '<span class="unit_paladin">Paladin (Lvl 22)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 22)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 18)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 18)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 22)</span>'
+                                ],
+                        '48' => [
+                                  '<span class="unit_bomber">Bomber (Lvl 15)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 16)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 16)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 15)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 16)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 15)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 11)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 15)</span>'
+                                ],
+                        '45' => [
+                                  '<span class="unit_warbeast">War Beast (Lvl 8)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 14)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 8)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 8)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 8)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 14)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 10)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 10)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 14)</span>'
+                                ],
+                        '25' => [
+                                  '<span class="unit_monk">Warrior Monk (Lvl 4)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 9)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 2)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 9)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 2)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 2)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 9)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 4)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 2)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 6)</span>'
+                                ],
+                        '14' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 6)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 3)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 6)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 3)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 3)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 6)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 3)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 2)</span>'
+                                ],
+                        '51' => [
+                                  '<span class="unit_musketeer">Musketeer (Lvl 11)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 18)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 17)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 17)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 18)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 11)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 13)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 17)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 17)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 18)</span>'
+                                ],
+                        '81' => [
+                                  '<span class="unit_buster">Buster (Lvl 30)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 20)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 21)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 20)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 29)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 29)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 30)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 20)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 29)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 30)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 20)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 21)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 30)</span>'
+                                ],
+                        '34' => [
+                                  '<span class="unit_templar">Templar (Lvl 6)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 6)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 6)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 6)</span>'
+                                ],
+                        '62' => [
+                                  '<span class="unit_bomber">Bomber (Lvl 20)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 20)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 14)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 14)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 20)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 20)</span>'
+                                ],
+                        '67' => [
+                                  '<span class="unit_templar">Templar (Lvl 13)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 26)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 24)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 26)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 26)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 23)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 24)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 23)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 13)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 22)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 13)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 13)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 24)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 23)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 23)</span>'
+                                ],
+                        '39' => [
+                                  '<span class="unit_archer">Archer (Lvl 13)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 13)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 8)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 13)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 9)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 8)</span>'
+                                ],
+                        '94' => [
+                                  '<span class="unit_mage">Mage (Lvl 28)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 29)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 28)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 28)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 28)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 29)</span>'
+                                ],
+                        '19' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 7)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 1)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 7)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 1)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 7)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 4)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 1)</span>'
+                                ],
+                        '87' => [
+                                  '<span class="unit_musketeer">Musketeer (Lvl 30)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 29)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 30)</span>'
+                                ],
+                        '57' => [
+                                  '<span class="unit_monk">Warrior Monk (Lvl 11)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 11)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 10)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 17)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 10)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 10)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 10)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 17)</span>'
+                                ],
+                        '52' => [
+                                  '<span class="unit_paladin">Paladin (Lvl 19)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 14)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 11)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 19)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 19)</span>'
+                                ],
+                        '82' => [
+                                  '<span class="unit_berserker">Berserker (Lvl 25)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 25)</span>'
+                                ],
+                        '61' => [
+                                  '<span class="unit_paladin">Paladin (Lvl 21)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 17)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 13)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 17)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 21)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 13)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 21)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 19)</span>'
+                                ],
+                        '90' => [
+                                  '<span class="unit_centurion">Centurion (Lvl 25)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 25)</span>'
+                                ],
+                        '75' => [
+                                  '<span class="unit_warrior">Warrior (Lvl 30)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 23)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 30)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 25)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 25)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 25)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 22)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 30)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 28)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 25)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 22)</span>'
+                                ],
+                        '38' => [
+                                  '<span class="unit_bomber">Bomber (Lvl 10)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 12)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 10)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 9)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 10)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 9)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 12)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 12)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 10)</span>'
+                                ],
+                        '10' => [
+                                  '<span class="unit_archer">Archer (Lvl 5)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 4)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 4)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 4)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 5)</span>'
+                                ],
+                        '18' => [
+                                  '<span class="unit_archer">Archer (Lvl 7)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 7)</span>'
+                                ],
+                        '95' => [
+                                  '<span class="unit_mage">Mage (Lvl 29)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 29)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 29)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 30)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 30)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 29)</span>'
+                                ],
+                        '29' => [
+                                  '<span class="unit_templar">Templar (Lvl 4)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 8)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 8)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 5)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 6)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 8)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 5)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 8)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 6)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 4)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 4)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 7)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 4)</span>'
+                                ],
+                        '53' => [
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 18)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 12)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 20)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 18)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 12)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 20)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 18)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 20)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 12)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 18)</span>'
+                                ],
+                        '83' => [
+                                  '<span class="unit_tank">Tank (Lvl 30)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 21)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 22)</span>',
+                                  '<span class="unit_musketeer">Musketeer (Lvl 26)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 21)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 25)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 26)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 21)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 30)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 21)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 22)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 30)</span>'
+                                ],
+                        '15' => [
+                                  '<span class="unit_healer">Healer (Lvl 3)</span>'
+                                ],
+                        '24' => [
+                                  '<span class="unit_warbeast">War Beast (Lvl 1)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 1)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 5)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 1)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 1)</span>'
+                                ],
+                        '35' => [
+                                  '<span class="unit_musketeer">Musketeer (Lvl 8)</span>',
+                                  '<span class="unit_berserker">Berserker (Lvl 8)</span>'
+                                ],
+                        '78' => [
+                                  '<span class="unit_buster">Buster (Lvl 28)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 30)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 28)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 28)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 28)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 28)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 28)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 28)</span>'
+                                ],
+                        '70' => [
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 16)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 16)</span>',
+                                  '<span class="unit_monk">Warrior Monk (Lvl 18)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 28)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 28)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 28)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 21)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 18)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 16)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 16)</span>'
+                                ],
+                        '44' => [
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 13)</span>',
+                                  '<span class="unit_paladin">Paladin (Lvl 13)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 12)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 12)</span>',
+                                  '<span class="unit_warrior">Warrior (Lvl 17)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 12)</span>',
+                                  '<span class="unit_archer">Archer (Lvl 17)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 13)</span>',
+                                  '<span class="unit_rogue">Rogue (Lvl 17)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 12)</span>'
+                                ],
+                        '66' => [
+                                  '<span class="unit_monk">Warrior Monk (Lvl 16)</span>',
+                                  '<span class="unit_buster">Buster (Lvl 22)</span>',
+                                  '<span class="unit_centurion">Centurion (Lvl 16)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 12)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 12)</span>',
+                                  '<span class="unit_bomber">Bomber (Lvl 22)</span>',
+                                  '<span class="unit_flyingarcher">Flying Rogue (Lvl 22)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 12)</span>',
+                                  '<span class="unit_balloonbuster">Balloon Buster (Lvl 21)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 12)</span>',
+                                  '<span class="unit_barbarian">Barbarian (Lvl 22)</span>'
+                                ],
+                        '6' => [
+                                 '<span class="unit_flagbearer">Flag Bearer (Lvl 1)</span>',
+                                 '<span class="unit_tank">Tank (Lvl 1)</span>',
+                                 '<span class="unit_rogue">Rogue (Lvl 1)</span>',
+                                 '<span class="unit_rogue">Rogue (Lvl 2)</span>',
+                                 '<span class="unit_warrior">Warrior (Lvl 1)</span>',
+                                 '<span class="unit_archer">Archer (Lvl 2)</span>',
+                                 '<span class="unit_archer">Archer (Lvl 1)</span>',
+                                 '<span class="unit_warrior">Warrior (Lvl 2)</span>',
+                                 '<span class="unit_paladin">Paladin (Lvl 1)</span>'
+                               ],
+                        '49' => [
+                                  '<span class="unit_paladin">Paladin (Lvl 17)</span>',
+                                  '<span class="unit_warbeast">War Beast (Lvl 9)</span>',
+                                  '<span class="unit_mage">Mage (Lvl 9)</span>',
+                                  '<span class="unit_tank">Tank (Lvl 17)</span>',
+                                  '<span class="unit_orcslayer">Orc Slayer (Lvl 9)</span>',
+                                  '<span class="unit_healer">Healer (Lvl 12)</span>',
+                                  '<span class="unit_templar">Templar (Lvl 9)</span>',
+                                  '<span class="unit_flagbearer">Flag Bearer (Lvl 17)</span>'
+                                ]
+                      }
+        };
+$VAR3 = 'total';
+$VAR4 = {
+          'Normal' => {
+                        'Healer' => 1611,
+                        'Warrior' => 1221,
+                        'Flying Rogue' => 1456,
+                        'Orc Slayer' => 1964,
+                        'Buster' => 1456,
+                        'Bomber' => 1456,
+                        'Flag Bearer' => 1359,
+                        'Balloon Buster' => 1572,
+                        'Mage' => 1964,
+                        'Berserker' => 1688,
+                        'Rogue' => 1222,
+                        'War Beast' => 1964,
+                        'Warrior Monk' => 1864,
+                        'Paladin' => 1359,
+                        'Centurion' => 1864,
+                        'Templar' => 1964,
+                        'Archer' => 1222,
+                        'Musketeer' => 1688,
+                        'Tank' => 1359,
+                        'Barbarian' => 1455
+                      },
+          'Epic' => {
+                      'Flag Bearer' => 334,
+                      'Bomber' => 334,
+                      'Berserker' => 334,
+                      'War Beast' => 3924,
+                      'Rogue' => 334,
+                      'Mage' => 3924,
+                      'Balloon Buster' => 6278,
+                      'Buster' => 334,
+                      'Warrior' => 334,
+                      'Healer' => 334,
+                      'Flying Rogue' => 334,
+                      'Orc Slayer' => 3924,
+                      'Tank' => 334,
+                      'Barbarian' => 334,
+                      'Musketeer' => 334,
+                      'Archer' => 334,
+                      'Warrior Monk' => 334,
+                      'Centurion' => 334,
+                      'Templar' => 3924,
+                      'Paladin' => 334
+                    },
+          'Captain' => {
+                         'Musketeer' => 6676,
+                         'Barbarian' => 5793,
+                         'Tank' => 5434,
+                         'Warrior Monk' => 7394,
+                         'Paladin' => 5434,
+                         'Centurion' => 7394,
+                         'Templar' => 3924,
+                         'Archer' => 4893,
+                         'Bomber' => 5797,
+                         'Flag Bearer' => 334,
+                         'Mage' => 3924,
+                         'Balloon Buster' => 3139,
+                         'Berserker' => 6676,
+                         'Rogue' => 4893,
+                         'War Beast' => 3924,
+                         'Warrior' => 2447,
+                         'Healer' => 6435,
+                         'Flying Rogue' => 5797,
+                         'Orc Slayer' => 3924,
+                         'Buster' => 8693
+                       }
+        };

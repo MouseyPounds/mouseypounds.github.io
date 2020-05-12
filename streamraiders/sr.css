@@ -1,0 +1,225 @@
+/* sr.css
+ * https://mouseypounds.github.io/streamraiders/
+ */
+
+/* Color palette
+ * #eb1 - Yellow, Headlines and highlights
+ * #39e - Brigher blue, table borders
+ * #eff - Nearly white, body text
+ * #89a - Lt blue, borders
+ * #69b - Lt blue gradient center
+ * #257 - Med blue, alternate bg
+ * #135 - Dark blue, bg
+ * #012 - Very dark blue, header bg and gradient ends
+ *
+ * #0dd - turquoise, links
+ * #0cc - slightly darker turquoise, link visited
+ * #8ff - bright turquoise, link click
+ */ 
+ 
+html {
+	min-height: 100%;
+	background-attachment: fixed;
+	background-color: #135; /* fallback color if gradients are not supported */
+	background-image: -webkit-linear-gradient(top, #012, #69b, #012); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+	background-image:    -moz-linear-gradient(top, #012, #69b, #012); /* For Firefox (3.6 to 15) */
+	background-image:      -o-linear-gradient(top, #012, #69b, #012); /* For old Opera (11.1 to 12.0) */ 
+	background-image:         linear-gradient(to bottom, #012, #69b, #012); /* Standard syntax; must be last */
+}
+body {
+	margin: 15px;
+	color: #eff;
+	font-family: "Cambria", serif;
+}
+a:visited { color: #0bb; }
+a:link { color: #0dd; }
+a:hover { background-color: #257;}
+a:active { color: #8ff; background-color: #257;}
+.panel {
+	background-color: #135;
+	padding: .5em 2em .5em 1em;
+	margin: 5px;
+	border: 3px solid #89a;
+	border-radius: 15px;
+}
+#header {
+	padding-right: 5em;
+}
+#footer {
+	text-align: center;
+	padding-right: 1em;
+}
+h1, h2 {
+	color: #eb1;
+	font-family: "Calibri", sans-serif;
+}
+h2 {
+	margin: 10px 0 4px;
+}
+.mach_desc {
+	margin-bottom: 1em;
+	font-weight: bold;
+}
+.note,.group ,.none {
+	font-style: italic;
+}
+.duration {
+	font-style: italic;
+	padding-left: 1.5em;
+}
+.username, .strong {
+	font-weight: bold;
+}
+/* Sortable Table indicators from https://www.kryogenix.org/code/browser/sorttable/#symbolsbeforesorting */
+/*
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+}
+*/
+table.sortable th {
+	cursor: pointer;
+	
+}
+table.sortable th:hover {
+	background-color: #135;
+	
+}
+table.output, table.calendar {
+	border: 2px solid #39e;
+	background-color: #257;
+	border-collapse: collapse;
+	margin-top: 5px;
+}
+th, td {
+	border: 1px solid #39e;
+	text-align: center;
+}
+th {
+	color: #7ae;
+	background-color: #012;
+}
+td {
+	color: #eff;
+}
+td.text  {
+	text-align: left;
+}
+.highlight, tr.highlight td {
+	background-color: #135;
+	color: #eb1;
+}
+td.icon, td.num , td.result_text {
+	text-align: center;
+}
+td.name {
+	text-align: left;
+}
+td.value {
+	text-align: right;
+}
+td.foot_total {
+	text-align: right;
+}
+table.output th, table.output td, table.recipe th, table.recipe td {
+	padding: 3px 8px;
+}
+.container {
+	margin-bottom: 1em;
+}
+.container__image {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 32px;
+	margin-right: 0.5em;
+}
+.container__text {
+    display: inline-block;
+}
+img.unit {
+	display: inline-block;
+	float: left;
+	width: 72px;
+	height: 72px;
+}
+.stat_table {
+	clear: both;
+}
+#TOC {
+	position: fixed;
+	right: 0;
+	top: 0;
+	padding: 0;
+	max-height: 90%;
+	max-width: 250px;
+	overflow: auto;
+	background-color: #89a;
+	box-shadow: -2px 2px 25px #39e;
+	white-space: nowrap;
+}
+#TOC-details {
+	display:none;
+}
+#TOC, #TOC:hover #TOC-details {
+	display:block;
+}
+#TOC > h1, #TOC li a {
+	padding: 5px 10px;
+	padding-right: 20px;
+	display: block;
+}
+#TOC > h1 {
+	margin: 0;
+	font-size: 18px;
+	line-height: 24px;
+	background-color: #012;
+	color: #eb1;
+}
+#TOC ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#TOC li a {
+	color: #012;
+	text-decoration: none;
+}
+#TOC li a:hover {
+	background-color: #eff;
+}
+/* Form stuff. */
+fieldset {
+	display: inline-block;
+	border: 2px solid #39e;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	vertical-align: top;
+	width: 10em;
+}
+.select_set, .result_text {
+	width: 15em;
+}
+input, select {
+	margin-top: 5px;
+}
+/* tooltip implementation based on code from Andrea Ligios
+   https://stackoverflow.com/questions/7117073/how-to-add-a-tooltip-to-a-div
+   http://jsfiddle.net/AndreaLigios/jtLbpy62/
+ */
+[tooltip]:before {            
+	position: absolute;
+	content: attr(tooltip);
+	opacity: 0;
+	box-shadow: 2px 2px 1px #603000;
+	padding: .5em;
+	color: #603000;
+	font-style: normal;
+}
+[tooltip]:hover:before {        
+	opacity: .9;
+	background: #fc8;
+	margin-top: 1.5em;
+	margin-left: .5em;
+}
+[tooltip]:not([tooltip-persistent]):before {
+	pointer-events: none;
+}

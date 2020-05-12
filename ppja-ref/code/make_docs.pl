@@ -1382,7 +1382,10 @@ sub GetExtendedModInfo {
 	# From Ancient Crops
 	if ($modID eq 'ppja.ancientcrops') {
 		$isPPJA = 1;
-	} elsif ($modID eq 'PPJAAncientCropsCP') {
+	} elsif ($modID eq 'PPJAAncientCropsCP') { #This is now obsolete
+		$parentID = 'ppja.ancientcrops';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.ancientcropsforMFM') {
 		$parentID = 'ppja.ancientcrops';
 		$isPPJA = 1;
 	} elsif ($modID eq 'PPJA.AncientCropsAddOn') { #PFM

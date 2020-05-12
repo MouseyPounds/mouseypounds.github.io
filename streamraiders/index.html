@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mousey's Stream Raiders Datamine: Main Index</title>
+
+<meta charset="UTF-8" />
+<meta property="og:title" content="Stream Raiders Datamine: Main Index" />
+<meta property="og:description" content="Datamined info for Stream Raiders game." />
+<!-- meta property="og:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
+<!-- meta property="twitter:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
+<meta name="theme-color" content="#44ffff">
+<meta name="author" content="MouseyPounds" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" type="text/css" href="./sr.css" />
+<!-- link rel="stylesheet" type="text/css" href="./sr-img.css" / -->
+<link rel="icon" type="image/png" href="./StreamCaptainLogoDark.png" />
+
+<!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
+<!-- script type="text/javascript" src="./sorttable.js"></script -->
+<script type="text/javascript" src="./sr_scripts.js"></script>
+
+</head>
+<body>
+<div class="panel" id="header"><h1>Mousey's Stream Raiders Datamine: Main Index</h1>
+<p>Welcome to my personal collection of datamined info for the Stream Raiders game. Although all datamined info should be taken with a
+grain of salt, this is especially true for a game like Stream Raiders which is still in beta and undergoing frequent updates.</p>
+<p>Most images are from the Stream Captains external assets share. Data was collected from cached browser files for the web client from a viewer account. The export timestamp for the data used is 2020-05-08 11:15:58</p>
+<p>If you have any suggestions for improvement or bugs to report, please contact me at <span class="username">MouseyPounds#0557</span>
+on <a href="https://discordapp.com">Discord</a></p>
+<h2>Page Directory</h2>
+<ul>
+<li><a href="./captain_units.html">Captain Units</a> - Unit stats for troops placed by captains.</li>
+<li><a href="./captain_power.html">Captain Power</a> - Power rankings for captain troops (mainly useful for PvP events)</li>
+<li><a href="./viewer_units.html">Viewer Units</a> - Unit stats for troops placed by viewers.</li>
+<li><a href="./viewer_power.html">Viewer Power</a> - Power rankings for viewer troops (mainly useful for PvP events)</li>
+</ul>
+
+</div>
+<div class="panel">
+<h2>Unit Upgrade Cost Calculator</h2>
+<p>This tool calculates the total upgrade cost for a unit; the level range is specified by the selection menus, and the type of unit
+is specified by the radio buttons. The calculated cost will be shown in the small <span class="note">Results</span> table just below
+the entry fields, and a detailed breakdown of the individual levels with applicable rows <span class="highlight">highlighted</span>
+appears in the table below that.</p>
+<fieldset id="level_set" class="select_set">
+<legend>Level Range</legend>
+Current Level: <select id="level_start" name="level_start" class="level_select"><option value="unlock_initial">Unlock (Initial)</option><option value="unlock_dupe">Unlock (Duplicate)</option><option value="1" selected="selected">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option></select>
+Target Level: <select id="level_end" name="level_end" class="level_select"><option value="unlock_initial">Unlock (Initial)</option><option value="unlock_dupe">Unlock (Duplicate)</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30" selected="selected">30</option></select>
+</fieldset>
+<fieldset id="filter_acct_options" class="radio_set">
+<legend>Account Type</legend>
+<label><input class="filter" type="radio" name="filter_acct" value="0" checked="checked"> Viewer</label><br />
+<label><input class="filter" type="radio" name="filter_acct" value="4"> Captain</label>
+</fieldset>
+<fieldset id="filter_rare_options" class="radio_set">
+<legend>Unit Rarity</legend>
+<label><input class="filter" type="radio" name="filter_rare" value="0" checked="checked"> Non-Legendary</label><br />
+<label><input class="filter" type="radio" name="filter_rare" value="2"> Legendary</label>
+</fieldset>
+<table class="output">
+<thead><tr><th>Results</th>
+<th class="cost_0">Gold</th><th class="cost_1">Scrolls</th>
+<th class="cost_2">Gold</th><th class="cost_3">Scrolls</th>
+<th class="cost_4">Gold</th><th class="cost_5">Scrolls</th>
+<th class="cost_6">Gold</th><th class="cost_7">Scrolls</th>
+</tr></thead><tbody><tr class="highlight"><td class="result_text" id="result_desc">Placeholder</td>
+<td class="num cost_0" id="total_0">0</td><td class="num cost_1" id="total_1">0</td>
+<td class="num cost_2" id="total_2">0</td><td class="num cost_3" id="total_3">0</td>
+<td class="num cost_4" id="total_4">0</td><td class="num cost_5" id="total_5">0</td>
+<td class="num cost_6" id="total_6">0</td><td class="num cost_7" id="total_7">0</td>
+</tr></tbody></table>
+<table class="output">
+<thead>
+<tr><th colspan="4">Detailed Breakdown</th></tr>
+<tr><th>From</th><th>To</th>
+<th class="cost_0">Gold</th><th class="cost_1">Scrolls</th>
+<th class="cost_2">Gold</th><th class="cost_3">Scrolls</th>
+<th class="cost_4">Gold</th><th class="cost_5">Scrolls</th>
+<th class="cost_6">Gold</th><th class="cost_7">Scrolls</th>
+</tr></thead><tbody>
+<tr id="unlock_initial">
+<td class="num" colspan="2">Unlock (Initial)</td>
+<td class="num cost_0">10</td>
+<td class="num cost_1">5</td>
+<td class="num cost_2">50</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">30</td>
+<td class="num cost_5">5</td>
+<td class="num cost_6">50</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="unlock_dupe">
+<td class="num" colspan="2">Unlock (Dupe)</td>
+<td class="num cost_0">1000</td>
+<td class="num cost_1">300</td>
+<td class="num cost_2">1000</td>
+<td class="num cost_3">300</td>
+<td class="num cost_4">1000</td>
+<td class="num cost_5">300</td>
+<td class="num cost_6">1000</td>
+<td class="num cost_7">300</td>
+</tr>
+<tr id="level_1">
+<td class="num">1</td><td class="num">2</td>
+<td class="num cost_0">25</td>
+<td class="num cost_1">15</td>
+<td class="num cost_2">50</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">6</td>
+<td class="num cost_5">7</td>
+<td class="num cost_6">12</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_2">
+<td class="num">2</td><td class="num">3</td>
+<td class="num cost_0">35</td>
+<td class="num cost_1">20</td>
+<td class="num cost_2">70</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">7</td>
+<td class="num cost_5">8</td>
+<td class="num cost_6">14</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_3">
+<td class="num">3</td><td class="num">4</td>
+<td class="num cost_0">50</td>
+<td class="num cost_1">25</td>
+<td class="num cost_2">100</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">8</td>
+<td class="num cost_5">9</td>
+<td class="num cost_6">16</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_4">
+<td class="num">4</td><td class="num">5</td>
+<td class="num cost_0">100</td>
+<td class="num cost_1">50</td>
+<td class="num cost_2">200</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">9</td>
+<td class="num cost_5">10</td>
+<td class="num cost_6">18</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_5">
+<td class="num">5</td><td class="num">6</td>
+<td class="num cost_0">120</td>
+<td class="num cost_1">60</td>
+<td class="num cost_2">240</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">10</td>
+<td class="num cost_5">11</td>
+<td class="num cost_6">20</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_6">
+<td class="num">6</td><td class="num">7</td>
+<td class="num cost_0">140</td>
+<td class="num cost_1">70</td>
+<td class="num cost_2">280</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">15</td>
+<td class="num cost_5">12</td>
+<td class="num cost_6">30</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_7">
+<td class="num">7</td><td class="num">8</td>
+<td class="num cost_0">160</td>
+<td class="num cost_1">80</td>
+<td class="num cost_2">320</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">20</td>
+<td class="num cost_5">13</td>
+<td class="num cost_6">40</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_8">
+<td class="num">8</td><td class="num">9</td>
+<td class="num cost_0">180</td>
+<td class="num cost_1">90</td>
+<td class="num cost_2">360</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">25</td>
+<td class="num cost_5">14</td>
+<td class="num cost_6">50</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_9">
+<td class="num">9</td><td class="num">10</td>
+<td class="num cost_0">200</td>
+<td class="num cost_1">100</td>
+<td class="num cost_2">400</td>
+<td class="num cost_3">10</td>
+<td class="num cost_4">30</td>
+<td class="num cost_5">15</td>
+<td class="num cost_6">60</td>
+<td class="num cost_7">10</td>
+</tr>
+<tr id="level_10">
+<td class="num">10</td><td class="num">11</td>
+<td class="num cost_0">220</td>
+<td class="num cost_1">110</td>
+<td class="num cost_2">440</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">35</td>
+<td class="num cost_5">16</td>
+<td class="num cost_6">70</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_11">
+<td class="num">11</td><td class="num">12</td>
+<td class="num cost_0">240</td>
+<td class="num cost_1">120</td>
+<td class="num cost_2">480</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">40</td>
+<td class="num cost_5">17</td>
+<td class="num cost_6">80</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_12">
+<td class="num">12</td><td class="num">13</td>
+<td class="num cost_0">260</td>
+<td class="num cost_1">130</td>
+<td class="num cost_2">520</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">45</td>
+<td class="num cost_5">18</td>
+<td class="num cost_6">90</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_13">
+<td class="num">13</td><td class="num">14</td>
+<td class="num cost_0">280</td>
+<td class="num cost_1">140</td>
+<td class="num cost_2">560</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">50</td>
+<td class="num cost_5">19</td>
+<td class="num cost_6">100</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_14">
+<td class="num">14</td><td class="num">15</td>
+<td class="num cost_0">300</td>
+<td class="num cost_1">150</td>
+<td class="num cost_2">600</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">55</td>
+<td class="num cost_5">20</td>
+<td class="num cost_6">110</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_15">
+<td class="num">15</td><td class="num">16</td>
+<td class="num cost_0">320</td>
+<td class="num cost_1">160</td>
+<td class="num cost_2">640</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">60</td>
+<td class="num cost_5">22</td>
+<td class="num cost_6">120</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_16">
+<td class="num">16</td><td class="num">17</td>
+<td class="num cost_0">340</td>
+<td class="num cost_1">170</td>
+<td class="num cost_2">680</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">65</td>
+<td class="num cost_5">24</td>
+<td class="num cost_6">130</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_17">
+<td class="num">17</td><td class="num">18</td>
+<td class="num cost_0">360</td>
+<td class="num cost_1">180</td>
+<td class="num cost_2">720</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">70</td>
+<td class="num cost_5">26</td>
+<td class="num cost_6">140</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_18">
+<td class="num">18</td><td class="num">19</td>
+<td class="num cost_0">380</td>
+<td class="num cost_1">190</td>
+<td class="num cost_2">760</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">75</td>
+<td class="num cost_5">28</td>
+<td class="num cost_6">150</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_19">
+<td class="num">19</td><td class="num">20</td>
+<td class="num cost_0">400</td>
+<td class="num cost_1">200</td>
+<td class="num cost_2">800</td>
+<td class="num cost_3">15</td>
+<td class="num cost_4">100</td>
+<td class="num cost_5">30</td>
+<td class="num cost_6">200</td>
+<td class="num cost_7">15</td>
+</tr>
+<tr id="level_20">
+<td class="num">20</td><td class="num">21</td>
+<td class="num cost_0">450</td>
+<td class="num cost_1">220</td>
+<td class="num cost_2">850</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">120</td>
+<td class="num cost_5">40</td>
+<td class="num cost_6">220</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_21">
+<td class="num">21</td><td class="num">22</td>
+<td class="num cost_0">500</td>
+<td class="num cost_1">240</td>
+<td class="num cost_2">900</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">140</td>
+<td class="num cost_5">60</td>
+<td class="num cost_6">240</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_22">
+<td class="num">22</td><td class="num">23</td>
+<td class="num cost_0">550</td>
+<td class="num cost_1">260</td>
+<td class="num cost_2">950</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">160</td>
+<td class="num cost_5">60</td>
+<td class="num cost_6">260</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_23">
+<td class="num">23</td><td class="num">24</td>
+<td class="num cost_0">600</td>
+<td class="num cost_1">280</td>
+<td class="num cost_2">1000</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">180</td>
+<td class="num cost_5">70</td>
+<td class="num cost_6">280</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_24">
+<td class="num">24</td><td class="num">25</td>
+<td class="num cost_0">675</td>
+<td class="num cost_1">300</td>
+<td class="num cost_2">1100</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">200</td>
+<td class="num cost_5">80</td>
+<td class="num cost_6">300</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_25">
+<td class="num">25</td><td class="num">26</td>
+<td class="num cost_0">750</td>
+<td class="num cost_1">320</td>
+<td class="num cost_2">1200</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">220</td>
+<td class="num cost_5">90</td>
+<td class="num cost_6">320</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_26">
+<td class="num">26</td><td class="num">27</td>
+<td class="num cost_0">825</td>
+<td class="num cost_1">340</td>
+<td class="num cost_2">1300</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">240</td>
+<td class="num cost_5">100</td>
+<td class="num cost_6">340</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_27">
+<td class="num">27</td><td class="num">28</td>
+<td class="num cost_0">900</td>
+<td class="num cost_1">360</td>
+<td class="num cost_2">1500</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">260</td>
+<td class="num cost_5">115</td>
+<td class="num cost_6">360</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_28">
+<td class="num">28</td><td class="num">29</td>
+<td class="num cost_0">1000</td>
+<td class="num cost_1">380</td>
+<td class="num cost_2">1600</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">280</td>
+<td class="num cost_5">130</td>
+<td class="num cost_6">380</td>
+<td class="num cost_7">20</td>
+</tr>
+<tr id="level_29">
+<td class="num">29</td><td class="num">30</td>
+<td class="num cost_0">1200</td>
+<td class="num cost_1">400</td>
+<td class="num cost_2">2000</td>
+<td class="num cost_3">20</td>
+<td class="num cost_4">300</td>
+<td class="num cost_5">150</td>
+<td class="num cost_6">400</td>
+<td class="num cost_7">20</td>
+</tr>
+</table></div>
+<div id="footer" class="panel">
+Stream Raiders Datamine:
+<a href="./index.html">Main Index</a> ||
+<a href="./captain_units.html">Captain Units</a> || 
+<a href="./captain_power.html">Captain Power</a> || 
+<a href="./viewer_units.html">Viewer Units</a> || 
+<a href="./viewer_power.html">Viewer Power</a>
+<br />
+Other Stream Raiders resources: <a href="http://www.streamcaptain.com/streamraiders/">Website</a> || 
+<a href="https://streamraiders.fandom.com/wiki/Stream_Raiders_Wiki">Wiki</a> || 
+<a href="https://discordapp.com/invite/SJF2Eef">Discord</a>
+</div>
+</body>
+</html>
