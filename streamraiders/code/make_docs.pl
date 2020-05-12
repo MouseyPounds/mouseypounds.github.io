@@ -30,7 +30,7 @@ my %Units = ();
 my %Power = ();
 GatherUnitData();
 
-WriteMainIndex($GameData->{'exportDate'});
+WriteMainIndex();
 WriteUnitSummaryViewer();
 WriteUnitSummaryCaptain();
 WritePowerSummaryViewer();
@@ -260,13 +260,11 @@ sub WriteMainIndex {
 	open $FH, ">$DocBase/index.html" or die "Can't open index.html for writing: $!";
 	select $FH;
 
-	my $version = shift;
-	
 	print STDOUT "Generating Main Index\n";
 	my $longdesc = <<"END_PRINT";
 <p>Welcome to my personal collection of datamined info for the Stream Raiders game. Although all datamined info should be taken with a
 grain of salt, this is especially true for a game like Stream Raiders which is still in beta and undergoing frequent updates.</p>
-<p>Most images are from the Stream Captains external assets share. Data was collected from cached browser files for the web client from a viewer account. The export timestamp for the data used is $version</p>
+<p>Most images are from the Stream Captains external assets share. Data was collected from cached browser files for the web client from a viewer account. The export timestamp for the data used is $GameData->{'exportDate'} PDT.</p>
 <p>If you have any suggestions for improvement or bugs to report, please contact me at <span class="username">MouseyPounds#0557</span>
 on <a href="https://discordapp.com">Discord</a></p>
 <h2>Page Directory</h2>
@@ -473,7 +471,7 @@ END_PRINT
 
 
 	my $longdesc = <<"END_PRINT";
-<p>A summary of unit stats as of $GameData->{'exportDate'}. Some notes on this data:</p>
+<p>A summary of unit stats as of $GameData->{'exportDate'} PDT. Some notes on this data:</p>
 <ul>
 <li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; actual milestone data and other unit buffs is still a work-in-progress.</li>
 <li>Specialization information is not yet included.</li>
@@ -576,7 +574,7 @@ END_PRINT
 
 
 	my $longdesc = <<"END_PRINT";
-<p>A summary of unit stats as of $GameData->{'exportDate'}. Some notes on this data:</p>
+<p>A summary of unit stats as of $GameData->{'exportDate'} PDT. Some notes on this data:</p>
 <ul>
 <li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; actual milestone data and other unit buffs is still a work-in-progress.</li>
 <li>Specialization information is not yet included.</li>
@@ -677,7 +675,7 @@ END_PRINT
 
 
 	my $longdesc = <<"END_PRINT";
-<p>A summary of the power rankings of units as of $GameData->{'exportDate'}. The primary use of this data is to help understand
+<p>A summary of the power rankings of units as of $GameData->{'exportDate'} PDT. The primary use of this data is to help understand
 the filling of the power bar in PvP.</p>
 END_PRINT
 
@@ -770,7 +768,7 @@ END_PRINT
 
 
 	my $longdesc = <<"END_PRINT";
-<p>A summary of the power rankings of units as of $GameData->{'exportDate'}. The primary use of this data is to help understand
+<p>A summary of the power rankings of units as of $GameData->{'exportDate'} PDT. The primary use of this data is to help understand
 the filling of the power bar in PvP.</p>
 END_PRINT
 
