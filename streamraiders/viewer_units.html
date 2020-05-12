@@ -25,10 +25,12 @@
 <div class="panel" id="header"><h1>Mousey's Stream Raiders Datamine: Viewer Units</h1>
 <p>A summary of unit stats as of 2020-05-11 18:44:58. Some notes on this data:</p>
 <ul>
-<li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; this summary does not currently include actual milestone data or inherent unit buffs.</li>
-<li>It also does not yet include any information on specializations.</li>
-<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; as the main user interest for this is PvP placement, it is only shown for non-epic units.</li>
-<li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).</li>
+<li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; actual milestone data and other unit buffs is still a work-in-progress.</li>
+<li>Specialization information is not yet included.</li>
+<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; as the main user interest for this is PvP placement, it is only shown for non-epic units.
+For an overall power summary, see the <a href="./viewer_power.html">Viewer Power page</a>.</li>
+<li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).
+A cost calculator is included on the <a href="./index.html#upgrade_calc">main directory</a>.</li>
 <li>A <span class="note">Heal</span> column is displayed for units which can heal allies.</li>
 </ul>
 
@@ -1054,9 +1056,9 @@ Targets Enemy GroundAndAir within 0 tiles with priority: None
 <h2>Centurion</h2>
 <img class="unit" src="./img/centurion_walk.gif" alt="Unit Icon" />
 Rare Armored &mdash; An armored unit that boosts the defense of other nearby armored units.<br />
-Strong Against: Ranged,Flying<br />
+Strong Against: Ranged<br />
 Weak Against: None<br />
-Targets Enemy GroundAndAir within 0 tiles with priority: None
+Targets Enemy Ground within 0 tiles with priority: None
 </div>
 <div class="stat_table">
 <table class="output">
@@ -2566,9 +2568,9 @@ Targets Enemy GroundAndAir within 100 tiles with priority: Ranged,Support
 <h2>Tank</h2>
 <img class="unit" src="./img/tank_walk.gif" alt="Unit Icon" />
 Common Armored &mdash; An armored unit with high defense but low attack power.<br />
-Strong Against: Ranged<br />
+Strong Against: Ranged,Flying<br />
 Weak Against: None<br />
-Targets Enemy Ground within 0 tiles with priority: None
+Targets Enemy GroundAndAir within 0 tiles with priority: None
 </div>
 <div class="stat_table">
 <table class="output">
@@ -2736,7 +2738,7 @@ Targets Enemy Ground within 0 tiles with priority: None
 Legendary Support &mdash; A legendary support unit that boosts all nearby ally damage and deals 2x damage to the Undead.<br />
 Strong Against: Undead,Melee<br />
 Weak Against: None<br />
-Targets Enemy GroundAndAir within 0 tiles with priority: None
+Targets Enemy Ground within 0 tiles with priority: None
 </div>
 <div class="stat_table">
 <table class="output">
@@ -3070,9 +3072,9 @@ Targets Enemy Ground within 0 tiles with priority: Armored
 <h2>Warrior</h2>
 <img class="unit" src="./img/warrior_walk.gif" alt="Unit Icon" />
 Common Melee &mdash; A basic melee unit that deals high damage to armored opponents.<br />
-Strong Against: Armored<br />
+Strong Against: Armored,Flying<br />
 Weak Against: None<br />
-Targets Enemy Ground within 0 tiles with priority: None
+Targets Enemy GroundAndAir within 0 tiles with priority: None
 </div>
 <div class="stat_table">
 <table class="output">
@@ -3240,7 +3242,7 @@ Targets Enemy Ground within 0 tiles with priority: None
 Rare Support &mdash; A combat support unit that heals nearby allies while fighting.<br />
 Strong Against: Melee<br />
 Weak Against: None<br />
-Targets Enemy GroundAndAir within 0 tiles with priority: None
+Targets Enemy Ground within 0 tiles with priority: None
 </div>
 <div class="stat_table">
 <table class="output">

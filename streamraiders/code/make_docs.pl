@@ -281,7 +281,7 @@ END_PRINT
 	print GetHeader("Main Index", qq(Datamined info for Stream Raiders game.), $longdesc);
 	
 	my $out = <<"END_PRINT";
-<div class="panel">
+<div class="panel" id="upgrade_calc">
 <h2>Unit Upgrade Cost Calculator</h2>
 <p>This tool calculates the total upgrade cost for a unit; the level range is specified by the selection menus, and the type of unit
 is specified by the radio buttons. The calculated cost will be shown in the small <span class="note">Results</span> table just below
@@ -475,10 +475,12 @@ END_PRINT
 	my $longdesc = <<"END_PRINT";
 <p>A summary of unit stats as of $GameData->{'exportDate'}. Some notes on this data:</p>
 <ul>
-<li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; this summary does not currently include actual milestone data or inherent unit buffs.</li>
-<li>It also does not yet include any information on specializations.</li>
-<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; as the main user interest for this is PvP placement, it is only shown for non-epic units.</li>
-<li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).</li>
+<li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; actual milestone data and other unit buffs is still a work-in-progress.</li>
+<li>Specialization information is not yet included.</li>
+<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; as the main user interest for this is PvP placement, it is only shown for non-epic units.
+For an overall power summary, see the <a href="./viewer_power.html">Viewer Power page</a>.</li>
+<li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).
+A cost calculator is included on the <a href="./index.html#upgrade_calc">Main Index page</a>.</li>
 <li>A <span class="note">Heal</span> column is displayed for units which can heal allies.</li>
 </ul>
 END_PRINT
@@ -555,12 +557,14 @@ END_PRINT
 			if ($Units{$k}{'_CanHeal'}) {
 				$heal_norm = qq(<td class="num">$Units{$k}{'Captain'}{$lvl}{'Heal'}</td>);
 			}
-#<td class="text">$Units{$k}{'Captain'}{$lvl}{'SpecialAbilityDescription'}</td>
+			my $mile_capt = qq(<td class="text">$Units{$k}{'Captain'}{$lvl}{'SpecialAbilityDescription'}<br />);
+			$mile_capt .= join("<br />", (map {TranslateBuff($_)} split(/,/, $Units{$k}{'Captain'}{$lvl}{'StartBuffsList'})));
+			$mile_capt .= "</td>";
 			
 			$entry->{'out'} .= <<"END_PRINT";
 <tr class="$row_class"><td class="num">$lvl</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Speed'}</td><td class="num">$atk_spd</td>
 <td class="num">$Units{$k}{'Captain'}{$lvl}{'HP'}</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Damage'}</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Range'}</td>$heal_norm<td class="num">$Units{$k}{'Captain'}{$lvl}{'Power'}</td>
-<td class="text">$Units{$k}{'Captain'}{$lvl}{'StartBuffsList'}</td>
+$mile_capt
 <td>$Units{$k}{'Captain'}{$lvl}{'UpgradeCostGold'}</td><td>$Units{$k}{'Captain'}{$lvl}{'UpgradeCost'}</td>
 </tr>
 END_PRINT
@@ -574,10 +578,12 @@ END_PRINT
 	my $longdesc = <<"END_PRINT";
 <p>A summary of unit stats as of $GameData->{'exportDate'}. Some notes on this data:</p>
 <ul>
-<li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; this summary does not currently include actual milestone data or inherent unit buffs.</li>
-<li>It also does not yet include any information on specializations.</li>
-<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; the main user interest for this is PvP placement.</li>
-<li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).</li>
+<li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; actual milestone data and other unit buffs is still a work-in-progress.</li>
+<li>Specialization information is not yet included.</li>
+<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; the main user interest for this is PvP placement.
+For an overall power summary, see the <a href="./captain_power.html">Captain Power page</a>.</li>
+<li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).
+A cost calculator is included on the <a href="./index.html#upgrade_calc">Main Index page</a>.</li>
 <li>A <span class="note">Heal</span> column is displayed for units which can heal allies.</li>
 </ul>
 END_PRINT
