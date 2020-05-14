@@ -25,6 +25,7 @@ my $GameData = ParseJsonFile($DataFile);
 
 # Some configs
 my $DocBase = "..";
+my $HidePower = 1;
 
 my %Units = ();
 my %Power = ();
@@ -456,9 +457,10 @@ END_PRINT
 			my $mile_epic = qq(<td class="text">$Units{$k}{'Epic'}{$lvl}{'SpecialAbilityDescription'}<br />);
 			$mile_epic .= join("<br />", (map {TranslateBuff($_)} split(/,/, $Units{$k}{'Epic'}{$lvl}{'StartBuffsList'})));
 			$mile_epic .= "</td>";
+			my $power = $HidePower ? "--" : $Units{$k}{'Normal'}{$lvl}{'Power'};
 			$entry->{'out'} .= <<"END_PRINT";
 <tr class="$row_class"><td class="num">$lvl</td><td class="num">$Units{$k}{'Normal'}{$lvl}{'Speed'}</td><td class="num">$atk_spd</td>
-<td class="num">$Units{$k}{'Normal'}{$lvl}{'HP'}</td><td class="num">$Units{$k}{'Normal'}{$lvl}{'Damage'}</td><td class="num">$Units{$k}{'Normal'}{$lvl}{'Range'}</td>$heal_norm<td class="num">$Units{$k}{'Normal'}{$lvl}{'Power'}</td>$mile_norm
+<td class="num">$Units{$k}{'Normal'}{$lvl}{'HP'}</td><td class="num">$Units{$k}{'Normal'}{$lvl}{'Damage'}</td><td class="num">$Units{$k}{'Normal'}{$lvl}{'Range'}</td>$heal_norm<td class="num">$power</td>$mile_norm
 <td class="num">$Units{$k}{'Epic'}{$lvl}{'HP'}</td><td class="num">$Units{$k}{'Epic'}{$lvl}{'Damage'}</td><td class="num">$Units{$k}{'Epic'}{$lvl}{'Range'}</td>$heal_epic$mile_epic
 <td class="num">$Units{$k}{'Normal'}{$lvl}{'UpgradeCostGold'}</td><td class="num">$Units{$k}{'Normal'}{$lvl}{'UpgradeCost'}</td>
 </tr>
@@ -468,18 +470,20 @@ END_PRINT
 		$entry->{'out'} .= "</tbody></table></div>";
 		push @Panel, $entry;
 	}
-
+	my $power_desc = $HidePower ? qq(<span class="warn">specific power numbers are currently hidden at request of the Stream Captain team</span>) : 
+	qq( as the main user interest for power is PvP placement, it is only shown for non-epic units.
+For an overall power summary, see the <a href="./viewer_power.html">Viewer Power page</a>.);
 
 	my $longdesc = <<"END_PRINT";
 <p>A summary of unit stats as of $GameData->{'exportDate'} PDT. Some notes on this data:</p>
 <ul>
 <li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; actual milestone data and other unit buffs is still a work-in-progress.</li>
 <li>Specialization information is not yet included.</li>
-<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; as the main user interest for this is PvP placement, it is only shown for non-epic units.
-For an overall power summary, see the <a href="./viewer_power.html">Viewer Power page</a>.</li>
+<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; $power_desc</li>
 <li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).
 A cost calculator is included on the <a href="./index.html#upgrade_calc">Main Index page</a>.</li>
 <li>A <span class="note">Heal</span> column is displayed for units which can heal allies.</li>
+<li>The ground/air targeting information is for normal units only as epics can always target both.</li>
 </ul>
 END_PRINT
 
@@ -558,10 +562,10 @@ END_PRINT
 			my $mile_capt = qq(<td class="text">$Units{$k}{'Captain'}{$lvl}{'SpecialAbilityDescription'}<br />);
 			$mile_capt .= join("<br />", (map {TranslateBuff($_)} split(/,/, $Units{$k}{'Captain'}{$lvl}{'StartBuffsList'})));
 			$mile_capt .= "</td>";
-			
+			my $power = $HidePower ? "--" : $Units{$k}{'Captain'}{$lvl}{'Power'};			
 			$entry->{'out'} .= <<"END_PRINT";
 <tr class="$row_class"><td class="num">$lvl</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Speed'}</td><td class="num">$atk_spd</td>
-<td class="num">$Units{$k}{'Captain'}{$lvl}{'HP'}</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Damage'}</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Range'}</td>$heal_norm<td class="num">$Units{$k}{'Captain'}{$lvl}{'Power'}</td>
+<td class="num">$Units{$k}{'Captain'}{$lvl}{'HP'}</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Damage'}</td><td class="num">$Units{$k}{'Captain'}{$lvl}{'Range'}</td>$heal_norm<td class="num">$power</td>
 $mile_capt
 <td>$Units{$k}{'Captain'}{$lvl}{'UpgradeCostGold'}</td><td>$Units{$k}{'Captain'}{$lvl}{'UpgradeCost'}</td>
 </tr>
@@ -571,15 +575,15 @@ END_PRINT
 		$entry->{'out'} .= "</tbody></table>";
 		push @Panel, $entry;
 	}
-
+	my $power_desc = $HidePower ? qq(<span class="warn">specific power numbers are currently hidden at request of the Stream Captain team</span>) : 
+	qq(the main user interest for power is PvP placement. Note that anecdotal evidence suggests that the Captain's unit will be limited to 25% of the power cap, so on a given battle the actual power counted may be less than that listed here. For an overall power summary, see the <a href="./captain_power.html">Captain Power page</a>.);
 
 	my $longdesc = <<"END_PRINT";
 <p>A summary of unit stats as of $GameData->{'exportDate'} PDT. Some notes on this data:</p>
 <ul>
 <li><span class="note">Milestone Desc</span> is just the text displayed for the milestone ability; actual milestone data and other unit buffs is still a work-in-progress.</li>
 <li>Specialization information is not yet included.</li>
-<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; the main user interest for this is PvP placement.
-For an overall power summary, see the <a href="./captain_power.html">Captain Power page</a>.</li>
+<li>The <span class="note">Rng</span> column is attack range, and the <span class="note">Pow</span> column is unit power; $power_desc</li>
 <li>Upgrade costs are the costs to get to that level from the previous level (or to initially unlock for level 1).
 A cost calculator is included on the <a href="./index.html#upgrade_calc">Main Index page</a>.</li>
 <li>A <span class="note">Heal</span> column is displayed for units which can heal allies.</li>
@@ -632,14 +636,17 @@ sub WritePowerSummaryViewer {
 	foreach my $k (sort {$Power{'total'}{'Normal'}{$b} <=> $Power{'total'}{'Normal'}{$a} or 
 						$a cmp $b} keys %{$Power{'total'}{'Normal'}}) {
 		if ($Power{'total'}{'Normal'}{$k} != $last_power) {
-			push @rank, "[$Power{'total'}{'Normal'}{$k}] $k";
+			my $the_power = $HidePower ? "----" : $Power{'total'}{'Normal'}{$k};
+			push @rank, "[$the_power] $k";
 			$last_power = $Power{'total'}{'Normal'}{$k};
 		} else {
 			$rank[$#rank] .= ", $k";
 		}
 	}
+	my $intro = $HidePower ? qq(<p class="warn">Specific power numbers are currently hidden at the request of the Stream Captain team.</p>) : "";
 	
 	$entry->{'out'} = <<"END_PRINT";
+$intro
 <p>This section is just a simple power ranking of each unit based on the total power for levels 1 through 30 of the unit.
 Basically it is a way to quickly see which units the game considers the strongest overall without regard for level
 differences.</p>
@@ -656,6 +663,7 @@ END_PRINT
 	$entry = { 'key' => '2_detailed', 'name' => 'Per-Level Power Rankings', 'out' => "" };
 	
 	$entry->{'out'} = <<"END_PRINT";
+$intro
 <p>This section takes each individual level of each unit and puts them all together into a power ranking which
 provides a more detailed view. Note that when trying to compare two specific units (e.g. Archer vs Buster), it may
 be easier to just look at the power numbers listed in their respective <a href="./viewer_units.html">unit summaries</a>.</p>
@@ -666,7 +674,8 @@ END_PRINT
 	
 	foreach my $p (sort {$b <=> $a} keys %{$Power{'individual'}{'Normal'}}) {
 		# TODO: Future feature: dropdown list of units to highlight all entries for that unit.
-		$entry->{'out'} .= qq(<tr><td class="num">$p</td><td class="text">);
+		my $the_power = $HidePower ? "--" : $p;
+		$entry->{'out'} .= qq(<tr><td class="num">$the_power</td><td class="text">);
 		$entry->{'out'} .= join(", ", sort @{$Power{'individual'}{'Normal'}{$p}});
 		$entry->{'out'} .= '</td></tr>';
 	}
@@ -725,17 +734,21 @@ sub WritePowerSummaryCaptain {
 	foreach my $k (sort {$Power{'total'}{'Captain'}{$b} <=> $Power{'total'}{'Captain'}{$a} or
 						$a cmp $b} keys %{$Power{'total'}{'Captain'}}) {
 		if ($Power{'total'}{'Captain'}{$k} != $last_power) {
-			push @rank, "[$Power{'total'}{'Captain'}{$k}] $k";
+			my $the_power = $HidePower ? "----" : $Power{'total'}{'Captain'}{$k};
+			push @rank, "[$the_power] $k";
 			$last_power = $Power{'total'}{'Captain'}{$k};
 		} else {
 			$rank[$#rank] .= ", $k";
 		}
 	}
+	my $intro = $HidePower ? qq(<p class="warn">Specific power numbers are currently hidden at the request of the Stream Captain team.</p>) : "";
 	
 	$entry->{'out'} = <<"END_PRINT";
+$intro
 <p>This section is just a simple power ranking of each unit based on the total power for levels 1 through 30 of the unit.
 Basically it is a way to quickly see which units the game considers the strongest overall without regard for level
-differences.</p>
+differences. Note that anecdotal evidence suggests that the Captain's unit will be limited to 25% of the power cap,
+so on a given battle the actual power counted may be less than that listed here.</p>
 <ol>
 END_PRINT
 
@@ -749,6 +762,7 @@ END_PRINT
 	$entry = { 'key' => '2_detailed', 'name' => 'Per-Level Power Rankings', 'out' => "" };
 	
 	$entry->{'out'} = <<"END_PRINT";
+$intro
 <p>This section takes each individual level of each unit and puts them all together into a power ranking which
 provides a more detailed view. Note that when trying to compare two specific units (e.g. Archer vs Buster), it may
 be easier to just look at the power numbers listed in their respective <a href="./captain_units.html">unit summaries</a>.</p>
@@ -759,7 +773,8 @@ END_PRINT
 	
 	foreach my $p (sort {$b <=> $a} keys %{$Power{'individual'}{'Captain'}}) {
 		# TODO: Future feature: dropdown list of units to highlight all entries for that unit.
-		$entry->{'out'} .= qq(<tr><td class="num">$p</td><td class="text">);
+		my $the_power = $HidePower ? "--" : $p;
+		$entry->{'out'} .= qq(<tr><td class="num">$the_power</td><td class="text">);
 		$entry->{'out'} .= join(", ", sort @{$Power{'individual'}{'Captain'}{$p}});
 		$entry->{'out'} .= '</td></tr>';
 	}

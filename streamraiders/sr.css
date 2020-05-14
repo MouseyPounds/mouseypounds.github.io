@@ -11,6 +11,7 @@
  * #257 - Med blue, alternate bg
  * #135 - Dark blue, bg
  * #012 - Very dark blue, header bg and gradient ends
+ * #f88 - Pink, warning text
  *
  * #0dd - turquoise, links
  * #0cc - slightly darker turquoise, link visited
@@ -62,6 +63,10 @@ h2 {
 }
 .note,.group ,.none {
 	font-style: italic;
+}
+.warn {
+	font-style: italic;
+	color: #f88;
 }
 .duration {
 	font-style: italic;
