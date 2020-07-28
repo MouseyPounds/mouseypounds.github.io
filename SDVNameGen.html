@@ -239,9 +239,9 @@ window.onload = function () {
 			}
 		}
 		var nameEnding = name.charAt(name.length - 1);
-		if (Math.random() < 0.5 && !(nameEnding in vowels)) {
+		if (Math.random() < 0.5 && !(vowels.includes(nameEnding))) {
 			name += consonantEndings[randInt(consonantEndings.length)];
-		} else if (nameEnding in vowels) {
+		} else if (vowels.includes(nameEnding)) {
 			if (Math.random() < 0.8) {
 				if (name.length > 3) {
 					name += endings[nameEnding][randInt(endings[nameEnding].length)];
@@ -254,8 +254,8 @@ window.onload = function () {
 		}
 		
 		for (var i = name.length - 1; i > 2; i--) {
-			if ((name.charAt(i) in vowels) && (name.charAt(i - 2) in vowels)) {
-				switch (name.charAt(i - 2)) {
+			if (vowels.includes(name.charAt(i)) && vowels.includes(name.charAt(i - 2))) {
+				switch (name.charAt(i - 1)) {
 					case "c":
 						name = name.substring(0, i) + "k" + name.substring(i);
 						i--;
@@ -273,14 +273,15 @@ window.onload = function () {
 		}
 
 		if (name.length <= 3 && Math.random() < 0.1) {
-			name = (Math.random() < 0.5) ? name + name : name + "-" + name;
+			name = ((Math.random() < 0.5) ? name + name : name + "-" + name);
 		}
 		if (name.length <= 2 && name.endsWith("e")) {
-			name += (Math.random() < 0.3) ? "m" : (Math.random() < 0.5) ? "p" : "b";
+			name += ((Math.random() < 0.3) ? "m" : (Math.random() < 0.5) ? "p" : "b");
 		}
 		
 		if (name.toLowerCase().includes("sex") || name.toLowerCase().includes("taboo") || name.toLowerCase().includes("fuck") || name.toLowerCase().includes("rape") || name.toLowerCase().includes("cock") || name.toLowerCase().includes("willy") || name.toLowerCase().includes("cum") || name.toLowerCase().includes("goock") || name.toLowerCase().includes("trann") || name.toLowerCase().includes("gook") || name.toLowerCase().includes("bitch") || name.toLowerCase().includes("shit") || name.toLowerCase().includes("pusie") || name.toLowerCase().includes("kike") || name.toLowerCase().includes("nigg") || name.toLowerCase().includes("puss")) {
-			name = (Math.random() < 0.5) ? "Bobo" : "Wumbus" ;
+			console.log("Censor Trip: " + name);
+			name = ((Math.random() < 0.5) ? "Bobo" : "Wumbus") ;
 		}
 		
 		return name;
