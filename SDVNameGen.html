@@ -1,0 +1,311 @@
+<HTML>
+<HEAD>
+<TITLE>Stardew Valley Name Generator</TITLE>
+</HEAD>
+<BODY>
+<h1>Stardew Valley Name Generator</h1>
+<p>Quick and dirty hack that I will probably never bother prettying up and releasing.</p>
+<h2>Input</h2>
+<p>This should have options and stuff. For now, just click the button.</p>
+<button id="theButton" type="button">Get More Names</button>
+<h2>Output</h2>
+<div id="output-container"></div>
+
+<script>
+window.onload = function () {
+	"use strict";
+	// This is all from Dialogue.randomName()
+	
+	// Helper since I am using native JS rng instead of the C# implementation
+	// If 2 args, interpreted as (min, max) with range [min, max)
+	// If 1 arg, interpreted as (max) with range [0, max)
+	function randInt(a, b) {
+		var min, max;
+		if (b === undefined) {
+			min = 0;
+			max = a;
+		} else {
+			min = a;
+			max = b;
+		}	
+		return Math.floor( min + Math.random()*(max - min));
+	}
+
+	// Skipping the special japanese and chinese versions for now and only including English.
+	var startingConsonants = [
+		"B",
+		"Br",
+		"J",
+		"F",
+		"S",
+		"M",
+		"C",
+		"Ch",
+		"L",
+		"P",
+		"K",
+		"W",
+		"G",
+		"Z",
+		"Tr",
+		"T",
+		"Gr",
+		"Fr",
+		"Pr",
+		"N",
+		"Sn",
+		"R",
+		"Sh",
+		"St"
+	];
+	
+	var consonants = [
+		"ll",
+		"tch",
+		"l",
+		"m",
+		"n",
+		"p",
+		"r",
+		"s",
+		"t",
+		"c",
+		"rt",
+		"ts"	
+	];
+	
+	var vowels = [
+		"a",
+		"e",
+		"i",
+		"o",
+		"u"
+	];
+
+	var consonantEndings = [
+		"ie",
+		"o",
+		"a",
+		"ers",
+		"ley"
+	];
+
+	var endings = {
+		"a" : [
+			"nie",
+			"bell",
+			"bo",
+			"boo",
+			"bella",
+			"s"		
+		],
+		"e" : [
+			"ll",
+			"llo",
+			"",
+			"o"
+		],
+		"i" : [
+			"ck",
+			"e",
+			"bo",
+			"ba",
+			"lo",
+			"la",
+			"to",
+			"ta",
+			"no",
+			"na",
+			"ni",
+			"a",
+			"o",
+			"zor",
+			"que",
+			"ca",
+			"co",
+			"mi"		
+		],
+		"o" : [
+			"nie",
+			"ze",
+			"dy",
+			"da",
+			"o",
+			"ver",
+			"la",
+			"lo",
+			"s",
+			"ny",
+			"mo",
+			"ra"
+		],
+		"u" : [
+			"rt",
+			"mo",
+			"",
+			"s"
+		]
+	};
+		
+	var endingsForShortNames = {
+		"a" : [
+			"nny",
+			"sper",
+			"trina",
+			"bo",
+			"-bell",
+			"boo",
+			"lbert",
+			"sko",
+			"sh",
+			"ck",
+			"ishe",
+			"rk"
+		],
+		"e" : [
+			"lla",
+			"llo",
+			"rnard",
+			"cardo",
+			"ffe",
+			"ppo",
+			"ppa",
+			"tch",
+			"x"
+		],
+		"i" : [
+			"llard",
+			"lly",
+			"lbo",
+			"cky",
+			"card",
+			"ne",
+			"nnie",
+			"lbert",
+			"nono",
+			"nano",
+			"nana",
+			"ana",
+			"nsy",
+			"msy",
+			"skers",
+			"rdo",
+			"rda",
+			"sh"
+		],
+		"o" : [
+			"nie",
+			"zzy",
+			"do",
+			"na",
+			"la",
+			"la",
+			"ver",
+			"ng",
+			"ngus",
+			"ny",
+			"-mo",
+			"llo",
+			"ze",
+			"ra",
+			"ma",
+			"cco",
+			"z"
+		],
+		"u" : [
+			"ssie",
+			"bbie",
+			"ffy",
+			"bba",
+			"rt",
+			"s",
+			"mby",
+			"mbo",
+			"mbus",
+			"ngus",
+			"cky"
+		]
+	};
+
+	function getName() {
+		var name = "";	
+		var nameLength = randInt(3, 6);
+		name += startingConsonants[randInt(startingConsonants.length - 1)];
+		for (var j = 1; j < nameLength - 1; j++) {
+			name = ((j % 2 != 0) ? (name + vowels[randInt(vowels.length)]) : (name + consonants[randInt(consonants.length)]));
+			if (name.length >= nameLength)
+			{
+				break;
+			}
+		}
+		var nameEnding = name.charAt(name.length - 1);
+		if (Math.random() < 0.5 && !(nameEnding in vowels)) {
+			name += consonantEndings[randInt(consonantEndings.length)];
+		} else if (nameEnding in vowels) {
+			if (Math.random() < 0.8) {
+				if (name.length > 3) {
+					name += endings[nameEnding][randInt(endings[nameEnding].length)];
+				} else {
+					name += endingsForShortNames[nameEnding][randInt(endingsForShortNames[nameEnding].length)];
+				}
+			}
+		} else {
+			name += vowels[randInt(vowels.length)];
+		}
+		
+		for (var i = name.length - 1; i > 2; i--) {
+			if ((name.charAt(i) in vowels) && (name.charAt(i - 2) in vowels)) {
+				switch (name.charAt(i - 2)) {
+					case "c":
+						name = name.substring(0, i) + "k" + name.substring(i);
+						i--;
+						break;
+					case "r":
+						name = name.substring(0, i - 1) + "k" + name.substring(i);
+						i--;
+						break;
+					case "l":
+						name = name.substring(0, i - 1) + "n" + name.substring(i);
+						i--;
+						break;
+				}
+			}
+		}
+
+		if (name.length <= 3 && Math.random() < 0.1) {
+			name = (Math.random() < 0.5) ? name + name : name + "-" + name;
+		}
+		if (name.length <= 2 && name.endsWith("e")) {
+			name += (Math.random() < 0.3) ? "m" : (Math.random() < 0.5) ? "p" : "b";
+		}
+		
+		if (name.toLowerCase().includes("sex") || name.toLowerCase().includes("taboo") || name.toLowerCase().includes("fuck") || name.toLowerCase().includes("rape") || name.toLowerCase().includes("cock") || name.toLowerCase().includes("willy") || name.toLowerCase().includes("cum") || name.toLowerCase().includes("goock") || name.toLowerCase().includes("trann") || name.toLowerCase().includes("gook") || name.toLowerCase().includes("bitch") || name.toLowerCase().includes("shit") || name.toLowerCase().includes("pusie") || name.toLowerCase().includes("kike") || name.toLowerCase().includes("nigg") || name.toLowerCase().includes("puss")) {
+			name = (Math.random() < 0.5) ? "Bobo" : "Wumbus" ;
+		}
+		
+		return name;
+	}
+	
+	function generateNames(howMany) {
+		if (howMany === undefined || howMany < 1) {
+			howMany = 10;
+		}
+		var output = "<p>Here are " + howMany + " random names:</p><ol>";
+		for (var count = 0; count < howMany; count++) {
+			output += "<li>" + getName() + "</li>";
+		}
+		output += "</ol>";
+		
+		document.getElementById("output-container").innerHTML = output;
+	}
+
+	generateNames(25);
+	
+	document.getElementById("theButton").addEventListener("click", function() { generateNames(25); } );
+
+	
+}
+</script>
+
+</BODY>
+</HTML>
