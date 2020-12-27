@@ -183,7 +183,7 @@ fieldset {
 	padding: 0.5em 0.25em 0.5em 0.75em;
 	width: 38em;
 }
-.col_10, .col_20, .col_25, .col_35 {
+.col_10, .col_20, .col_25, .col_35, .col_33, .col_43 {
 	display:none;
 }
 #filter_control button {

@@ -5,6 +5,8 @@
 # processing JA & CFR data for PPJA Mods to create summary web pages
 
 use strict;
+use feature 'unicode_strings';
+use open OUT => ':encoding(UTF-8)';
 use Scalar::Util qw(looks_like_number);
 use POSIX qw(ceil floor);
 use List::Util qw(min max);
@@ -20,7 +22,7 @@ my $ModData = retrieve("../local/cache_ModData");
 my $ModInfo = retrieve("../local/cache_ModInfo");
 
 my $DocBase = "..";
-my $StardewVersion = "1.4.3";
+my $StardewVersion = "1.5.1";
 
 my $SpriteInfo = {};
 GatherSpriteInfo($SpriteInfo);
@@ -54,10 +56,13 @@ sub AddCommas {
 # Wikify: Conversion of a javascript function from Stardew Checkup that adds a wiki link for an item.
 #   item name
 #   page name [optional] - used when the item is just an anchor on another page rather than having its own page
+#   no anchor [optional] - if this is supplied, the link will just be page name without using item name as anchor
 #
 sub Wikify {
 	my $item = shift;
 	my $page = shift;
+	my $no_anchor = shift;
+	
 	my $trimmed = $item;
 	$trimmed =~ s/ (White)//;
 	$trimmed =~ s/ (Brown)//;
@@ -70,7 +75,11 @@ sub Wikify {
 	}
 	
 	if (defined $page) {
-		return qq(<a href="http://stardewvalleywiki.com/$page#$trimmed">$item</a>);
+		if (defined $no_anchor) {
+			return qq(<a href="http://stardewvalleywiki.com/$page">$item</a>);
+		} else {
+			return qq(<a href="http://stardewvalleywiki.com/$page#$trimmed">$item</a>);
+		}
 	} else {
 		return qq(<a href="http://stardewvalleywiki.com/$trimmed">$item</a>);
 	}
@@ -99,7 +108,12 @@ sub WikiShop {
 	elsif ($NPC =~ /Robin/i) { $shop = "Carpenter%27s_Shop"; }
 	elsif ($NPC =~ /Sandy/i) { $shop = "Oasis"; }
 	elsif ($NPC =~ /Traveling Merchant/i) { $shop = "Traveling_Cart"; }
-	elsif ($NPC =~ /Willy/i) { $shop = "Fish_Shop";	}
+	elsif ($NPC =~ /Willy/i) { $shop = "Fish_Shop"; }
+	elsif ($NPC =~ /Island Trader/i) { $shop = "Island_Trader"; }
+	elsif ($NPC =~ /Volcano Dwarf/i) { $shop = "VolcanoDungeon#Shop"; }
+	elsif ($NPC =~ /Qi's Walnut Room/i) { $shop = "Qi%27s_Walnut_Room#Stock"; }
+	# TODO - Island Trader and Volcano Dwarf, may need to wait until after release to know what wiki page.
+	# Also possibly for Gus at Island Resort.
 	else {
 		warn "WikiShop: unknown vendor ($NPC);"
 	}
@@ -153,6 +167,7 @@ sub GetItem {
 				# These used to be "Any ___" with a wiki link on the "___", but to support mod
 				#  items better we are moving to a tooltip list.
 				my $list = join(', ', @{$Categorized->{$input}});
+				$list = "whatever seed matches the input crop; too many possibilities to list" if ($input == -74);
 				$outputSimple = GetCategory($input);
 				$output = qq(<span class="group" tooltip="Includes $list">Any $outputSimple</span>);
 				$outputSimple = "Any $outputSimple";
@@ -365,6 +380,7 @@ sub GetCategory {
 		-98 => 'Weapon', #unused in vanilla
 		-99 => 'Tool', #unused in vanilla
 		-777 => 'Wild Seeds', #weird special category used for Tea Sapling crafting recipe
+		-888 => 'Crop', # completely fake special category for handling seedmaker recipe
 	);	
 	
 	if (exists $c{$input}) {
@@ -383,7 +399,7 @@ sub GetCategoryNum {
 	my $output = 0;
 	# Since the primary purpose of this is to translate JA items, we currently only support the
 	#   named categories which JA allows:
-	#   Flower, Fruit, Vegetable, Gem, Fish, Egg, Milk, Cooking, Crafting, Mineral, Meat, Metal, Junk, Syrup, MonsterLoot, ArtisanGoods, and Seeds.
+	#   Flower, Fruit, Vegetable, Gem, Fish, Egg, Milk, Cooking, Crafting, Mineral, Meat, Metal, Junk, Syrup, MonsterLoot, ArtisanGoods, Greens, AnimalGoods and Seeds.
 	my %c = (
 		'Flower' => -80,
 		'Vegetable' => -75,
@@ -401,6 +417,7 @@ sub GetCategoryNum {
 		'Syrup' => -27,
 		'MonsterLoot' => -28,
 		'ArtisanGoods' => -26,
+		'Greens' => -81,
 		'AnimalGoods' => -18,
 		'Seeds' => -74,
 	);	
@@ -461,6 +478,10 @@ sub GetImgTag {
 			return GetImgTag("Orange", "object", $isBig, $extraClasses);
 		} elsif ($1 =~ /^vegetable/i) {
 			return GetImgTag("Bok Choy", "object", $isBig, $extraClasses);
+		} elsif ($1 =~ /^seed/i) {
+			return GetImgTag("Parsnip Seeds", "object", $isBig, $extraClasses);
+		} elsif ($1 =~ /^crop/i) {
+			return GetImgTag("Parsnip", "object", $isBig, $extraClasses);
 		} 
 	}
 	if ($input eq 'Stone') {
@@ -486,6 +507,10 @@ sub GetImgTag {
 				return GetImgTag("Bok Choy", "object", $isBig, $extraClasses);
 			} elsif ($input == -777) {
 				return GetImgTag("Spring Seeds", "object", $isBig, $extraClasses);
+			} elsif ($input == -74) {
+				return GetImgTag("Parsnip Seeds", "object", $isBig, $extraClasses);
+			} elsif ($input == -888) {
+				return GetImgTag("Parsnip", "object", $isBig, $extraClasses);
 			} 
 		} else {
 			if ($type =~ /^objects?/i) {
@@ -783,6 +808,7 @@ sub GetHealthAndEnergy {
 }
 
 # CalcGrowth - Calculates the number of days it will take for a crop to grow from seed
+#   Code Ref: TerrainFeatures.HoeDirt.applySpeedIncreases()
 #
 #   factor - the pct reduction factor (e.g. .10 for basic speed-gro or agriculturist)
 #   phases_ref - a reference to the array of phase data
@@ -817,8 +843,8 @@ sub CalcGrowth {
 					$days--;
 				}
 			} else {
-				# lost reduction day in final phase
-				$reduction--;
+				# lost reduction day in final phase; fixed in 1.5
+				#$reduction--;
 			}
 			last if ($reduction <= 0);
 		}
@@ -892,6 +918,26 @@ sub TranslatePreconditions {
 		} elsif ($arg =~ /^w (\w+)/) {
 			my $type = ucfirst $1;
 			push @results, "$type weather";
+		} elsif ($arg =~ /^n (\w+)/) {
+			# mailFlags; since these can represent more than mail there are some hard-coded translations
+			my $flag = $1;
+			if ($flag eq 'willyHours') {
+				push @results, "Has fixed Willy's boat";
+			} else {
+				push @results, "Has received mail $flag";
+			}
+		} elsif ($arg =~ /^e (\d+)/) {
+			# seen event; since the numbers are obscure, there are some hard-coded translations
+			my $id = $1;
+			if ($id == '1039573') {
+				push @results, "Has earned Leo's trust";
+			} else {
+				push @results, "Has seen event $id";
+			}
+		# Oh boy, JA now has Expanded Preconditions Mod as a prereq so we get to support a lot more stuff!
+		} elsif ($arg =~ /^HasCookingRecipe (.*)/) {
+			my $name = $1;
+			push @results, "Knows recipe for $name";
 		} else {
 			warn "TranslatePreconditions doesn't know how to deal with {$arg}";
 		}
@@ -1284,7 +1330,7 @@ sub GetNexusKey {
 
 	if (defined $modID and exists $ModInfo->{$modID} and defined $ModInfo->{$modID}{'UpdateKeys'}) {
 		foreach my $u (@{$ModInfo->{$modID}{'UpdateKeys'}}) {
-			if ($u =~ /Nexus:(\d+)/) {
+			if ($u =~ /Nexus:(\d+)/i or $u =~ /ModDrop:(\d+)/i) {
 				return $1;
 			}
 		}
@@ -1300,6 +1346,8 @@ sub GetNexusKey {
 		return "3395";
 	} elsif ($modID eq 'StephansLotsOfWildCrops') {
 		return "3171";
+	} elsif ($modID eq 'Bonster.Recipes') {
+		return "3468";
 	} elsif ($modID eq 'Zosa.eatums') {
 		return "5203";
 	} 
@@ -1323,6 +1371,7 @@ sub GetModInfo {
 	my $name = "Stardew Valley (base game)";
 	my $version = $StardewVersion;
 	my $url = "https://stardewvalley.net/";
+	my $modsite = "Nexus";
 	
 	if (not defined $includeLink) {
 		$includeLink = 1;
@@ -1340,8 +1389,14 @@ sub GetModInfo {
 			my $NexusKey = GetNexusKey($modID);
 			if ($NexusKey eq "") {
 				$includeLink = 0;
+			} else {
+				$url = "https://www.nexusmods.com/stardewvalley/mods/$NexusKey";
+				# Hack to support ModDrop for eemie's crops
+				if ($NexusKey > 100000) {
+					$url = "https://www.moddrop.com/stardew-valley/mods/$NexusKey";
+					$modsite = "ModDrop";
+				}
 			}
-			$url = "https://www.nexusmods.com/stardewvalley/mods/$NexusKey";
 		} else {
 			warn "** GetModInfo received unknown modID ($modID)";
 			return undef;
@@ -1352,7 +1407,7 @@ sub GetModInfo {
 		if ($formatType == 1) {
 				return qq(<a href="$url">$name</a> version $version);
 		} elsif ($formatType == 2) {
-				return qq[$name version $version (<a href="$url">Nexus page</a>)];
+				return qq[$name version $version (<a href="$url">$modsite page</a>)];
 		} else {
 			warn "** GetModInfo unknown format type $formatType";
 		}
@@ -1455,6 +1510,15 @@ sub GetExtendedModInfo {
 	} elsif ($modID eq 'ppja.FreshMeatforMFM') {
 		$parentID = 'paradigmnomad.freshmeat';
 		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.FreshMeatforPFM') {
+		$parentID = 'paradigmnomad.freshmeat';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.FreshMeatforPFMBugNet') {
+		$parentID = 'paradigmnomad.freshmeat';
+		$isPPJA = 1;
+	} elsif ($modID eq 'ppja.FreshMeatforCPA') {
+		$parentID = 'paradigmnomad.freshmeat';
+		$isPPJA = 1;
 	# From Fruits and Veggies
 	} elsif ($modID eq 'ppja.fruitsandveggies') {
 		$isPPJA = 1;
@@ -1519,6 +1583,19 @@ sub GetExtendedModInfo {
 	# From Bonster's Recipes
 	} elsif ($modID eq 'Bonster.Adv.Recipes') {
 		$parentID = 'Bonster.Recipes';
+	# From Champagne Wishes
+	} elsif ($modID eq 'fwippy.MFM.champagnewishes') {
+		$parentID = 'fwippy.champagnewishes';
+	} elsif ($modID eq 'fwippy.PFM.champagnewishes') {
+		$parentID = 'fwippy.champagnewishes';
+	# From Chocolatier
+	} elsif ($modID eq 'Ritsune.ChocolatierPFM') {
+		$parentID = 'Ritsune.ChocolatierJA';
+	# From Fizzy Drinks
+	} elsif ($modID eq 'MelindaC.FizzyDrinksFTM') {
+		$parentID = 'MelindaC.FizzyDrinks';
+	} elsif ($modID eq 'MelindaC.FizzyDrinksPFM') {
+		$parentID = 'MelindaC.FizzyDrinks';
 	# From Hot Cocoa Shop; the TMX should probably be the parent mod, but we don't parse those
 	} elsif ($modID eq 'penny3.JA.HCS') {
 		$parentID = 'penny3.CP.HCS';
@@ -1554,6 +1631,8 @@ sub GetExtendedModInfo {
 	} elsif ($modID eq 'PPJA.TrentNewAnimalsAddOn') {
 		$parentID = 'Trent.NewAnimals';
 	# From Trent's Raccoons
+	} elsif ($modID eq 'RecoveryMachine') {
+		$parentID = 'TrentNewRaccoons';
 	} elsif ($modID eq 'MultiRaccoonPack') {
 		$parentID = 'TrentNewRaccoons';
 	} elsif ($modID eq 'Raccoons.MachineSetting') {
@@ -1632,6 +1711,8 @@ sub UpdateCategories {
 	}
 	# Hardcoding the weird special category used in tea sapling crafting
 	$Categorized->{-777} = ["Spring Seeds", "Summer Seeds", "Fall Seeds", "Winter Seeds"];
+	# And also the even weirder special category we made up for seedmakers
+	$Categorized->{-888} = ["most Vegetables, Fruits, and Flowers; too many possibilities to list"];
 	# Because these are used for icons and I don't want the images changing that often, I am going to
 	#  pre-sort all the arrays now. This might make temporary copies but it shouldn't matter much.
 	foreach my $t (keys %$Categorized) {
@@ -1766,6 +1847,9 @@ sub WriteCookingSummary {
 	# And then there are some others that are just completely special
 	my %Special = (
 		'Cookies' => Wikify("Evelyn") . " 4&#x2665; Event",
+		'Ginger Ale' => "Buy for 1000g from " . WikiShop("Volcano Dwarf"),
+		'Banana Pudding' => "Buy for 30 " . Wikify("Bone Fragment") . " from " . Wikify("Island Trader"),
+		'Tropical Curry' => "Buy for 2000g from " . Wikify("Gus") . " at " . Wikify("Island Resort"),
 		);
 	# Buff descriptions will be shared by vanilla and mods
 	my @buff_desc = (
@@ -1854,6 +1938,10 @@ sub WriteCookingSummary {
 		# Triple shot espresso does not have a free alternative.
 		if ($key eq "Triple Shot Espresso") {
 			$recipe_cost = $SaloonRecipes{$key};
+		} elsif ($key eq "Ginger Ale") {
+			$recipe_cost = 1000;
+		} elsif ($key eq "Tropical Curry") {
+			$recipe_cost = 2000;
 		}
 		my $value = GetValue($cid);
 		my $profit = (looks_like_number($ingr_value) and looks_like_number($value)) ? $value - $ingr_value : $ingr_value;
@@ -2177,15 +2265,36 @@ sub WriteCraftingSummary {
 			'Marble Brazier' => { 'Robin' => 5000 },
 			'Wood Lamp-post' => { 'Robin' => 500 },
 			'Iron Lamp-post' => { 'Robin' => 1000 },
+			'Rustic Plank Floor' => { 'Robin' => 200 },
+			'Stone Walkway Floor' => { 'Robin' => 200 },
 			'Grass Starter' => { 'Pierre' => 1000 },
 			'Weathered Floor' => { 'Dwarf' => 500 },
 			'Crystal Floor' => { 'Krobus' => 500 },
 			'Wicked Statue' => { 'Krobus' => 2000 },
 			'Wedding Ring' => { 'Traveling Merchant' => 500 },
+			"Warp Totem: Island" =>  { 'Volcano Dwarf' => 10000 },
 		);
 	my %FestivalRecipes = (
 			"Jack-O-Lantern" => { "Spirit's Eve" => 2000 },
 			"Tub o' Flowers" => { "Flower Dance" => 2000 },
+		);
+	my %QiChallengeRecipes = (
+			"Deluxe Fertilizer" => 20,
+			"Hyper Speed-Gro" => 30,
+			"Magic Bait" => 20,
+			"Heavy Tapper" => 20,
+			"Hopper" => 50,
+		);
+	my %SpecialOrders = (
+			"Fiber Seeds" => { 'Community Cleanup' => 'Linus' },
+			"Monster Musk" => { 'Prismatic Jelly' => 'Wizard' },
+			"Quality Bobber" => { 'Juicy Bugs Wanted!' => 'Willy' },
+			"Bone Mill" => { 'Fragments of the past' => 'Gunther' },
+			"Farm Computer" => { 'Aquatic Overpopulation' => 'Demetrius', 'Biome Balance' => 'Demetrius' },
+			"Geode Crusher" => { 'Cave Patrol' => 'Clint' },
+			"Mini-Obelisk" => { 'A Curious Substance' => 'Wizard' },
+			"Solar Panel" => { 'Island Ingredients' => 'Caroline' },
+			"Stone Chest" => { "Robin's Resource Rush" => 'Robin' },
 		);
 	# More defaults for crafting, and they aren't explicitly identified in the data file,
 	#  so we'll add them along with other specials.
@@ -2202,20 +2311,33 @@ sub WriteCraftingSummary {
 		'Stone Sign' => "Given automatically",
 		'Cask' => "Farmhouse " . Wikify("Cellar") . " upgrade",
 		'Ancient Seeds' => "Museum reward for donating " . Wikify("Ancient Seed"),
-		'Tea Sapling' => "Mail from " . Wikify("Caroline") . " after event",
+		'Tea Sapling' => "Mail from " . Wikify("Caroline") . " after Sunroom event",
 		'Deluxe Scarecrow' => "Mail after collecting all " . Wikify("Rarecrows"),
 		'Garden Pot' => Wikify("Evelyn") . " event after fixing " . Wikify("Greenhouse"),
 		'Wild Bait' => Wikify("Linus") . " 4&#x2665; Event",
 		'Mini-Jukebox' => Wikify("Gus") . " 5&#x2665; Event",
 		'Drum Block' => Wikify("Robin") . " 6&#x2665; Event",
 		'Flute Block' => Wikify("Robin") . " 6&#x2665; Event",
-		"Warp Totem: Desert" => "Purchase from " . Wikify("Desert Trader") . " for 10 " . Wikify("Iridium Bar"),
+		"Warp Totem: Desert" => "Buy for 10 " . Wikify("Iridium Bar") . " from " . Wikify("Desert Trader"),
+		"Deluxe Retaining Soil" => "Buy for 50 " . Wikify("Cinder Shard") . " from " . Wikify("Island Trader"),
+		"Ostrich Incubator" => "Reward for completing all " . Wikify("Field Office") . " donations.",
+		"Fairy Dust" => qq(Reward for completing "A Pirate's Wife" quest for ) . Wikify("Birdie"), 
 		);
+	# Needed for later precondition checks
+	my %skills = ( 'Farming' => 1, 'Fishing' => 1, 'Mining' => 1, 'Foraging' => 1, 'Combat' => 1 );
 	foreach my $key (keys %{$GameData->{'CraftingRecipes'}}) {
 		# Skip anything on machine summary
 		next if (exists $Machines{$key});
 		my @temp = split(/ /, $GameData->{'CraftingRecipes'}{$key}{'split'}[2]);
 		my $cid = $temp[0];
+		my $qty = 1;
+		if (scalar @temp > 1) {
+			$qty = $temp[1];
+		}
+		my $qstr = "";
+		if ($qty > 1) {
+			$qstr = " ($qty)";
+		}
 		my $item_type = ($GameData->{'CraftingRecipes'}{$key}{'split'}[3] eq 'true') ? 'craftable' : 'object';
 		my $cname = GetItem($cid, "", 1, 1);
 		my $imgTag = GetImgTag($cid, $item_type, 1);
@@ -2246,22 +2368,36 @@ sub WriteCraftingSummary {
 				$recipe_cost = $FestivalRecipes{$key}{$v};
 			}
 		}
-		# Some conditions are defined in the last field of the recipe data. Only skills are useful
+		if (exists $SpecialOrders{$key}) {
+			foreach my $v (keys %{$SpecialOrders{$key}}) {
+				$source .= qq(Mail from ) . Wikify($SpecialOrders{$key}{$v}) . qq( after completing "$v" ) . Wikify("Special Order") . qq( <br />);
+			}
+		}
+		if (exists $QiChallengeRecipes{$key}) {
+			$source .= qq(Buy for $QiChallengeRecipes{$key} gems from ) . WikiShop("Qi's Walnut Room") . qq(<br />);
+		}
+		# Some conditions are defined in the last field of the recipe data, mostly skill-related.
 		# To make our lives difficult, some of them have the leading s and some of them don't.
 		# Also we start with 2 \w because some of the special/default recipes have conditions like "l 0"
 		my $condition = $GameData->{'CraftingRecipes'}{$key}{'split'}[4];
 		if ($condition =~ /^s \w\w+ \d+$/) {
 			my @temp = TranslatePreconditions("$condition");
 			$source .= "$temp[0]<br />";
-		} elsif ($condition =~ /\w\w+ \d+$/) {
-			my @temp = TranslatePreconditions("s $condition");
+		} elsif ($condition =~ /(\w\w+) \d+$/) {
+			# some of the skill conditions are listed this way, so if so we have to add the leading 's' ourselves.
+			my @temp;
+			if (exists $skills{$1}) {
+				@temp = TranslatePreconditions("s $condition");
+			} else {
+				@temp = TranslatePreconditions("$condition");
+			}
 			$source .= "$temp[0]<br />";
 		}
 		my $filter = "filter_base_game";
 		my $data_attr = join('|', @ingr_data);
 		my $output = <<"END_PRINT";
 <tr class="$filter">
-<td class="name">$imgTag $cname</td>
+<td class="name">$imgTag $cname$qstr</td>
 <td class="name ingr" data-ingr="$data_attr">$ingr</td>
 <td>$source</td>
 <td class="value total_$item_type">$recipe_cost</td>
@@ -2553,6 +2689,7 @@ sub WriteFruitTreeSummary {
 		{ 'key' => 'Summer', 'row' => {}, },
 		{ 'key' => 'Fall', 'row' => {}, },
 		{ 'key' => 'Winter', 'row' => {}, },
+		{ 'key' => 'Island', 'row' => {}, },
 		);
 	
 	print STDOUT "  Processing Game Fruit Trees\n";
@@ -2563,7 +2700,7 @@ sub WriteFruitTreeSummary {
 		my $sprite_index = $GameData->{'FruitTrees'}{$sid}{'split'}[0];
 		my $season = $GameData->{'FruitTrees'}{$sid}{'split'}[1];
 		my $cid = $GameData->{'FruitTrees'}{$sid}{'split'}[2];
-		# Object Info price is sell price, but we want buy price which is x2.
+		# Data file price is sell price, but we want buy price which is x2.
 		my $scost = 2 * $GameData->{'FruitTrees'}{$sid}{'split'}[3];
 		my $cname = GetItem($cid);
 		$GameData->{'ObjectInformation'}{$cid}{'split'}[3] =~ /(\-?\d*)$/;
@@ -2575,6 +2712,16 @@ sub WriteFruitTreeSummary {
 		my $seedImg = GetImgTag($sid, "object");
 		my $amt = ceil($scost/$cprice);
 		my $filter = "filter_base_game";
+		
+		if ($sid == 69) {
+			$scost = "5 ". Wikify("Dragon Teeth", "Dragon Tooth", 1);
+			$seed_vendor = WikiShop("Island Trader");
+			$amt = qq(<span class="note">--</span>);
+		} elsif ($sid == 835) {
+			$scost = "75 " . Wikify("Mussels", "Mussel", 1);
+			$seed_vendor = WikiShop("Island Trader");
+			$amt = qq(<span class="note">--</span>);
+		}
 		
 		my $output = <<"END_PRINT";
 <tr class="$filter">
@@ -2762,8 +2909,8 @@ sub WriteMachineSummary {
 
 	print STDOUT "  Processing PFM Machines\n";
 	# The mod Digus.CustomProducerMod has nearly all the vanilla machine data, so we'll use that to setup
-	#  vanilla stuff and mess with the filtering when we see it. It is missing an aged Roe recipe since
-	#  PFM doesn't support it yet and seedmakers only have a single example. Here we try to correct that
+	#  vanilla stuff and mess with the filtering when we see it. We don't know how to properly parse the
+	#  way they handle aged Roe & Sturgeon so we start with our own recipes and get rid of theirs later.
 	foreach my $i (@{$ModData->{'Producers'}}) {
 		if (defined $ModInfo->{$i->{'__MOD_ID'}} and $i->{'__MOD_ID'} eq "Digus.CustomProducerMod") {
 			my $roe = 	{
@@ -2777,7 +2924,8 @@ sub WriteMachineSummary {
 							"OutputPriceMultiplier"=> 2,
 							"Sounds"=> ["Ship"],
 							"PlacingAnimation"=> "Bubbles",
-							"PlacingAnimationColorName"=> "LightBlue"
+							"PlacingAnimationColorName"=> "LightBlue",
+							"DontDeleteMe" => 1,
 						};
 			push @{$i->{'producers'}}, $roe;
 			my $cav = 	{
@@ -2791,9 +2939,34 @@ sub WriteMachineSummary {
 							"OutputPriceMultiplier"=> 2,
 							"Sounds"=> ["Ship"],
 							"PlacingAnimation"=> "Bubbles",
-							"PlacingAnimationColorName"=> "LightBlue"
+							"PlacingAnimationColorName"=> "LightBlue",
+							"DontDeleteMe" => 1,
 						};
 			push @{$i->{'producers'}}, $cav;
+			my $seed = 	{
+							"ProducerName" => "Seed Maker",
+							"InputIdentifier" => "-888",
+							"MinutesUntilReady" => 20,
+							"OutputIdentifier" => "-74",
+							"OutputStack" => 1,
+							"OutputMaxStack" => 3,
+							"AdditionalOutputs" => [
+								{
+									"OutputProbability" => 0.005,
+									"OutputIdentifier" => "499",
+									"OutputStack" => 1
+								},
+								{
+									"OutputProbability" => 0.0199,
+									"OutputIdentifier" => "770",
+									"OutputStack" => 1,
+									"OutputMaxStack" => 4
+								}
+							],
+							"Sounds" => [ "Ship" ],
+							"DelayedSounds"=> [ { "dirtyHit" => 250 } ]
+						};
+			push @{$i->{'producers'}}, $seed;
 		}
 	}
 
@@ -2919,6 +3092,7 @@ $extra_info
 END_PRINT
 				$Panel{$key}{'out'} = $output;
 			}
+			
 			# Now it is time to parse a product and add it to the panel
 			# The whole quality input thing makes this really tricky. We are going to create an array that tells us which
 			#  inputs are defined so we know what to process.
@@ -2949,20 +3123,29 @@ END_PRINT
 					$amt_max = (defined $m->{$override_tag}{'OutputMaxStack'}) ? $m->{$override_tag}{'OutputMaxStack'} : $amt_min;
 				}
 				next if ($input_prob == 0);
+				# Here is where we skip the PFM Custom Producer Roe & Poppy seed recipes.
+				next if ($j->{'__MOD_ID'} eq "Digus.CustomProducerMod" and not exists $m->{'DontDeleteMe'} and
+					($m->{'ProducerName'} eq "Preserves Jar" and $m->{'OutputIdentifier'} eq '447') or
+					($m->{'ProducerName'} eq "Seed Maker" and $m->{'InputIdentifier'} eq '376')	);
 				my %entry = ( 'key1' => '', 'key2' => '', 'out' => '' );
-				my $name = GetItem($m->{'OutputIdentifier'});
-				# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
-				# that a simple regex can do the job rather than needing a more robust general approach.
-				$entry{'key1'} = StripHTML($name);
-				my $img = GetImgTag($entry{'key1'});
+				# Sometimes, there is no OutputIdentifier defined but there is something in AdditionalOutputs.
+				my $name = 'UNKNOWN';
+				my $img = "";
 				my $val_mult = 1;
-				if (defined $m->{'OutputQuality'} and $m->{'OutputQuality'} > 0) {
-					my $q = $m->{'OutputQuality'};
-					$val_mult *= (1 + .25*$q);
-					my $alt = $quality_desc[$q];
-					my $tag = GetImgTag($entry{'key1'}, 'object', 0, "quality-item");
-					$img = qq(<div class="quality-container">$tag<img class="quality quality-star" id="Quality_$q" alt="$alt" src="img/blank.png"></div>);
-				};
+				if (defined $m->{'OutputIdentifier'}) {
+					$name = GetItem($m->{'OutputIdentifier'});
+					# key1 is the output name, but we need to strip HTML. Because we created the HTML ourselves we know
+					# that a simple regex can do the job rather than needing a more robust general approach.
+					$entry{'key1'} = StripHTML($name);
+					$img = GetImgTag($entry{'key1'}) if (defined $m->{'OutputIdentifier'});
+					if (defined $m->{'OutputQuality'} and $m->{'OutputQuality'} > 0) {
+						my $q = $m->{'OutputQuality'};
+						$val_mult *= (1 + .25*$q);
+						my $alt = $quality_desc[$q];
+						my $tag = GetImgTag($entry{'key1'}, 'object', 0, "quality-item");
+						$img = qq(<div class="quality-container">$tag<img class="quality quality-star" id="Quality_$q" alt="$alt" src="img/blank.png"></div>);
+					}
+				}
 				# Quality should probably apply to these as well
 				my $prob = 1;
 				my $left = 1;
@@ -2981,7 +3164,14 @@ END_PRINT
 							$this_prob = sprintf("%0.1f", $this_prob*100);
 						}
 						$this_name .= " [$this_prob%]";
-						$outs{$key} = "$this_img $this_name";
+						if ($name eq 'UNKNOWN') {
+							# Promote this output to the "main" output
+							$name = $this_name;
+							$entry{'key1'} = $key;
+							$img = $this_img;
+						} else {
+							$outs{$key} = "$this_img $this_name";
+						}
 					}
 					$prob = sprintf("%0.1f", $prob*100/$left);
 					foreach my $k (keys %outs) {
@@ -3000,12 +3190,19 @@ END_PRINT
 						$val_mult = $amt_max;
 					}
 				}
-				if ($prob ne "1") {
+				if ($prob ne '1') {
 					$name .= " [$prob%]";
 				}
 				my $adds = "";
 				foreach my $k (sort keys %outs) {
 					$adds .= "<br/>$outs{$k}";
+				}
+				# If the output is *still* UNKNOWN, make it same as input
+				if ($name =~ /^UNKNOWN/ and defined $m->{'InputIdentifier'}) {
+					# Promote this output to the "main" output
+					$name =~ s/UNKNOWN/GetItem($m->{'InputIdentifier'})/e;
+					$entry{'key1'} = StripHTML($name);
+					$img = GetImgTag($m->{'InputIdentifier'});
 				}
 				$entry{'out'} = qq(<tr class="$filter"><td class="name">$img $name$adds</td>);
 				my $cost = 0;
@@ -3015,7 +3212,8 @@ END_PRINT
 					$name = qq(<span class="none">(No input)</span>);
 				}
 				# Hardcoded bullshit
-				if ($m->{'OutputIdentifier'} eq "445" and $m->{'InputIdentifier'} eq "812") {
+				if (defined $m->{'OutputIdentifier'} and $m->{'OutputIdentifier'} eq "445" and
+					defined $m->{'InputIdentifier'} and $m->{'InputIdentifier'} eq "812") {
 					$name .= " (Sturgeon)";
 				}
 				$entry{'key2'} = StripHTML($name);
@@ -3090,10 +3288,18 @@ END_PRINT
 				}
 				$entry{'out'} .= qq(<td class="name">) . join("<br/>", @inputs);
 				if (defined $m->{'ExcludeIdentifiers'}) {
-					$entry{'out'} .= '<br /><span class="group">Except ' . join(', ', (map {GetItem($_)} @{$m->{'ExcludeIdentifiers'}})) . "</span><br />";
+					if (scalar @{$m->{'ExcludeIdentifiers'}} > 5) {
+						$entry{'out'} .= '<br /><span class="group">(For items without a specific recipe)</span><br />';
+					} else {
+						$entry{'out'} .= '<br /><span class="group">Except ' . join(', ', (map {GetItem($_)} @{$m->{'ExcludeIdentifiers'}})) . "</span><br />";
+					}
 				}
 				$entry{'out'} .= "</td>";
-				my $time = $m->{'MinutesUntilReady'};
+				# TODO: Should look into how PFM actually handles this being missing.
+				my $time = 10;
+				if (defined $m->{'MinutesUntilReady'}) {
+					$time = $m->{'MinutesUntilReady'};
+				}
 				# 1.4 standardized machine time to be 60 min per hour from 6a-2a and then 100min per hour after. This gives
 				#  a total of 1600 min rather than the 1440 we used to use. This does cause complications estimating time.
 				my $min_per_day = 1600;
@@ -3542,7 +3748,7 @@ sub WriteCropSummary {
 		} elsif ($crop eq 'Sweet Gem Berry') {
 			$seed_vendor = WikiShop("Traveling Merchant");
 			$scost = 1000;
-		} elsif ($crop eq 'Ancient Fruit') {
+		} elsif ($crop eq 'Ancient Fruit' || $crop eq 'Qi Fruit' || $crop eq 'Pineapple' || $crop eq 'Taro Root' || $crop eq 'Fiber') {
 			$seed_vendor = qq(<span class="note">None</span>);
 			$scost = 0;
 		}
@@ -3551,7 +3757,10 @@ sub WriteCropSummary {
 			# This is also hardcoded. Might as well do it here
 			if ($crop eq 'Unmilled Rice') {
 				$is_paddy = 1;
-			} 
+			}
+		}
+		if ($crop eq 'Taro Root') {
+			$is_paddy = 1;
 		}
 		my $imgTag = GetImgTag($sid, "crop");
 		my $prodImg = GetImgTag($cid, "object");
@@ -3596,7 +3805,7 @@ sub WriteCropSummary {
 <td class="value">$xp</td>
 END_PRINT
 
-		foreach my $opt (qw(0 10 20 25 35)) {
+		foreach my $opt (qw(0 10 20 25 33 35 43)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
 			my $max_harvests = floor(27/$growth);
 			my $wasted_days = 27 - $growth * $max_harvests;
@@ -3735,7 +3944,7 @@ END_PRINT
 <td class="value">$xp</td>
 END_PRINT
 
-		foreach my $opt (qw(0 10 20 25 35)) {
+		foreach my $opt (qw(0 10 20 25 33 35 43)) {
 			my $growth = CalcGrowth($opt/100, \@phases);
 			my $max_harvests = floor(27/$growth);
 			my $wasted_days = 27 - $growth * $max_harvests;
@@ -3842,7 +4051,9 @@ with the close-water bonus, and the number in parentheses is without. Unfortunat
 <label><input type="radio" name="speed" value="10"> 10% (Only one of <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession or <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
 <label><input type="radio" name="speed" value="20"> 20% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Speed-Gro">Speed-Gro</a> Fertilizer</label>)</label><br />
 <label><input type="radio" name="speed" value="25"> 25% (Only <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label><br />
-<label><input type="radio" name="speed" value="35"> 35% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label>
+<label><input type="radio" name="speed" value="33"> 33% (Only <a href="https://stardewvalleywiki.com/Hyper_Speed-Gro">Hyper Speed-Gro</a> Fertilizer)</label><br />
+<label><input type="radio" name="speed" value="35"> 35% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Deluxe_Speed-Gro">Deluxe Speed-Gro</a> Fertilizer)</label><br />
+<label><input type="radio" name="speed" value="43"> 43% (Both <a href="https://stardewvalleywiki.com/Farming#Farming_Skill">Agriculturist</a> Profession and <a href="https://stardewvalleywiki.com/Hyper_Speed-Gro">Hyper Speed-Gro</a> Fertilizer)</label>
 </fieldset>
 <input type="hidden" id="last_speed" value="0" />
 END_PRINT
@@ -3879,7 +4090,7 @@ END_PRINT
 <th>Avg<br />Yield</th>
 <th>Crop<br />Value</th>
 <th>XP</th>
-<th class="col_0">Grow<br />Days</th>
+<th class="col_0">Initial<br />Growth</th>
 <th class="col_0">Regrow<br />Days</th>
 <th class="col_0">Max<br />Harvests</th>
 <th class="col_0">Wasted<br />Days</th>
@@ -3899,11 +4110,21 @@ END_PRINT
 <th class="col_25">Max<br />Harvests</th>
 <th class="col_25">Wasted<br />Days</th>
 <th class="col_25">Seasonal<br />Profit</th>
+<th class="col_33">Initial<br />Growth</th>
+<th class="col_33">Regrow<br />Days</th>
+<th class="col_33">Max<br />Harvests</th>
+<th class="col_33">Wasted<br />Days</th>
+<th class="col_33">Seasonal<br />Profit</th>
 <th class="col_35">Initial<br />Growth</th>
 <th class="col_35">Regrow<br />Days</th>
 <th class="col_35">Max<br />Harvests</th>
 <th class="col_35">Wasted<br />Days</th>
 <th class="col_35">Seasonal<br />Profit</th>
+<th class="col_43">Initial<br />Growth</th>
+<th class="col_43">Regrow<br />Days</th>
+<th class="col_43">Max<br />Harvests</th>
+<th class="col_43">Wasted<br />Days</th>
+<th class="col_43">Seasonal<br />Profit</th>
 </tr>
 </thead>
 <tbody>
@@ -3938,7 +4159,7 @@ sub WriteGiftSummary {
 	# by_npc will be NPCName => Taste => [ItemName] and we might not even use it.
 	my %by_item = ();
 	my %by_npc = ();
-	my @npcs = qw(Abigail Alex Caroline Clint Demetrius Dwarf Elliott Emily Evelyn George Gus Haley Harvey Jas Jodi Kent Krobus Leah Lewis Linus Marnie Maru Pam Penny Pierre Robin Sam Sandy Sebastian Shane Vincent Willy Wizard);
+	my @npcs = qw(Abigail Alex Caroline Clint Demetrius Dwarf Elliott Emily Evelyn George Gus Haley Harvey Jas Jodi Kent Krobus Leah Leo Lewis Linus Marnie Maru Pam Penny Pierre Robin Sam Sandy Sebastian Shane Vincent Willy Wizard);
 	# These are the values used by tasteForItem in the game code. We'll make hashes that go both ways
 	my %tasteFromIndex = ( 0 => "Love", 2 => "Like", 4 => "Dislike", 6 => "Hate", 8 => "Neutral" );
 	my %tasteToIndex = ( "Love" => 0, "Like" => 2, "Dislike" => 4, "Hate" => 6, "Neutral" => 8 );
@@ -3963,6 +4184,8 @@ sub WriteGiftSummary {
 		if (defined $GameData->{'NPCGiftTastes'}{"Universal_$t"}) {
 			my @temp = split(' ', $GameData->{'NPCGiftTastes'}{"Universal_$t"}{'raw'});
 			foreach my $i (@temp) {
+				# Debugging
+				#next if ($i == 0);
 				$universal{$t}{$i} = 1;
 			}
 		}
@@ -3972,7 +4195,9 @@ sub WriteGiftSummary {
 		$specific{$n} = {};
 		if (defined $GameData->{'NPCGiftTastes'}{$n}) {
 			foreach my $t (keys %tasteToIndex) {
-				my @temp = split(' ', $GameData->{'NPCGiftTastes'}{$n}{'split'}[$tasteToIndex{$t}+1]);
+				my $gift_string = $GameData->{'NPCGiftTastes'}{$n}{'split'}[$tasteToIndex{$t}+1];
+				$gift_string = "" unless (defined $gift_string);
+				my @temp = split(' ', $gift_string);
 				foreach my $i (@temp) {
 					$specific{$n}{$i} = $tasteToIndex{$t};
 				}
@@ -3988,6 +4213,7 @@ sub WriteGiftSummary {
 		next if ($name eq 'Stone' and $id ne 390);
 		next if ($name eq 'Weeds');
 		next if ($name eq 'Twig');
+		next if ($name eq 'SupplyCrate');
 		next if ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /asdf/);
 		next if ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /Ring/);
 		next if ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /Quest/);
@@ -4002,6 +4228,12 @@ sub WriteGiftSummary {
 		next if ($id == 434); #Stardrop
 		next if ($id == 808); #Void Ghost Pendant
 		next if ($id == 277); #Wilted Bouquet
+		next if ($id == 73); #Golden Walnut
+		next if ($id == 858); #Qi Gem
+		next if ($id == 925); #Slime Crate (not implemented)
+		next if ($id == 927); #Camping Stove
+		next if ($id == 929); #Hedge (not implemented)
+		next if ($id == 930); #Heart drop
 		
 		my @temp = split(' ', $GameData->{'ObjectInformation'}{$id}{'split'}[3]);
 		my $category = 0;
@@ -4044,20 +4276,21 @@ sub WriteGiftSummary {
 		}
 		# After that, it sets some defaults based on edibility & price for neutral items
 		my $pennyOverride = -1;
+		if ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /Arch/) {
+			$tasteForItem = 4;
+			$pennyOverride = 2;
+		}
 		if ($tasteForItem == 8 and not $skipDefaultValueRules) {
 			if ($edibility != -300 and $edibility < 0) {
 				$tasteForItem = 6;
 			} elsif ($price < 20) {
 				$tasteForItem = 4;
-			} elsif ($GameData->{'ObjectInformation'}{$id}{'split'}[3] =~ /Arch/) {
-				$tasteForItem = 4;
-				$pennyOverride = 2;
 			} 
 		}
 		# Now we go into NPC specifics
 		foreach my $n (@npcs) {
 			my $thisTasteForItem = $tasteForItem; # resetting for each NPC
-			if ($n eq 'Penny' and $pennyOverride >= 0) {
+			if ( ($n eq 'Penny' or $n eq 'Dwarf')and $pennyOverride >= 0) {
 				$thisTasteForItem = $pennyOverride;
 			}
 			if (exists $specific{$n}{$id}) {
@@ -4107,13 +4340,14 @@ sub WriteGiftSummary {
 		my $wasIndividualUniversal = 0;
 		my $skipDefaultValueRules = 0;
 		# Next the code checks the Universals for the exact item ID. This shouldn't ever be a thing with JA items.
+		# Next it sets "Arch" items to liked for Penny & Dwarf but custom items should never be "Arch"
 		# After that, it sets some defaults based on edibility & price for neutral items
 		if ($tasteForItem == 8 and not $skipDefaultValueRules) {
 			if ($edibility != -300 and $edibility < 0) {
 				$tasteForItem = 6;
 			} elsif ($price < 20) {
 				$tasteForItem = 4;
-			} # Next it sets "Arch" items to liked for Penny but custom items should never be "Arch"
+			}
 		}
 		# Okay, preliminaries are out of the way, so now it checks for the actual item defined in the gift tastes
 		# This next bit is tricky. We need to know if there is a specific gift taste for this item for each NPC,
@@ -4124,7 +4358,7 @@ sub WriteGiftSummary {
 			foreach my $t (keys %tasteToIndex) {
 				if (defined $ModData->{'Objects'}{$i}{'GiftTastes'}{$t}) {
 					foreach my $n (@{$ModData->{'Objects'}{$i}{'GiftTastes'}{$t}}) {
-						$modDefinedTaste{$n} = $tasteToIndex{$t};
+						$modDefinedTaste{$n} = $tasteToIndex{$t} if (defined $n);
 					}
 				}
 			}
@@ -4504,7 +4738,7 @@ END_PRINT
 	# To have just headshots, we need to adjust the y based upon the following values and keep the img.character definition 16x16.
 	# For full-body sprites, we'd ignore the offsets (keeping y=0 for everyone) and make the img.characters definition 16x32.
 	#my @npcs = qw(Abigail Alex Bouncer Caroline Clint Demetrius Dwarf Elliott Emily Evelyn George Governor Gunther Gus Haley Harvey Henchman Jas Jodi Kent Krobus Leah Lewis Linus Marcello Mariner Marlon Marnie Maru Morris MrQi Pam Penny Pierre Robin Sam Sandy Sebastian Shane Vincent Willy Wizard);
-	my %npcs = ('Abigail' => 5,'Alex' => 3,'Bouncer' => 4,'Caroline' => 7,'Clint' => 3,'Demetrius' => 1,'Dwarf' => 12,'Elliott' => 3,'Emily' => 4,'Evelyn' => 8,'George' => 7,'Governor' => 4,'Gunther' => 3,'Gus' => 2,'Haley' => 6,'Harvey' => 2,'Henchman' => 3,'Jas' => 7,'Jodi' => 6,'Kent' => 1,'Krobus' => 8,'Leah' => 6,'Lewis' => 3,'Linus' => 7,'Marcello' => 2,'Mariner' => 1,'Marlon' => 3,'Marnie' => 6,'Maru' => 6,'Morris' => 2,'MrQi' => 1,'Pam' => 7,'Penny' => 7,'Pierre' => 3,'Robin' => 4,'Sam' => 0,'Sandy' => 3,'Sebastian' => 4,'Shane' => 4,'Vincent' => 9,'Willy' => 2,'Wizard' => 1,);
+	my %npcs = ('Abigail' => 5,'Alex' => 3,'Bouncer' => 4,'Caroline' => 7,'Clint' => 3,'Demetrius' => 1,'Dwarf' => 12,'Elliott' => 3,'Emily' => 4,'Evelyn' => 8,'George' => 7,'Governor' => 4,'Gunther' => 3,'Gus' => 2,'Haley' => 6,'Harvey' => 2,'Henchman' => 3,'Jas' => 7,'Jodi' => 6,'Kent' => 1,'Krobus' => 8,'Leah' => 6,'Leo' => 7,'Lewis' => 3,'Linus' => 7,'Marcello' => 2,'Mariner' => 1,'Marlon' => 3,'Marnie' => 6,'Maru' => 6,'Morris' => 2,'MrQi' => 1,'Pam' => 7,'Penny' => 7,'Pierre' => 3,'Robin' => 4,'Sam' => 0,'Sandy' => 3,'Sebastian' => 4,'Shane' => 4,'Vincent' => 9,'Willy' => 2,'Wizard' => 1,);
 
 	my $x = 0;
 	foreach my $n (sort keys %npcs) {

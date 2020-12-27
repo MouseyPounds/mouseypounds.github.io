@@ -5,8 +5,9 @@
 # processing JA & CFR data for PPJA Mods to create summary web pages
 
 use strict;
+use feature 'unicode_strings';
 use JSON::Relaxed qw(from_rjson);
-use File::Slurp qw(read_file);
+use File::BOM qw(open_bom);
 use File::Copy;
 use Data::Dumper;
 use Storable;
@@ -29,7 +30,7 @@ my $LogLevel = 2;
 #     It could contain other mods too, but only certain mods are supported.
 #     We don't currently recurse into this directory and the mods are all expected to be just 1 level deep
 my $GameDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Content (unpacked)/Data';
-my $ModDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Mods';
+my $ModDir = 'C:/Program Files/Steam/steamapps/common/Stardew Valley/Mods/..Disabled/PPJA_and_Friends';
 
 # Game data stored in %GameData dictionary
 #   Top level entries correspond to particular files but do not exactly mirror game file & directory organization 
@@ -596,6 +597,61 @@ sub ParseModData {
 						LogMessage("    This is an unknown pack type ($packID)", 1);
 						$storeMeta = 0;
 					}
+				} elsif ($id eq 'spacechase0.BugNet') {
+					LogMessage("    This is Bug Net. Storing hardcoded information.", 1);
+					# Ref https://github.com/spacechase0/BugNet/blob/master/Mod.cs#L50
+					# Note, we could technically use the internal keys and parse the localization file instead.
+					my @objects = ( 
+					  "Blue Summer Butterfly",
+					  "Green Summer Butterfly",
+					  "Red Summer Butterfly",
+					  "Pink Summer Butterfly",
+					  "Yellow Summer Butterfly",
+					  "Orange Summer Butterfly",
+					  "Pale Pink Spring Butterfly",
+					  "Magenta Spring Butterfly",
+					  "White Spring Butterfly",
+					  "Yellow Spring Butterfly",
+					  "Purple Spring Butterfly",
+					  "Pink Spring Butterfly",
+					  "Brown Bird",
+					  "Blue Bird",
+					  "Green Frog",
+					  "Olive Frog",
+					  "Firefly",
+					  "Squirrel",
+					  "Gray Rabbit",
+					  "White Rabbit",
+					  "Woodpecker",
+					  "Seagull",
+					  "Owl",
+					  "Crow",
+					  "Cloud?",
+					  "Blue Parrot",
+					  "Green Parrot",
+					  "Monkey",
+					  "Orange Island Butterfly",
+					  "Pink Island Butterfly",
+					  "Purple Bird",
+					  "Red Bird",
+					  "Sunset Tropical Butterfly",
+					  "Tropical Butterfly",
+					  "Marsupial");
+					  
+					for (my $i = 0; $i < $#objects; $i++) {
+						my $critter = $objects[$i];
+						my $json = {};
+						$json->{'Name'} = "Critter Cage - $critter";
+						$json->{'Price'} = ($critter =~ /Butterfly/) ? 50 : 100;
+						(my ($x, $y)) = StoreNextImageFile("$BaseDir/$m/assets/critters.png", 'objects', 16*($i%4), 16*floor($i/4));
+						$json->{'__PATH'} = "$BaseDir/$m";
+						$json->{'__MOD_ID'} = $id;
+						$json->{'__SS_X'} = $x;
+						$json->{'__SS_Y'} = $y;
+						LogMessage("        Dumping json object", 3);
+						LogMessage(Dumper($json), 3);
+						$DataRef->{'Objects'}{$json->{'Name'}} = $json;
+					}
 				} else {
 					LogMessage("    This is not a content pack and will be skipped.", 1);
 					$storeMeta = 0;
@@ -737,20 +793,26 @@ sub LogMessage {
 #    filename
 sub ParseJsonFile {
 	my $filename = shift;
-	my $file_contents = read_file($filename, {binmode => ':encoding(UTF-8)'});
-	LogMessage("      Dumping file contents", 3);
+	my $encoding = shift;	$encoding = "UTF-8" unless (defined $encoding);
+
+	local $/;
+	#print STDERR "About to open $filename\n";
+	$encoding = open_bom(my $FH, $filename, ":encoding($encoding)");
+	my $file_contents = <$FH>;
+	LogMessage("      Dumping file contents ($encoding)", 3);
 	LogMessage(Dumper($file_contents), 3);
-	# Remove UTF-8 BOM if it is there because from_rjson can't deal with it
-	$file_contents =~ s/^\x{feff}//;
-	# The JSON parser cannot handle situations like the following
+	# The JSON::Relaxed parser cannot handle situations like the following
 	# "key": //comment
 	# { ...
 	# So we are going to try to prevent that. This might backfire spectacularly.
 	my $comment_removed = ($file_contents =~ s|(?<=:)\s*//[^*\r\n]*(?=[\r\n])||g);
 	if ($comment_removed) { LogMessage("      $comment_removed potentially problematic comment(s) removed", 2); }
-	# And trailing spaces sometimes screw us too.
+	# And trailing spaces sometimes screw us too. Really.
 	$comment_removed = ($file_contents =~ s|(?<=\S)[^\S\r\n]+(?=[\r\n])||g);
 	if ($comment_removed) { LogMessage("      $comment_removed trailing space(s) removed", 2); }
+	# Might as well fix fancy quotes while we're at it.
+	$comment_removed = ($file_contents =~ s/[\x{201c}\x{201d}]/"/g);
+	if ($comment_removed) { LogMessage("      $comment_removed fancy quote(s) removed", 2); }
 	my $json = from_rjson($file_contents);
 	if (not defined $json) {
 		LogMessage("WARNING JSON parsing failed on $filename\n  Error $JSON::Relaxed::err_id: $JSON::Relaxed::err_msg");
