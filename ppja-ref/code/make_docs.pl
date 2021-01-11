@@ -1434,20 +1434,8 @@ sub GetExtendedModInfo {
 	my $isPPJA = 0;
 
 	# PPJA-stuff first; all of these will use the JA pack as the primary/parent
-	# From Ancient Crops
-	if ($modID eq 'ppja.ancientcrops') {
-		$isPPJA = 1;
-	} elsif ($modID eq 'PPJAAncientCropsCP') { #This is now obsolete
-		$parentID = 'ppja.ancientcrops';
-		$isPPJA = 1;
-	} elsif ($modID eq 'ppja.ancientcropsforMFM') {
-		$parentID = 'ppja.ancientcrops';
-		$isPPJA = 1;
-	} elsif ($modID eq 'PPJA.AncientCropsAddOn') { #PFM
-		$parentID = 'ppja.ancientcrops';
-		$isPPJA = 1;
 	# From Artisan Valley
-	} elsif ($modID eq 'ppja.artisanvalleymachinegoods') {
+	if ($modID eq 'ppja.artisanvalleymachinegoods') {
 		$isPPJA = 1;
 	} elsif ($modID eq 'ppja.avcfr') { #CFR, legacy
 		$parentID = 'ppja.artisanvalleymachinegoods';
@@ -1565,6 +1553,13 @@ sub GetExtendedModInfo {
 		$parentID = 'ppja.KRSCP';
 		$isPPJA = 1;
 	# Now non-PPJA Stuff. 
+	# From Ancient Crops - Despite the ModID, these are no longer PPJA
+	} elsif ($modID eq 'PPJAAncientCropsCP') { #This is now obsolete
+		$parentID = 'ppja.ancientcrops';
+	} elsif ($modID eq 'ppja.ancientcropsforMFM') {
+		$parentID = 'ppja.ancientcrops';
+	} elsif ($modID eq 'PPJA.AncientCropsAddOn') { #PFM
+		$parentID = 'ppja.ancientcrops';
 	# From Artisinal Soda Makers; JA will be parent
 	} elsif ($modID eq 'Hadi.SodaMaker') {
 		$parentID = 'Hadi.JASoda';
@@ -1831,16 +1826,16 @@ sub WriteCookingSummary {
 		$TVDates{$recipe_key} = $date_string;
 	}
 	# Some recipes can be purchased at the saloon. This is hardcoded in StardewValley.Utility.getSaloonStock()
-	#  and we'll copy the relevant info here.
+	#  and we'll copy the relevant info here. TODO: see what prices are in function; they were adjusted to match in-game
 	my %SaloonRecipes = (
-		'Hashbrowns' => 250,
-		'Omelet' => 500,
-		'Pancakes' => 500,
-		'Bread' => 500,
-		'Tortilla' => 500,
-		'Pizza' => 750,
-		'Maki Roll' => 1500,
-		'Triple Shot Espresso' => 2500,
+		'Hashbrowns' => 50,
+		'Omelet' => 100,
+		'Pancakes' => 100,
+		'Bread' => 100,
+		'Tortilla' => 100,
+		'Pizza' => 150,
+		'Maki Roll' => 300,
+		'Triple Shot Espresso' => 5000,
 		);
 	# And then there are some others that are just completely special
 	my %Special = (

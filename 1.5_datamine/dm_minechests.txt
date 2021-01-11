@@ -1,0 +1,68 @@
+Possible Mine Chest Items if using Randomized Option
+ref: StardewValley.Locations.MineShaft.GetReplacementChestItem()
+seed: Random((int)(Game1.uniqueIDForThisGame * 512uL) + floor);
+
+Level 10
+- Boots 506 (Leather Boots; 1/1)
+- Boots 507 (Work Boots; 2/0)
+- Weapon 12 (Wooden Blade; 3-7 sword)
+- Weapon 17 (Iron Dirk; 2-4 dagger)
+- Weapon 22 (Wind Spire; 1-5 dagger)
+- Weapon 31 (Femur; 6-11 club)
+
+Level 20
+- Weapon 11 (Steel Smallsword; 4-8 sword)
+- Weapon 24 (Wood Club; 9-16 club)
+- Weapon 20 (Elf Blade; 3-5 dagger)
+- Ring 517 (Glow Ring)
+- Ring 519 (Magnet Ring)
+
+Level 30
+- (Nothing)
+
+Level 40
+- Slingshot
+
+Level 50
+- Boots 509 (Tundra Boots; 2/1)
+- Boots 510 (Thermal Boots; 1/2)
+- Boots 508 (Combat Boots; 3/0)
+- Weapon 1 (Silver Saber; 8-15 sword)
+- Weapon 43 (Pirate's Sword; 8-14 sword)
+
+Level 60
+- Weapon 21 (Crystal Dagger; 4-10 dagger)
+- Weapon 44 (Cutlass; 9-17 sword)
+- Weapon 6 (Iron Edge; 12-25 sword)
+- Weapon 18 (Burglar's Shank; 7-12 dagger)
+- Weapon 27 (Wood Mallet; 15-24 club)
+
+Level 70
+- Master Slingshot
+
+Level 80
+- Boots 512 (Firewalker Boots; 3/3)
+- Boots 511 (Genie Shoes; 1/6)
+- Weapon 10 (Claymore; 20-32 sword)
+- Weapon 7 (Templar's Blade; 22-29)
+- Weapon 46 (Kudgel; 27-40 club)
+- Weapon 19 (Shadow Dagger; 10-20 dagger)
+
+Level 90
+- Weapon 8 (Obsidian Edge; 30-45 sword)
+- Weapon 52 (Broken Trident; 15-26 dagger)
+- Weapon 45 (Wicked Kris; 24-30 dagger)
+- Weapon 5 (Bone Sword; 20-30 sword)
+- Weapon 60 (Ossified Blade; 26-42 dagger)
+
+Level 100
+- Stardrop
+
+Level 110
+- Boots 514 (Space Boots; 4/4)
+- Boots 878 (Crystal Shoes; 3/5)
+- Weapon 50 (Steel Falchion; 28-46 sword)
+- Weapon 28 (The Slammer; 40-55 club)
+
+Level 120
+- Skull Key
