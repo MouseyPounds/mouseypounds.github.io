@@ -1,0 +1,233 @@
+/* dv.css
+ * https://mouseypounds.github.io/dappervolk/
+ */
+
+/* Color palette d8a481 - menu bar bg, e5af8b & ea4490 bg stripes, f8d0a1 tan bg, b98c75 brown text ea9a00 - orange buttons
+ *  #eb1 - Yellow, Headlines and highlights
+ *  #3e3 - Brigher green, table borders
+ *  #ffe - White with slight yellow tint, body text
+ *  #bfb - Lt green, borders
+ *  #360 - Med green, alternate bg
+ *  #040 - Dk Green, bg
+ *  #020 - Darker green, header bg
+ *  #f88 - Pink, warning text
+ *  #7e8 - Table header text
+ *
+ *  #fb6 - Lt brown, gradient center
+ *  #210 - Dk brown, gradient ends
+ * 
+ *  #be1 - greenish-yellow, links
+ *  #8b0 - slightly darker greenish-yellow, link visited
+ *  #fc8 - bright turquoise, link click
+ */ 
+ 
+html {
+	min-height: 100%;
+	background-attachment: fixed;
+	background-color: #040; /* fallback color if gradients are not supported */
+	background-image: -webkit-linear-gradient(top, #210, #fb6, #210); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+	background-image:    -moz-linear-gradient(top, #210, #fb6, #210); /* For Firefox (3.6 to 15) */
+	background-image:      -o-linear-gradient(top, #210, #fb6, #210); /* For old Opera (11.1 to 12.0) */ 
+	background-image:         linear-gradient(to bottom, #210, #fb6, #210); /* Standard syntax; must be last */
+}
+body {
+	margin: 15px;
+	color: #ffe;
+	font-family: "Roboto Condensed", "Helvetica", "Arial", sans-serif;
+}
+a:visited { color: #8b0; }
+a:link { color: #be1; }
+a:hover { background-color: #360;}
+a:active { color: #fc8; background-color: #360;}
+.panel {
+	background-color: #040;
+	padding: .5em 2em .5em 1em;
+	margin: 5px;
+	border: 3px solid #bfb;
+	border-radius: 15px;
+}
+#header {
+	padding-right: 5em;
+}
+#footer {
+	text-align: center;
+	padding-right: 1em;
+}
+h1, h2 {
+	color: #eb1;
+	font-family: "Calibri", sans-serif;
+}
+h2 {
+	margin: 10px 0 4px;
+}
+.mach_desc {
+	margin-bottom: 1em;
+	font-weight: bold;
+}
+.note,.group ,.none {
+	font-style: italic;
+}
+.warn {
+	font-style: italic;
+	color: #f88;
+}
+.duration {
+	font-style: italic;
+	padding-left: 1.5em;
+}
+.username, .strong {
+	font-weight: bold;
+}
+/* Sortable Table indicators from https://www.kryogenix.org/code/browser/sorttable/#symbolsbeforesorting */
+/*
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+}
+*/
+table.sortable th {
+	cursor: pointer;
+	
+}
+table.sortable th:hover {
+	background-color: #040;
+	
+}
+table.output, table.calendar {
+	border: 2px solid #3e3;
+	background-color: #360;
+	border-collapse: collapse;
+	margin-top: 5px;
+}
+th, td {
+	border: 1px solid #3e3;
+	text-align: center;
+}
+th {
+	color: #7e8;
+	background-color: #020;
+}
+td {
+	color: #ffe;
+}
+td.text  {
+	text-align: left;
+}
+.highlight, tr.highlight td {
+	background-color: #040;
+	color: #eb1;
+}
+td.icon, td.num , td.result_text {
+	text-align: center;
+}
+td.name {
+	text-align: left;
+}
+td.value {
+	text-align: right;
+}
+td.foot_total {
+	text-align: right;
+}
+table.output th, table.output td, table.recipe th, table.recipe td {
+	padding: 3px 8px;
+}
+.container {
+	margin-bottom: 1em;
+}
+.container__image {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 32px;
+	margin-right: 0.5em;
+}
+.container__text {
+    display: inline-block;
+}
+img.unit {
+	display: inline-block;
+	float: left;
+	width: 72px;
+	height: 72px;
+}
+.stat_table {
+	clear: both;
+}
+#TOC {
+	position: fixed;
+	right: 0;
+	top: 0;
+	padding: 0;
+	max-height: 90%;
+	max-width: 250px;
+	overflow: auto;
+	background-color: #bfb;
+	box-shadow: -2px 2px 25px #3e3;
+	white-space: nowrap;
+}
+#TOC-details {
+	display:none;
+}
+#TOC, #TOC:hover #TOC-details {
+	display:block;
+}
+#TOC > h1, #TOC li a {
+	padding: 5px 10px;
+	padding-right: 20px;
+	display: block;
+}
+#TOC > h1 {
+	margin: 0;
+	font-size: 18px;
+	line-height: 24px;
+	background-color: #020;
+	color: #eb1;
+}
+#TOC ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#TOC li a {
+	color: #020;
+	text-decoration: none;
+}
+#TOC li a:hover {
+	background-color: #ffe;
+}
+/* Form stuff. */
+fieldset {
+	display: inline-block;
+	border: 2px solid #3e3;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	vertical-align: top;
+	width: 10em;
+}
+.select_set, .result_text {
+	width: 15em;
+}
+input, select {
+	margin-top: 5px;
+}
+/* tooltip implementation based on code from Andrea Ligios
+   https://stackoverflow.com/questions/7117073/how-to-add-a-tooltip-to-a-div
+   http://jsfiddle.net/AndreaLigios/jtLbpy62/
+ */
+[tooltip]:before {            
+	position: absolute;
+	content: attr(tooltip);
+	opacity: 0;
+	box-shadow: 2px 2px 1px #603000;
+	padding: .5em;
+	color: #603000;
+	font-style: normal;
+}
+[tooltip]:hover:before {        
+	opacity: .9;
+	background: #fc8;
+	margin-top: 1.5em;
+	margin-left: .5em;
+}
+[tooltip]:not([tooltip-persistent]):before {
+	pointer-events: none;
+}

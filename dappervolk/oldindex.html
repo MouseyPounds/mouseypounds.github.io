@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mousey's Dappervolk Stuff: Main Index</title>
+
+<meta charset="UTF-8" />
+<meta property="og:title" content="Mousey's Dappervolk Stuff: Main Index" />
+<meta property="og:description" content="Reference information for the Dappervolk pet/avatar site." />
+<!-- meta property="og:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
+<!-- meta property="twitter:image" content="https://mouseypounds.github.io/stardew-checkup/og-embed-image.png" / -->
+<meta name="theme-color" content="#44ffff">
+<meta name="author" content="MouseyPounds" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" type="text/css" href="./dv.css" />
+<!-- link rel="stylesheet" type="text/css" href="./sr-img.css" / -->
+<link rel="icon" type="image/png" href="./favicon_dv.png" />
+
+<!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
+<!-- script type="text/javascript" src="./sorttable.js"></script -->
+<script type="text/javascript" src="./dv_scripts.js"></script>
+
+</head>
+<body>
+<div class="panel" id="header"><h1>Mousey's Dappervolk Stuff: Main Index</h1>
+<p>Welcome to my personal collection of reference info for the Dappervolk Pet/Avatar website. 
+It is pretty sparse right now.</p>
+<p>If you have any comments or bugs to report, please contact me at <span class="username">MouseyPounds#23596</span> on DV or at <span class="username">MouseyPounds#0557</span> on <a href="https://discordapp.com">Discord</a>. DMs on either are fine.</p>
+<h2>Page Directory</h2>
+<ul>
+<li><a href="https://docs.google.com/spreadsheets/d/12CYS7CLXDWYPrW-meAjR-PAqmB_vXJukq6M1M_BOIdg/edit#gid=0">Yet Another Dappervolk Wardrobe Tracker</a> - My own personal tracking spreadsheet; feel free to make a copy and use it. Note, you can set or clear multiple checkboxes at once by selecting a large area and hitting the spacebar.</li>
+</ul>
+
+</div>
+<div class="panel" id="upgrade_calc">
+<h2>Summer Event Point Calculator</h2>
+<p>This tool summarizes both total points and points available within the time left.</p>
+<fieldset cid="tz_options" class="radio_set">
+<legend>Timezone Display</legend>
+<label><input class="trigger" type="radio" name="tz_opt" value="Local" checked="checked"> Local</label><br />
+<label><input class="trigger" type="radio" name="tz_opt" value="DV"> DV Time (PDT)</label>
+</fieldset>
+<fieldset id="level_set" class="select_set">
+<legend>Your Current Score</legend>
+Points: <input class="trigger" id="player_points" name="player_points" type="text">
+</fieldset>
+<div id="results">
+</div>
+</div>
+<div id="footer" class="panel">
+Other Dappervolk resources: <a href="http://www.dappervolk.com/">Website</a> || 
+<a href="https://dappervolk.fandom.com/">Wiki</a> || 
+<a href="https://discord.gg/bqXTTjc">Discord</a>
+</div>
+</body>
+</html>
