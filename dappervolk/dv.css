@@ -201,7 +201,7 @@ fieldset {
 	margin-right: 5px;
 	margin-bottom: 5px;
 	vertical-align: top;
-	width: 10em;
+	width: 12.5em;
 }
 .select_set, .result_text {
 	width: 15em;
@@ -209,6 +209,12 @@ fieldset {
 input, select {
 	margin-top: 5px;
 }
+#theButton {
+	font-weight: bold;
+}
+button {
+	margin-top: 1.5em;
+}	
 /* tooltip implementation based on code from Andrea Ligios
    https://stackoverflow.com/questions/7117073/how-to-add-a-tooltip-to-a-div
    http://jsfiddle.net/AndreaLigios/jtLbpy62/
