@@ -21,7 +21,7 @@
 <script>window.Cookies || document.write('<script src="./js.cookie-2.2.1.min.js"><\/script>')</script>
 <!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
 <!-- script type="text/javascript" src="./sorttable.js"></script -->
-<script type="text/javascript" src="./dv_scripts.js"></script>
+<script type="text/javascript" src="./dv_scripts.js?v=20210129"></script>
 </HEAD>
 
 <BODY>
@@ -30,7 +30,7 @@
 <p>Picks some random DV items to incorporate into an outfit. Feel free to DM me on DV (<a href="https://dappervolk.com/messages/new/23596">MouseyPounds #23596</a>) or Discord (MouseyPounds#0557) for suggestions, bug reports, and other feedback.</p></div>
 
 <div class="panel" id="input"><h2>Input</h2>
-<p>Here you can select the item sources and how many items to pick. These choices will be saved with cookies (if allowed) so that they persist over multiple visits to the site. The item picking is done randomly and avoids duplicates however it does not take wardrobe slots into consideration so impossible combinations (e.g. 2 different eyes) could happen. Item source pools last updated on 24 Jan 2021.</p>
+<p>Here you can select the item sources and how many items to pick. These choices will be saved with cookies (if allowed) so that they persist over multiple visits to the site. The item picking is done randomly and avoids duplicates however it does not take wardrobe slots into consideration so impossible combinations (e.g. 2 different eyes) could happen. Item source pools last updated on 29 Jan 2021.</p>
 
 <div id="checkbox_div">
 <fieldset id="set_count" class="selects">
@@ -56,7 +56,8 @@
 </fieldset>
 <fieldset id="set_port" class="checkboxes">
 <legend>Peddler's Port</legend>
-<label><input type="checkbox" name="nico" class="check_sub" checked> Nico (Generics)</label><br />
+<label><input type="checkbox" name="nico" class="check_sub" checked> Nico (Old Generics)</label><br />
+<label><input type="checkbox" name="new_nico" class="check_sub"> Nico (New Generics)</label><br />
 <label><input type="checkbox" name="oran" class="check_sub" checked> Oran (Potato Monthlies)</label><br />
 <label><input type="checkbox" name="pai" class="check_sub"> Pai (Turnip Monthlies)</label><br />
 </fieldset>
