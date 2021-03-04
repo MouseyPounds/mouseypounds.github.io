@@ -814,6 +814,8 @@ window.onload = function () {
 			"Vaer's Symbols",
 			"Vaer's Tights",
 			"Ravan's Tomes",
+			"Kelbi's Likeness",
+			"Kelbi's Staff",
 		],
 		"alch": [
 			"Blue Egg Friends",
@@ -1179,6 +1181,12 @@ window.onload = function () {
 			"Butterfly Mystic Hairpin",
 			"Butterfly Mystic Pants",
 			"Butterfly Mystic Winglets",
+			"Cosmic Mage Frilled Robes",
+			"Cosmic Mage Moon",
+			"Cosmic Mage Short Hair",
+			"Cosmic Mage Skin",
+			"Cosmic Mage Skin Crystals",
+			"Cosmic Mage Vision",
 		],
 		"pai": [
 			"Circus Unicorn Backdrop",
@@ -1239,6 +1247,14 @@ window.onload = function () {
 			"Butterfly Mystic Veil",
 			"Butterfly Mystic Wings",
 			"Butterfly Mystic's Regard",
+			"Cosmic Mage Black Cat",
+			"Cosmic Mage Flight",
+			"Cosmic Mage Hat",
+			"Cosmic Mage Long Hair",
+			"Cosmic Mage Moon Staff",
+			"Cosmic Mage Seeing Pearl",
+			"Cosmic Mage Tapestry",
+			"Cosmic Mage White Cat",
 		],
 	};
 	var extra_aff = {
