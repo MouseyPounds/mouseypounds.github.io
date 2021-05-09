@@ -820,6 +820,7 @@ window.onload = function () {
 			"Kelbi's Staff",
 			"Signi's Boots",
 			"Signi's Tears",
+			"Aeolin's Wings",
 		],
 		"alch": [
 			"Blue Egg Friends",
@@ -1211,6 +1212,14 @@ window.onload = function () {
 			"Elder Forest Straw Cape",
 			"Elder Forest Tights",
 			"Elder Forest Wisdom",
+			"Orchard Historian Earrings",
+			"Orchard Historian Floral Hat",
+			"Orchard Historian Knotted Drapes",
+			"Orchard Historian Knotted Shift",
+			"Orchard Historian Mantled Sleeves",
+			"Orchard Historian Reminiscence",
+			"Orchard Historian Sword",
+			"Orchard Historian Tousled Short Hair",
 		],
 		"pai": [
 			"Circus Unicorn Backdrop",
@@ -1287,6 +1296,14 @@ window.onload = function () {
 			"Elder Forest Skull Mask",
 			"Elder Forest Veil Crown",
 			"Elder Forest Vined Feet",
+			"Orchard Historian Buttoned Smock",
+			"Orchard Historian Floral Wallpaper",
+			"Orchard Historian Florid Body Paint",
+			"Orchard Historian Petal Headdress",
+			"Orchard Historian Pleated Coat",
+			"Orchard Historian Silk Robe",
+			"Orchard Historian Tied Long Hair",
+			"Orchard Historian Veiled Sun Hat",
 		],
 	};
 	var extra_aff = {
