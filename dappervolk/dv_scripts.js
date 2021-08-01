@@ -116,6 +116,9 @@ window.onload = function () {
 	});
 
 	var clothes = {
+		"custom": [
+			"Two-toned Hime Hairstyle",
+		],
 		"pr_alpha": [
 			"Support Axe",
 			"Support Bun",
@@ -751,8 +754,7 @@ window.onload = function () {
 			"White Suspenders",
 			"White Tie",
 			"Yellow Neck Kerchief",
-		],
-		"new_nico": [
+			// May update
 			"Basic Closed Eyes",
 			"Basic Ebony Brown Skin",
 			"Basic Grin",
@@ -795,10 +797,15 @@ window.onload = function () {
 			"Silver Monocle",
 			"Silver Secretary Glasses",
 			"White Sparkles",
+			// July update
+			"Verdant Cooking Apron",
+			"Denim Cooking Apron",
+			"Corduroy Cooking Apron",
 		],
 		"deity": [
 			"Ingi Deity",
 			"Ingi's Fiery Skin",
+			"Ingi's Fiery Tresses",
 			"Ingi's Tattered Robes",
 			"Ivita's Mask",
 			"Ivita's Tail",
@@ -963,6 +970,14 @@ window.onload = function () {
 			"Obsidian Single Horn",
 			"Opal Wings",
 			"Shade Wings",
+		],
+		"jeweled_horns": [
+			"Jeweled Horns In Obsidian",
+			"Jeweled Horns In Pearl",
+			"Jeweled Horns In Sapphire",
+			"Jeweled Horns In Gold",
+			"Jeweled Horns In Emerald",
+			"Jeweled Horns In Ruby",
 		],
 		"affection": [
 			"Black Heart Chest Plate",
@@ -1282,6 +1297,15 @@ window.onload = function () {
 			"Mordant Advisor Painted Tattoos",
 			"Mordant Advisor Braided Dark Bob",
 			"Mordant Advisor Braided Silver Bob",
+			"Glasswork Artificer Braids",
+			"Glasswork Artificer Bronze Cuirass",
+			"Glasswork Artificer Bronze Fauld",
+			"Glasswork Artificer Bronze Sabatons",
+			"Glasswork Artificer Ornate Fauld",
+			"Glasswork Artificer Ornate Sabatons",
+			"Glasswork Artificer Prism Ceilings",
+			"Glasswork Artificer Trousers",
+			"Glasswork Artificer Vision",
 		],
 		"pai": [
 			"Circus Unicorn Backdrop",
@@ -1388,6 +1412,15 @@ window.onload = function () {
 			"Mordant Advisor Scythe",
 			"Mordant Advisor Skirt",
 			"Mordant Advisor Striped Stockings",
+			"Glasswork Artificer Axe",
+			"Glasswork Artificer Basilica",
+			"Glasswork Artificer Brocade Cloak",
+			"Glasswork Artificer Brocade Coat",
+			"Glasswork Artificer Disc",
+			"Glasswork Artificer Ornate Cuirass",
+			"Glasswork Artificer Prism Panels",
+			"Glasswork Artificer Shard Skin",
+			"Glasswork Artificer Tricolour Bob",
 		],
 	};
 	var extra_aff = {
