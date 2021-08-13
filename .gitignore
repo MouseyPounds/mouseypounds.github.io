@@ -2,5 +2,5 @@
 desktop.ini
 [Ll]ocal/
 cache_*
-aoc/*
+out.txt
 streamraiders/*

@@ -1,0 +1,64 @@
+Forcing list context on a list of my variables.
+(my ($move, $dist)) = $instructions->[$i] =~ /^(\w)(\d+)/;
+
+Slurping entire input (see 2020 Day 12)
+my $puzzle = do { local $/; <DATA> }; # slurp it
+my @lines = split("\n", $puzzle);
+
+Processing input line by line into hash (see 2015 Day 17)
+my %aunts = ();
+while (<DATA>) {
+	chomp;
+	(my ($num, $properties)) = /^Sue (\d+): (.*)$/;
+	my @prop = split(', ', $properties);
+	foreach my $p (@prop) {
+		(my ($name, $amt)) = $p =~ /(\w+): (\d+)/;
+		$aunts{$num}{$name} = $amt;
+	}
+}
+
+
+Intcode usage in 2019:
+Day 2 and then every odd day beginning on day 5.
+
+Wall-hugging to map a maze: (see 2019 Day 15)
+- Always turn clockwise unless you hit a wall, then turn counter-clockwise instead.
+
+BFS search for shortest path: (see 2019 Day 15 & 18)
+-Queue of tiles to check (coords, distance, any additional metrics); if intertile distances vary, use PriorityQueue with distance as weight.
+-Hash of visited tiles so that you don't revisit same place with a worse distance
+-At every step, increment distance and add any valid adjacent tile to queue
+-Stop as soon as target is found since it will be shortest distance.
+-2018 day 22 may be the best example since it has some distance variation and fixed a bug related to marking things visited too soon.
+
+Library Permutations and combinations -- CPAN Math::Combinatorics
+
+Homemade Permutations of a list: (see 2015 Day 9 and 2019 Day 7)
+sub permute_list {
+	my $results = shift;	# Array Ref -- 2d array of all permutations
+	my $left = shift;		# Array Ref -- Initially the list of things to permute; gradually empties
+	my $used = shift;		# Array Ref -- Initially empty and okay if missing; gradually fills
+	
+	$used = [] unless (defined $used);
+	
+	if (scalar(@$left) == 0) {
+		push @$results, $used;
+		return;
+	} else {
+		for (my $i = 0; $i < scalar(@$left); $i++) {
+			my @new_used = @$used;
+			my @new_left = @$left;
+			push @new_used, $new_left[$i];
+			splice @new_left, $i, 1;
+			permute_list($results, \@new_left, \@new_used);
+		}
+	}
+}
+
+Wizard shit that I should look into (2015 Day 19)
+(From https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/)
+#! /usr/bin/env perl
+my %rule = map { reverse =~ m/(\w*).*\b(\w+)/ } <>;
+my $string = delete $rule{""};
+my $count = 0; $count++ while ($string =~ s/(@{[ join "|", keys %rule ]})/$rule{$1}/);
+print "$count @{[scalar reverse $string]}\n"
