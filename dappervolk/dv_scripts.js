@@ -834,6 +834,7 @@ window.onload = function () {
 			"Soll Coat",
 			"Soll's Locks",
 			"Thalies' Antlers",
+			"Thalies' Deer Legs",
 			"Thalies' Emblem",
 			"Turara Deity",
 			"Vaer's Symbols",
