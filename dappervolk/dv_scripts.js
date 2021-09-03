@@ -566,7 +566,7 @@ window.onload = function () {
 			"Clione's Camisole",
 			"Clione's Consideration",
 			"Clione's Glowing Coral",
-			"Clione's Growing Coral",
+			"Clione's Coral",
 			"Clione's Hairstyle",
 			"Clione's Lavender Lips",
 			"Clione's Lilac Consideration",
@@ -754,7 +754,7 @@ window.onload = function () {
 			"White Suspenders",
 			"White Tie",
 			"Yellow Neck Kerchief",
-			// May update
+			// 27 Jan 2021 update
 			"Basic Closed Eyes",
 			"Basic Ebony Brown Skin",
 			"Basic Grin",
@@ -797,10 +797,25 @@ window.onload = function () {
 			"Silver Monocle",
 			"Silver Secretary Glasses",
 			"White Sparkles",
-			// July update
+			// 27 July 2021 update
 			"Verdant Cooking Apron",
 			"Denim Cooking Apron",
 			"Corduroy Cooking Apron",
+			// 30 August 2021 update
+			"Messy Bob Brown",
+			"Messy Bob Gold",
+			"Messy Bob Gray",
+			"Messy Bob Green",
+			"Messy Bob Pink",
+			"Messy Bob Red",
+			"Messy Bob Silver",
+			"Sleek Bob Brown",
+			"Sleek Bob Gold",
+			"Sleek Bob Gray",
+			"Sleek Bob Green",
+			"Sleek Bob Pink",
+			"Sleek Bob Red",
+			"Sleek Bob Silver",
 		],
 		"deity": [
 			"Ingi Deity",
@@ -955,6 +970,7 @@ window.onload = function () {
 			"Prismatic Sea Serpent",
 			"Prismatic Single Horn",
 			"Prismatic Wings",
+			// 19 May 2021 Update
 			"Louise Hill Ripened Produce",
 			"3s Forest Autumn Gate",
 			"Silvies Mine Blue Lamps",
@@ -971,13 +987,16 @@ window.onload = function () {
 			"Opal Wings",
 			"Shade Wings",
 		],
-		"jeweled_horns": [
+		"misc": [
 			"Jeweled Horns In Obsidian",
 			"Jeweled Horns In Pearl",
 			"Jeweled Horns In Sapphire",
 			"Jeweled Horns In Gold",
 			"Jeweled Horns In Emerald",
 			"Jeweled Horns In Ruby",
+			"Frilly Pink Apron",
+			"Frilly Hearts Apron",
+			"Frilly Blue Apron",
 		],
 		"affection": [
 			"Black Heart Chest Plate",
@@ -1306,6 +1325,14 @@ window.onload = function () {
 			"Glasswork Artificer Prism Ceilings",
 			"Glasswork Artificer Trousers",
 			"Glasswork Artificer Vision",
+			"Seaside Botanist Boots",
+			"Seaside Botanist Reflection",
+			"Seaside Botanist Trousers",
+			"Seaside Botanist Ponytail",
+			"Seaside Botanist Blouse",
+			"Seaside Botanist Ram Horns",
+			"Seaside Botanist Shawl",
+			"Seaside Botanist Winglets",
 		],
 		"pai": [
 			"Circus Unicorn Backdrop",
@@ -1421,6 +1448,14 @@ window.onload = function () {
 			"Glasswork Artificer Prism Panels",
 			"Glasswork Artificer Shard Skin",
 			"Glasswork Artificer Tricolour Bob",
+			"Seaside Botanist Deck",
+			"Seaside Botanist Curls",
+			"Seaside Botanist Gown",
+			"Seaside Botanist Garden",
+			"Seaside Botanist Hanging Plants",
+			"Seaside Botanist Laced Shoes",
+			"Seaside Botanist Cloaked Shirt",
+			"Seaside Botanist Skin Stencils",
 		],
 	};
 	var extra_aff = {
