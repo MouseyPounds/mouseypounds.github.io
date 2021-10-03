@@ -828,6 +828,7 @@ window.onload = function () {
 			"Ombra's Cloak",
 			"Ombra's Forest",
 			"Pann Deity",
+			"Pann's Triangle",
 			"Parsnip On A Stick",
 			"Prismatic Fields Backdrop",
 			"Prismatic Star Gem",
@@ -871,6 +872,12 @@ window.onload = function () {
 			"Shark Plush",
 			"Snail Friends",
 			"Snail Helm",
+			// 25 September 2021 Update
+			"Laurels In Obsidian",
+			"Laurels In Silver",
+			"Dark Embroidered Sash",
+			"White Embroidered Sash",
+			
 		],
 		"referral": [
 			"Black Royal Cloak",
@@ -998,6 +1005,13 @@ window.onload = function () {
 			"Frilly Pink Apron",
 			"Frilly Hearts Apron",
 			"Frilly Blue Apron",
+			// 25 September 2021 Update
+			"Laurels In Gold",
+			"Laurels In Emerald",
+			"Laurels In Rose",
+			"Gold Embroidered Sash",
+			"Red Embroidered Sash",
+			"Teal Embroidered Sash",
 		],
 		"affection": [
 			"Black Heart Chest Plate",
@@ -1334,6 +1348,14 @@ window.onload = function () {
 			"Seaside Botanist Ram Horns",
 			"Seaside Botanist Shawl",
 			"Seaside Botanist Winglets",
+			"Spirit Wayfarer Claws",
+			"Spirit Wayfarers Leer",
+			"Spirit Wayfarer Feet",
+			"Spirit Wayfarer Mist",
+			"Spirit Wayfarer's Smile",
+			"Spirit Wayfarer Petals",
+			"Spirit Wayfarer Ponytail",
+			"Spirit Wayfarer Shoulder Mask",
 		],
 		"pai": [
 			"Circus Unicorn Backdrop",
@@ -1457,6 +1479,14 @@ window.onload = function () {
 			"Seaside Botanist Laced Shoes",
 			"Seaside Botanist Cloaked Shirt",
 			"Seaside Botanist Skin Stencils",
+			"Spirit Wayfarer Forest",
+			"Spirit Wayfarer Horns",
+			"Spirit Wayfarer Ceremonial Hair",
+			"Spirit Wayfarer Mantle",
+			"Spirit Wayfarer Tattered Robe",
+			"Spirit Wayfarer Skin",
+			"Spirit Wayfarer Bandaged Wrappings",
+			"Spirit Wayfarer Staff",
 		],
 	};
 	var extra_aff = {
