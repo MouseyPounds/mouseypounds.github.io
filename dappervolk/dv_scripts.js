@@ -118,9 +118,11 @@ window.onload = function () {
 	var clothes = {
 		"custom": [
 			"Breezy Moonlight Tresses",
+			"Dress of the Duchess",
 			"Drifter's Raiment",
 			"Leaf Spirit Pendant",
 			"Lethal Lolita",
+			"Midnight Dress",
 			"Tranquili-tea Bistro Pop-up Shop",
 			"Twilight Blight Romper",
 			"Two-toned Hime Hairstyle",		
