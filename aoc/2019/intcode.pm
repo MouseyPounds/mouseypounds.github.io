@@ -22,15 +22,15 @@ use Time::HiRes qw(usleep);
 
 # Primary constructor, which creates a "controller" which will launch necessary computers and help manage I/O
 #
-# new ( instructions, blocking, ascii, dump_mem, initial_inputs, num_computers )
+# new ( instructions, blocking, dump_mem, initial_inputs, num_computers )
 # - instructions (req) should be either a single string (int,int,...) or an array of ints which provide the program code
 # - blocking (opt) tells whether I/O should block or not; defaults to true.
 # - dump_mem (opt) tells whether computers should output a memory dump when exiting; defaults to false.
 # - initial_inputs (opt) should be an array ref containing the starting single input for all computers created
 # - num_computers (opt) provides an explicit number of computes to create if initial_inputs is empty
 #
-# By default, just 1 computer will be created. If initial_inputs has multiple elements, that size will be used instead,
-# and num_computers would be an explicit override and is only used if initial_inputs is empty.
+# By default, just 1 computer will be created. If initial_inputs has multiple elements, that size will be used instead;
+# num_computers would be an explicit override and is only used if initial_inputs is empty.
 sub new {
 	my $class = shift;
 	my $instructions = shift;
