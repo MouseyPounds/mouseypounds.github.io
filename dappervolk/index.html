@@ -20,17 +20,16 @@
 <script>window.Cookies || document.write('<script src="./js.cookie-2.2.1.min.js"><\/script>')</script>
 <!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
 <!-- script type="text/javascript" src="./sorttable.js"></script -->
-<script type="text/javascript" src="./dv_scripts.js?v=20220408"></script>
+<script type="text/javascript" src="./dv_scripts.js?v=20220429"></script>
 </HEAD>
 
 <BODY>
 <div class="panel" id="header"><h1>Dappervolk Outfit Prompt Generator</h1>
 
 <p>Picks some random DV items to incorporate into an outfit. Feel free to DM me on DV (<a href="https://dappervolk.com/messages/new/23596">MouseyPounds #23596</a>) or Discord (MouseyPounds#0557) for suggestions, bug reports, and other feedback.</p>
-<p>Most recent changes (8 April 2022):</p>
-<ul><li>New Signi item</li>
-<li>Wisteria Garden monthlies</li>
-<li>Cosmos Sky background</li>
+<p>Most recent changes (29 April 2022):</p>
+<ul><li>Name changes for Lief's Cheerful Lips and Mothlike Familiars</li>
+<li>Inclusion of items from the Recipe Balancing Update; an "Agnes Quest Rewards" filter has been added to the Peddler's Port section for items gained from her dailies and other items have been added to the "Random Alchemy" and "Adventuring" pools as appropriate. Note that alchemy products will be put in the same category as their base; e.g. Adolescent Mountain Yaks are with the Agnes items and 3's Forest Autumn Coat is in Adventuring. Also a filter has been added for the Officator bonus items.</li>
 </ul>
 </div>
 
@@ -61,9 +60,11 @@
 </fieldset>
 <fieldset id="set_port" class="checkboxes">
 <legend>Peddler's Port</legend>
+<label><input type="checkbox" name="agnes" class="check_sub"> Agnes Quest Rewards</label><br />
 <label><input type="checkbox" name="nico_atelier" class="check_sub" checked> Nico's Atelier (Clothing)</label><br />
 <label><input type="checkbox" name="nico_salon" class="check_sub" checked> Nico's Salon (Body)</label><br />
 <label><input type="checkbox" name="nico_bonus" class="check_sub" checked> Nico's Bonus Items</label><br />
+<label><input type="checkbox" name="officiator" class="check_sub"> Officator Bonus Items</label><br />
 <label><input type="checkbox" name="oran" class="check_sub" checked> Oran (Potato Monthlies)</label><br />
 <label><input type="checkbox" name="pai" class="check_sub"> Pai (Turnip Monthlies)</label><br />
 </fieldset>
