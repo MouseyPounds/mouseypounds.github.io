@@ -34,13 +34,12 @@ window.onload = function () {
 		return Math.floor(min + Math.random()*(max - min));
 	}
 
-	function generateList() {
+	function generateListFromFilters() {
 		var howMany = document.getElementById("item_count").value;
 		var whichClass = document.getElementById("class_specific").value;
 		var townAlch = $("#extra_alch").prop('checked');
 		var townAff = $("#extra_aff").prop('checked');
-
-		pickFrom = [];
+		var	pickFrom = [];
 		$('.check_sub').each(function() {
 			if ($(this).prop('checked')) {
 				pickFrom.push.apply(pickFrom, clothes[$(this).attr("name")]);
@@ -53,8 +52,10 @@ window.onload = function () {
 		if (whichClass !== "none") {
 			pickFrom.push.apply(pickFrom, clothes[whichClass]);
 		}
-
-		var output = "<p>Picking " + howMany + " random items from a pool of " + pickFrom.length + ":</p>";
+		var output = "<p>Picking " + howMany + " random items out of a pool of " + pickFrom.length + 
+			" from a filtered list of all known items:</p>";
+		// For this method, pickFrom is just a big old list of item names so we simply keep grabbing them
+		// until we have enough and only sanity-check to skip duplicates
 		var theItems = [];
 		if (howMany <= pickFrom.length) {
 			output += "<ol>";
@@ -70,11 +71,72 @@ window.onload = function () {
 		} else {
 			output += '<p class="note">Cannot generate item list because pool is too small</p>';
 		}
-
 		setCookies();
 		document.getElementById("output-container").innerHTML = output;
 	}
 
+	function generateListFromWardrobe() {
+		var howMany = document.getElementById("item_count").value;
+		// So here's our scuffed way to pull the item information from wardrobe source into something we can use.
+		// First we regexp match all the var = X assignments on the page and then we feed the ones we need into
+		// an anonymous function that basically just parses that whole line and returns a copy of the var.
+		var source = $('#wardrobe_source').val();
+		const re_vars = /\svar [^\r\n]*;/g;
+		const re_whichvar = /^.var (\w+)\s?=/;
+		var vmatch = source.match(re_vars);
+		var wvar = {};
+		for (var m of vmatch) {
+			var mm = m.match(re_whichvar);
+			if (mm) {
+				var v = `${mm[1]}`;
+				if (v === "categories" || v === "flattenItems" || v === "avatar") {
+					wvar[v] = Function(m + "return " + v)();
+				}
+			}
+		}
+		// Grabbing userid strictly for personalized text
+		var wh = wvar["avatar"]["user"]["select_name"];
+		if (typeof(wh) === 'undefined') {
+			wh = "your Worldhopper";
+		}
+		var pickFrom = Object.keys(wvar["flattenItems"]);
+		var output = "<p>Picking " + howMany + " random items out of a pool of " + pickFrom.length +
+			" from the wardrobe contents of " + wh + ":</p>";
+		// For this method, we already have all the item info in wvar["flattenItems"] so pickFrom simply stores
+		// a list of possible item IDs. Variable theItems is again used to avoid duplicates but we are also trying to
+		// honour DV wardrobe slot limits by keeping track of things in usedSlots.
+		var theItems = [];
+		var usedSlots = {};
+		var thumbnails = [];
+		if (howMany <= pickFrom.length) {
+			output += "<ol>";
+			for (var i = 0; i < howMany; i++) {
+				var index = -1;
+				while (index === -1 || theItems.includes(index)) {
+					index = randInt(pickFrom.length);
+					var slot = wvar["flattenItems"][pickFrom[index]]["clothing_settings"]["slot_id"];
+					if (!(slot in usedSlots)) {
+						usedSlots[slot] = 0;
+					}
+					if (usedSlots[slot] < wvar["categories"][slot-1]["max_slots"]) {
+						usedSlots[slot]++;
+					} else {
+						// Slot too full, pick again
+						index = -1;
+					}
+				}
+				theItems.push(index);
+				//output += "<li>" + wvar["flattenItems"][pickFrom[index]]["name"] + "</li>";
+				output += '<li><img class="thumb" src="' + wvar["flattenItems"][pickFrom[index]]["thumbnail_url"] + '"> '+ wvar["flattenItems"][pickFrom[index]]["name"] + "</li>";
+			}
+			output += "</ol>";
+		} else {
+			output += '<p class="note">Cannot generate item list because pool is too small</p>';
+		}
+		setCookies();
+		document.getElementById("output-container").innerHTML = output;
+	}
+	
 	function setCookies() {
 		$('input:checkbox').each(function() {
 			var n = $(this).attr("name");
@@ -112,20 +174,24 @@ window.onload = function () {
 
 		document.getElementById("button_all_on").addEventListener("click", function() { setCheckboxes(1) } );
 		document.getElementById("button_all_off").addEventListener("click", function() { setCheckboxes(0) } );
-		document.getElementById("theButton").addEventListener("click", function() { generateList(); } );
+		document.getElementById("theButton").addEventListener("click", function() { generateListFromFilters(); } );
+		document.getElementById("theWardrobeButton").addEventListener("click", function() { generateListFromWardrobe(); } );
 	});
 
 	var clothes = {
 		"custom": [
+			"Accesstarry",
 			"Black Fishnet Set",
 			"Breezy Moonlight Tresses",
 			"Dress of the Duchess",
 			"Drifter's Raiment",
+			"Lace Wings",
 			"Leaf Spirit Pendant",
 			"Lethal Lolita",
 			"Midnight Dress",
 			"Naga's Mimicry",
 			"Ram Horns",
+			"Sanguine Crypt",
 			"Tranquili-tea Bistro Pop-up Shop",
 			"Twilight Blight Romper",
 			"Two-toned Hime Hairstyle",		
@@ -276,6 +342,79 @@ window.onload = function () {
 			"Not A Wizard Wand",
 			"Not Wizard Keys",
 			"Not Wizard Silver Keys",
+			// 17 June 2022 Update
+			"Bearnard's Turnip Fields",
+			"Bearnard's Dusk Turnip Fields",
+			"Bearnard's Farming Spade",
+			"Bearnard's Green Farming Spade",
+			"Bearnard's Charcoal Farming Gloves",
+			"Bearnard's Golden Farming Shirt",
+			"Bearnard's Gold Farming Shoes",
+			"Bearnard's Gold Farming Overalls",
+			"Bearnard's Gold Ribbon Sun Hat",
+			"Bearnard's Fancy Broom",
+			"Bearnard's Strange Turnip Fields",
+			"Bearnard's Gold Farming Spade",
+			"Buli's Bow",
+			"Buli's Green Bow",
+			"Buli's Mysterious Opal Dress",
+			"Buli's Hairstyle Black",
+			"Buli's Magic Opal Pots",
+			"Buli's Opal Essence Rings",
+			"Buli's Opal Essence Spirit",
+			"Buli's White Bow",
+			"Calbet's Pretense",
+			"Calbet's Warm Pretense",
+			"Calbet's Training Fields",
+			"Calbet's Fall Training Fields",
+			"Calbet's Obsidian Archery Boots",
+			"Calbet's Obsidian Training Bow",
+			"Calbet's Hairstyle Obsidian",
+			"Calbet's Obsidian Pantaloons",
+			"Calbet's Obsidian Training Quiver",
+			"Calbet's Obsidian Armour",
+			"Calbet's Obsidian Cabbage Friend",
+			"Calbet's Striking Pretense",
+			"Calbet's Dark Training Fields",
+			"Not A Wizard Trousers",
+			"Not A Wizard Red Trousers",
+			"Not A Wizard Study",
+			"Not A Wizard Ruby Study",
+			"Not A Wizard Cosmic Robe Drapings",
+			"Not A Wizard Cosmic Hairstyle",
+			"Not A Wizard Cosmic Hat",
+			"Not A Wizard Cosmic Robe Top",
+			"Not A Wizard Cosmic Wand",
+			"Not Wizard Rose Gold Keys",
+			"Not A Wizard Cosmic Trinket",
+			"Not A Wizard Cosmic Trousers",
+			"Not A Wizard Cosmic Study",
+			"Fantasia's Perception",
+			"Fantasia's Green Perception",
+			"Fantasia's Sword",
+			"Fantasia's Emerald Sword",
+			"Fantasia's Silver Rogue Boots",
+			"Fantasia's Twilight Eyepatch",
+			"Fantasia's Silver Dagger Gloves",
+			"Fantasia's Silver Hairstyle",
+			"Fantasia's Silver Fox Tail",
+			"Fantasia's Silver Training Shirt",
+			"Fantasia's Silver Desert Halo",
+			"Fantasia's Midnight Perception",
+			"Fantasia's Silver Sword",
+			"Lilia's Clarity",
+			"Lilia's Icy Clarity",
+			"Lilia's Pressed Shirt",
+			"Lilia's Snow Pressed Shirt",
+			"Lilia's Midnight Gauntlets",
+			"Lilia's Midnight Hairstyle",
+			"Lilia's Midnight Training Lances",
+			"Lilia's Midnight Soldier Leggings",
+			"Lilia's Midnight Battle Tiara",
+			"Lilia's Midnight Training Armor",
+			"Lilia's Midnight Flower Gem Necklace",
+			"Lilia's Midnight Clarity",
+			"Lilia's Midnight Pressed Shirt",
 		],
 		"town_3f": [
 			"Barclay's Belts",
@@ -1050,6 +1189,7 @@ window.onload = function () {
 			"Pann's Trousers",
 			"Prismatic Fields Backdrop",
 			"Prismatic Star Gem",
+			"Prismatic Scarf",
 			"Soll Coat",
 			"Soll's Locks",
 			"Soll's Moons",
@@ -1233,6 +1373,34 @@ window.onload = function () {
 			"Moonlit Lotus Pond",
 			"Rosy Lotus Pond",
 			"Sunlit Lotus Pond",
+			"Lotus Temple",
+			"Moonlit Lotus Hairclip",
+			"Rosy Lotus Hairclip",
+			"Sunlit Lotus Hairclip",
+			"Masquerade Night Sky",
+			"Masquerade Gold Gown",
+			"Masquerade Silver Gown",
+			"Masquerade Gold Fascinator",
+			"Masquerade Silver Fascinator",
+			"Masquerade Red Ingi Balloon",
+			"Masquerade Blue Ingi Balloon",
+			"Masquerade Red Ingi Mask",
+			"Masquerade Blue Ingi Mask",
+			"Masquerade Night Ivita Mask",
+			"Masquerade Day Ivita Mask",
+			"Masquerade Night Ivita Balloon",
+			"Masquerade Day Ivita Balloon",
+			"Masquerade Gold Trousers",
+			"Masquerade Silver Trousers",
+			"Muted Party Of Onesie",
+			"Masquerade Gold Shoes",
+			"Masquerade Silver Shoes",
+			"Masquerade Red Signi Balloon",
+			"Masquerade Blue Signi Balloon",
+			"Masquerade Night Signi Mask",
+			"Masquerade Day Signi Mask",
+			"Masquerade Gold Tailcoat",
+			"Masquerade Silver Tailcoat",
 		],
 		"adventuring": [
 			"Louise Hill Produce",
@@ -1755,6 +1923,14 @@ window.onload = function () {
 			"Little Forager Shoes",
 			"Little Forager Shrub Hair",
 			"Little Forager Skin",
+			"Ravencrypt Vintner Attitude",
+			"Ravencrypt Vintner Belted Corset",
+			"Ravencrypt Vintner Boots",
+			"Ravencrypt Vintner Buckled Hat",
+			"Ravencrypt Vintner Fangs",
+			"Ravencrypt Vintner Harness Pouch",
+			"Ravencrypt Vintner Scraggly Hair",
+			"Ravencrypt Vintner Trousers",
 		],
 		"pai": [
 			"Circus Unicorn Backdrop",
@@ -1937,6 +2113,16 @@ window.onload = function () {
 			"Little Forager Camouflage",
 			"Little Forager Coat",
 			"Little Forager Home",
+			"Ravencrypt Vintner Arm Wings",
+			"Ravencrypt Vintner Cloak",
+			"Ravencrypt Vintner Heels",
+			"Ravencrypt Vintner Lace Jacket",
+			"Ravencrypt Vintner Long Tied Hair",
+			"Ravencrypt Vintner Moon On The Lake",
+			"Ravencrypt Vintner Ruffled Skirt",
+			"Ravencrypt Vintner Spirit",
+			"Ravencrypt Vintner Thorns",
+			"Ravencrypt Vintner Wide Brim Hat",
 		],
 	};
 	var extra_aff = {
@@ -2016,6 +2202,8 @@ window.onload = function () {
 			"Not A Wizard Magic Wand",
 			"Not A Wizard Magical Trinket",
 			"Not Wizard Blue Keys",
+			// 17 June 2022 Update
+
 		],
 		"town_3f": [
 			"Barclay's Black Belts",

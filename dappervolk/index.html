@@ -20,34 +20,47 @@
 <script>window.Cookies || document.write('<script src="./js.cookie-2.2.1.min.js"><\/script>')</script>
 <!-- Table sorting by https://www.kryogenix.org/code/browser/sorttable/ -->
 <!-- script type="text/javascript" src="./sorttable.js"></script -->
-<script type="text/javascript" src="./dv_scripts.js?v=20220528"></script>
+<script type="text/javascript" src="./dv_scripts.js?v=20220624"></script>
 </HEAD>
 
 <BODY>
 <div class="panel" id="header"><h1>Dappervolk Outfit Prompt Generator</h1>
 
 <p>Picks some random DV items to incorporate into an outfit. Feel free to DM me on DV (<a href="https://dappervolk.com/messages/new/23596">MouseyPounds #23596</a>) or Discord (MouseyPounds#0557) for suggestions, bug reports, and other feedback.</p>
-<p>Most recent changes (28 May 2022):</p>
-<ul><li>New Signi and Spring items from Lotus Festival event</li>
-<li>Aeolin's Bandaged Tights</li>
-<li>Little Forager monthlies</li>
+<p>Most recent changes (24 June 2022):</p>
+<ul><li>Added a new input method to pick items from your wardrobe</li>
+<li>Included following new items for the old filter-method of input:<ul>
+<li>Anniversary Masquerade Items</li>
+<li>New Louise Hill Items</li>
+<li>Extra tier rewards from Lotus Festival event</li>
+<li>Prismatic Scarf</li>
+<li>Ravencrypt Vineyard monthlies</li>
+<li>Public Customs: Accesstarry, Lace Wings, and Sanguine Crypt</li>
+</ul></li>
 </ul>
 </div>
 
 <div class="panel" id="input"><h2>Input</h2>
-<p>Here you can select the item sources and how many items to pick. These choices will be saved with cookies (if allowed) so that they persist over multiple visits to the site. The item picking is done randomly and avoids duplicates however it does not take wardrobe slots into consideration so impossible combinations (e.g. 2 different eyes) could happen.</p>
+<p>There are two different ways to generate the item list:</p>
+<ol><li>Wardrobe Input where you copy &amp; paste the source of your Wardrobe page. This method will only pick from items you actually have and will try to avoid slot-overloading, but there isn't currently any way to filter the choices. It also includes thumbnails of the picked items since that is part of the wardrobe information.</li>
+<li>Filtered Input where the generator picks from a filtered list of all known Dappervolk items. This method may select items you don't actually have and does not take wardrobe slots into consideration so could generate impossible combinations. Filter choices are saved with cookies (if allowed) so that they persist over multiple visits to the site.</li></ol>
 
 <div id="checkbox_div">
 <fieldset id="set_count" class="selects">
 <legend>Number of Items</legend>
 <select id="item_count" name="item_count" class="level_select"><option value="1">1</option><option value="2">2</option><option value="3" selected="selected">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
 </fieldset>
-<fieldset id="set_race" class="selects">
-<legend>Include Class-Specific?</legend>
-<select id="class_specific" name="class_specific" class="level_select"><option value="none" selected="selected">None</option><option value="animal">Animal</option><option value="elf">Elf</option><option value="galactic">Galactic</option><option value="human">Human</option></select>
+<br />
+<h3 class="form_header">Method 1: Wardrobe Input</h3>
+<p>Go to your wardrobe page, view and copy the source, then paste it into the box below.</p>
+<fieldset id="set_wardrobe" class="textarea">
+<legend>Paste Source Here</legend>
+<textarea id="wardrobe_source"></textarea>
 </fieldset>
 <br />
-<h3 class="form_header">Item Filters</h3>
+<button id="theWardrobeButton" type="button">Generate Items from Wardrobe</button>
+<h3 class="form_header">Method 2: Filtered Input of All Known Items</h3>
+<p>Choose groups from all known DV items (very recent updates may not apply.)</p>
 <fieldset id="set_town" class="checkboxes">
 <legend>Main Towns</legend>
 <label><input type="checkbox" name="town_lh" class="check_sub town" checked> Louise Hill NPCs</label><br />
@@ -87,10 +100,15 @@
 <label><input type="checkbox" name="pr_ks" class="check_sub"> Kickstarter</label><br />
 <label><input type="checkbox" name="pr_launch" class="check_sub"> Launch Support</label>
 </fieldset>
+<br />
+<fieldset id="set_race" class="selects">
+<legend>Include Class-Specific?</legend>
+<select id="class_specific" name="class_specific" class="level_select"><option value="none" selected="selected">None</option><option value="animal">Animal</option><option value="elf">Elf</option><option value="galactic">Galactic</option><option value="human">Human</option></select>
+</fieldset>
 </div>
 <button id="button_all_on" type="button">Check All</button>
 <button id="button_all_off" type="button">Uncheck All</button><br />
-<button id="theButton" type="button">Generate Items</button></div>
+<button id="theButton" type="button">Generate Items using Filters</button></div>
 <div class="panel" id="output">
 <h2>Output</h2>
 <div id="output-container"><span class="note">(Chosen items will appear here)</span></div>
